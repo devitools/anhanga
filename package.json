@@ -1,0 +1,8 @@
+{
+  "name": "anhanga",
+  "private": true,
+  "scripts": {
+    "build": "pnpm -r build",
+    "test": "pnpm -r test"
+  }
+}

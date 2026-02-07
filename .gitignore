@@ -1,0 +1,25 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+
+# TypeScript
+*.tsbuildinfo
+
+# IDE
+.idea/
+
+# Expo
+.expo/
+
+# macOS
+.DS_Store
+
+# pnpm
+.pnpm-debug.log*
+
+# Local settings
+*.local.json
+
+insights
