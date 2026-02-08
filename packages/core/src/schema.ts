@@ -1,5 +1,5 @@
 import { Scope } from './types'
-import type { FieldConfig, GroupConfig, ActionConfig, SchemaProvide, FieldProxy, ScopeValue, ComponentContract, FormContract } from './types'
+import type { FieldConfig, GroupConfig, ActionConfig, SchemaProvide, FieldProxy, ScopeValue, ComponentContract, FormContract, TableContract } from './types'
 import type { FieldDefinition } from "./fields"
 import type { GroupDefinition } from './group'
 import type { ActionDefinition } from './action'
@@ -29,7 +29,8 @@ type BaseHandlerContext<BF extends Record<string, FieldDefinition>> = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   schema: { services: Record<string, any> }
   component: ComponentContract
-  form: FormContract
+  form?: FormContract
+  table?: TableContract
 }
 
 type BaseActionHandler<BF extends Record<string, FieldDefinition>> =
@@ -39,7 +40,8 @@ type ActionContext<F extends Record<string, FieldDefinition>, S extends Record<s
   state: InferState<F>
   schema: InferSchemaProxy<F, S>
   component: ComponentContract
-  form: FormContract
+  form?: FormContract
+  table?: TableContract
 }
 
 type ActionHandler<F extends Record<string, FieldDefinition>, S extends Record<string, object>> =

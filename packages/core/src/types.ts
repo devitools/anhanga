@@ -2,6 +2,7 @@ export const Position = {
   top: "top",
   footer: "footer",
   floating: "floating",
+  row: "row",
 } as const;
 
 export type PositionValue = typeof Position[keyof typeof Position]
@@ -139,6 +140,24 @@ export interface ComponentContract {
   dialog: DialogContract;
   toast: ToastContract;
   loading: LoadingContract;
+}
+
+export interface TableContract {
+  page: number;
+  limit: number;
+  total: number;
+  sort?: string;
+  order?: "asc" | "desc";
+  filters: Record<string, unknown>;
+  selected: Record<string, unknown>[];
+
+  reload (): void;
+
+  setPage (page: number): void;
+
+  setFilters (filters: Record<string, unknown>): void;
+
+  clearSelection (): void;
 }
 
 export interface PaginateParams {
