@@ -8,7 +8,7 @@ importers:
 
   .: {}
 
-  packages/core:
+  core:
     devDependencies:
       tsup:
         specifier: ^8.0.0
@@ -20,7 +20,7 @@ importers:
         specifier: ^3.0.0
         version: 3.2.4(@types/node@25.2.1)(lightningcss@1.31.1)(terser@5.46.0)(yaml@2.8.2)
 
-  packages/playground:
+  playground:
     dependencies:
       '@anhanga/core':
         specifier: workspace:*
@@ -81,7 +81,7 @@ importers:
         specifier: ~5.9.2
         version: 5.9.3
 
-  packages/react:
+  react:
     devDependencies:
       '@anhanga/core':
         specifier: workspace:*
