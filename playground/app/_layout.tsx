@@ -2,7 +2,7 @@ import "../settings/i18n";
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { View, StyleSheet } from "react-native";
-import { DialogProvider } from "../src/presentation/components/Dialog";
+import { DialogProvider } from "../src/presentation/components";
 
 export default function RootLayout() {
   return (

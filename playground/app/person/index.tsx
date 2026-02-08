@@ -1,13 +1,9 @@
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { Scope } from "@anhanga/core";
-import { PersonSchema } from "../../src/domain/person/schema";
-import { personHandlers } from "../../src/domain/person/handlers";
-import { personHooks } from "../../src/domain/person/hooks";
+import { PersonSchema, personHandlers, personHooks } from "../../src/domain/person";
 import { createComponent } from "../../src/presentation/contracts/component";
-import { useDialog } from "../../src/presentation/components/Dialog";
-import { SchemaTable } from "../../src/presentation/components/SchemaTable";
-import { Page } from "../../src/presentation/components/Page";
+import { useDialog, SchemaTable, Page } from "../../src/presentation/components";
 import { scopes } from "./@routes";
 
 export default function PersonIndexPage () {
