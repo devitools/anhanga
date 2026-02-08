@@ -9,9 +9,11 @@ import type {
   ComponentContract,
   FormContract,
   TableContract,
+  TranslateContract,
 } from '@anhanga/core'
 
 export interface FieldRendererProps {
+  domain: string
   name: string
   value: unknown
   config: FieldConfig
@@ -34,6 +36,10 @@ export interface FieldGroup {
   config: GroupConfig
   fields: ResolvedField[]
 }
+
+export type FormSection =
+  | { kind: 'group'; name: string; config: GroupConfig; fields: ResolvedField[] }
+  | { kind: 'ungrouped'; fields: ResolvedField[] }
 
 export interface ResolvedAction {
   name: string
@@ -64,6 +70,7 @@ export interface UseSchemaFormOptions {
   handlers?: Record<string, HandlerFn>
   component: ComponentContract
   initialValues?: Record<string, unknown>
+  translate?: TranslateContract
 }
 
 export interface UseSchemaFormReturn {
@@ -71,6 +78,7 @@ export interface UseSchemaFormReturn {
   fields: ResolvedField[]
   groups: FieldGroup[]
   ungrouped: ResolvedField[]
+  sections: FormSection[]
   actions: ResolvedAction[]
   errors: Record<string, string[]>
   dirty: boolean
@@ -97,6 +105,7 @@ export interface UseSchemaTableOptions {
   handlers?: Record<string, HandlerFn>
   component: ComponentContract
   pageSize?: number
+  translate?: TranslateContract
 }
 
 export interface UseSchemaTableReturn {
@@ -114,6 +123,7 @@ export interface UseSchemaTableReturn {
   total: number
   totalPages: number
   setPage (page: number): void
+  setLimit (limit: number): void
 
   sortField?: string
   sortOrder?: "asc" | "desc"

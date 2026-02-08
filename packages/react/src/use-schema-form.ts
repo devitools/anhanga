@@ -1,5 +1,5 @@
 import { useState, useMemo, useCallback, useRef } from "react";
-import type { FieldProxy, FieldConfig, ScopeValue } from "@anhanga/core";
+import type { FieldProxy, FieldConfig, ScopeValue, TranslateContract } from "@anhanga/core";
 import { createStateProxy, createSchemaProxy } from "./proxy";
 import { validateField, validateAllFields } from "./validation";
 import type {
@@ -7,6 +7,7 @@ import type {
   UseSchemaFormReturn,
   ResolvedField,
   FieldGroup,
+  FormSection,
   ResolvedAction,
   FieldRendererProps,
 } from "./types";
@@ -33,7 +34,8 @@ function isActionInScope (config: { scopes: ScopeValue[] | null }, scope: ScopeV
 }
 
 export function useSchemaForm (options: UseSchemaFormOptions): UseSchemaFormReturn {
-  const { schema, scope, services, events, handlers, component, initialValues } = options;
+  const { schema, scope, services, events, handlers, component, initialValues, translate } = options;
+  const t: TranslateContract = translate ?? ((key) => key);
 
   const [state, setState] = useState<Record<string, unknown>>(() =>
     buildInitialState(schema.fields, initialValues),
@@ -102,6 +104,37 @@ export function useSchemaForm (options: UseSchemaFormOptions): UseSchemaFormRetu
     return resolvedFields.filter((f) => !f.config.group);
   }, [resolvedFields]);
 
+  const sections = useMemo((): FormSection[] => {
+    const result: FormSection[] = [];
+    const emittedGroups = new Set<string>();
+    let currentUngrouped: ResolvedField[] = [];
+
+    for (const field of resolvedFields) {
+      const groupName = field.config.group;
+      if (groupName && schema.groups[groupName]) {
+        if (currentUngrouped.length > 0) {
+          result.push({ kind: "ungrouped", fields: currentUngrouped });
+          currentUngrouped = [];
+        }
+        if (!emittedGroups.has(groupName)) {
+          emittedGroups.add(groupName);
+          const group = groups.find((g) => g.name === groupName);
+          if (group) {
+            result.push({ kind: "group", name: group.name, config: group.config, fields: group.fields });
+          }
+        }
+      } else {
+        currentUngrouped.push(field);
+      }
+    }
+
+    if (currentUngrouped.length > 0) {
+      result.push({ kind: "ungrouped", fields: currentUngrouped });
+    }
+
+    return result;
+  }, [resolvedFields, groups, schema.groups]);
+
   const fireEvent = useCallback(
     (fieldName: string, eventName: string, nextState: Record<string, unknown>) => {
       const handler = events?.[fieldName]?.[eventName];
@@ -143,7 +176,7 @@ export function useSchemaForm (options: UseSchemaFormOptions): UseSchemaFormRetu
 
       const config = schema.fields[field];
       if (config) {
-        const fieldErrors = validateField(value, config.validations);
+        const fieldErrors = validateField(value, config.validations, t);
         setErrors((prev) => {
           const next = { ...prev };
           if (fieldErrors.length > 0) {
@@ -157,7 +190,7 @@ export function useSchemaForm (options: UseSchemaFormOptions): UseSchemaFormRetu
 
       fireEvent(field, "change", nextState);
     },
-    [state, schema.fields, fireEvent],
+    [state, schema.fields, fireEvent, t],
   );
 
   const setValues = useCallback(
@@ -179,10 +212,10 @@ export function useSchemaForm (options: UseSchemaFormOptions): UseSchemaFormRetu
   );
 
   const validate = useCallback((): boolean => {
-    const allErrors = validateAllFields(state, scopedFields);
+    const allErrors = validateAllFields(state, scopedFields, t);
     setErrors(allErrors);
     return Object.keys(allErrors).length === 0;
-  }, [state, scopedFields]);
+  }, [state, scopedFields, t]);
 
   const dirty = useMemo(() => {
     const initial = initialStateRef.current;
@@ -228,6 +261,7 @@ export function useSchemaForm (options: UseSchemaFormOptions): UseSchemaFormRetu
       const config = schema.fields[name];
       const proxy = getProxy(name);
       return {
+        domain: schema.domain,
         name,
         value: state[name],
         config,
@@ -245,7 +279,7 @@ export function useSchemaForm (options: UseSchemaFormOptions): UseSchemaFormRetu
         },
       };
     },
-    [schema.fields, state, errors, scope, getProxy, setValue, fireEvent],
+    [schema.fields, schema.domain, state, errors, scope, getProxy, setValue, fireEvent],
   );
 
   return {
@@ -253,6 +287,7 @@ export function useSchemaForm (options: UseSchemaFormOptions): UseSchemaFormRetu
     fields: resolvedFields,
     groups,
     ungrouped,
+    sections,
     actions,
     errors,
     dirty,

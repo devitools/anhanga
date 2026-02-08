@@ -25,7 +25,7 @@ export function useSchemaTable (options: UseSchemaTableOptions): UseSchemaTableR
   const [loading, setLoading] = useState(false);
   const [total, setTotal] = useState(0);
   const [page, setPage] = useState(1);
-  const [limit] = useState(pageSize);
+  const [limit, setLimitState] = useState(pageSize);
   const [sortField, setSortField] = useState<string | undefined>();
   const [sortOrder, setSortOrder] = useState<"asc" | "desc" | undefined>();
   const [filters, setFilters] = useState<Record<string, unknown>>({});
@@ -138,6 +138,11 @@ export function useSchemaTable (options: UseSchemaTableOptions): UseSchemaTableR
 
   const clearFilters = useCallback(() => {
     setFilters({});
+    setPage(1);
+  }, []);
+
+  const setLimit = useCallback((value: number) => {
+    setLimitState(value);
     setPage(1);
   }, []);
 
@@ -259,6 +264,7 @@ export function useSchemaTable (options: UseSchemaTableOptions): UseSchemaTableR
     total,
     totalPages,
     setPage,
+    setLimit,
     sortField,
     sortOrder,
     setSort,
