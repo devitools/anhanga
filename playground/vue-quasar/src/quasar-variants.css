@@ -1,0 +1,62 @@
+.text-default {
+  color: #616161 !important;
+}
+.bg-default {
+  background: #616161 !important;
+}
+
+.text-primary {
+  color: #1976d2 !important;
+}
+.bg-primary {
+  background: #1976d2 !important;
+}
+
+.text-secondary {
+  color: #607d8b !important;
+}
+.bg-secondary {
+  background: #607d8b !important;
+}
+
+.text-destructive {
+  color: #c62828 !important;
+}
+.bg-destructive {
+  background: #c62828 !important;
+}
+
+.text-muted {
+  color: #9e9e9e !important;
+}
+.bg-muted {
+  background: #9e9e9e !important;
+}
+
+.text-accent {
+  color: #9c27b0 !important;
+}
+.bg-accent {
+  background: #9c27b0 !important;
+}
+
+.text-success {
+  color: #2e7d32 !important;
+}
+.bg-success {
+  background: #2e7d32 !important;
+}
+
+.text-warning {
+  color: #f57f17 !important;
+}
+.bg-warning {
+  background: #f57f17 !important;
+}
+
+.text-info {
+  color: #0277bd !important;
+}
+.bg-info {
+  background: #0277bd !important;
+}
