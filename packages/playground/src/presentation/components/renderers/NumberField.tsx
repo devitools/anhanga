@@ -9,7 +9,10 @@ export function NumberField({ domain, name, value, proxy, errors, onChange, onBl
   const { t } = useTranslation();
   if (proxy.hidden) return null;
 
+  const { i18n } = useTranslation();
   const fieldLabel = t(`${domain}.fields.${name}`, { defaultValue: name });
+  const placeholderKey = `${domain}.fields.${name}.placeholder`;
+  const placeholder = i18n.exists(placeholderKey) ? t(placeholderKey) : undefined;
 
   return (
     <View style={styles.container} {...ds(`NumberField:${name}`)}>
@@ -25,7 +28,7 @@ export function NumberField({ domain, name, value, proxy, errors, onChange, onBl
         onFocus={onFocus}
         editable={!proxy.disabled}
         keyboardType="numeric"
-        placeholder={fieldLabel}
+        placeholder={placeholder}
         placeholderTextColor={theme.colors.mutedForeground}
       />
       <View style={styles.errorSlot}>
