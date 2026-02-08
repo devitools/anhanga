@@ -1,10 +1,10 @@
-import { Scope, ServiceContract } from "@anhanga/core";
-import { BootstrapContext, FetchContext } from "../src/domain/support/types";
+import type { ServiceContract, BootstrapHookContext, FetchHookContext } from "@anhanga/core";
+import { Scope } from "@anhanga/core";
 
 export function createDefault (service: ServiceContract) {
   return {
     bootstrap: {
-      async [Scope.view] ({ context, schema, hydrate }: BootstrapContext) {
+      async [Scope.view] ({ context, schema, hydrate }: BootstrapHookContext) {
         if (!context.id) return;
         const data = await service.read(context.id as string);
         hydrate(data);
@@ -12,14 +12,14 @@ export function createDefault (service: ServiceContract) {
           field.disabled = true;
         }
       },
-      async [Scope.edit] ({ context, hydrate }: BootstrapContext) {
+      async [Scope.edit] ({ context, hydrate }: BootstrapHookContext) {
         if (!context.id) return;
         const data = await service.read(context.id as string);
         hydrate(data);
       },
     },
     fetch: {
-      async [Scope.index] ({ params }: FetchContext) {
+      async [Scope.index] ({ params }: FetchHookContext) {
         return service.paginate(params);
       },
     },

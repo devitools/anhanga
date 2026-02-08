@@ -1,6 +1,5 @@
-import type { ServiceContract } from "@anhanga/core";
+import type { ServiceContract, HandlerContext } from "@anhanga/core";
 import { Scope } from "@anhanga/core";
-import { HandlerContext } from "../src/domain/support/types";
 
 export function createDefault (service: ServiceContract) {
   return {
