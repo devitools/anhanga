@@ -46,7 +46,7 @@ function ActionButton({ action }: { action: { name: string; config: { icon?: str
 }
 
 function ActionBar({ actions, position }: { actions: { name: string; config: any; execute: () => void }[]; position: PositionValue }) {
-  const items = actions.filter((a) => a.config.position === position);
+  const items = actions.filter((a) => a.config.positions.includes(position));
   if (items.length === 0) return null;
 
   if (position === "floating") {
