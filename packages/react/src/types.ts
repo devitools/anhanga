@@ -5,8 +5,10 @@ import type {
   ScopeValue,
   GroupConfig,
   ActionConfig,
+  TableConfig,
   ComponentContract,
   FormContract,
+  TableContract,
 } from '@anhanga/core'
 
 export interface FieldRendererProps {
@@ -48,7 +50,8 @@ export interface HandlerContext {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   schema: any
   component: ComponentContract
-  form: FormContract
+  form?: FormContract
+  table?: TableContract
 }
 
 type HandlerFn = (context: HandlerContext) => void | Promise<void>
@@ -80,3 +83,56 @@ export interface UseSchemaFormReturn {
 }
 
 export type FieldRenderer = React.ComponentType<FieldRendererProps>
+
+export interface ResolvedColumn {
+  name: string
+  config: FieldConfig
+  table: TableConfig
+}
+
+export interface UseSchemaTableOptions {
+  schema: SchemaProvide
+  scope: ScopeValue
+  services?: Record<string, object>
+  handlers?: Record<string, HandlerFn>
+  component: ComponentContract
+  pageSize?: number
+}
+
+export interface UseSchemaTableReturn {
+  rows: Record<string, unknown>[]
+  loading: boolean
+  empty: boolean
+
+  columns: ResolvedColumn[]
+  availableColumns: ResolvedColumn[]
+  visibleColumns: string[]
+  toggleColumn (name: string): void
+
+  page: number
+  limit: number
+  total: number
+  totalPages: number
+  setPage (page: number): void
+
+  sortField?: string
+  sortOrder?: "asc" | "desc"
+  setSort (field: string): void
+
+  filters: Record<string, unknown>
+  setFilter (field: string, value: unknown): void
+  clearFilters (): void
+
+  selected: Record<string, unknown>[]
+  isSelected (record: Record<string, unknown>): boolean
+  toggleSelect (record: Record<string, unknown>): void
+  selectAll (): void
+  clearSelection (): void
+
+  actions: ResolvedAction[]
+  getRowActions (record: Record<string, unknown>): ResolvedAction[]
+
+  reload (): void
+  formatValue (name: string, value: unknown, record: Record<string, unknown>): string
+  getIdentity (record: Record<string, unknown>): string
+}
