@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@anhanga/core": "workspace:*",
+    "@anhanga/demo": "workspace:*",
     "@anhanga/persistence": "workspace:*",
     "@anhanga/react": "workspace:*",
     "@expo/metro-runtime": "~6.1.2",

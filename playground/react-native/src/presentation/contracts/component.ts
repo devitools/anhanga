@@ -1,6 +1,6 @@
 import { router } from "expo-router";
 import type { ComponentContract, DialogContract, ScopeValue, ScopeRoute } from "@anhanga/core";
-import i18n from "../../../settings/i18n";
+import i18n from "i18next";
 
 const t = (key: string) => {
   return i18n.exists(key) ? i18n.t(key) : key;

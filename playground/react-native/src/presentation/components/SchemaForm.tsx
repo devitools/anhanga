@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { Feather } from "@expo/vector-icons";
 import { useSchemaForm, getRenderer } from "@anhanga/react";
 import type { UseSchemaFormOptions, ResolvedField, UseSchemaFormReturn } from "@anhanga/react";
-import { fakeAll } from "../support/faker";
+import { fakeAll } from "@anhanga/demo";
 import { theme } from "../theme";
 import { ActionBar } from "./ActionBar";
 import "./renderers";
