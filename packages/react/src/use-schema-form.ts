@@ -1,7 +1,7 @@
-import { useState, useMemo, useCallback, useRef } from 'react'
-import type { FieldProxy, FieldConfig, ScopeValue } from '@anhanga/core'
-import { createStateProxy, createSchemaProxy } from './proxy'
-import { validateField, validateAllFields } from './validation'
+import { useState, useMemo, useCallback, useRef } from "react";
+import type { FieldProxy, FieldConfig, ScopeValue } from "@anhanga/core";
+import { createStateProxy, createSchemaProxy } from "./proxy";
+import { validateField, validateAllFields } from "./validation";
 import type {
   UseSchemaFormOptions,
   UseSchemaFormReturn,
@@ -9,66 +9,66 @@ import type {
   FieldGroup,
   ResolvedAction,
   FieldRendererProps,
-} from './types'
+} from "./types";
 
-function buildInitialState(
+function buildInitialState (
   fields: Record<string, FieldConfig>,
   initialValues?: Record<string, unknown>,
 ): Record<string, unknown> {
-  const state: Record<string, unknown> = {}
+  const state: Record<string, unknown> = {};
   for (const [name, config] of Object.entries(fields)) {
-    state[name] = initialValues?.[name] ?? config.defaultValue ?? undefined
+    state[name] = initialValues?.[name] ?? config.defaultValue ?? undefined;
   }
-  return state
+  return state;
 }
 
-function isFieldInScope(config: FieldConfig, scope: ScopeValue): boolean {
-  if (config.scopes === null) return true
-  return config.scopes.includes(scope)
+function isFieldInScope (config: FieldConfig, scope: ScopeValue): boolean {
+  if (config.scopes === null) return true;
+  return config.scopes.includes(scope);
 }
 
-function isActionInScope(config: { scopes: ScopeValue[] | null }, scope: ScopeValue): boolean {
-  if (config.scopes === null) return true
-  return config.scopes.includes(scope)
+function isActionInScope (config: { scopes: ScopeValue[] | null }, scope: ScopeValue): boolean {
+  if (config.scopes === null) return true;
+  return config.scopes.includes(scope);
 }
 
-export function useSchemaForm(options: UseSchemaFormOptions): UseSchemaFormReturn {
-  const { schema, scope, services, events, handlers, component, initialValues } = options
+export function useSchemaForm (options: UseSchemaFormOptions): UseSchemaFormReturn {
+  const { schema, scope, services, events, handlers, component, initialValues } = options;
 
   const [state, setState] = useState<Record<string, unknown>>(() =>
     buildInitialState(schema.fields, initialValues),
-  )
-  const [fieldOverrides, setFieldOverrides] = useState<Record<string, Partial<FieldProxy>>>({})
-  const [errors, setErrors] = useState<Record<string, string[]>>({})
-  const initialStateRef = useRef(buildInitialState(schema.fields, initialValues))
+  );
+  const [fieldOverrides, setFieldOverrides] = useState<Record<string, Partial<FieldProxy>>>({});
+  const [errors, setErrors] = useState<Record<string, string[]>>({});
+  const initialStateRef = useRef(buildInitialState(schema.fields, initialValues));
 
   const scopedFields = useMemo(() => {
-    const result: Record<string, FieldConfig> = {}
+    const result: Record<string, FieldConfig> = {};
     for (const [name, config] of Object.entries(schema.fields)) {
       if (isFieldInScope(config, scope)) {
-        result[name] = config
+        result[name] = config;
       }
     }
-    return result
-  }, [schema.fields, scope])
+    return result;
+  }, [schema.fields, scope]);
 
   const getProxy = useCallback(
     (name: string): FieldProxy => {
-      const config = schema.fields[name]
+      const config = schema.fields[name];
       if (!config) {
-        return { width: 100, height: 1, hidden: false, disabled: false, state: '' }
+        return { width: 100, height: 1, hidden: false, disabled: false, state: "" };
       }
-      const override = fieldOverrides[name]
+      const override = fieldOverrides[name];
       return {
         width: override?.width ?? config.form.width,
         height: override?.height ?? config.form.height,
         hidden: override?.hidden ?? config.form.hidden,
         disabled: override?.disabled ?? config.form.disabled,
-        state: override?.state ?? '',
-      }
+        state: override?.state ?? "",
+      };
     },
     [schema.fields, fieldOverrides],
-  )
+  );
 
   const resolvedFields = useMemo((): ResolvedField[] => {
     return Object.entries(scopedFields)
@@ -77,16 +77,16 @@ export function useSchemaForm(options: UseSchemaFormOptions): UseSchemaFormRetur
         config,
         proxy: getProxy(name),
       }))
-      .sort((a, b) => a.config.form.order - b.config.form.order)
-  }, [scopedFields, getProxy])
+      .sort((a, b) => a.config.form.order - b.config.form.order);
+  }, [scopedFields, getProxy]);
 
   const groups = useMemo((): FieldGroup[] => {
-    const groupMap: Record<string, ResolvedField[]> = {}
+    const groupMap: Record<string, ResolvedField[]> = {};
     for (const field of resolvedFields) {
-      const groupName = field.config.group
+      const groupName = field.config.group;
       if (groupName && schema.groups[groupName]) {
-        if (!groupMap[groupName]) groupMap[groupName] = []
-        groupMap[groupName].push(field)
+        if (!groupMap[groupName]) groupMap[groupName] = [];
+        groupMap[groupName].push(field);
       }
     }
     return Object.entries(schema.groups)
@@ -95,132 +95,138 @@ export function useSchemaForm(options: UseSchemaFormOptions): UseSchemaFormRetur
         name,
         config,
         fields: groupMap[name],
-      }))
-  }, [resolvedFields, schema.groups])
+      }));
+  }, [resolvedFields, schema.groups]);
 
   const ungrouped = useMemo((): ResolvedField[] => {
-    return resolvedFields.filter((f) => !f.config.group)
-  }, [resolvedFields])
+    return resolvedFields.filter((f) => !f.config.group);
+  }, [resolvedFields]);
 
   const fireEvent = useCallback(
     (fieldName: string, eventName: string, nextState: Record<string, unknown>) => {
-      const handler = events?.[fieldName]?.[eventName]
-      if (!handler) return nextState
+      const handler = events?.[fieldName]?.[eventName];
+      if (!handler) return nextState;
 
-      const stateResult = createStateProxy(nextState)
-      const schemaResult = createSchemaProxy(schema.fields, fieldOverrides)
+      const stateResult = createStateProxy(nextState);
+      const schemaResult = createSchemaProxy(schema.fields, fieldOverrides);
 
-      handler({ state: stateResult.proxy, schema: schemaResult.proxy })
+      handler({ state: stateResult.proxy, schema: schemaResult.proxy });
 
-      const stateChanges = stateResult.getChanges()
-      const schemaOverrides = schemaResult.getOverrides()
+      const stateChanges = stateResult.getChanges();
+      const schemaOverrides = schemaResult.getOverrides();
 
-      const mergedState = { ...nextState, ...stateChanges }
+      const mergedState = { ...nextState, ...stateChanges };
 
       if (Object.keys(stateChanges).length > 0) {
-        setState(mergedState)
+        setState(mergedState);
       }
 
       if (Object.keys(schemaOverrides).length > 0) {
         setFieldOverrides((prev) => {
-          const next = { ...prev }
+          const next = { ...prev };
           for (const [name, overrides] of Object.entries(schemaOverrides)) {
-            next[name] = { ...next[name], ...overrides }
+            next[name] = { ...next[name], ...overrides };
           }
-          return next
-        })
+          return next;
+        });
       }
 
-      return mergedState
+      return mergedState;
     },
     [events, schema.fields, fieldOverrides],
-  )
+  );
 
   const setValue = useCallback(
     (field: string, value: unknown) => {
-      const nextState = { ...state, [field]: value }
-      setState(nextState)
+      const nextState = { ...state, [field]: value };
+      setState(nextState);
 
-      const config = schema.fields[field]
+      const config = schema.fields[field];
       if (config) {
-        const fieldErrors = validateField(value, config.validations)
+        const fieldErrors = validateField(value, config.validations);
         setErrors((prev) => {
-          const next = { ...prev }
+          const next = { ...prev };
           if (fieldErrors.length > 0) {
-            next[field] = fieldErrors
+            next[field] = fieldErrors;
           } else {
-            delete next[field]
+            delete next[field];
           }
-          return next
-        })
+          return next;
+        });
       }
 
-      fireEvent(field, 'change', nextState)
+      fireEvent(field, "change", nextState);
     },
     [state, schema.fields, fireEvent],
-  )
+  );
 
   const setValues = useCallback(
     (values: Record<string, unknown>) => {
-      const nextState = { ...state, ...values }
-      setState(nextState)
+      const nextState = { ...state, ...values };
+      setState(nextState);
     },
     [state],
-  )
+  );
 
   const reset = useCallback(
     (values?: Record<string, unknown>) => {
-      const nextState = values ?? initialStateRef.current
-      setState(nextState)
-      setErrors({})
-      setFieldOverrides({})
+      const nextState = values ?? initialStateRef.current;
+      setState(nextState);
+      setErrors({});
+      setFieldOverrides({});
     },
     [],
-  )
+  );
 
   const validate = useCallback((): boolean => {
-    const allErrors = validateAllFields(state, scopedFields)
-    setErrors(allErrors)
-    return Object.keys(allErrors).length === 0
-  }, [state, scopedFields])
+    const allErrors = validateAllFields(state, scopedFields);
+    setErrors(allErrors);
+    return Object.keys(allErrors).length === 0;
+  }, [state, scopedFields]);
 
   const dirty = useMemo(() => {
-    const initial = initialStateRef.current
+    const initial = initialStateRef.current;
     for (const key of Object.keys(state)) {
-      if (state[key] !== initial[key]) return true
+      if (state[key] !== initial[key]) return true;
     }
-    return false
-  }, [state])
+    return false;
+  }, [state]);
 
-  const valid = useMemo(() => Object.keys(errors).length === 0, [errors])
+  const valid = useMemo(() => Object.keys(errors).length === 0, [errors]);
+
+  const formRef = useRef({ validate, reset, setValues, errors });
+  formRef.current = { validate, reset, setValues, errors };
 
   const actions = useMemo((): ResolvedAction[] => {
     return Object.entries(schema.actions)
       .filter(([, config]) => !config.hidden && isActionInScope(config, scope))
+      .sort(([, a], [, b]) => a.order - b.order)
       .map(([name, config]) => ({
         name,
         config,
         execute: async () => {
-          if (config.validate) {
-            const allErrors = validateAllFields(state, scopedFields)
-            setErrors(allErrors)
-            if (Object.keys(allErrors).length > 0) return
-          }
-          const handler = handlers?.[name]
-          if (!handler) return
+          const handler = handlers?.[name];
+          if (!handler) return;
           await handler({
             state: { ...state },
             schema: { services: services ?? {} },
             component,
-          })
+            form: {
+              errors,
+              dirty,
+              valid,
+              reset,
+              validate
+            },
+          });
         },
-      }))
-  }, [schema.actions, scope, handlers, state, services, component])
+      }));
+  }, [schema.actions, scope, handlers, state, services, component]);
 
   const getFieldProps = useCallback(
     (name: string): FieldRendererProps => {
-      const config = schema.fields[name]
-      const proxy = getProxy(name)
+      const config = schema.fields[name];
+      const proxy = getProxy(name);
       return {
         name,
         value: state[name],
@@ -228,19 +234,19 @@ export function useSchemaForm(options: UseSchemaFormOptions): UseSchemaFormRetur
         proxy,
         errors: errors[name] ?? [],
         scope,
-        onChange(value: unknown) {
-          setValue(name, value)
+        onChange (value: unknown) {
+          setValue(name, value);
         },
-        onBlur() {
-          fireEvent(name, 'blur', state)
+        onBlur () {
+          fireEvent(name, "blur", state);
         },
-        onFocus() {
-          fireEvent(name, 'focus', state)
+        onFocus () {
+          fireEvent(name, "focus", state);
         },
-      }
+      };
     },
     [schema.fields, state, errors, scope, getProxy, setValue, fireEvent],
-  )
+  );
 
   return {
     state,
@@ -256,5 +262,5 @@ export function useSchemaForm(options: UseSchemaFormOptions): UseSchemaFormRetur
     reset,
     validate,
     getFieldProps,
-  }
+  };
 }

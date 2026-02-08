@@ -6,6 +6,7 @@ import type {
   GroupConfig,
   ActionConfig,
   ComponentContract,
+  FormContract,
 } from '@anhanga/core'
 
 export interface FieldRendererProps {
@@ -40,8 +41,17 @@ export interface ResolvedAction {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type EventFn = (context: any) => void
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type HandlerFn = (context: any) => void | Promise<void>
+
+export interface HandlerContext {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  state: any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  schema: any
+  component: ComponentContract
+  form: FormContract
+}
+
+type HandlerFn = (context: HandlerContext) => void | Promise<void>
 
 export interface UseSchemaFormOptions {
   schema: SchemaProvide
