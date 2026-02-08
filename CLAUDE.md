@@ -34,7 +34,7 @@ pnpm --filter @anhanga/playground start:clear  # clear cache
 | `@anhanga/react` | `useSchemaForm` hook, renderer registry, validation, proxy system | tsup (ESM) |
 | `@anhanga/playground` | Expo app demonstrating the full stack | Expo/Metro |
 
-### Core (`core/src`)
+### Core (`packages/core/src`)
 
 Schema-driven form system built on builder-pattern field definitions.
 
@@ -54,7 +54,7 @@ Schema-driven form system built on builder-pattern field definitions.
 
 `InferRecord<S>` extracts a typed record from a schema's field definitions.
 
-### React (`react/src`)
+### React (`packages/react/src`)
 
 - **`use-schema-form.ts`** — Main hook: manages field state, applies events/handlers, resolves groups and scoped actions, returns proxied fields for dynamic overrides
 - **`proxy.ts`** — `createStateProxy()` (tracks mutations in event handlers), `createSchemaProxy()` (dynamic field property override: hidden, disabled, width, height, state)

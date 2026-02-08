@@ -1,7 +1,12 @@
 {
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
-    "strict": true
+    "strict": true,
+    "paths": {
+      "@anhanga/core": ["../packages/core/src"],
+      "@anhanga/react": ["../packages/react/src"],
+      "@anhanga/persistence": ["../packages/persistence/src"]
+    }
   },
   "include": [
     "**/*.ts",
