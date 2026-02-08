@@ -3,8 +3,8 @@ layout: home
 
 hero:
   name: Anhanga
-  text: Schema-driven forms for React
-  tagline: Define your fields once, get type-safe forms, tables, validation, events, and actions — all from a single source of truth.
+  text: Schema-driven UI for management systems
+  tagline: Define your domain once — get forms, tables, validation, i18n, and actions for React and Vue from a single source of truth.
   actions:
     - theme: brand
       text: Get Started

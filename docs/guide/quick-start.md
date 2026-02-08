@@ -107,9 +107,11 @@ export const personHandlers = PersonSchema.handlers({
 })
 ```
 
-## 5. Use in React
+## 5. Render the Form
 
-```tsx
+::: code-group
+
+```tsx [React]
 import { useSchemaForm, getRenderer } from '@anhanga/react'
 
 function PersonForm({ scope }) {
@@ -140,9 +142,49 @@ function PersonForm({ scope }) {
 }
 ```
 
+```vue [Vue]
+<script setup lang="ts">
+import { useSchemaForm, getRenderer } from '@anhanga/vue'
+import { Scope } from '@anhanga/core'
+
+const props = defineProps<{ scope: string }>()
+
+const form = useSchemaForm({
+  schema: PersonSchema.provide(),
+  scope: props.scope,
+  events: personEvents,
+  handlers: personHandlers,
+  component: componentContract,
+  translate: t,
+})
+</script>
+
+<template>
+  <form>
+    <template v-for="field in form.fields" :key="field.name">
+      <component
+        :is="getRenderer(field.config.component)"
+        v-bind="form.getFieldProps(field.name)"
+      />
+    </template>
+
+    <button
+      v-for="action in form.actions"
+      :key="action.name"
+      @click="action.execute"
+    >
+      {{ action.label }}
+    </button>
+  </form>
+</template>
+```
+
+:::
+
 ## Next Steps
 
 - [Schema Definition](/guide/schema-definition) — learn about `configure()`, `extend()`, `pick()`, `omit()`
 - [Field Types](/guide/field-types) — all field types and their methods
 - [Events & Proxy](/guide/events-and-proxy) — reactive field events in depth
-- [useSchemaForm](/react/use-schema-form) — full hook API reference
+- [useSchemaForm (React)](/react/use-schema-form) — full React hook API reference
+- [useSchemaForm (Vue)](/vue/use-schema-form) — full Vue composable API reference

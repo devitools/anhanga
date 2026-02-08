@@ -1,15 +1,20 @@
 # Introduction
 
-Anhanga is a **schema-driven form and table system** for React. You define your domain schema once — fields, actions, groups, scopes — and the framework derives forms, tables, validation, events, and type-safe records from that single source of truth.
+Anhanga is a **schema-driven UI system for management applications**. You define your domain schema once — fields, actions, groups, scopes — and the framework derives forms, tables, validation, events, i18n, and type-safe records from that single source of truth.
+
+The core is framework-agnostic. Official adapters are provided for **React** and **Vue**.
 
 ## Why Anhanga?
 
-Traditional form libraries make you wire up fields, validation, visibility, and layout by hand — for every screen. Anhanga flips the approach: **describe your domain schema once**, and the framework derives everything else.
+Traditional CRUD screens require wiring up fields, validation, visibility, layout, tables, filters, and actions **by hand — for every screen**. Anhanga flips the approach: **describe your domain schema once**, and the framework derives everything else.
 
+- **Less code per feature** — a single schema definition generates forms, tables, validation, and i18n for any scope (add, edit, view, index)
+- **LLM-friendly** — declarative, consistent patterns make it easy for AI tools to generate and maintain schema code
+- **Testability & governance** — separation of concerns (schema, events, handlers, services) makes each layer independently testable and auditable
 - **Type inference** — `InferRecord<typeof PersonSchema>` gives you a fully-typed record
-- **Scoped visibility** — Fields and actions appear/hide based on scope (index, add, view, edit)
-- **Reactive events** — Field changes can mutate other fields, toggle visibility, set states
-- **i18n-native** — Labels resolved via `{domain}.{field}`, never hardcoded
+- **Scoped visibility** — fields and actions appear/hide based on scope (index, add, view, edit)
+- **Reactive events** — field changes can mutate other fields, toggle visibility, set states
+- **i18n-native** — labels resolved via `{domain}.{field}`, never hardcoded
 - **Framework-agnostic core** — `@anhanga/core` has zero dependencies; bring your own UI
 
 ## Packages
@@ -18,6 +23,8 @@ Traditional form libraries make you wire up fields, validation, visibility, and 
 |---------|-------------|
 | `@anhanga/core` | Schema definition, field types, actions, groups, type system |
 | `@anhanga/react` | `useSchemaForm` / `useSchemaTable` hooks, renderer registry, validation |
+| `@anhanga/vue` | `useSchemaForm` / `useSchemaTable` composables, renderer registry, validation |
+| `@anhanga/demo` | Shared demo domain (person schema, services, settings, i18n) |
 
 ## How It Works
 
@@ -25,7 +32,7 @@ Traditional form libraries make you wire up fields, validation, visibility, and 
 2. **Create** domain schemas with fields, groups, and actions
 3. **Define events** that react to field changes
 4. **Define handlers** for actions like create, update, destroy
-5. **Render** using React hooks that resolve fields, validation, and actions automatically
+5. **Render** using framework hooks/composables that resolve fields, validation, and actions automatically
 
 ```typescript
 import { text, Text, date, toggle, group, action, Position, Scope } from '@anhanga/core'

@@ -75,6 +75,18 @@ const meta = extractPersistenceMeta(PersonSchema)
 // { resource: 'person', identity: 'id', fields: { name: { dataType: 'string' }, ... } }
 ```
 
+## Built-in Local Driver
+
+The `@anhanga/demo` package includes a `createLocalDriver()` that implements `PersistenceContract` using in-memory storage. It's useful for prototyping and testing without a backend:
+
+```typescript
+import { createLocalDriver } from '@anhanga/demo'
+import { createService } from '@anhanga/core'
+
+const localDriver = createLocalDriver()
+const personService = createService(PersonSchema, localDriver)
+```
+
 ## Implementing a Persistence Driver
 
 ```typescript

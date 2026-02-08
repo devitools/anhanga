@@ -2,7 +2,7 @@ import { defineConfig } from 'vitepress'
 
 export default defineConfig({
   title: 'Anhanga',
-  description: 'Schema-driven forms for React',
+  description: 'Schema-driven UI for management systems — React & Vue',
   base: '/anhanga/',
 
   appearance: 'dark',
@@ -19,6 +19,7 @@ export default defineConfig({
     nav: [
       { text: 'Guide', link: '/guide/introduction', activeMatch: '/guide/' },
       { text: 'React', link: '/react/use-schema-form', activeMatch: '/react/' },
+      { text: 'Vue', link: '/vue/use-schema-form', activeMatch: '/vue/' },
       { text: 'Advanced', link: '/advanced/lifecycle-hooks', activeMatch: '/advanced/' },
       { text: 'API', link: '/api/core', activeMatch: '/api/' },
     ],
@@ -63,6 +64,16 @@ export default defineConfig({
           ],
         },
       ],
+      '/vue/': [
+        {
+          text: 'Vue Integration',
+          items: [
+            { text: 'useSchemaForm', link: '/vue/use-schema-form' },
+            { text: 'useSchemaTable', link: '/vue/use-schema-table' },
+            { text: 'Renderer Registry', link: '/vue/renderer-registry' },
+          ],
+        },
+      ],
       '/advanced/': [
         {
           text: 'Advanced',
@@ -80,6 +91,7 @@ export default defineConfig({
           items: [
             { text: '@anhanga/core', link: '/api/core' },
             { text: '@anhanga/react', link: '/api/react' },
+            { text: '@anhanga/vue', link: '/api/vue' },
           ],
         },
       ],
