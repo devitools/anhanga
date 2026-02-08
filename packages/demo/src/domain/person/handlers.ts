@@ -1,10 +1,12 @@
+import type { ServiceContract } from "@anhanga/core";
 import { PersonSchema } from "./schema";
-import { personService } from "../../applcation/person/personService";
-import { createDefault } from "../../../settings/handlers";
+import { createDefault } from "../../settings/handlers";
 
-export const personHandlers = PersonSchema.handlers({
-  ...createDefault(personService),
-  custom ({ state }) {
-    personService.custom(state.name);
-  },
-});
+export function createPersonHandlers (service: ServiceContract) {
+  return PersonSchema.handlers({
+    ...createDefault(service),
+    custom ({ state }) {
+      (service as any).custom(state.name);
+    },
+  });
+}

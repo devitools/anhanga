@@ -1,0 +1,8 @@
+export { PersonSchema, personEvents, createPersonHandlers, createPersonHooks } from './domain/person'
+export { createPersonService } from './application/person/personService'
+export { schema } from './settings/schema'
+export { Icon } from './settings/icon'
+export { createDefault as createDefaultHandlers } from './settings/handlers'
+export { createDefault as createDefaultHooks } from './settings/hooks'
+export { ptBR } from './settings/locales/pt-BR'
+export { fakeValue, fakeAll } from './support/faker'

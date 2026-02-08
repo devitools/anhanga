@@ -1,4 +1,4 @@
 export { PersonSchema } from './schema'
 export { personEvents } from './events'
-export { personHandlers } from './handlers'
-export { personHooks } from './hooks'
+export { createPersonHandlers } from './handlers'
+export { createPersonHooks } from './hooks'

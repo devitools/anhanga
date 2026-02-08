@@ -38,4 +38,29 @@ export const ptBR = {
     maxDate: "Data deve ser anterior a {{value}}",
     pattern: "Formato inválido",
   },
+  person: {
+    title: "Pessoa",
+    fields: {
+      id: "ID",
+      name: "Nome",
+      "name.placeholder": "Digite seu nome aqui",
+      email: "E-mail",
+      "email.placeholder": "Informe seu melhor e-mail",
+      phone: "Telefone",
+      "phone.placeholder": "Ex.: (11) 99999-9999",
+      birthDate: "Data de Nascimento",
+      active: "Ativo",
+      street: "Rua",
+      "street.placeholder": "Informe a rua do endereço",
+      city: "Cidade",
+      "city.placeholder": "Digite a cidade",
+    },
+    groups: {
+      basic: "Informações Básicas",
+      address: "Endereço",
+    },
+    actions: {
+      custom: "Enviar",
+    },
+  },
 }

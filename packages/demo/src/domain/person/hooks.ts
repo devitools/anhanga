@@ -1,5 +1,7 @@
+import type { ServiceContract } from "@anhanga/core";
 import { PersonSchema } from "./schema";
-import { personService } from "../../applcation/person/personService";
-import { createDefault } from "../../../settings/hooks";
+import { createDefault } from "../../settings/hooks";
 
-export const personHooks = PersonSchema.hooks(createDefault(personService));
+export function createPersonHooks (service: ServiceContract) {
+  return PersonSchema.hooks(createDefault(service));
+}

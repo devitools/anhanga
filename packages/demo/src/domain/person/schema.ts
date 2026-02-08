@@ -1,6 +1,6 @@
 import { action, date, group, Position, Scope, text, Text, toggle } from "@anhanga/core";
-import { Icon } from "../../../settings/icon";
-import { schema } from "../../../settings/schema";
+import { Icon } from "../../settings/icon";
+import { schema } from "../../settings/schema";
 
 export const PersonSchema = schema.create("person", {
   groups: {
