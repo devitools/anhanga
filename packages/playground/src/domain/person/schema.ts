@@ -1,8 +1,6 @@
 import { action, date, group, Position, Scope, text, Text, toggle } from "@anhanga/core";
 import { Icon } from "../../../settings/icon";
 import { schema } from "../../../settings/schema";
-import { personService } from "../../applcation/person/personService";
-import { storageService } from "../../applcation/support/storage";
 
 export const PersonSchema = schema.create("person", {
   groups: {
@@ -18,11 +16,6 @@ export const PersonSchema = schema.create("person", {
     active: toggle().width(20).default(true).column().group("basic"),
     street: text().kind(Text.Street).width(60).group("address"),
     city: text().kind(Text.City).width(40).group("address"),
-  },
-
-  services: {
-    default: personService,
-    storage: storageService,
   },
 
   actions: {

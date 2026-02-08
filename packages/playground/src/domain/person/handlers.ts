@@ -1,7 +1,10 @@
 import { PersonSchema } from "./schema";
+import { personService } from "../../applcation/person/personService";
+import { createDefault } from "../../../settings/handlers";
 
 export const personHandlers = PersonSchema.handlers({
-  custom ({ state, schema }) {
-    schema.services.default.custom(state.name);
-  }
+  ...createDefault(personService),
+  custom ({ state }) {
+    personService.custom(state.name);
+  },
 });

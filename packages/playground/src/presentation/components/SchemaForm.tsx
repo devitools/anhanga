@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import { View, Text, Pressable, StyleSheet, Platform } from "react-native";
+import { View, Text, Pressable, StyleSheet, Platform, ActivityIndicator } from "react-native";
 import { useTranslation } from "react-i18next";
 import { Feather } from "@expo/vector-icons";
 import { useSchemaForm, getRenderer } from "@anhanga/react";
@@ -54,6 +54,14 @@ export function SchemaForm ({ debug = __DEV__, ...props }: SchemaFormProps) {
     const fakeData = fakeAll(props.schema.fields, props.schema.identity);
     form.setValues(fakeData);
   }, [props.schema.fields, props.schema.identity, form]);
+
+  if (form.loading) {
+    return (
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator size="large" />
+      </View>
+    );
+  }
 
   return (
     <View {...ds("SchemaForm")}>
@@ -182,6 +190,11 @@ export function SchemaForm ({ debug = __DEV__, ...props }: SchemaFormProps) {
 }
 
 const styles = StyleSheet.create({
+  loadingContainer: {
+    paddingVertical: theme.spacing.xxl,
+    alignItems: "center",
+    justifyContent: "center",
+  },
   group: {
     marginBottom: theme.spacing.lg,
   },
