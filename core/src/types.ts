@@ -179,6 +179,13 @@ export interface TranslateContract {
   (key: string, params?: Record<string, unknown>): string
 }
 
+export interface HandlerContext {
+  state: Record<string, unknown>
+  component: ComponentContract
+  form?: FormContract
+  table?: TableContract
+}
+
 export interface BootstrapHookContext {
   context: Record<string, unknown>
   hydrate(data: Record<string, unknown>): void

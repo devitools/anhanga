@@ -18,6 +18,9 @@ export { ActionDefinition, action } from './action'
 export { Icon } from './icon'
 export type { IconValue } from './icon'
 
+export { createService, extractPersistenceMeta } from './persistence'
+export type { PersistenceContract, PersistenceMeta } from './persistence'
+
 export { Position, Scope } from './types'
 
 export type {
@@ -43,6 +46,7 @@ export type {
   FormContract,
   TableContract,
   TranslateContract,
+  HandlerContext,
   BootstrapHookContext,
   BootstrapHookFn,
   FetchHookContext,
