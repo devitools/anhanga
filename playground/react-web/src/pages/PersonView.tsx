@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Scope } from "@anhanga/core";
 import { PersonSchema, personEvents } from "@anhanga/demo";
@@ -24,13 +24,14 @@ const dialog = {
   },
 };
 
-export function PersonAdd() {
+export function PersonView() {
+  const { id } = useParams<{ id: string }>();
   const { t } = useTranslation();
   const navigate = useNavigate();
   setNavigate(navigate);
 
   const component = useMemo(
-    () => createComponent(Scope.add, scopes, dialog),
+    () => createComponent(Scope.view, scopes, dialog),
     [],
   );
 
@@ -38,16 +39,17 @@ export function PersonAdd() {
     <Card>
       <CardHeader>
         <CardTitle className="text-xl">
-          {t("person.title")} — {t("common.scopes.add")}
+          {t("person.title")} — {t("common.scopes.view")}
         </CardTitle>
       </CardHeader>
       <CardContent>
         <SchemaForm
           schema={PersonSchema.provide()}
-          scope={Scope.add}
+          scope={Scope.view}
           events={personEvents}
           handlers={personHandlers}
           hooks={personHooks}
+          context={{ id }}
           component={component}
           translate={t}
         />

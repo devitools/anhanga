@@ -1,5 +1,7 @@
 import { useTranslation } from "react-i18next";
 import type { FieldRendererProps } from "@anhanga/react";
+import { Switch } from "@/components/ui/switch";
+import { Label } from "@/components/ui/label";
 
 export function ToggleField({ domain, name, value, proxy, onChange }: FieldRendererProps) {
   const { t } = useTranslation();
@@ -8,22 +10,18 @@ export function ToggleField({ domain, name, value, proxy, onChange }: FieldRende
   const isOn = Boolean(value);
 
   return (
-    <div style={{ marginBottom: "0.5rem" }}>
-      <label style={{ display: "block", fontSize: "0.875rem", fontWeight: 600, marginBottom: "0.25rem" }}>
-        {t(`${domain}.fields.${name}`, { defaultValue: name })}
-      </label>
-      <label style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem", cursor: proxy.disabled ? "not-allowed" : "pointer" }}>
-        <input
-          type="checkbox"
+    <div className="mb-2 space-y-1.5">
+      <Label>{t(`${domain}.fields.${name}`, { defaultValue: name })}</Label>
+      <div className="flex items-center gap-2">
+        <Switch
           checked={isOn}
-          onChange={() => !proxy.disabled && onChange(!isOn)}
+          onCheckedChange={(checked) => onChange(checked)}
           disabled={proxy.disabled}
-          style={{ width: 18, height: 18 }}
         />
-        <span style={{ fontSize: "0.875rem", color: proxy.disabled ? "#9ca3af" : "#111827" }}>
+        <span className="text-sm text-muted-foreground">
           {isOn ? "Sim" : "Não"}
         </span>
-      </label>
+      </div>
     </div>
   );
 }

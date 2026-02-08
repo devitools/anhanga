@@ -1,4 +1,5 @@
 import type { ComponentContract, DialogContract, ScopeValue, ScopeRoute } from "@anhanga/core";
+import { toast } from "@/components/ui/sonner";
 import i18n from "i18next";
 
 const t = (key: string) => {
@@ -42,25 +43,21 @@ export function createComponent(
     dialog,
     toast: {
       success(message: string) {
-        console.log("[toast.success]", t(message));
+        toast.success(t(message));
       },
       error(message: string) {
-        console.log("[toast.error]", t(message));
+        toast.error(t(message));
       },
       warning(message: string) {
-        console.log("[toast.warning]", t(message));
+        toast.warning(t(message));
       },
       info(message: string) {
-        console.log("[toast.info]", t(message));
+        toast.info(t(message));
       },
     },
     loading: {
-      show() {
-        console.log("[loading.show]");
-      },
-      hide() {
-        console.log("[loading.hide]");
-      },
+      show() {},
+      hide() {},
     },
   };
 }

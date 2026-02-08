@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ```bash
 # Build all packages
-pnpm build              # runs tsup in core and react
+pnpm build              # runs tsup in core, react, and demo
 
 # Test all packages
 pnpm test               # runs vitest in core and react
@@ -18,21 +18,26 @@ pnpm --filter @anhanga/react test
 # Run a single test file
 pnpm --filter @anhanga/core exec vitest run src/some.test.ts
 
-# Playground (Expo)
+# Playground React Native (Expo)
 pnpm --filter @anhanga/playground start       # dev server
 pnpm --filter @anhanga/playground web         # web only
 pnpm --filter @anhanga/playground start:clear  # clear cache
+
+# Playground React Web (Vite)
+pnpm --filter @anhanga/playground-web dev     # dev server
 ```
 
 ## Architecture
 
-**Monorepo** — pnpm workspaces with three packages:
+**Monorepo** — pnpm workspaces:
 
 | Package | Purpose | Bundler |
 |---------|---------|---------|
 | `@anhanga/core` | Schema definition, field types, actions, groups, type system | tsup (ESM) |
 | `@anhanga/react` | `useSchemaForm` hook, renderer registry, validation, proxy system | tsup (ESM) |
-| `@anhanga/playground` | Expo app demonstrating the full stack | Expo/Metro |
+| `@anhanga/demo` | Shared demo domain (person schema, services, settings, i18n) | tsup (ESM) |
+| `@anhanga/playground` | Expo app (`playground/react-native`) demonstrating the full stack | Expo/Metro |
+| `@anhanga/playground-web` | Vite + React web app (`playground/react-web`) demonstrating reuse of `@anhanga/demo` | Vite |
 
 ### Core (`packages/core/src`)
 
@@ -61,23 +66,51 @@ Schema-driven form system built on builder-pattern field definitions.
 - **`validation.ts`** — Registry-based validators (required, minLength, maxLength, min, max, pattern, date bounds); extensible via `registerValidator()`
 - **`registry.ts`** — Global and scoped field renderer registry; `registerRenderers()` / `getRenderer()`
 
-### Playground (`playground`)
+### Demo (`packages/demo/src`)
 
-Demonstrates a "person" domain following the canonical file layout:
+Shared framework-agnostic demo code reused by both playgrounds:
 
 ```
 settings/schema.ts        ← configure() base schema (identity, display, default actions/handlers)
+settings/handlers.ts      ← createDefault handlers
+settings/hooks.ts         ← createDefault hooks
 settings/icon.ts          ← icon enum
-src/domain/person/
+settings/i18n.ts          ← setupI18n()
+settings/locales/pt-BR.ts ← pt-BR translations (common + person)
+domain/person/
   schema.ts               ← schema.create("person", { fields, groups, services, actions })
   events.ts               ← PersonSchema.events({ fieldName: { change/blur/focus } })
   handlers.ts             ← PersonSchema.handlers({ actionName })
-src/applcation/person/
+  hooks.ts                ← PersonSchema.hooks(createDefault(personService))
+application/person/
   personService.ts        ← ServiceContract implementation
+application/support/
+  local-driver.ts         ← createLocalDriver()
+```
+
+### Playground React Native (`playground/react-native`)
+
+Expo app consuming `@anhanga/demo`. Contains only platform-specific presentation:
+
+```
 src/presentation/
-  components/renderers/   ← field renderer components (TextField, NumberField, etc.)
-  contracts/component.ts  ← ComponentContract implementation
+  components/renderers/   ← field renderer components (React Native)
+  contracts/component.ts  ← ComponentContract (expo-router)
   components/SchemaForm.tsx ← form component using useSchemaForm
+```
+
+### Playground React Web (`playground/react-web`)
+
+Vite + React web app consuming `@anhanga/demo`. Demonstrates reuse of the same domain in a pure web context:
+
+```
+src/presentation/
+  components/renderers/   ← field renderer components (HTML inputs)
+  contracts/component.ts  ← ComponentContract (react-router-dom)
+  components/SchemaForm.tsx ← form component using useSchemaForm
+src/pages/
+  PersonList.tsx           ← table listing
+  PersonAdd.tsx            ← add form
 ```
 
 ## Key Design Rules

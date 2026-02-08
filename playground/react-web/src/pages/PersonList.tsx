@@ -2,10 +2,15 @@ import { useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Scope } from "@anhanga/core";
+import type { PositionValue } from "@anhanga/core";
 import { useSchemaTable } from "@anhanga/react";
-import { PersonSchema, personHandlers, personHooks } from "@anhanga/demo";
+import { PersonSchema } from "@anhanga/demo";
+import { personHandlers, personHooks } from "../setup";
 import { createComponent, setNavigate } from "../presentation/contracts/component";
 import type { ResolvedAction } from "@anhanga/react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
 const scopes = {
   [Scope.index]: { path: "/person" },
@@ -15,42 +20,36 @@ const scopes = {
 };
 
 const dialog = {
-  async confirm(message: string) {
+  async confirm (message: string) {
     return window.confirm(message);
   },
-  async alert(message: string) {
+  async alert (message: string) {
     window.alert(message);
   },
 };
 
-function ActionBar({ actions, position, domain }: { actions: ResolvedAction[]; position: string; domain: string }) {
+function ActionBar ({ actions, position, domain }: { actions: ResolvedAction[]; position: PositionValue; domain: string }) {
   const { t } = useTranslation();
-  const filtered = actions.filter((a) => a.config.positions?.includes(position as any));
+  const filtered = actions.filter((a) => a.config.positions?.includes(position));
   if (filtered.length === 0) return null;
 
   return (
-    <div style={{ display: "flex", gap: "0.5rem", marginBottom: "1rem" }}>
+    <div className="flex gap-2 mb-4">
       {filtered.map((action) => (
-        <button
+        <Button
           key={action.name}
           onClick={() => action.execute()}
-          style={{
-            padding: "0.5rem 1rem",
-            borderRadius: 4,
-            border: "1px solid #ccc",
-            cursor: "pointer",
-            backgroundColor: action.config.variant === "primary" ? "#2563eb" : undefined,
-            color: action.config.variant === "primary" ? "#fff" : undefined,
-          }}
+          variant={action.config.variant === "primary" ? "default" : action.config.variant === "destructive" ? "destructive" : "outline"}
+          size="sm"
         >
           {t(`common.actions.${action.name}`, { defaultValue: t(`${domain}.actions.${action.name}`, { defaultValue: action.name }) })}
-        </button>
+        </Button>
       ))}
     </div>
   );
 }
 
-export function PersonList() {
+export function PersonList () {
   const { t } = useTranslation();
   const navigate = useNavigate();
   setNavigate(navigate);
@@ -71,98 +70,97 @@ export function PersonList() {
   });
 
   return (
-    <div>
-      <h1 style={{ fontSize: "1.5rem", fontWeight: 700, marginBottom: "1rem" }}>
-        {t("person.title")}
-      </h1>
+    <Card>
+      <CardHeader>
+        <CardTitle className="text-xl">{t("person.title")}</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <ActionBar
+          actions={table.actions}
+          position="top"
+          domain={PersonSchema.domain}
+        />
 
-      <ActionBar actions={table.actions} position="top" domain={PersonSchema.domain} />
-
-      <table style={{ width: "100%", borderCollapse: "collapse" }}>
-        <thead>
-          <tr>
-            {table.columns.map((col) => (
-              <th
-                key={col.name}
-                style={{
-                  textAlign: "left",
-                  padding: "0.5rem",
-                  borderBottom: "2px solid #e5e7eb",
-                  cursor: "pointer",
-                }}
-                onClick={() => table.setSort(col.name)}
-              >
-                {t(`person.fields.${col.name}`, { defaultValue: col.name })}
-                {table.sortField === col.name && (table.sortOrder === "asc" ? " ↑" : " ↓")}
-              </th>
-            ))}
-            <th style={{ textAlign: "right", padding: "0.5rem", borderBottom: "2px solid #e5e7eb" }}>
-              {t("common.table.actions")}
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {table.empty && (
-            <tr>
-              <td
-                colSpan={table.columns.length + 1}
-                style={{ textAlign: "center", padding: "2rem", color: "#6b7280" }}
-              >
-                {t("common.table.empty")}
-              </td>
-            </tr>
-          )}
-          {table.rows.map((row) => (
-            <tr key={table.getIdentity(row)} style={{ borderBottom: "1px solid #e5e7eb" }}>
+        <Table>
+          <TableHeader>
+            <TableRow>
               {table.columns.map((col) => (
-                <td key={col.name} style={{ padding: "0.5rem" }}>
-                  {table.formatValue(col.name, row[col.name], row)}
-                </td>
+                <TableHead
+                  key={col.name}
+                  className="cursor-pointer select-none"
+                  onClick={() => table.setSort(col.name)}
+                >
+                  {t(`person.fields.${col.name}`, { defaultValue: col.name })}
+                  {table.sortField === col.name && (table.sortOrder === "asc" ? " ↑" : " ↓")}
+                </TableHead>
               ))}
-              <td style={{ padding: "0.5rem", textAlign: "right" }}>
-                {table.getRowActions(row).map((action) => (
-                  <button
-                    key={action.name}
-                    onClick={() => action.execute()}
-                    style={{
-                      marginLeft: "0.25rem",
-                      padding: "0.25rem 0.5rem",
-                      borderRadius: 4,
-                      border: "1px solid #ccc",
-                      cursor: "pointer",
-                      fontSize: "0.75rem",
-                    }}
-                  >
-                    {t(`common.actions.${action.name}`, { defaultValue: action.name })}
-                  </button>
+              <TableHead className="text-right">
+                {t("common.table.actions")}
+              </TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {table.empty && (
+              <TableRow>
+                <TableCell
+                  colSpan={table.columns.length + 1}
+                  className="text-center py-8 text-muted-foreground"
+                >
+                  {t("common.table.empty")}
+                </TableCell>
+              </TableRow>
+            )}
+            {table.rows.map((row) => (
+              <TableRow key={table.getIdentity(row)}>
+                {table.columns.map((col) => (
+                  <TableCell key={col.name}>
+                    {table.formatValue(col.name, row[col.name], row)}
+                  </TableCell>
                 ))}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+                <TableCell className="text-right">
+                  <div className="flex justify-end gap-1">
+                    {table.getRowActions(row).map((action) => (
+                      <Button
+                        key={action.name}
+                        onClick={() => action.execute()}
+                        variant="outline"
+                        size="sm"
+                        className="h-8 text-xs"
+                      >
+                        {t(`common.actions.${action.name}`, { defaultValue: action.name })}
+                      </Button>
+                    ))}
+                  </div>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
 
-      {table.totalPages > 1 && (
-        <div style={{ display: "flex", justifyContent: "center", gap: "0.5rem", marginTop: "1rem", alignItems: "center" }}>
-          <button
-            disabled={table.page <= 1}
-            onClick={() => table.setPage(table.page - 1)}
-            style={{ padding: "0.25rem 0.75rem", borderRadius: 4, border: "1px solid #ccc", cursor: "pointer" }}
-          >
-            {t("common.table.previous")}
-          </button>
-          <span style={{ fontSize: "0.875rem" }}>
-            {t("common.table.page", { page: table.page, total: table.totalPages })}
-          </span>
-          <button
-            disabled={table.page >= table.totalPages}
-            onClick={() => table.setPage(table.page + 1)}
-            style={{ padding: "0.25rem 0.75rem", borderRadius: 4, border: "1px solid #ccc", cursor: "pointer" }}
-          >
-            {t("common.table.next")}
-          </button>
-        </div>
-      )}
-    </div>
+        {table.totalPages > 1 && (
+          <div className="flex justify-center gap-2 mt-4 items-center">
+            <Button
+              variant="outline"
+              size="sm"
+              disabled={table.page <= 1}
+              onClick={() => table.setPage(table.page - 1)}
+            >
+              {t("common.table.previous")}
+            </Button>
+            <span className="text-sm text-muted-foreground">
+              {t("common.table.page", { page: table.page, total: table.totalPages })}
+            </span>
+            <Button
+              variant="outline"
+              size="sm"
+              disabled={table.page >= table.totalPages}
+              onClick={() => table.setPage(table.page + 1)}
+            >
+              {t("common.table.next")}
+            </Button>
+          </div>
+        )}
+      </CardContent>
+    </Card>
   );
 }
