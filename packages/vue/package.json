@@ -1,0 +1,28 @@
+{
+  "name": "@anhanga/vue",
+  "version": "0.0.1",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest run"
+  },
+  "peerDependencies": {
+    "vue": ">=3.4",
+    "@anhanga/core": "workspace:*"
+  },
+  "devDependencies": {
+    "@anhanga/core": "workspace:*",
+    "vue": "^3.5.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.7.0",
+    "vitest": "^3.0.0"
+  }
+}
