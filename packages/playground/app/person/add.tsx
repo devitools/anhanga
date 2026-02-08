@@ -6,10 +6,11 @@ import { personEvents } from "../../src/domain/person/events";
 import { personHandlers } from "../../src/domain/person/handlers";
 import { createComponent } from "../../src/presentation/contracts/component";
 import { SchemaForm } from "../../src/presentation/components/SchemaForm";
+import { scopes } from "./@routes";
 
-export default function PersonCreatePage() {
+export default function PersonAddPage() {
   const component = useMemo(
-    () => createComponent(Scope.add, () => console.log("[reload]")),
+    () => createComponent(Scope.add, scopes, () => console.log("[reload]")),
     [],
   );
 
@@ -19,7 +20,6 @@ export default function PersonCreatePage() {
         <Text style={styles.title}>Person / Create</Text>
 
         <SchemaForm
-          debug={false}
           schema={PersonSchema.provide()}
           scope={Scope.add}
           services={PersonSchema.getServices()}

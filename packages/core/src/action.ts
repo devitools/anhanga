@@ -9,7 +9,7 @@ export class ActionDefinition {
       positions: [],
       align: "end",
       hidden: false,
-      scopes: [],
+      scopes: null,
       order: 0,
     };
   }

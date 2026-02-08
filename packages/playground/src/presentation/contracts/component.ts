@@ -1,35 +1,31 @@
 import { Alert } from "react-native";
+import { router } from "expo-router";
 import type { ComponentContract, ScopeValue, ScopeRoute } from "@anhanga/core";
 import { Scope } from "@anhanga/core";
 
-export function createComponent(
+export function createComponent (
   scope: ScopeValue,
+  scopes: Record<ScopeValue, ScopeRoute>,
   reload: () => void,
 ): ComponentContract {
-  const scopes: Record<ScopeValue, ScopeRoute> = {
-    [Scope.index]: { path: "/person" },
-    [Scope.add]: { path: "/person/create" },
-    [Scope.view]: { path: "/person/view" },
-    [Scope.edit]: { path: "/person/edit" },
-  };
 
   return {
     scope,
     scopes,
     reload,
     navigator: {
-      push(path: string) {
-        console.log("[navigator.push]", path);
+      push (path: string) {
+        router.push(path as any);
       },
-      back() {
-        console.log("[navigator.back]");
+      back () {
+        router.back();
       },
-      replace(path: string) {
-        console.log("[navigator.replace]", path);
+      replace (path: string) {
+        router.replace(path as any);
       },
     },
     dialog: {
-      async confirm(message: string) {
+      async confirm (message: string) {
         return new Promise((resolve) => {
           Alert.alert("Confirm", message, [
             { text: "Cancel", onPress: () => resolve(false) },
@@ -37,29 +33,29 @@ export function createComponent(
           ]);
         });
       },
-      async alert(message: string) {
+      async alert (message: string) {
         Alert.alert("Alert", message);
       },
     },
     toast: {
-      success(message: string) {
+      success (message: string) {
         console.log("[toast.success]", message);
       },
-      error(message: string) {
+      error (message: string) {
         console.log("[toast.error]", message);
       },
-      warning(message: string) {
+      warning (message: string) {
         console.log("[toast.warning]", message);
       },
-      info(message: string) {
+      info (message: string) {
         console.log("[toast.info]", message);
       },
     },
     loading: {
-      show() {
+      show () {
         console.log("[loading.show]");
       },
-      hide() {
+      hide () {
         console.log("[loading.hide]");
       },
     },

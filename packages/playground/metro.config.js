@@ -16,4 +16,14 @@ config.resolver.nodeModulesPaths = [
 config.resolver.unstable_enableSymlinks = true;
 config.resolver.unstable_enablePackageExports = true;
 
+config.resolver.assetExts = [...config.resolver.assetExts, 'wasm'];
+
+config.server.enhanceMiddleware = (metroMiddleware) => {
+  return (req, res, next) => {
+    res.setHeader('Cross-Origin-Embedder-Policy', 'credentialless');
+    res.setHeader('Cross-Origin-Opener-Policy', 'same-origin');
+    return metroMiddleware(req, res, next);
+  };
+};
+
 module.exports = config;
