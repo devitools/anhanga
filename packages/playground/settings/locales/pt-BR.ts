@@ -12,6 +12,7 @@ export const ptBR = {
       "create.success": "Registro criado com sucesso",
       "update.invalid": "Corrija os erros antes de enviar",
       "update.success": "Registro atualizado com sucesso",
+      "destroy.confirm": "Deseja realmente excluir este registro?",
       "destroy.success": "Registro excluído com sucesso",
     },
     table: {

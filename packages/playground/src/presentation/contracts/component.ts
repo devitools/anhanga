@@ -1,6 +1,5 @@
-import { Alert } from "react-native";
 import { router } from "expo-router";
-import type { ComponentContract, ScopeValue, ScopeRoute } from "@anhanga/core";
+import type { ComponentContract, DialogContract, ScopeValue, ScopeRoute } from "@anhanga/core";
 import i18n from "../../../settings/i18n";
 
 const t = (key: string) => {
@@ -18,13 +17,13 @@ function resolvePath (path: string, params?: Record<string, unknown>): string {
 export function createComponent (
   scope: ScopeValue,
   scopes: Record<ScopeValue, ScopeRoute>,
-  reload: () => void,
+  dialog: DialogContract,
 ): ComponentContract {
 
   return {
     scope,
     scopes,
-    reload,
+    reload () {},
     navigator: {
       push (path: string, params?: Record<string, unknown>) {
         router.push(resolvePath(path, params) as any);
@@ -36,19 +35,7 @@ export function createComponent (
         router.replace(resolvePath(path, params) as any);
       },
     },
-    dialog: {
-      async confirm (message: string) {
-        return new Promise((resolve) => {
-          Alert.alert(t("common.dialog.confirm"), t(message), [
-            { text: t("common.dialog.cancel"), onPress: () => resolve(false) },
-            { text: t("common.dialog.ok"), onPress: () => resolve(true) },
-          ]);
-        });
-      },
-      async alert (message: string) {
-        Alert.alert(t("common.dialog.alert"), t(message));
-      },
-    },
+    dialog,
     toast: {
       success (message: string) {
         console.log("[toast.success]", t(message));
