@@ -42,6 +42,7 @@ export type {
   ComponentContract,
   FormContract,
   TableContract,
+  TranslateContract,
 } from './types'
 
 import type { SchemaDefinition } from './schema'

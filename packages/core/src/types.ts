@@ -91,11 +91,11 @@ export interface ScopeRoute {
 }
 
 export interface NavigatorContract {
-  push (path: string): void;
+  push (path: string, params?: Record<string, unknown>): void;
 
   back (): void;
 
-  replace (path: string): void;
+  replace (path: string, params?: Record<string, unknown>): void;
 }
 
 export interface DialogContract {
@@ -173,6 +173,10 @@ export interface PaginatedResult<T> {
   total: number;
   page: number;
   limit: number;
+}
+
+export interface TranslateContract {
+  (key: string, params?: Record<string, unknown>): string
 }
 
 export interface ServiceContract<T = Record<string, unknown>> {

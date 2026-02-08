@@ -9,8 +9,8 @@ export class FieldDefinition<T = unknown> {
       component,
       dataType,
       attrs,
-      form: { width: 100, height: 1, hidden: false, disabled: false, order: 0 },
-      table: { show: false, width: 'auto', sortable: true, filterable: false, order: 0 },
+      form: { width: 100, height: 1, hidden: false, disabled: false, order: 1 },
+      table: { show: false, width: 'auto', sortable: true, filterable: false, order: 1 },
       validations: [],
       scopes: null,
       group: undefined,
@@ -36,6 +36,11 @@ export class FieldDefinition<T = unknown> {
 
   disabled(d = true): this {
     this._config.form.disabled = d
+    return this
+  }
+
+  order(o: number): this {
+    this._config.form.order = o
     return this
   }
 
