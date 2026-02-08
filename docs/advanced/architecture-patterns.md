@@ -4,7 +4,7 @@ Recommended project layout and patterns for Anhanga-based applications.
 
 ## Recommended File Layout
 
-The domain and application layers are framework-agnostic — they can be shared between React and Vue apps. Only the presentation layer is framework-specific.
+The domain and application layers are framework-agnostic — they can be shared between React, Vue, and Svelte apps. Only the presentation layer is framework-specific.
 
 ### Shared (framework-agnostic)
 
@@ -47,6 +47,18 @@ src/presentation/
     SchemaTable.vue    ← table component using useSchemaTable
   contracts/
     component.ts       ← ComponentContract (vue-router)
+```
+
+### Svelte presentation
+
+```
+src/presentation/
+  components/
+    renderers/         ← field renderer components (.svelte)
+    SchemaForm.svelte  ← form component using useSchemaForm
+    SchemaTable.svelte ← table component using useSchemaTable
+  contracts/
+    component.ts       ← ComponentContract (SvelteKit goto)
 ```
 
 See the `playground/vue-quasar` directory for a complete Vue + Quasar example.

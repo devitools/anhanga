@@ -2,7 +2,7 @@ import { defineConfig } from 'vitepress'
 
 export default defineConfig({
   title: 'Anhanga',
-  description: 'Schema-driven UI for management systems — React & Vue',
+  description: 'Schema-driven UI for management systems — React, Vue & Svelte',
   base: '/anhanga/',
 
   appearance: 'dark',

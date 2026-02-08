@@ -5,7 +5,7 @@ Extend the built-in validation with custom rules using `registerValidator()`.
 ## Registering a Validator
 
 ```typescript
-import { registerValidator } from '@anhanga/react' // or '@anhanga/vue'
+import { registerValidator } from '@anhanga/react' // or '@anhanga/vue' or '@anhanga/svelte'
 
 registerValidator('cpf', (value, params, translate) => {
   if (!value) return null

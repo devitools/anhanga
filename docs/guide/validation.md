@@ -62,7 +62,7 @@ const personHandlers = PersonSchema.handlers({
 
 ## Validation Functions
 
-`@anhanga/react` and `@anhanga/vue` export identical validation utilities:
+All framework packages export identical validation utilities:
 
 ::: code-group
 
@@ -93,7 +93,7 @@ const allErrors = validateAllFields(state, schema.fields, translate)
 Register custom validators to extend the built-in set:
 
 ```typescript
-import { registerValidator } from '@anhanga/react' // or '@anhanga/vue'
+import { registerValidator } from '@anhanga/react' // or '@anhanga/vue' or '@anhanga/svelte'
 
 registerValidator('cpf', (value, params, translate) => {
   if (!value) return null

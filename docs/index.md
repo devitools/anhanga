@@ -4,7 +4,7 @@ layout: home
 hero:
   name: Anhanga
   text: Schema-driven UI for management systems
-  tagline: Define your domain once — get forms, tables, validation, i18n, and actions for React and Vue from a single source of truth.
+  tagline: Define your domain once — get forms, tables, validation, i18n, and actions for React, Vue, and Svelte from a single source of truth.
   actions:
     - theme: brand
       text: Get Started

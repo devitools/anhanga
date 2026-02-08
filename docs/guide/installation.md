@@ -3,7 +3,7 @@
 ## Prerequisites
 
 - Node.js 18+
-- React 18+ or Vue 3.4+
+- React 18+, Vue 3.4+, or Svelte 5+
 - A package manager: pnpm (recommended), npm, or yarn
 
 ## Install Packages
@@ -44,7 +44,25 @@ yarn add @anhanga/core @anhanga/vue
 
 :::
 
-`@anhanga/core` has **zero dependencies**. `@anhanga/react` requires React 18+ and `@anhanga/vue` requires Vue 3.4+ as peer dependencies.
+### Svelte
+
+::: code-group
+
+```bash [pnpm]
+pnpm add @anhanga/core @anhanga/svelte
+```
+
+```bash [npm]
+npm install @anhanga/core @anhanga/svelte
+```
+
+```bash [yarn]
+yarn add @anhanga/core @anhanga/svelte
+```
+
+:::
+
+`@anhanga/core` has **zero dependencies**. `@anhanga/react` requires React 18+, `@anhanga/vue` requires Vue 3.4+, and `@anhanga/svelte` requires Svelte 5+ as peer dependencies.
 
 ## Package Overview
 
@@ -53,6 +71,7 @@ yarn add @anhanga/core @anhanga/vue
 | `@anhanga/core` | Schema definition, field types, actions, groups, scopes, type inference |
 | `@anhanga/react` | `useSchemaForm`, `useSchemaTable`, renderer registry, validation (React hooks) |
 | `@anhanga/vue` | `useSchemaForm`, `useSchemaTable`, renderer registry, validation (Vue composables) |
+| `@anhanga/svelte` | `useSchemaForm`, `useSchemaTable`, renderer registry, validation (Svelte stores) |
 | `@anhanga/demo` | Shared demo domain — person schema, services, settings, i18n |
 
-You can use `@anhanga/core` standalone if you're building your own UI integration. `@anhanga/react` and `@anhanga/vue` provide ready-to-use hooks/composables for their respective frameworks.
+You can use `@anhanga/core` standalone if you're building your own UI integration. `@anhanga/react`, `@anhanga/vue`, and `@anhanga/svelte` provide ready-to-use integrations for their respective frameworks.

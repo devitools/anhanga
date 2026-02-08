@@ -2,7 +2,7 @@
 
 Anhanga is a **schema-driven UI system for management applications**. You define your domain schema once — fields, actions, groups, scopes — and the framework derives forms, tables, validation, events, i18n, and type-safe records from that single source of truth.
 
-The core is framework-agnostic. Official adapters are provided for **React** and **Vue**.
+The core is framework-agnostic. Official adapters are provided for **React**, **Vue**, and **Svelte**.
 
 ## Why Anhanga?
 
@@ -24,6 +24,7 @@ Traditional CRUD screens require wiring up fields, validation, visibility, layou
 | `@anhanga/core` | Schema definition, field types, actions, groups, type system |
 | `@anhanga/react` | `useSchemaForm` / `useSchemaTable` hooks, renderer registry, validation |
 | `@anhanga/vue` | `useSchemaForm` / `useSchemaTable` composables, renderer registry, validation |
+| `@anhanga/svelte` | `useSchemaForm` / `useSchemaTable` stores, renderer registry, validation |
 | `@anhanga/demo` | Shared demo domain (person schema, services, settings, i18n) |
 
 ## How It Works

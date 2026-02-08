@@ -188,3 +188,4 @@ const form = useSchemaForm({
 - [Events & Proxy](/guide/events-and-proxy) — reactive field events in depth
 - [useSchemaForm (React)](/react/use-schema-form) — full React hook API reference
 - [useSchemaForm (Vue)](/vue/use-schema-form) — full Vue composable API reference
+- useSchemaForm (Svelte) — Svelte store API reference _(coming soon)_
