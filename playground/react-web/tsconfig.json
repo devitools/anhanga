@@ -1,0 +1,15 @@
+{
+  "extends": "../tsconfig.base.json",
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "outDir": "dist",
+    "rootDir": "src",
+    "paths": {
+      "@anhanga/core": ["../packages/core/src"],
+      "@anhanga/demo": ["../packages/demo/src"],
+      "@anhanga/demo/*": ["../packages/demo/src/*"],
+      "@anhanga/react": ["../packages/react/src"]
+    }
+  },
+  "include": ["src"]
+}
