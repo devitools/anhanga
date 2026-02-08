@@ -15,10 +15,13 @@ export type { TextKind } from './fields'
 
 export { GroupDefinition, group } from './group'
 export { ActionDefinition, action } from './action'
+export { Icon } from './icon'
+export type { IconValue } from './icon'
 
-export { Scope } from './types'
+export { Position, Scope } from './types'
 
 export type {
+  PositionValue,
   ScopeValue,
   FieldConfig,
   FormConfig,
@@ -37,6 +40,7 @@ export type {
   ToastContract,
   LoadingContract,
   ComponentContract,
+  FormContract,
 } from './types'
 
 import type { SchemaDefinition } from './schema'

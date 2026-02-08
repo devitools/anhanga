@@ -4,11 +4,11 @@ import { theme } from "../../theme";
 
 const ds = (id: string) => ({ dataSet: { id } }) as any;
 
-export function TextField({ name, value, proxy, errors, onChange, onBlur, onFocus }: FieldRendererProps) {
+export function DateField({ name, value, proxy, errors, onChange, onBlur, onFocus }: FieldRendererProps) {
   if (proxy.hidden) return null;
 
   return (
-    <View style={styles.container} {...ds(`TextField:${name}`)}>
+    <View style={styles.container} {...ds(`DateField:${name}`)}>
       <Text style={styles.label}>{name}</Text>
       <TextInput
         style={[styles.input, proxy.disabled && styles.inputDisabled, errors.length > 0 && styles.inputError]}
@@ -17,12 +17,14 @@ export function TextField({ name, value, proxy, errors, onChange, onBlur, onFocu
         onBlur={onBlur}
         onFocus={onFocus}
         editable={!proxy.disabled}
-        placeholder={name}
+        placeholder="YYYY-MM-DD"
         placeholderTextColor={theme.colors.mutedForeground}
       />
-      {errors.map((error, i) => (
-        <Text key={i} style={styles.error}>{error}</Text>
-      ))}
+      <View style={styles.errorSlot}>
+        {errors.map((error, i) => (
+          <Text key={i} style={styles.error}>{error}</Text>
+        ))}
+      </View>
     </View>
   );
 }
@@ -30,7 +32,6 @@ export function TextField({ name, value, proxy, errors, onChange, onBlur, onFocu
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: theme.spacing.xs,
-    marginBottom: theme.spacing.md,
   },
   label: {
     fontSize: theme.fontSize.sm,
@@ -55,9 +56,12 @@ const styles = StyleSheet.create({
   inputError: {
     borderColor: theme.colors.destructive,
   },
+  errorSlot: {
+    minHeight: 20,
+    marginTop: 2,
+  },
   error: {
     fontSize: theme.fontSize.xs,
     color: theme.colors.destructive,
-    marginTop: 2,
   },
 });

@@ -4,25 +4,31 @@ import { theme } from "../../theme";
 
 const ds = (id: string) => ({ dataSet: { id } }) as any;
 
-export function DateField({ name, value, proxy, errors, onChange, onBlur, onFocus }: FieldRendererProps) {
+export function NumberField({ name, value, proxy, errors, onChange, onBlur, onFocus }: FieldRendererProps) {
   if (proxy.hidden) return null;
 
   return (
-    <View style={styles.container} {...ds(`DateField:${name}`)}>
+    <View style={styles.container} {...ds(`NumberField:${name}`)}>
       <Text style={styles.label}>{name}</Text>
       <TextInput
         style={[styles.input, proxy.disabled && styles.inputDisabled, errors.length > 0 && styles.inputError]}
-        value={String(value ?? "")}
-        onChangeText={onChange}
+        value={value !== undefined && value !== null ? String(value) : ""}
+        onChangeText={(text) => {
+          const num = Number(text);
+          onChange(isNaN(num) ? text : num);
+        }}
         onBlur={onBlur}
         onFocus={onFocus}
         editable={!proxy.disabled}
-        placeholder="YYYY-MM-DD"
+        keyboardType="numeric"
+        placeholder={name}
         placeholderTextColor={theme.colors.mutedForeground}
       />
-      {errors.map((error, i) => (
-        <Text key={i} style={styles.error}>{error}</Text>
-      ))}
+      <View style={styles.errorSlot}>
+        {errors.map((error, i) => (
+          <Text key={i} style={styles.error}>{error}</Text>
+        ))}
+      </View>
     </View>
   );
 }
@@ -30,7 +36,6 @@ export function DateField({ name, value, proxy, errors, onChange, onBlur, onFocu
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: theme.spacing.xs,
-    marginBottom: theme.spacing.md,
   },
   label: {
     fontSize: theme.fontSize.sm,
@@ -55,9 +60,12 @@ const styles = StyleSheet.create({
   inputError: {
     borderColor: theme.colors.destructive,
   },
+  errorSlot: {
+    minHeight: 20,
+    marginTop: 2,
+  },
   error: {
     fontSize: theme.fontSize.xs,
     color: theme.colors.destructive,
-    marginTop: 2,
   },
 });

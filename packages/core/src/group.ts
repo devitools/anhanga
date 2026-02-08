@@ -1,5 +1,4 @@
 import type { GroupConfig } from './types'
-
 export class GroupDefinition {
   private _config: GroupConfig
 

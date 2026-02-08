@@ -1,15 +1,16 @@
 import { Scope } from "./types";
-import type { ActionConfig, ScopeValue } from "./types";
-
+import type { ActionConfig, PositionValue, ScopeValue } from "./types";
 export class ActionDefinition {
-  private _config: ActionConfig;
+  private readonly _config: ActionConfig;
 
   constructor () {
     this._config = {
       variant: "default",
+      positions: [],
+      align: "end",
       hidden: false,
-      validate: false,
-      scopes: null,
+      scopes: [],
+      order: 0,
     };
   }
 
@@ -58,8 +59,23 @@ export class ActionDefinition {
     return this;
   }
 
-  validate (v = true): this {
-    this._config.validate = v;
+  positions (...p: PositionValue[]): this {
+    this._config.positions = p;
+    return this;
+  }
+
+  start (): this {
+    this._config.align = "start";
+    return this;
+  }
+
+  end (): this {
+    this._config.align = "end";
+    return this;
+  }
+
+  order (o: number): this {
+    this._config.order = o;
     return this;
   }
 

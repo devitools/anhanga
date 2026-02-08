@@ -1,3 +1,11 @@
+export const Position = {
+  top: "top",
+  footer: "footer",
+  floating: "floating",
+} as const;
+
+export type PositionValue = typeof Position[keyof typeof Position]
+
 export const Scope = {
   index: "index",
   add: "add",
@@ -52,9 +60,11 @@ export interface GroupConfig {
 export interface ActionConfig {
   icon?: string;
   variant: "default" | "primary" | "destructive" | "secondary" | "muted" | "accent" | "success" | "warning" | "info";
+  positions: PositionValue[];
+  align: "start" | "end";
   hidden: boolean;
-  validate: boolean;
   scopes: ScopeValue[] | null;
+  order: number;
 }
 
 export interface FieldProxy {
@@ -107,6 +117,16 @@ export interface LoadingContract {
   show (): void;
 
   hide (): void;
+}
+
+export interface FormContract {
+  errors: Record<string, string[]>;
+  dirty: boolean;
+  valid: boolean;
+
+  validate (): boolean;
+
+  reset (values?: Record<string, unknown>): void;
 }
 
 export interface ComponentContract {

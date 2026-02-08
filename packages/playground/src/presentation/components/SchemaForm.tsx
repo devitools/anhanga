@@ -3,6 +3,7 @@ import { View, Text, Pressable, StyleSheet, Platform } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import { useSchemaForm, getRenderer } from "@anhanga/react";
 import type { UseSchemaFormOptions } from "@anhanga/react";
+import type { PositionValue } from "@anhanga/core";
 import { fakeAll } from "../support/faker";
 import { theme } from "../theme";
 import "./renderers";
@@ -19,28 +20,57 @@ function reload() {
   }
 }
 
-const iconMap: Record<string, keyof typeof Feather.glyphMap> = {
-  save: "save",
-  close: "x",
-  trash: "trash-2",
-  plane: "send",
-  edit: "edit-2",
-  plus: "plus",
-  search: "search",
-  eye: "eye",
-  list: "list",
-};
-
-function resolveIcon(name?: string): keyof typeof Feather.glyphMap | undefined {
-  if (!name) return undefined;
-  return iconMap[name] ?? (name as keyof typeof Feather.glyphMap);
-}
-
 const variantStyles: Record<string, { bg: string; border: string; text: string }> = {
   default: { bg: theme.colors.card, border: theme.colors.border, text: theme.colors.foreground },
   primary: { bg: theme.colors.primary, border: theme.colors.primary, text: theme.colors.primaryForeground },
   destructive: { bg: theme.colors.destructive, border: theme.colors.destructive, text: theme.colors.destructiveForeground },
+  warning: { bg: theme.colors.warning, border: theme.colors.warning, text: theme.colors.warningForeground },
+  success: { bg: theme.colors.success, border: theme.colors.success, text: theme.colors.successForeground },
+  info: { bg: theme.colors.info, border: theme.colors.info, text: theme.colors.infoForeground },
+  muted: { bg: theme.colors.muted, border: theme.colors.muted, text: theme.colors.mutedForeground },
+  accent: { bg: theme.colors.accent, border: theme.colors.accent, text: theme.colors.accentForeground },
 };
+
+function ActionButton({ action }: { action: { name: string; config: { icon?: string; variant: string }; execute: () => void } }) {
+  const variant = variantStyles[action.config.variant] ?? variantStyles.default;
+  return (
+    <Pressable
+      style={[styles.actionButton, { backgroundColor: variant.bg, borderColor: variant.border }]}
+      onPress={action.execute}
+      {...ds(`action:${action.name}`)}
+    >
+      {action.config.icon && <Feather name={action.config.icon as any} size={16} color={variant.text} style={styles.actionIcon} />}
+      <Text style={[styles.actionButtonText, { color: variant.text }]}>{action.name}</Text>
+    </Pressable>
+  );
+}
+
+function ActionBar({ actions, position }: { actions: { name: string; config: any; execute: () => void }[]; position: PositionValue }) {
+  const items = actions.filter((a) => a.config.position === position);
+  if (items.length === 0) return null;
+
+  if (position === "floating") {
+    return (
+      <View style={styles.floatingContainer} {...ds("actions:floating")}>
+        {items.map((action) => <ActionButton key={action.name} action={action} />)}
+      </View>
+    );
+  }
+
+  const startItems = items.filter((a) => a.config.align === "start");
+  const endItems = items.filter((a) => a.config.align === "end");
+
+  return (
+    <View style={styles.actionsRow} {...ds(`actions:${position}`)}>
+      <View style={styles.actionsGroup}>
+        {startItems.map((action) => <ActionButton key={action.name} action={action} />)}
+      </View>
+      <View style={styles.actionsGroup}>
+        {endItems.map((action) => <ActionButton key={action.name} action={action} />)}
+      </View>
+    </View>
+  );
+}
 
 export function SchemaForm({ debug = __DEV__, ...props }: SchemaFormProps) {
   const form = useSchemaForm(props);
@@ -52,6 +82,8 @@ export function SchemaForm({ debug = __DEV__, ...props }: SchemaFormProps) {
 
   return (
     <View {...ds("SchemaForm")}>
+      <ActionBar actions={form.actions} position="top" />
+
       {form.groups.map((group) => (
         <View key={group.name} style={styles.group} {...ds(`group:${group.name}`)}>
           <Text style={styles.groupTitle}>{group.name}</Text>
@@ -97,25 +129,9 @@ export function SchemaForm({ debug = __DEV__, ...props }: SchemaFormProps) {
 
       <View style={styles.divider} />
 
-      <View style={styles.actionsRow} {...ds("actions")}>
-        {form.actions.map((action) => {
-          const variant = variantStyles[action.config.variant] ?? variantStyles.default;
-          const icon = resolveIcon(action.config.icon);
-          return (
-            <Pressable
-              key={action.name}
-              style={[styles.actionButton, { backgroundColor: variant.bg, borderColor: variant.border }]}
-              onPress={action.execute}
-              {...ds(`action:${action.name}`)}
-            >
-              {icon && <Feather name={icon} size={16} color={variant.text} style={styles.actionIcon} />}
-              <Text style={[styles.actionButtonText, { color: variant.text }]}>
-                {action.name}
-              </Text>
-            </Pressable>
-          );
-        })}
-      </View>
+      <ActionBar actions={form.actions} position="footer" />
+
+      <ActionBar actions={form.actions} position="floating" />
 
       {debug && (
         <View style={styles.debugSection} {...ds("debug")}>
@@ -180,7 +196,18 @@ const styles = StyleSheet.create({
   },
   actionsRow: {
     flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  actionsGroup: {
+    flexDirection: "row",
     flexWrap: "wrap",
+    gap: theme.spacing.md,
+  },
+  floatingContainer: {
+    position: "absolute",
+    bottom: theme.spacing.xl,
+    right: theme.spacing.xl,
+    flexDirection: "column",
     gap: theme.spacing.md,
   },
   actionButton: {
