@@ -1,0 +1,24 @@
+{
+  "pt-BR": {
+    "person": {
+      "title": "Pessoa",
+      "fields": {
+        "id": "ID",
+        "name": "Nome",
+        "email": "E-mail",
+        "phone": "Telefone",
+        "birthDate": "Data de Nascimento",
+        "active": "Ativo",
+        "street": "Rua",
+        "city": "Cidade"
+      },
+      "groups": {
+        "basic": "Informações Básicas",
+        "address": "Endereço"
+      },
+      "actions": {
+        "custom": "Enviar"
+      }
+    }
+  }
+}
