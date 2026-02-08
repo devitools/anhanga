@@ -1,15 +1,17 @@
 import { View, Text, Switch, StyleSheet } from "react-native";
+import { useTranslation } from "react-i18next";
 import type { FieldRendererProps } from "@anhanga/react";
 import { theme } from "../../theme";
 
 const ds = (id: string) => ({ dataSet: { id } }) as any;
 
-export function ToggleField({ name, value, proxy, onChange }: FieldRendererProps) {
+export function ToggleField({ domain, name, value, proxy, onChange }: FieldRendererProps) {
+  const { t } = useTranslation();
   if (proxy.hidden) return null;
 
   return (
     <View style={styles.container} {...ds(`ToggleField:${name}`)}>
-      <Text style={styles.label}>{name}</Text>
+      <Text style={styles.label}>{t(`${domain}.fields.${name}`, { defaultValue: name })}</Text>
       <View style={styles.row}>
         <Switch
           value={Boolean(value)}

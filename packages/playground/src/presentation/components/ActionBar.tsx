@@ -1,6 +1,8 @@
 import { View, Text, Pressable, StyleSheet } from "react-native";
+import { useTranslation } from "react-i18next";
 import { Feather } from "@expo/vector-icons";
 import type { PositionValue } from "@anhanga/core";
+import { resolveActionLabel } from "@anhanga/react";
 import { theme } from "../theme";
 
 const ds = (id: string) => ({ dataSet: { id } }) as any;
@@ -16,8 +18,10 @@ const variantStyles: Record<string, { bg: string; border: string; text: string }
   accent: { bg: theme.colors.accent, border: theme.colors.accent, text: theme.colors.accentForeground },
 };
 
-export function ActionButton({ action }: { action: { name: string; config: { icon?: string; variant: string }; execute: () => void } }) {
+export function ActionButton({ action, domain }: { action: { name: string; config: { icon?: string; variant: string }; execute: () => void }; domain: string }) {
+  const { t } = useTranslation();
   const variant = variantStyles[action.config.variant] ?? variantStyles.default;
+  const actionLabel = resolveActionLabel(t, domain, action.name);
   return (
     <Pressable
       style={[styles.actionButton, { backgroundColor: variant.bg, borderColor: variant.border }]}
@@ -25,19 +29,19 @@ export function ActionButton({ action }: { action: { name: string; config: { ico
       {...ds(`action:${action.name}`)}
     >
       {action.config.icon && <Feather name={action.config.icon as any} size={16} color={variant.text} style={styles.actionIcon} />}
-      <Text style={[styles.actionButtonText, { color: variant.text }]}>{action.name}</Text>
+      <Text style={[styles.actionButtonText, { color: variant.text }]}>{actionLabel}</Text>
     </Pressable>
   );
 }
 
-export function ActionBar({ actions, position }: { actions: { name: string; config: any; execute: () => void }[]; position: PositionValue }) {
+export function ActionBar({ actions, position, domain }: { actions: { name: string; config: any; execute: () => void }[]; position: PositionValue; domain: string }) {
   const items = actions.filter((a) => a.config.positions.includes(position));
   if (items.length === 0) return null;
 
   if (position === "floating") {
     return (
       <View style={styles.floatingContainer} {...ds("actions:floating")}>
-        {items.map((action) => <ActionButton key={action.name} action={action} />)}
+        {items.map((action) => <ActionButton key={action.name} action={action} domain={domain} />)}
       </View>
     );
   }
@@ -48,10 +52,10 @@ export function ActionBar({ actions, position }: { actions: { name: string; conf
   return (
     <View style={styles.actionsRow} {...ds(`actions:${position}`)}>
       <View style={styles.actionsGroup}>
-        {startItems.map((action) => <ActionButton key={action.name} action={action} />)}
+        {startItems.map((action) => <ActionButton key={action.name} action={action} domain={domain} />)}
       </View>
       <View style={styles.actionsGroup}>
-        {endItems.map((action) => <ActionButton key={action.name} action={action} />)}
+        {endItems.map((action) => <ActionButton key={action.name} action={action} domain={domain} />)}
       </View>
     </View>
   );

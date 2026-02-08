@@ -1,63 +1,35 @@
 import { useMemo } from "react";
-import { View, Text, ScrollView, StyleSheet } from "react-native";
+import { useTranslation } from "react-i18next";
 import { Scope } from "@anhanga/core";
 import { PersonSchema } from "../../src/domain/person/schema";
 import { personEvents } from "../../src/domain/person/events";
 import { personHandlers } from "../../src/domain/person/handlers";
 import { createComponent } from "../../src/presentation/contracts/component";
 import { SchemaForm } from "../../src/presentation/components/SchemaForm";
+import { Page } from "../../src/presentation/components/Page";
 import { scopes } from "./@routes";
 
-export default function PersonAddPage() {
+export default function PersonAddPage () {
+  const { t } = useTranslation();
   const component = useMemo(
     () => createComponent(Scope.add, scopes, () => console.log("[reload]")),
     [],
   );
 
   return (
-    <ScrollView style={styles.scroll} contentContainerStyle={styles.scrollContent}>
-      <View style={styles.container}>
-        <Text style={styles.title}>Person / Create</Text>
-
-        <SchemaForm
-          schema={PersonSchema.provide()}
-          scope={Scope.add}
-          services={PersonSchema.getServices()}
-          events={personEvents}
-          handlers={personHandlers}
-          component={component}
-        />
-      </View>
-    </ScrollView>
+    <Page
+      domain={PersonSchema.domain}
+      scope={Scope.add}
+    >
+      <SchemaForm
+        schema={PersonSchema.provide()}
+        scope={Scope.add}
+        services={PersonSchema.getServices()}
+        events={personEvents}
+        handlers={personHandlers}
+        component={component}
+        translate={t}
+      />
+    </Page>
   );
 }
-
-const styles = StyleSheet.create({
-  scroll: {
-    flex: 1,
-    backgroundColor: "#F3F4F6",
-  },
-  scrollContent: {
-    padding: 20,
-    paddingTop: 60,
-  },
-  container: {
-    maxWidth: 720,
-    width: "100%",
-    alignSelf: "center",
-    backgroundColor: "#FFFFFF",
-    borderRadius: 12,
-    padding: 24,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-    elevation: 4,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: "700",
-    marginBottom: 24,
-    color: "#111827",
-  },
-});

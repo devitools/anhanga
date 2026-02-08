@@ -1,8 +1,9 @@
 import { useCallback, useState } from "react";
 import { View, Text, Pressable, StyleSheet, Platform } from "react-native";
+import { useTranslation } from "react-i18next";
 import { Feather } from "@expo/vector-icons";
 import { useSchemaForm, getRenderer } from "@anhanga/react";
-import type { UseSchemaFormOptions } from "@anhanga/react";
+import type { UseSchemaFormOptions, ResolvedField, UseSchemaFormReturn } from "@anhanga/react";
 import { fakeAll } from "../support/faker";
 import { theme } from "../theme";
 import { ActionBar } from "./ActionBar";
@@ -11,17 +12,42 @@ import "./renderers";
 const ds = (id: string) => ({ dataSet: { id } }) as any;
 
 interface SchemaFormProps extends UseSchemaFormOptions {
-  debug?: boolean
+  debug?: boolean;
 }
 
-function reload() {
+function reload () {
   if (Platform.OS === "web" && typeof window !== "undefined") {
     window.location.reload();
   }
 }
 
-export function SchemaForm({ debug = __DEV__, ...props }: SchemaFormProps) {
-  const form = useSchemaForm(props);
+function FieldsGrid ({ fields, getFieldProps }: {
+  fields: ResolvedField[];
+  getFieldProps: UseSchemaFormReturn["getFieldProps"]
+}) {
+  return (
+    <View style={styles.fieldsGrid}>
+      {fields.map((field) => {
+        if (field.proxy.hidden) return null;
+        const Renderer = getRenderer(field.config.component);
+        if (!Renderer) return null;
+        return (
+          <View
+            key={field.name}
+            style={{ gridColumn: `span ${field.proxy.width}` } as any}
+            {...ds(`field:${field.name}`)}
+          >
+            <Renderer {...getFieldProps(field.name)} />
+          </View>
+        );
+      })}
+    </View>
+  );
+}
+
+export function SchemaForm ({ debug = __DEV__, ...props }: SchemaFormProps) {
+  const { t } = useTranslation();
+  const form = useSchemaForm({ ...props, translate: props.translate ?? t });
   const [debugExpanded, setDebugExpanded] = useState(false);
 
   const handleFill = useCallback(() => {
@@ -31,75 +57,105 @@ export function SchemaForm({ debug = __DEV__, ...props }: SchemaFormProps) {
 
   return (
     <View {...ds("SchemaForm")}>
-      <ActionBar actions={form.actions} position="top" />
+      <ActionBar
+        actions={form.actions}
+        position="top"
+        domain={props.schema.domain}
+      />
 
-      {form.groups.map((group) => (
-        <View key={group.name} style={styles.group} {...ds(`group:${group.name}`)}>
-          <Text style={styles.groupTitle}>{group.name}</Text>
-          <View style={styles.fieldsGrid}>
-            {group.fields.map((field) => {
-              if (field.proxy.hidden) return null;
-              const Renderer = getRenderer(field.config.component);
-              if (!Renderer) return null;
-              return (
-                <View
-                  key={field.name}
-                  style={{ gridColumn: `span ${field.proxy.width}` } as any}
-                  {...ds(`field:${field.name}`)}
-                >
-                  <Renderer {...form.getFieldProps(field.name)} />
-                </View>
-              );
-            })}
+      {form.sections.map((section, index) => {
+        if (section.kind === "group") {
+          return (
+            <View
+              key={section.name}
+              style={styles.group} {...ds(`group:${section.name}`)}>
+              <Text style={styles.groupTitle}>{t(`${props.schema.domain}.groups.${section.name}`, { defaultValue: section.name })}</Text>
+              <FieldsGrid
+                fields={section.fields}
+                getFieldProps={form.getFieldProps}
+              />
+            </View>
+          );
+        }
+        return (
+          <View
+            key={`ungrouped-${index}`}
+            style={styles.group} {...ds("ungrouped")}>
+            <FieldsGrid
+              fields={section.fields}
+              getFieldProps={form.getFieldProps}
+            />
           </View>
-        </View>
-      ))}
-
-      {form.ungrouped.length > 0 && (
-        <View style={styles.group} {...ds("ungrouped")}>
-          <View style={styles.fieldsGrid}>
-            {form.ungrouped.map((field) => {
-              if (field.proxy.hidden) return null;
-              const Renderer = getRenderer(field.config.component);
-              if (!Renderer) return null;
-              return (
-                <View
-                  key={field.name}
-                  style={{ gridColumn: `span ${field.proxy.width}` } as any}
-                  {...ds(`field:${field.name}`)}
-                >
-                  <Renderer {...form.getFieldProps(field.name)} />
-                </View>
-              );
-            })}
-          </View>
-        </View>
-      )}
+        );
+      })}
 
       <View style={styles.divider} />
 
-      <ActionBar actions={form.actions} position="footer" />
+      <ActionBar
+        actions={form.actions}
+        position="footer"
+        domain={props.schema.domain}
+      />
 
-      <ActionBar actions={form.actions} position="floating" />
+      <ActionBar
+        actions={form.actions}
+        position="floating"
+        domain={props.schema.domain}
+      />
 
       {debug && (
         <View style={styles.debugSection} {...ds("debug")}>
           <View style={styles.debugToolbar}>
             <View style={styles.debugActions}>
-              <Pressable style={styles.debugButton} onPress={handleFill}>
-                <Feather name="zap" size={12} color={theme.colors.warning} />
+              <Pressable
+                style={styles.debugButton}
+                onPress={handleFill}
+              >
+                <Feather
+                  name="zap"
+                  size={12}
+                  color={theme.colors.warning}
+                />
               </Pressable>
-              <Pressable style={styles.debugButton} onPress={() => form.reset()}>
-                <Feather name="rotate-ccw" size={12} color={theme.colors.mutedForeground} />
+              <Pressable
+                style={styles.debugButton}
+                onPress={() => form.reset()}
+              >
+                <Feather
+                  name="rotate-ccw"
+                  size={12}
+                  color={theme.colors.mutedForeground}
+                />
               </Pressable>
-              <Pressable style={styles.debugButton} onPress={() => form.validate()}>
-                <Feather name="check" size={12} color={theme.colors.success} />
+              <Pressable
+                style={styles.debugButton}
+                onPress={() => form.validate()}
+              >
+                <Feather
+                  name="check"
+                  size={12}
+                  color={theme.colors.success}
+                />
               </Pressable>
-              <Pressable style={styles.debugButton} onPress={reload}>
-                <Feather name="refresh-cw" size={12} color={theme.colors.info} />
+              <Pressable
+                style={styles.debugButton}
+                onPress={reload}
+              >
+                <Feather
+                  name="refresh-cw"
+                  size={12}
+                  color={theme.colors.info}
+                />
               </Pressable>
-              <Pressable style={styles.debugButton} onPress={() => setDebugExpanded((v) => !v)}>
-                <Feather name={debugExpanded ? "minus" : "plus"} size={12} color={theme.colors.warning} />
+              <Pressable
+                style={styles.debugButton}
+                onPress={() => setDebugExpanded((v) => !v)}
+              >
+                <Feather
+                  name={debugExpanded ? "minus" : "plus"}
+                  size={12}
+                  color={theme.colors.warning}
+                />
               </Pressable>
             </View>
           </View>
@@ -134,7 +190,6 @@ const styles = StyleSheet.create({
     fontWeight: theme.fontWeight.semibold,
     color: theme.colors.mutedForeground,
     marginBottom: theme.spacing.md,
-    textTransform: "capitalize",
   },
   fieldsGrid: {
     display: "grid" as any,

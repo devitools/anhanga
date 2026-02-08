@@ -1,15 +1,19 @@
 import { View, Text, TextInput, StyleSheet } from "react-native";
+import { useTranslation } from "react-i18next";
 import type { FieldRendererProps } from "@anhanga/react";
 import { theme } from "../../theme";
 
 const ds = (id: string) => ({ dataSet: { id } }) as any;
 
-export function TextField({ name, value, proxy, errors, onChange, onBlur, onFocus }: FieldRendererProps) {
+export function TextField({ domain, name, value, proxy, errors, onChange, onBlur, onFocus }: FieldRendererProps) {
+  const { t } = useTranslation();
   if (proxy.hidden) return null;
+
+  const fieldLabel = t(`${domain}.fields.${name}`, { defaultValue: name });
 
   return (
     <View style={styles.container} {...ds(`TextField:${name}`)}>
-      <Text style={styles.label}>{name}</Text>
+      <Text style={styles.label}>{fieldLabel}</Text>
       <TextInput
         style={[styles.input, proxy.disabled && styles.inputDisabled, errors.length > 0 && styles.inputError]}
         value={String(value ?? "")}
@@ -17,7 +21,7 @@ export function TextField({ name, value, proxy, errors, onChange, onBlur, onFocu
         onBlur={onBlur}
         onFocus={onFocus}
         editable={!proxy.disabled}
-        placeholder={name}
+        placeholder={fieldLabel}
         placeholderTextColor={theme.colors.mutedForeground}
       />
       <View style={styles.errorSlot}>

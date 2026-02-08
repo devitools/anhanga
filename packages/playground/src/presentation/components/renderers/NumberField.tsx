@@ -1,15 +1,19 @@
 import { View, Text, TextInput, StyleSheet } from "react-native";
+import { useTranslation } from "react-i18next";
 import type { FieldRendererProps } from "@anhanga/react";
 import { theme } from "../../theme";
 
 const ds = (id: string) => ({ dataSet: { id } }) as any;
 
-export function NumberField({ name, value, proxy, errors, onChange, onBlur, onFocus }: FieldRendererProps) {
+export function NumberField({ domain, name, value, proxy, errors, onChange, onBlur, onFocus }: FieldRendererProps) {
+  const { t } = useTranslation();
   if (proxy.hidden) return null;
+
+  const fieldLabel = t(`${domain}.fields.${name}`, { defaultValue: name });
 
   return (
     <View style={styles.container} {...ds(`NumberField:${name}`)}>
-      <Text style={styles.label}>{name}</Text>
+      <Text style={styles.label}>{fieldLabel}</Text>
       <TextInput
         style={[styles.input, proxy.disabled && styles.inputDisabled, errors.length > 0 && styles.inputError]}
         value={value !== undefined && value !== null ? String(value) : ""}
@@ -21,7 +25,7 @@ export function NumberField({ name, value, proxy, errors, onChange, onBlur, onFo
         onFocus={onFocus}
         editable={!proxy.disabled}
         keyboardType="numeric"
-        placeholder={name}
+        placeholder={fieldLabel}
         placeholderTextColor={theme.colors.mutedForeground}
       />
       <View style={styles.errorSlot}>

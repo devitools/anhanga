@@ -8,7 +8,8 @@ export const schema = configure({
   fields: {
     id: text()
       .excludeScopes(Scope.add)
-      .column(),
+      .order(0)
+      .disabled(),
   },
   actions: {
     add: action().icon(Icon.Add).primary().positions(Position.top).scopes(Scope.index),
@@ -16,18 +17,18 @@ export const schema = configure({
     edit: action().icon(Icon.Edit).positions(Position.row).scopes(Scope.index),
     create: action().icon(Icon.Save).primary().order(999).positions(Position.footer).scopes(Scope.add),
     update: action().icon(Icon.Save).primary().order(999).positions(Position.footer).scopes(Scope.edit),
-    cancel: action().icon(Icon.Close).start().order(1).positions(Position.footer).scopes(Scope.add, Scope.edit),
-    destroy: action().icon(Icon.Trash).start().order(2).positions(Position.footer, Position.row).destructive().excludeScopes(Scope.add),
+    cancel: action().icon(Icon.Close).start().order(1).positions(Position.footer).scopes(Scope.view, Scope.add, Scope.edit),
+    destroy: action().icon(Icon.Trash).start().order(2).positions(Position.footer, Position.row).destructive().excludeScopes(Scope.add, Scope.view),
   },
   handlers: {
     add ({ component }) {
       component.navigator.push(component.scopes[Scope.add].path);
     },
     view ({ state, component }) {
-      component.navigator.push(`${component.scopes[Scope.view].path}/${state.id}`);
+      component.navigator.push(component.scopes[Scope.view].path, { id: state.id });
     },
     edit ({ state, component }) {
-      component.navigator.push(`${component.scopes[Scope.edit].path}/${state.id}`);
+      component.navigator.push(component.scopes[Scope.edit].path, { id: state.id });
     },
     create ({ state, schema, component, form }) {
       if (!form?.validate()) {
