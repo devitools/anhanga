@@ -179,6 +179,27 @@ export interface TranslateContract {
   (key: string, params?: Record<string, unknown>): string
 }
 
+export interface BootstrapHookContext {
+  context: Record<string, unknown>
+  hydrate(data: Record<string, unknown>): void
+  schema: Record<string, FieldProxy>
+  component: ComponentContract
+}
+
+export type BootstrapHookFn = (ctx: BootstrapHookContext) => void | Promise<void>
+
+export interface FetchHookContext {
+  params: PaginateParams
+  component: ComponentContract
+}
+
+export type FetchHookFn = (ctx: FetchHookContext) => Promise<PaginatedResult<Record<string, unknown>>>
+
+export interface SchemaHooks {
+  bootstrap?: Partial<Record<ScopeValue, BootstrapHookFn>>
+  fetch?: Partial<Record<ScopeValue, FetchHookFn>>
+}
+
 export interface ServiceContract<T = Record<string, unknown>> {
   paginate (params: PaginateParams): Promise<PaginatedResult<T>>;
 

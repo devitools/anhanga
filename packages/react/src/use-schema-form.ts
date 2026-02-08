@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback, useRef } from "react";
+import { useState, useMemo, useCallback, useRef, useEffect } from "react";
 import type { FieldProxy, FieldConfig, ScopeValue, TranslateContract } from "@anhanga/core";
 import { createStateProxy, createSchemaProxy } from "./proxy";
 import { validateField, validateAllFields } from "./validation";
@@ -34,7 +34,7 @@ function isActionInScope (config: { scopes: ScopeValue[] | null }, scope: ScopeV
 }
 
 export function useSchemaForm (options: UseSchemaFormOptions): UseSchemaFormReturn {
-  const { schema, scope, services, events, handlers, component, initialValues, translate } = options;
+  const { schema, scope, events, handlers, hooks, context, component, initialValues, translate } = options;
   const t: TranslateContract = translate ?? ((key) => key);
 
   const [state, setState] = useState<Record<string, unknown>>(() =>
@@ -43,6 +43,36 @@ export function useSchemaForm (options: UseSchemaFormOptions): UseSchemaFormRetu
   const [fieldOverrides, setFieldOverrides] = useState<Record<string, Partial<FieldProxy>>>({});
   const [errors, setErrors] = useState<Record<string, string[]>>({});
   const initialStateRef = useRef(buildInitialState(schema.fields, initialValues));
+  const [loading, setLoading] = useState(() => !!hooks?.bootstrap?.[scope]);
+
+  useEffect(() => {
+    const hook = hooks?.bootstrap?.[scope];
+    if (!hook) return;
+
+    const run = async () => {
+      let hydratedData: Record<string, unknown> | undefined;
+      const schemaResult = createSchemaProxy(schema.fields, {});
+      const hydrate = (data: Record<string, unknown>) => { hydratedData = data; };
+
+      await hook({ context: context ?? {}, hydrate, schema: schemaResult.proxy, component });
+
+      if (hydratedData) {
+        const newState = buildInitialState(schema.fields, hydratedData);
+        setState(newState);
+        initialStateRef.current = newState;
+      }
+
+      const overrides = schemaResult.getOverrides();
+      if (Object.keys(overrides).length > 0) {
+        setFieldOverrides(overrides);
+      }
+
+      setLoading(false);
+    };
+
+    run();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const scopedFields = useMemo(() => {
     const result: Record<string, FieldConfig> = {};
@@ -242,7 +272,6 @@ export function useSchemaForm (options: UseSchemaFormOptions): UseSchemaFormRetu
           if (!handler) return;
           await handler({
             state: { ...state },
-            schema: { services: services ?? {} },
             component,
             form: {
               errors,
@@ -254,7 +283,7 @@ export function useSchemaForm (options: UseSchemaFormOptions): UseSchemaFormRetu
           });
         },
       }));
-  }, [schema.actions, scope, handlers, state, services, component]);
+  }, [schema.actions, scope, handlers, state, component]);
 
   const getFieldProps = useCallback(
     (name: string): FieldRendererProps => {
@@ -283,6 +312,7 @@ export function useSchemaForm (options: UseSchemaFormOptions): UseSchemaFormRetu
   );
 
   return {
+    loading,
     state,
     fields: resolvedFields,
     groups,

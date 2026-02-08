@@ -43,6 +43,11 @@ export type {
   FormContract,
   TableContract,
   TranslateContract,
+  BootstrapHookContext,
+  BootstrapHookFn,
+  FetchHookContext,
+  FetchHookFn,
+  SchemaHooks,
 } from './types'
 
 import type { SchemaDefinition } from './schema'

@@ -19,7 +19,7 @@ function isActionInScope (config: { scopes: ScopeValue[] | null }, scope: ScopeV
 }
 
 export function useSchemaTable (options: UseSchemaTableOptions): UseSchemaTableReturn {
-  const { schema, scope, services, handlers, component, pageSize = 10 } = options;
+  const { schema, scope, handlers, hooks, component, pageSize = 10 } = options;
 
   const [rows, setRows] = useState<Record<string, unknown>[]>([]);
   const [loading, setLoading] = useState(false);
@@ -81,12 +81,11 @@ export function useSchemaTable (options: UseSchemaTableOptions): UseSchemaTableR
 
   const reload = useCallback(() => {
     const id = ++fetchIdRef.current;
-    const service = (services as Record<string, any>)?.default;
-    if (!service?.paginate) return;
+    const fetchHook = hooks?.fetch?.[scope];
+    if (!fetchHook) return;
 
     setLoading(true);
-    service
-      .paginate({ page, limit, sort: sortField, order: sortOrder, filters })
+    fetchHook({ params: { page, limit, sort: sortField, order: sortOrder, filters }, component })
       .then((result: { data: Record<string, unknown>[]; total: number }) => {
         if (fetchIdRef.current !== id) return;
         setRows(result.data);
@@ -97,7 +96,7 @@ export function useSchemaTable (options: UseSchemaTableOptions): UseSchemaTableR
         setLoading(false);
       });
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [services, page, limit, sortField, sortOrder, filtersKey]);
+  }, [hooks?.fetch, scope, page, limit, sortField, sortOrder, filtersKey, component]);
 
   useEffect(() => {
     reload();
@@ -219,13 +218,12 @@ export function useSchemaTable (options: UseSchemaTableOptions): UseSchemaTableR
           if (!handler) return;
           await handler({
             state: {},
-            schema: { services: services ?? {} },
             component,
             table: tableContract,
           });
         },
       }));
-  }, [schema.actions, scope, handlers, services, component, tableContract]);
+  }, [schema.actions, scope, handlers, component, tableContract]);
 
   const getRowActions = useCallback(
     (record: Record<string, unknown>): ResolvedAction[] => {
@@ -241,14 +239,13 @@ export function useSchemaTable (options: UseSchemaTableOptions): UseSchemaTableR
             if (!handler) return;
             await handler({
               state: { ...record },
-              schema: { services: services ?? {} },
               component,
               table: tableContract,
             });
           },
         }));
     },
-    [schema.actions, scope, handlers, services, component, tableContract],
+    [schema.actions, scope, handlers, component, tableContract],
   );
 
   return {

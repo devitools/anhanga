@@ -53,8 +53,6 @@ type EventFn = (context: any) => void
 export interface HandlerContext {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   state: any
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  schema: any
   component: ComponentContract
   form?: FormContract
   table?: TableContract
@@ -62,18 +60,28 @@ export interface HandlerContext {
 
 type HandlerFn = (context: HandlerContext) => void | Promise<void>
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type BootstrapHookFn = (ctx: any) => void | Promise<void>
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type FetchHookFn = (ctx: any) => Promise<any>
+
 export interface UseSchemaFormOptions {
   schema: SchemaProvide
   scope: ScopeValue
-  services?: Record<string, object>
   events?: Record<string, Record<string, EventFn>>
   handlers?: Record<string, HandlerFn>
+  hooks?: {
+    bootstrap?: Partial<Record<ScopeValue, BootstrapHookFn>>
+    fetch?: Partial<Record<ScopeValue, FetchHookFn>>
+  }
+  context?: Record<string, unknown>
   component: ComponentContract
   initialValues?: Record<string, unknown>
   translate?: TranslateContract
 }
 
 export interface UseSchemaFormReturn {
+  loading: boolean
   state: Record<string, unknown>
   fields: ResolvedField[]
   groups: FieldGroup[]
@@ -101,8 +109,12 @@ export interface ResolvedColumn {
 export interface UseSchemaTableOptions {
   schema: SchemaProvide
   scope: ScopeValue
-  services?: Record<string, object>
   handlers?: Record<string, HandlerFn>
+  hooks?: {
+    bootstrap?: Partial<Record<ScopeValue, BootstrapHookFn>>
+    fetch?: Partial<Record<ScopeValue, FetchHookFn>>
+  }
+  context?: Record<string, unknown>
   component: ComponentContract
   pageSize?: number
   translate?: TranslateContract
