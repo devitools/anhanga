@@ -121,94 +121,38 @@
   </div>
 </template>
 
-<script
-    setup
-    lang="ts"
->
-import { ref } from "vue";
-import { useI18n } from "vue-i18n";
-import { QBtn } from "quasar";
-import { useSchemaForm, getRenderer } from "@anhanga/vue";
-import type { UseSchemaFormOptions, ResolvedAction } from "@anhanga/vue";
-import type { PositionValue } from "@anhanga/core";
-import { fakeAll } from "@anhanga/demo";
-import { h, defineComponent } from "vue";
-import { iconMap } from "@/presentation/contracts/icons";
+<script setup lang="ts">
+import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
+import { useSchemaForm, getRenderer } from '@anhanga/vue'
+import type { UseSchemaFormOptions } from '@anhanga/vue'
+import { fakeAll } from '@anhanga/demo'
+import ActionBar from './ActionBar.vue'
 
 interface SchemaFormProps extends UseSchemaFormOptions {
-  debug?: boolean;
+  debug?: boolean
 }
 
 const props = withDefaults(defineProps<SchemaFormProps>(), {
   debug: true,
-});
+})
 
-const { t, te } = useI18n();
+const { t, te } = useI18n()
 const translateFn = (key: string, params?: Record<string, unknown>) => {
-  if (!te(key)) return key;
-  return t(key, params ?? {});
-};
+  if (!te(key)) return key
+  return t(key, params ?? {})
+}
 
-const form = useSchemaForm({ ...props, translate: props.translate ?? translateFn });
-const debugExpanded = ref(false);
+const form = useSchemaForm({ ...props, translate: props.translate ?? translateFn })
+const debugExpanded = ref(false)
 
 function resolveGroup (name: string) {
-  const key = `${props.schema.domain}.groups.${name}`;
-  return te(key) ? t(key) : name;
+  const key = `${props.schema.domain}.groups.${name}`
+  return te(key) ? t(key) : name
 }
 
 function handleFill () {
-  const fakeData = fakeAll(props.schema.fields, props.schema.identity);
-  form.setValues(fakeData);
+  const fakeData = fakeAll(props.schema.fields, props.schema.identity)
+  form.setValues(fakeData)
 }
-
-const ActionBar = defineComponent({
-  props: {
-    actions: { type: Array as () => ResolvedAction[], required: true },
-    position: { type: String as () => PositionValue, required: true },
-    domain: { type: String, required: true },
-  },
-  setup (innerProps) {
-    const { t: innerT, te: innerTe } = useI18n();
-
-    function resolveAction (name: string) {
-      const commonKey = `common.actions.${name}`;
-      if (innerTe(commonKey)) return innerT(commonKey);
-      const domainKey = `${innerProps.domain}.actions.${name}`;
-      if (innerTe(domainKey)) return innerT(domainKey);
-      return name;
-    }
-
-    return () => {
-      const filtered = innerProps.actions.filter(
-          (a) => a.config.positions?.includes(innerProps.position),
-      );
-      if (filtered.length === 0) return null;
-
-      const startActions = filtered.filter((a) => a.config.align === "start");
-      const endActions = filtered.filter((a) => a.config.align === "end");
-      const isDefault = (v: string) => v === "default";
-
-      function renderBtn (action: ResolvedAction) {
-        const icon = action.config.icon ? iconMap[action.config.icon] ?? action.config.icon : undefined;
-        return h(QBtn, {
-          key: action.name,
-          label: resolveAction(action.name),
-          icon,
-          color: isDefault(action.config.variant) ? undefined : action.config.variant,
-          outline: isDefault(action.config.variant),
-          unelevated: !isDefault(action.config.variant),
-          noCaps: true,
-          rounded: true,
-          onClick: () => action.execute(),
-        });
-      }
-
-      return h("div", { class: "row justify-between items-center q-mb-md" }, [
-        h("div", { class: "row q-gutter-sm" }, startActions.map(renderBtn)),
-        h("div", { class: "row q-gutter-sm" }, endActions.map(renderBtn)),
-      ]);
-    };
-  },
-});
 </script>
