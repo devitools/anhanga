@@ -13,4 +13,7 @@ config.resolver.nodeModulesPaths = [
   path.resolve(monorepoRoot, 'node_modules'),
 ];
 
+config.resolver.unstable_enableSymlinks = true;
+config.resolver.unstable_enablePackageExports = true;
+
 module.exports = config;

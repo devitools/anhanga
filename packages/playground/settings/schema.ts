@@ -1,4 +1,5 @@
-import { configure, action, text, Scope } from "@anhanga/core";
+import { configure, action, text, Scope, Position } from "@anhanga/core";
+import { Icon } from "./icon";
 
 export const schema = configure({
   identity: "id",
@@ -10,18 +11,26 @@ export const schema = configure({
       .column(),
   },
   actions: {
-    create: action().icon("save").primary().validate().scopes(Scope.add),
-    update: action().icon("save").primary().validate().scopes(Scope.edit),
-    cancel: action().icon("close").scopes(Scope.add, Scope.edit),
-    destroy: action().icon("trash").destructive().excludeScopes(Scope.add),
+    create: action().icon(Icon.Save).primary().order(999).positions(Position.footer).scopes(Scope.add),
+    update: action().icon(Icon.Save).primary().order(999).positions(Position.footer).scopes(Scope.edit),
+    cancel: action().icon(Icon.Close).start().order(1).positions(Position.footer).scopes(Scope.add, Scope.edit),
+    destroy: action().icon(Icon.Trash).start().order(2).positions(Position.footer).destructive().excludeScopes(Scope.add),
   },
   handlers: {
-    create({ state, schema, component }) {
+    create({ state, schema, component, form }) {
+      if (!form.validate()) {
+        component.toast.error("common.actions.create.invalid");
+        return;
+      }
       schema.services.default.create(state);
       component.toast.success("common.actions.create.success");
       component.navigator.push(component.scopes[Scope.index].path);
     },
-    update({ state, schema, component }) {
+    update({ state, schema, component, form }) {
+      if (!form.validate()) {
+        component.toast.error("common.actions.update.invalid");
+        return;
+      }
       schema.services.default.update(state.id, state);
       component.toast.success("common.actions.update.success");
       component.navigator.push(component.scopes[Scope.index].path);
