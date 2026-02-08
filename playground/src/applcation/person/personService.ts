@@ -1,20 +1,9 @@
-import { createService } from '../support/createService'
+import { createService } from '@anhanga/core'
+import { PersonSchema } from '../../domain/person/schema'
+import { localDriver } from '../support/local-driver'
 
 export const personService = {
-  ...createService({
-    table: 'person',
-    identity: 'id',
-    fields: {
-      id: { dataType: 'string' },
-      name: { dataType: 'string' },
-      email: { dataType: 'string' },
-      phone: { dataType: 'string' },
-      birthDate: { dataType: 'date' },
-      active: { dataType: 'boolean' },
-      street: { dataType: 'string' },
-      city: { dataType: 'string' },
-    },
-  }),
+  ...createService(PersonSchema, localDriver),
   async custom (name: string) {
     console.log("[personService.custom]", name)
   },
