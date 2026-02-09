@@ -1,5 +1,6 @@
 <script>
   import '../app.css'
+  import '$lib/settings/icons'
   import '$lib/presentation/components/renderers'
 
   let { children } = $props()

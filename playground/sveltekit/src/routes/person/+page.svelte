@@ -1,6 +1,6 @@
 <script lang="ts">
   import { Scope } from '@anhanga/core'
-  import { PersonSchema } from '@anhanga/demo'
+  import { allPermissions, PersonSchema } from '@anhanga/demo'
   import { personHandlers, personHooks } from '$lib/setup'
   import { createComponent } from '$lib/presentation/contracts/component'
   import { translate, hasTranslation } from '$lib/settings/i18n'
@@ -35,6 +35,7 @@
     hooks={personHooks}
     {component}
     translate={translateFn}
+    permissions={allPermissions(PersonSchema.provide())}
     pageSize={3}
   />
 </div>

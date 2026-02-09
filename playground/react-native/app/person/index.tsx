@@ -1,5 +1,5 @@
 import { Scope } from "@anhanga/core";
-import { PersonSchema } from "@anhanga/demo";
+import { allPermissions, PersonSchema } from "@anhanga/demo";
 import { DataTable, Page, useComponent } from "@anhanga/react-native";
 import { personHandlers, personHooks } from "../../src/demo";
 import { scopes } from "./@routes";
@@ -18,6 +18,7 @@ export default function PersonIndexPage () {
         handlers={personHandlers}
         hooks={personHooks}
         component={component}
+        permissions={allPermissions(PersonSchema.provide())}
         pageSize={3}
         debug={true}
       />

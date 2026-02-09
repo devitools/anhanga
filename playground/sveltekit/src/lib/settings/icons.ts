@@ -1,35 +1,16 @@
-import {
-  Save,
-  X,
-  Trash2,
-  Send,
-  Pencil,
-  Plus,
-  Search,
-  Eye,
-  List,
-  User,
-  MapPin,
-} from 'lucide-svelte'
-import type { ComponentType } from 'svelte'
+import { configureIcons } from "@anhanga/svelte";
+import { Eye, Pencil, Plus, Save, Trash2, X } from "lucide-svelte";
 
-export const iconMap: Record<string, ComponentType> = {
-  'save': Save,
-  'close': X,
-  'x': X,
-  'trash': Trash2,
-  'trash-2': Trash2,
-  'send': Send,
-  'edit': Pencil,
-  'edit-2': Pencil,
-  'add': Plus,
-  'plus': Plus,
-  'search': Search,
-  'view': Eye,
-  'eye': Eye,
-  'list': List,
-  'person': User,
-  'user': User,
-  'map': MapPin,
-  'map-pin': MapPin,
-}
+configureIcons({
+  common: {
+    actions: {
+      add: Plus,
+      view: Eye,
+      edit: Pencil,
+      create: Save,
+      update: Save,
+      cancel: X,
+      destroy: Trash2,
+    },
+  },
+});

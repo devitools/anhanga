@@ -1,5 +1,5 @@
 import { Scope } from "@anhanga/core";
-import { personEvents, PersonSchema } from "@anhanga/demo";
+import { allPermissions, personEvents, PersonSchema } from "@anhanga/demo";
 import { DataForm, Page, useComponent } from "@anhanga/react-native";
 import { useLocalSearchParams } from "expo-router";
 import { personHandlers, personHooks } from "../../../src/demo";
@@ -22,6 +22,7 @@ export default function PersonViewPage () {
         hooks={personHooks}
         context={{ id }}
         component={component}
+        permissions={allPermissions(PersonSchema.provide())}
         debug={true}
       />
     </Page>

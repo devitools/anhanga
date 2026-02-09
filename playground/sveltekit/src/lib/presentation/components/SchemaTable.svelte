@@ -21,6 +21,7 @@
     component: props.component,
     pageSize: props.pageSize,
     translate: props.translate ?? defaultTranslate,
+    permissions: props.permissions,
   })
 
   let table = $derived($tableStore)

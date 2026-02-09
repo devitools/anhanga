@@ -6,6 +6,7 @@ import './quasar-variants.css'
 import App from './App.vue'
 import { router } from './router'
 import { i18n } from './settings/i18n'
+import './settings/icons'
 import './presentation/components/renderers'
 
 const app = createApp(App)

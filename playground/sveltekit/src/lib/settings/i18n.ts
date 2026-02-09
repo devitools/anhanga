@@ -1,4 +1,7 @@
-import { ptBR } from '@anhanga/demo'
+import { ptBR } from '@anhanga/core'
+import { ptBR as local } from './locales/pt-BR'
+
+const messages = { ...ptBR, ...local } as Record<string, unknown>
 
 function walk (obj: Record<string, unknown>, path: string): string | undefined {
   const parts = path.split('.')
@@ -15,11 +18,11 @@ function interpolate (template: string, params: Record<string, unknown>): string
 }
 
 export function translate (key: string, params?: Record<string, unknown>): string {
-  const value = walk(ptBR as Record<string, unknown>, key)
+  const value = walk(messages, key)
   if (value === undefined) return key
   return params ? interpolate(value, params) : value
 }
 
 export function hasTranslation (key: string): boolean {
-  return walk(ptBR as Record<string, unknown>, key) !== undefined
+  return walk(messages, key) !== undefined
 }

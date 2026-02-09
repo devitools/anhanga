@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { ResolvedAction } from '@anhanga/svelte'
+  import { resolveActionIcon } from '@anhanga/svelte'
   import { translate, hasTranslation } from '$lib/settings/i18n'
-  import { iconMap } from '$lib/settings/icons'
 
   let { action, domain, flat = false, small = false }: {
     action: ResolvedAction
@@ -19,9 +19,9 @@
   })
 
   let iconComponent = $derived(() => {
-    const i = action.config.icon
-    if (!i) return null
-    return iconMap[i] ?? null
+    const resolved = resolveActionIcon(domain, action.name)
+    if (!resolved) return null
+    return resolved as import('svelte').ComponentType
   })
 
   let variant = $derived(() => action.config.variant ?? 'default')

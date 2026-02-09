@@ -1,7 +1,7 @@
 import { personHandlers, personHooks } from "@/demo";
 import { scopes } from "@/pages/person/@routes";
 import { Scope } from "@anhanga/core";
-import { PersonSchema } from "@anhanga/demo";
+import { allPermissions, PersonSchema } from "@anhanga/demo";
 import { DataTable, Page, useComponent } from "@anhanga/react-web";
 import { useNavigate } from "react-router-dom";
 
@@ -20,6 +20,7 @@ export function PersonList () {
         handlers={personHandlers}
         hooks={personHooks}
         component={component}
+        permissions={allPermissions(PersonSchema.provide())}
         pageSize={3}
         debug={true}
       />

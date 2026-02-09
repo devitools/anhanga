@@ -1,7 +1,7 @@
 import { personHandlers, personHooks } from "@/demo";
 import { scopes } from "@/pages/person/@routes";
 import { Scope } from "@anhanga/core";
-import { personEvents, PersonSchema } from "@anhanga/demo";
+import { allPermissions, personEvents, PersonSchema } from "@anhanga/demo";
 import { DataForm, Page, useComponent } from "@anhanga/react-web";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -23,6 +23,7 @@ export function PersonView () {
         hooks={personHooks}
         context={{ id }}
         component={component}
+        permissions={allPermissions(PersonSchema.provide())}
         debug={true}
       />
     </Page>

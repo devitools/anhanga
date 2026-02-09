@@ -18,7 +18,7 @@
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import type { ResolvedAction } from '@anhanga/vue'
-import { iconMap } from '@/settings/icons'
+import { resolveActionIcon } from '@anhanga/vue'
 
 const props = withDefaults(defineProps<{
   action: ResolvedAction
@@ -43,9 +43,9 @@ const label = computed(() => {
 })
 
 const resolvedIcon = computed(() => {
-  const icon = props.action.config.icon
+  const icon = resolveActionIcon(props.domain, props.action.name)
   if (!icon) return undefined
-  return iconMap[icon] ?? icon
+  return icon as string
 })
 
 const isDefault = computed(() => props.action.config.variant === 'default')

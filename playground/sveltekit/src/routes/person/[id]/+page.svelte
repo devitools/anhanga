@@ -1,7 +1,7 @@
 <script lang="ts">
   import { page } from '$app/state'
   import { Scope } from '@anhanga/core'
-  import { PersonSchema, personEvents } from '@anhanga/demo'
+  import { allPermissions, PersonSchema, personEvents } from '@anhanga/demo'
   import { personHandlers, personHooks } from '$lib/setup'
   import { createComponent } from '$lib/presentation/contracts/component'
   import { translate, hasTranslation } from '$lib/settings/i18n'
@@ -42,5 +42,6 @@
     context={{ id }}
     {component}
     translate={translateFn}
+    permissions={allPermissions(PersonSchema.provide())}
   />
 </div>

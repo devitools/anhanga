@@ -13,6 +13,7 @@
         :hooks="personHooks"
         :component="component"
         :translate="translateFn"
+        :permissions="allPermissions(PersonSchema.provide())"
       />
     </q-card-section>
   </q-card>
@@ -22,7 +23,7 @@
 import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { Scope } from '@anhanga/core'
-import { PersonSchema, personEvents } from '@anhanga/demo'
+import { allPermissions, PersonSchema, personEvents } from '@anhanga/demo'
 import { personHandlers, personHooks } from '../setup'
 import { createComponent, setRouter } from '../presentation/contracts/component'
 import SchemaForm from '../presentation/components/SchemaForm.vue'

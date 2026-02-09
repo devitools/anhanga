@@ -22,6 +22,7 @@
     component: props.component,
     initialValues: props.initialValues,
     translate: props.translate ?? defaultTranslate,
+    permissions: props.permissions,
   })
 
   let form = $derived($formStore)

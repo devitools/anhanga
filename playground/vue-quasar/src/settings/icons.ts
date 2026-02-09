@@ -1,20 +1,15 @@
-export const iconMap: Record<string, string> = {
-  'save': 'save',
-  'close': 'close',
-  'x': 'close',
-  'trash': 'delete',
-  'trash-2': 'delete',
-  'send': 'send',
-  'edit': 'edit',
-  'edit-2': 'edit',
-  'add': 'add',
-  'plus': 'add',
-  'search': 'search',
-  'view': 'visibility',
-  'eye': 'visibility',
-  'list': 'list',
-  'person': 'person',
-  'user': 'person',
-  'map': 'place',
-  'map-pin': 'place',
-}
+import { configureIcons } from "@anhanga/vue";
+
+configureIcons({
+  common: {
+    actions: {
+      add: "add",
+      view: "visibility",
+      edit: "edit",
+      create: "save",
+      update: "save",
+      cancel: "close",
+      destroy: "delete",
+    },
+  },
+});
