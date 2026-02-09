@@ -3,6 +3,8 @@ import { View, Text, StyleSheet, ActivityIndicator, Platform } from "react-nativ
 import { useTranslation } from "react-i18next";
 import { useDataForm } from "@anhanga/react";
 import type { UseDataFormOptions } from "@anhanga/react";
+import { fill, createFiller } from "@anhanga/core";
+import type { FillerRegistry } from "@anhanga/core";
 import { useTheme } from "../theme/context";
 import type { Theme } from "../theme/default";
 import { ActionBar } from "./ActionBar";
@@ -15,7 +17,7 @@ import "../renderers";
 interface DataFormProps extends UseDataFormOptions {
   debug?: boolean;
   components?: DataFormComponents;
-  onFill?: () => Record<string, unknown>;
+  filler?: FillerRegistry;
 }
 
 function reload() {
@@ -24,7 +26,7 @@ function reload() {
   }
 }
 
-export function DataForm({ debug, components, onFill, ...props }: DataFormProps) {
+export function DataForm({ debug, components, filler, ...props }: DataFormProps) {
   const { t } = useTranslation();
   const theme = useTheme();
   const form = useDataForm({ ...props, translate: props.translate ?? t });
@@ -35,10 +37,9 @@ export function DataForm({ debug, components, onFill, ...props }: DataFormProps)
   const ResolvedLoading = components?.Loading;
 
   const handleFill = useCallback(() => {
-    if (onFill) {
-      form.setValues(onFill());
-    }
-  }, [onFill, form]);
+    const fillerFn = filler ? createFiller(filler) : fill;
+    form.setValues(fillerFn(props.schema.fields, props.schema.identity));
+  }, [filler, form, props.schema]);
 
   if (form.loading) {
     if (ResolvedLoading) return <ResolvedLoading />;
@@ -117,7 +118,7 @@ export function DataForm({ debug, components, onFill, ...props }: DataFormProps)
       {debug && (
         <DebugPanel
           actions={[
-            ...(onFill ? [{ icon: "zap", color: theme.colors.warning, onPress: handleFill }] : []),
+            { icon: "zap", color: theme.colors.warning, onPress: handleFill },
             { icon: "rotate-ccw", color: theme.colors.mutedForeground, onPress: () => form.reset() },
             { icon: "check", color: theme.colors.success, onPress: () => form.validate() },
             { icon: "refresh-cw", color: theme.colors.info, onPress: reload },

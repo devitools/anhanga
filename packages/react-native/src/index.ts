@@ -9,6 +9,8 @@ export { defaultTheme } from './theme/default'
 export type { Theme } from './theme/default'
 
 export { createComponent, useComponent } from './contracts/component'
+export { createI18n } from './i18n'
+export { withProviders } from './providers'
 
 import './renderers'
 
