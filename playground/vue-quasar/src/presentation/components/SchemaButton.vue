@@ -18,7 +18,7 @@
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import type { ResolvedAction } from '@anhanga/vue'
-import { iconMap } from '@/presentation/contracts/icons'
+import { iconMap } from '@/settings/icons'
 
 const props = withDefaults(defineProps<{
   action: ResolvedAction

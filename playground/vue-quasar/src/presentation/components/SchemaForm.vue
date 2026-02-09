@@ -126,7 +126,7 @@ import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useDataForm, getRenderer } from '@anhanga/vue'
 import type { UseDataFormOptions } from '@anhanga/vue'
-import { fakeAll } from '@anhanga/demo'
+import { fill } from '@anhanga/core'
 import ActionBar from './ActionBar.vue'
 
 interface SchemaFormProps extends UseDataFormOptions {
@@ -152,7 +152,6 @@ function resolveGroup (name: string) {
 }
 
 function handleFill () {
-  const fakeData = fakeAll(props.schema.fields, props.schema.identity)
-  form.setValues(fakeData)
+  form.setValues(fill(props.schema.fields, props.schema.identity))
 }
 </script>

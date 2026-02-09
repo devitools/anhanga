@@ -5,7 +5,7 @@ import 'quasar/dist/quasar.css'
 import './quasar-variants.css'
 import App from './App.vue'
 import { router } from './router'
-import { i18n } from './i18n'
+import { i18n } from './settings/i18n'
 import './presentation/components/renderers'
 
 const app = createApp(App)
