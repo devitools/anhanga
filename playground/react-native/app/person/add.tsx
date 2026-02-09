@@ -16,6 +16,7 @@ export default function PersonAddPage() {
         handlers={personHandlers}
         hooks={personHooks}
         component={component}
+        debug={true}
       />
     </Page>
   );

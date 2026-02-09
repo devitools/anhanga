@@ -19,6 +19,7 @@ export default function PersonViewPage() {
         hooks={personHooks}
         context={{ id }}
         component={component}
+        debug={true}
       />
     </Page>
   );

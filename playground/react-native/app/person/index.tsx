@@ -19,6 +19,7 @@ export default function PersonIndexPage () {
         hooks={personHooks}
         component={component}
         pageSize={3}
+        debug={true}
       />
     </Page>
   );
