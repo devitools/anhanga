@@ -1,5 +1,6 @@
 import { ref, computed, onMounted } from 'vue'
-import type { FieldProxy, FieldConfig, ScopeValue, TranslateContract } from '@anhanga/core'
+import type { FieldConfig, FieldProxy, ScopeValue, TranslateContract } from '@anhanga/core'
+import { buildInitialState, isInScope, isScopePermitted } from '@anhanga/core'
 import { createStateProxy, createSchemaProxy } from './proxy'
 import { validateField, validateAllFields } from './validation'
 import type {
@@ -12,29 +13,8 @@ import type {
   FieldRendererProps,
 } from './types'
 
-function buildInitialState (
-  fields: Record<string, FieldConfig>,
-  initialValues?: Record<string, unknown>,
-): Record<string, unknown> {
-  const state: Record<string, unknown> = {}
-  for (const [name, config] of Object.entries(fields)) {
-    state[name] = initialValues?.[name] ?? config.defaultValue ?? undefined
-  }
-  return state
-}
-
-function isFieldInScope (config: FieldConfig, scope: ScopeValue): boolean {
-  if (config.scopes === null) return true
-  return config.scopes.includes(scope)
-}
-
-function isActionInScope (config: { scopes: ScopeValue[] | null }, scope: ScopeValue): boolean {
-  if (config.scopes === null) return true
-  return config.scopes.includes(scope)
-}
-
 export function useDataForm (options: UseDataFormOptions): UseDataFormReturn {
-  const { schema, scope, events, handlers, hooks, context, component, initialValues, translate } = options
+  const { schema, scope, events, handlers, hooks, context, component, initialValues, translate, permissions } = options
   const t: TranslateContract = translate ?? ((key) => key)
 
   const state = ref<Record<string, unknown>>(buildInitialState(schema.fields, initialValues))
@@ -74,7 +54,7 @@ export function useDataForm (options: UseDataFormOptions): UseDataFormReturn {
   const scopedFields = computed(() => {
     const result: Record<string, FieldConfig> = {}
     for (const [name, config] of Object.entries(schema.fields)) {
-      if (isFieldInScope(config, scope)) {
+      if (isInScope(config, scope)) {
         result[name] = config
       }
     }
@@ -234,7 +214,8 @@ export function useDataForm (options: UseDataFormOptions): UseDataFormReturn {
 
   const actions = computed((): ResolvedAction[] => {
     return Object.entries(schema.actions)
-      .filter(([, config]) => !config.hidden && isActionInScope(config, scope))
+      .filter(([, config]) => !config.hidden && isInScope(config, scope))
+      .filter(() => isScopePermitted(schema.domain, scope, permissions))
       .sort(([, a], [, b]) => a.order - b.order)
       .map(([name, config]) => ({
         name,

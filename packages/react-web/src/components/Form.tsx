@@ -24,7 +24,6 @@ export function DataForm({ debug, components, filler, ...props }: DataFormProps)
   const theme = useTheme();
   const form = useDataForm({ ...props, translate: props.translate ?? t });
   const styles = createStyles(theme);
-
   const ResolvedActionBar = components?.ActionBar ?? ActionBar;
   const ResolvedFieldsGrid = components?.FieldsGrid ?? DefaultFieldsGrid;
   const ResolvedLoading = components?.Loading;

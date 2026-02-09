@@ -25,6 +25,15 @@ const paths: Record<string, string> = {
   "x-square": "M9 9l6 6m0-6l-6 6 M3 3h18v18H3z",
   "filter": "M22 3H2l8 9.46V19l4 2v-8.54L22 3z",
   "eye": "M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z M12 9a3 3 0 100 6 3 3 0 000-6z",
+  "save": "M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z M17 21v-8H7v8 M7 3v5h8",
+  "x": "M18 6L6 18 M6 6l12 12",
+  "trash-2": "M3 6h18 M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2 M10 11v6 M14 11v6",
+  "send": "M22 2L11 13 M22 2l-7 20-4-9-9-4 20-7z",
+  "edit-2": "M17 3a2.83 2.83 0 114 4L7.5 20.5 2 22l1.5-5.5L17 3z",
+  "search": "M11 3a8 8 0 100 16 8 8 0 000-16z M21 21l-4.35-4.35",
+  "list": "M8 6h13 M8 12h13 M8 18h13 M3 6h.01 M3 12h.01 M3 18h.01",
+  "user": "M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2 M12 3a4 4 0 100 8 4 4 0 000-8z",
+  "map-pin": "M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z M12 7a3 3 0 100 6 3 3 0 000-6z",
 };
 
 export function Icon({ name, size = 16, color = "currentColor", style }: IconProps) {

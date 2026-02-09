@@ -8,8 +8,10 @@ export { ThemeProvider, useTheme } from './theme/context'
 export { defaultTheme } from './theme/default'
 export type { Theme } from './theme/default'
 
+export { configureIcons, resolveActionIcon, resolveGroupIcon } from '@anhanga/react'
+
 export { createComponent, useComponent } from './contracts/component'
-export { createI18n } from './i18n'
+export { configureI18n } from './i18n'
 export { withProviders } from './providers'
 
 import './renderers'

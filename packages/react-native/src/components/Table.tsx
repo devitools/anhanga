@@ -1,7 +1,7 @@
 import { View, Text, Pressable, StyleSheet, ScrollView, ActivityIndicator } from "react-native";
 import { useTranslation } from "react-i18next";
 import { Feather } from "@expo/vector-icons";
-import { useDataTable, resolveActionLabel } from "@anhanga/react";
+import { useDataTable, resolveActionLabel, resolveActionIcon } from "@anhanga/react";
 import type { UseDataTableOptions, ResolvedAction, ResolvedColumn } from "@anhanga/react";
 import { useTheme } from "../theme/context";
 import type { Theme } from "../theme/default";
@@ -26,10 +26,11 @@ function DefaultRowAction({ action, domain }: RowActionProps) {
   const color = action.config.variant === "destructive"
     ? theme.colors.destructive
     : theme.colors.mutedForeground;
+  const icon = resolveActionIcon(domain, action.name) as string | undefined;
   return (
     <Pressable style={rowActionStyles.button} onPress={action.execute} {...ds(`row-action:${action.name}`)}>
-      {action.config.icon
-        ? <Feather name={action.config.icon as any} size={14} color={color} />
+      {icon
+        ? <Feather name={icon as any} size={14} color={color} />
         : <Text style={[rowActionStyles.text, { color }]}>{resolveActionLabel(t, domain, action.name)}</Text>}
     </Pressable>
   );

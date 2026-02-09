@@ -1,6 +1,6 @@
 import { ref, computed, watch, onMounted } from 'vue'
 import type { FieldConfig, ScopeValue, TableContract } from '@anhanga/core'
-import { Position } from '@anhanga/core'
+import { Position, isInScope, isScopePermitted } from '@anhanga/core'
 import type {
   UseDataTableOptions,
   UseDataTableReturn,
@@ -8,18 +8,8 @@ import type {
   ResolvedAction,
 } from './types'
 
-function isFieldInScope (config: FieldConfig, scope: ScopeValue): boolean {
-  if (config.scopes === null) return true
-  return config.scopes.includes(scope)
-}
-
-function isActionInScope (config: { scopes: ScopeValue[] | null }, scope: ScopeValue): boolean {
-  if (config.scopes === null) return true
-  return config.scopes.includes(scope)
-}
-
 export function useDataTable (options: UseDataTableOptions): UseDataTableReturn {
-  const { schema, scope, handlers, hooks, component, pageSize = 10 } = options
+  const { schema, scope, handlers, hooks, component, pageSize = 10, permissions } = options
 
   const rows = ref<Record<string, unknown>[]>([])
   const loading = ref(false)
@@ -43,7 +33,7 @@ export function useDataTable (options: UseDataTableOptions): UseDataTableReturn 
   const scopedFields = computed(() => {
     const result: Record<string, FieldConfig> = {}
     for (const [name, config] of Object.entries(schema.fields)) {
-      if (isFieldInScope(config, scope)) {
+      if (isInScope(config, scope)) {
         result[name] = config
       }
     }
@@ -60,7 +50,7 @@ export function useDataTable (options: UseDataTableOptions): UseDataTableReturn 
 
   const visibleColumns = ref<string[]>(
     Object.entries(schema.fields)
-      .filter(([, config]) => isFieldInScope(config, scope) && config.table.show)
+      .filter(([, config]) => isInScope(config, scope) && config.table.show)
       .map(([name]) => name),
   )
 
@@ -209,7 +199,8 @@ export function useDataTable (options: UseDataTableOptions): UseDataTableReturn 
 
   const actions = computed((): ResolvedAction[] => {
     return Object.entries(schema.actions)
-      .filter(([, config]) => !config.hidden && isActionInScope(config, scope))
+      .filter(([, config]) => !config.hidden && isInScope(config, scope))
+      .filter(() => isScopePermitted(schema.domain, scope, permissions))
       .filter(([, config]) => !config.positions.includes(Position.row))
       .sort(([, a], [, b]) => a.order - b.order)
       .map(([name, config]) => ({
@@ -229,7 +220,8 @@ export function useDataTable (options: UseDataTableOptions): UseDataTableReturn 
 
   function getRowActions (record: Record<string, unknown>): ResolvedAction[] {
     return Object.entries(schema.actions)
-      .filter(([, config]) => !config.hidden && isActionInScope(config, scope))
+      .filter(([, config]) => !config.hidden && isInScope(config, scope))
+      .filter(() => isScopePermitted(schema.domain, scope, permissions))
       .filter(([, config]) => config.positions.includes(Position.row))
       .sort(([, a], [, b]) => a.order - b.order)
       .map(([name, config]) => ({

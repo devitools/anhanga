@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { useDataTable, resolveActionLabel } from "@anhanga/react";
+import { useDataTable, resolveActionLabel, resolveActionIcon } from "@anhanga/react";
 import type { UseDataTableOptions, ResolvedAction, ResolvedColumn } from "@anhanga/react";
 import { useTheme } from "../theme/context";
 import type { Theme } from "../theme/default";
@@ -24,6 +24,7 @@ function DefaultRowAction({ action, domain }: RowActionProps) {
   const color = action.config.variant === "destructive"
     ? theme.colors.destructive
     : theme.colors.mutedForeground;
+  const icon = resolveActionIcon(domain, action.name) as string | undefined;
 
   return (
     <button
@@ -40,8 +41,8 @@ function DefaultRowAction({ action, domain }: RowActionProps) {
       onClick={action.execute}
       {...ds(`row-action:${action.name}`)}
     >
-      {action.config.icon
-        ? <Icon name={action.config.icon} size={14} color={color} />
+      {icon
+        ? <Icon name={icon} size={14} color={color} />
         : <span style={{ fontSize: 12, color }}>{resolveActionLabel(t, domain, action.name)}</span>}
     </button>
   );

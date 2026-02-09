@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { resolveActionLabel } from "@anhanga/react";
+import { resolveActionLabel, resolveActionIcon } from "@anhanga/react";
 import { useTheme } from "../theme/context";
 import type { Theme } from "../theme/default";
 import { Icon } from "../support/Icon";
@@ -24,6 +24,7 @@ export function ActionButton({ action, domain }: ActionButtonProps) {
   const variant = variantStyles[action.config.variant] ?? variantStyles.default;
   const actionLabel = resolveActionLabel(t, domain, action.name);
   const styles = createStyles(theme);
+  const icon = resolveActionIcon(domain, action.name) as string | undefined;
 
   return (
     <button
@@ -32,8 +33,8 @@ export function ActionButton({ action, domain }: ActionButtonProps) {
       onClick={action.execute}
       {...ds(`action:${action.name}`)}
     >
-      {action.config.icon && (
-        <Icon name={action.config.icon} size={16} color={variant.text} style={{ marginRight: theme.spacing.sm }} />
+      {icon && (
+        <Icon name={icon} size={16} color={variant.text} style={{ marginRight: theme.spacing.sm }} />
       )}
       <span style={{ ...styles.actionButtonText, color: variant.text }}>{actionLabel}</span>
     </button>

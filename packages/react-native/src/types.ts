@@ -3,7 +3,7 @@ import type { ResolvedAction, ResolvedField, UseDataFormReturn, ResolvedColumn }
 import type { PositionValue } from "@anhanga/core";
 
 export interface ActionButtonProps {
-  action: { name: string; config: { icon?: string; variant: string }; execute: () => void };
+  action: { name: string; config: { variant: string }; execute: () => void };
   domain: string;
 }
 

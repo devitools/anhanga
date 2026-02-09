@@ -78,6 +78,7 @@ export interface UseDataFormOptions {
   component: ComponentContract
   initialValues?: Record<string, unknown>
   translate?: TranslateContract
+  permissions?: string[]
 }
 
 export interface UseDataFormReturn {
@@ -118,6 +119,7 @@ export interface UseDataTableOptions {
   component: ComponentContract
   pageSize?: number
   translate?: TranslateContract
+  permissions?: string[]
 }
 
 export interface UseDataTableReturn {

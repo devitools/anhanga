@@ -2,7 +2,7 @@ import { View, Text, Pressable, StyleSheet } from "react-native";
 import { useTranslation } from "react-i18next";
 import { Feather } from "@expo/vector-icons";
 import type { PositionValue } from "@anhanga/core";
-import { resolveActionLabel } from "@anhanga/react";
+import { resolveActionLabel, resolveActionIcon } from "@anhanga/react";
 import { useTheme } from "../theme/context";
 import type { Theme } from "../theme/default";
 import { ds } from "../support/ds";
@@ -26,13 +26,14 @@ export function ActionButton({ action, domain }: ActionButtonProps) {
 
   const variant = variantStyles[action.config.variant] ?? variantStyles.default;
   const actionLabel = resolveActionLabel(t, domain, action.name);
+  const icon = resolveActionIcon(domain, action.name) as string | undefined;
   return (
     <Pressable
       style={[styles.actionButton, { backgroundColor: variant.bg, borderColor: variant.border }]}
       onPress={action.execute}
       {...ds(`action:${action.name}`)}
     >
-      {action.config.icon && <Feather name={action.config.icon as any} size={16} color={variant.text} style={styles.actionIcon} />}
+      {icon && <Feather name={icon as any} size={16} color={variant.text} style={styles.actionIcon} />}
       <Text style={[styles.actionButtonText, { color: variant.text }]}>{actionLabel}</Text>
     </Pressable>
   );

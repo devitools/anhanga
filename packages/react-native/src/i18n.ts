@@ -7,7 +7,7 @@ interface I18nOptions {
   fallback: string
 }
 
-export function createI18n(options: I18nOptions) {
+export function configureI18n(options: I18nOptions) {
   i18n.use(initReactI18next).init({
     resources: options.resources,
     lng: options.default,
