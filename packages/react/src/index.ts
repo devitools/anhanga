@@ -1,5 +1,5 @@
-export { useSchemaForm } from './use-schema-form'
-export { useSchemaTable } from './use-schema-table'
+export { useDataForm } from './use-data-form'
+export { useDataTable } from './use-data-table'
 export { registerRenderers, getRenderer, createRegistry } from './registry'
 export { registerValidator, validateField, validateAllFields } from './validation'
 export { createStateProxy, createSchemaProxy } from './proxy'
@@ -11,12 +11,12 @@ export type {
   FieldGroup,
   FormSection,
   ResolvedAction,
-  UseSchemaFormOptions,
-  UseSchemaFormReturn,
+  UseDataFormOptions,
+  UseDataFormReturn,
   FieldRenderer,
   ResolvedColumn,
-  UseSchemaTableOptions,
-  UseSchemaTableReturn,
+  UseDataTableOptions,
+  UseDataTableReturn,
 } from './types'
 
 export type { RendererRegistry } from './registry'

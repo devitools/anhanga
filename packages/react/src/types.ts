@@ -65,7 +65,7 @@ type BootstrapHookFn = (ctx: any) => void | Promise<void>
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type FetchHookFn = (ctx: any) => Promise<any>
 
-export interface UseSchemaFormOptions {
+export interface UseDataFormOptions {
   schema: SchemaProvide
   scope: ScopeValue
   events?: Record<string, Record<string, EventFn>>
@@ -80,7 +80,7 @@ export interface UseSchemaFormOptions {
   translate?: TranslateContract
 }
 
-export interface UseSchemaFormReturn {
+export interface UseDataFormReturn {
   loading: boolean
   state: Record<string, unknown>
   fields: ResolvedField[]
@@ -106,7 +106,7 @@ export interface ResolvedColumn {
   table: TableConfig
 }
 
-export interface UseSchemaTableOptions {
+export interface UseDataTableOptions {
   schema: SchemaProvide
   scope: ScopeValue
   handlers?: Record<string, HandlerFn>
@@ -120,7 +120,7 @@ export interface UseSchemaTableOptions {
   translate?: TranslateContract
 }
 
-export interface UseSchemaTableReturn {
+export interface UseDataTableReturn {
   rows: Record<string, unknown>[]
   loading: boolean
   empty: boolean

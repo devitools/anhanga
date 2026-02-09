@@ -3,8 +3,8 @@ import type { FieldProxy, FieldConfig, ScopeValue, TranslateContract } from "@an
 import { createStateProxy, createSchemaProxy } from "./proxy";
 import { validateField, validateAllFields } from "./validation";
 import type {
-  UseSchemaFormOptions,
-  UseSchemaFormReturn,
+  UseDataFormOptions,
+  UseDataFormReturn,
   ResolvedField,
   FieldGroup,
   FormSection,
@@ -33,7 +33,7 @@ function isActionInScope (config: { scopes: ScopeValue[] | null }, scope: ScopeV
   return config.scopes.includes(scope);
 }
 
-export function useSchemaForm (options: UseSchemaFormOptions): UseSchemaFormReturn {
+export function useDataForm (options: UseDataFormOptions): UseDataFormReturn {
   const { schema, scope, events, handlers, hooks, context, component, initialValues, translate } = options;
   const t: TranslateContract = translate ?? ((key) => key);
 
