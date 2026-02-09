@@ -1,15 +1,15 @@
-# useSchemaForm
+# useDataForm
 
 The main React hook for schema-driven forms. It manages field state, applies events and handlers, resolves groups and scoped actions, and returns proxied fields for dynamic overrides.
 
 ## Basic Usage
 
 ```tsx
-import { useSchemaForm, getRenderer } from '@anhanga/react'
+import { useDataForm, getRenderer } from '@anhanga/react'
 import { Scope } from '@anhanga/core'
 
 function PersonForm() {
-  const form = useSchemaForm({
+  const form = useDataForm({
     schema: PersonSchema.provide(),
     scope: Scope.add,
     events: personEvents,
@@ -39,7 +39,7 @@ function PersonForm() {
 ## Options
 
 ```typescript
-interface UseSchemaFormOptions {
+interface UseDataFormOptions {
   schema: SchemaProvide
   scope: ScopeValue
   events?: Record<string, Record<string, EventFn>>
@@ -67,7 +67,7 @@ interface UseSchemaFormOptions {
 ## Return Value
 
 ```typescript
-interface UseSchemaFormReturn {
+interface UseDataFormReturn {
   loading: boolean
   state: Record<string, unknown>
   fields: ResolvedField[]
@@ -147,7 +147,7 @@ interface FieldRendererProps {
 
 ```tsx
 function PersonForm() {
-  const form = useSchemaForm({ /* ... */ })
+  const form = useDataForm({ /* ... */ })
 
   return (
     <form>

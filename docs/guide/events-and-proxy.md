@@ -96,12 +96,12 @@ change({ state, schema }) {
 | `height` | `number` | Override field height |
 | `state` | `string` | Set visual state (e.g., `'error'`, `'warning'`) |
 
-## Using Events with useSchemaForm
+## Using Events with useDataForm
 
 Pass events to the hook:
 
 ```typescript
-const form = useSchemaForm({
+const form = useDataForm({
   schema: PersonSchema.provide(),
   scope: Scope.add,
   events: personEvents,

@@ -1,4 +1,4 @@
-# useSchemaTable
+# useDataTable
 
 Composable for schema-driven data tables with pagination, sorting, filtering, and selection.
 
@@ -6,10 +6,10 @@ Composable for schema-driven data tables with pagination, sorting, filtering, an
 
 ```vue
 <script setup lang="ts">
-import { useSchemaTable } from '@anhanga/vue'
+import { useDataTable } from '@anhanga/vue'
 import { Scope } from '@anhanga/core'
 
-const table = useSchemaTable({
+const table = useDataTable({
   schema: PersonSchema.provide(),
   scope: Scope.index,
   handlers: personHandlers,
@@ -56,7 +56,7 @@ const table = useSchemaTable({
 ## Options
 
 ```typescript
-interface UseSchemaTableOptions {
+interface UseDataTableOptions {
   schema: SchemaProvide
   scope: ScopeValue
   handlers?: Record<string, HandlerFn>

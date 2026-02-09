@@ -25,5 +25,5 @@ features:
   - title: Framework-Agnostic Core
     details: "@anhanga/core has zero dependencies. Define schemas once, bring your own UI framework."
   - title: Table Support
-    details: useSchemaTable provides pagination, sorting, filtering, selection, and row actions out of the box.
+    details: useDataTable provides pagination, sorting, filtering, selection, and row actions out of the box.
 ---

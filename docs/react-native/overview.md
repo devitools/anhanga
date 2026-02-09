@@ -3,7 +3,7 @@
 Anhanga integration for React Native using the `@anhanga/react` package with Expo.
 
 ::: warning Coming Soon
-Full documentation for the React Native integration is under construction. The API is the same as the [React integration](/react/use-schema-form), with platform-specific renderers.
+Full documentation for the React Native integration is under construction. The API is the same as the [React integration](/react/use-data-form), with platform-specific renderers.
 :::
 
 ## Playground
@@ -15,7 +15,7 @@ playground/react-native/
   src/presentation/
     components/renderers/   ← field renderer components (React Native)
     contracts/component.ts  ← ComponentContract (expo-router)
-    components/SchemaForm.tsx
+    components/DataForm.tsx
 ```
 
 ## Quick Start

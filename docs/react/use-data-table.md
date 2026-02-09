@@ -1,15 +1,15 @@
-# useSchemaTable
+# useDataTable
 
 Hook for schema-driven data tables with pagination, sorting, filtering, and selection.
 
 ## Basic Usage
 
 ```tsx
-import { useSchemaTable } from '@anhanga/react'
+import { useDataTable } from '@anhanga/react'
 import { Scope } from '@anhanga/core'
 
 function PersonTable() {
-  const table = useSchemaTable({
+  const table = useDataTable({
     schema: PersonSchema.provide(),
     scope: Scope.index,
     handlers: personHandlers,
@@ -57,7 +57,7 @@ function PersonTable() {
 ## Options
 
 ```typescript
-interface UseSchemaTableOptions {
+interface UseDataTableOptions {
   schema: SchemaProvide
   scope: ScopeValue
   handlers?: Record<string, HandlerFn>

@@ -34,7 +34,7 @@ pnpm --filter @anhanga/playground-web dev     # dev server
 | Package | Purpose | Bundler |
 |---------|---------|---------|
 | `@anhanga/core` | Schema definition, field types, actions, groups, type system | tsup (ESM) |
-| `@anhanga/react` | `useSchemaForm` hook, renderer registry, validation, proxy system | tsup (ESM) |
+| `@anhanga/react` | `useDataForm` hook, renderer registry, validation, proxy system | tsup (ESM) |
 | `@anhanga/demo` | Shared demo domain (person schema, services, settings, i18n) | tsup (ESM) |
 | `@anhanga/playground` | Expo app (`playground/react-native`) demonstrating the full stack | Expo/Metro |
 | `@anhanga/playground-web` | Vite + React web app (`playground/react-web`) demonstrating reuse of `@anhanga/demo` | Vite |
@@ -96,7 +96,7 @@ Expo app consuming `@anhanga/demo`. Contains only platform-specific presentation
 src/presentation/
   components/renderers/   ← field renderer components (React Native)
   contracts/component.ts  ← ComponentContract (expo-router)
-  components/SchemaForm.tsx ← form component using useSchemaForm
+  components/DataForm.tsx ← form component using useDataForm
 ```
 
 ### Playground React Web (`playground/react-web`)
@@ -107,7 +107,7 @@ Vite + React web app consuming `@anhanga/demo`. Demonstrates reuse of the same d
 src/presentation/
   components/renderers/   ← field renderer components (HTML inputs)
   contracts/component.ts  ← ComponentContract (react-router-dom)
-  components/SchemaForm.tsx ← form component using useSchemaForm
+  components/DataForm.tsx ← form component using useDataForm
 src/pages/
   PersonList.tsx           ← table listing
   PersonAdd.tsx            ← add form

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Scope } from "@anhanga/core";
 import type { PositionValue } from "@anhanga/core";
-import { useSchemaTable } from "@anhanga/react";
+import { useDataTable } from "@anhanga/react";
 import { PersonSchema } from "@anhanga/demo";
 import { personHandlers, personHooks } from "../setup";
 import { createComponent, setNavigate } from "../presentation/contracts/component";
@@ -59,7 +59,7 @@ export function PersonList () {
     [],
   );
 
-  const table = useSchemaTable({
+  const table = useDataTable({
     schema: PersonSchema.provide(),
     scope: Scope.index,
     handlers: personHandlers,

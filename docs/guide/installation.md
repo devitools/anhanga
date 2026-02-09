@@ -69,9 +69,9 @@ yarn add @anhanga/core @anhanga/svelte
 | Package | What it provides |
 |---------|-----------------|
 | `@anhanga/core` | Schema definition, field types, actions, groups, scopes, type inference |
-| `@anhanga/react` | `useSchemaForm`, `useSchemaTable`, renderer registry, validation (React hooks) |
-| `@anhanga/vue` | `useSchemaForm`, `useSchemaTable`, renderer registry, validation (Vue composables) |
-| `@anhanga/svelte` | `useSchemaForm`, `useSchemaTable`, renderer registry, validation (Svelte stores) |
+| `@anhanga/react` | `useDataForm`, `useDataTable`, renderer registry, validation (React hooks) |
+| `@anhanga/vue` | `useDataForm`, `useDataTable`, renderer registry, validation (Vue composables) |
+| `@anhanga/svelte` | `useDataForm`, `useDataTable`, renderer registry, validation (Svelte stores) |
 | `@anhanga/demo` | Shared demo domain — person schema, services, settings, i18n |
 
 You can use `@anhanga/core` standalone if you're building your own UI integration. `@anhanga/react`, `@anhanga/vue`, and `@anhanga/svelte` provide ready-to-use integrations for their respective frameworks.

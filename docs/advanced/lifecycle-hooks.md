@@ -88,7 +88,7 @@ interface HookBootstrapContext {
 
 ## Fetch Hooks
 
-Fetch hooks provide data for `useSchemaTable`. They're called whenever pagination, sorting, or filtering changes.
+Fetch hooks provide data for `useDataTable`. They're called whenever pagination, sorting, or filtering changes.
 
 ### Context
 
@@ -140,7 +140,7 @@ fetch: {
 ## Passing Hooks to React
 
 ```typescript
-const form = useSchemaForm({
+const form = useDataForm({
   schema: PersonSchema.provide(),
   scope: Scope.edit,
   hooks: personHooks,

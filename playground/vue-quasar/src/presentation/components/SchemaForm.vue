@@ -124,12 +124,12 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { useSchemaForm, getRenderer } from '@anhanga/vue'
-import type { UseSchemaFormOptions } from '@anhanga/vue'
+import { useDataForm, getRenderer } from '@anhanga/vue'
+import type { UseDataFormOptions } from '@anhanga/vue'
 import { fakeAll } from '@anhanga/demo'
 import ActionBar from './ActionBar.vue'
 
-interface SchemaFormProps extends UseSchemaFormOptions {
+interface SchemaFormProps extends UseDataFormOptions {
   debug?: boolean
 }
 
@@ -143,7 +143,7 @@ const translateFn = (key: string, params?: Record<string, unknown>) => {
   return t(key, params ?? {})
 }
 
-const form = useSchemaForm({ ...props, translate: props.translate ?? translateFn })
+const form = useDataForm({ ...props, translate: props.translate ?? translateFn })
 const debugExpanded = ref(false)
 
 function resolveGroup (name: string) {

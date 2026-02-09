@@ -1,4 +1,4 @@
-# useSchemaForm
+# useDataForm
 
 The main Vue composable for schema-driven forms. It manages field state, applies events and handlers, resolves groups and scoped actions, and returns proxied fields for dynamic overrides.
 
@@ -6,10 +6,10 @@ The main Vue composable for schema-driven forms. It manages field state, applies
 
 ```vue
 <script setup lang="ts">
-import { useSchemaForm, getRenderer } from '@anhanga/vue'
+import { useDataForm, getRenderer } from '@anhanga/vue'
 import { Scope } from '@anhanga/core'
 
-const form = useSchemaForm({
+const form = useDataForm({
   schema: PersonSchema.provide(),
   scope: Scope.add,
   events: personEvents,
@@ -42,7 +42,7 @@ const form = useSchemaForm({
 ## Options
 
 ```typescript
-interface UseSchemaFormOptions {
+interface UseDataFormOptions {
   schema: SchemaProvide
   scope: ScopeValue
   events?: Record<string, Record<string, EventFn>>
@@ -70,7 +70,7 @@ interface UseSchemaFormOptions {
 ## Return Value
 
 ```typescript
-interface UseSchemaFormReturn {
+interface UseDataFormReturn {
   loading: boolean
   state: Record<string, unknown>
   fields: ResolvedField[]
@@ -150,9 +150,9 @@ interface FieldRendererProps {
 
 ```vue
 <script setup lang="ts">
-import { useSchemaForm, getRenderer } from '@anhanga/vue'
+import { useDataForm, getRenderer } from '@anhanga/vue'
 
-const form = useSchemaForm({ /* ... */ })
+const form = useDataForm({ /* ... */ })
 </script>
 
 <template>

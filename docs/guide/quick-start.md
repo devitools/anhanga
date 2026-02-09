@@ -112,10 +112,10 @@ export const personHandlers = PersonSchema.handlers({
 ::: code-group
 
 ```tsx [React]
-import { useSchemaForm, getRenderer } from '@anhanga/react'
+import { useDataForm, getRenderer } from '@anhanga/react'
 
 function PersonForm({ scope }) {
-  const form = useSchemaForm({
+  const form = useDataForm({
     schema: PersonSchema.provide(),
     scope,
     events: personEvents,
@@ -144,12 +144,12 @@ function PersonForm({ scope }) {
 
 ```vue [Vue]
 <script setup lang="ts">
-import { useSchemaForm, getRenderer } from '@anhanga/vue'
+import { useDataForm, getRenderer } from '@anhanga/vue'
 import { Scope } from '@anhanga/core'
 
 const props = defineProps<{ scope: string }>()
 
-const form = useSchemaForm({
+const form = useDataForm({
   schema: PersonSchema.provide(),
   scope: props.scope,
   events: personEvents,
@@ -186,6 +186,6 @@ const form = useSchemaForm({
 - [Schema Definition](/guide/schema-definition) — learn about `configure()`, `extend()`, `pick()`, `omit()`
 - [Field Types](/guide/field-types) — all field types and their methods
 - [Events & Proxy](/guide/events-and-proxy) — reactive field events in depth
-- [useSchemaForm (React)](/react/use-schema-form) — full React hook API reference
-- [useSchemaForm (Vue)](/vue/use-schema-form) — full Vue composable API reference
-- useSchemaForm (Svelte) — Svelte store API reference _(coming soon)_
+- [useDataForm (React)](/react/use-data-form) — full React hook API reference
+- [useDataForm (Vue)](/vue/use-data-form) — full Vue composable API reference
+- useDataForm (Svelte) — Svelte store API reference _(coming soon)_

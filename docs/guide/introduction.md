@@ -22,9 +22,9 @@ Traditional CRUD screens require wiring up fields, validation, visibility, layou
 | Package | Description |
 |---------|-------------|
 | `@anhanga/core` | Schema definition, field types, actions, groups, type system |
-| `@anhanga/react` | `useSchemaForm` / `useSchemaTable` hooks, renderer registry, validation |
-| `@anhanga/vue` | `useSchemaForm` / `useSchemaTable` composables, renderer registry, validation |
-| `@anhanga/svelte` | `useSchemaForm` / `useSchemaTable` stores, renderer registry, validation |
+| `@anhanga/react` | `useDataForm` / `useDataTable` hooks, renderer registry, validation |
+| `@anhanga/vue` | `useDataForm` / `useDataTable` composables, renderer registry, validation |
+| `@anhanga/svelte` | `useDataForm` / `useDataTable` stores, renderer registry, validation |
 | `@anhanga/demo` | Shared demo domain (person schema, services, settings, i18n) |
 
 ## How It Works

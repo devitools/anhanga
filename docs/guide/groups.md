@@ -41,10 +41,10 @@ The group name must match a key in the `groups` object of your schema.
 
 ## Ungrouped Fields
 
-Fields without a `.group()` assignment are collected as "ungrouped". The `useSchemaForm` hook/composable provides both grouped and ungrouped fields:
+Fields without a `.group()` assignment are collected as "ungrouped". The `useDataForm` hook/composable provides both grouped and ungrouped fields:
 
 ```typescript
-const form = useSchemaForm({ /* ... */ })
+const form = useDataForm({ /* ... */ })
 
 form.groups    // FieldGroup[] — groups with their fields
 form.ungrouped // ResolvedField[] — fields without a group

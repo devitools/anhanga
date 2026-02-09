@@ -46,7 +46,7 @@ action().excludeScopes(Scope.add, Scope.view)  // hidden in add and view
 
 ## How Scopes Work
 
-When you pass a `scope` to `useSchemaForm` or `useSchemaTable`, the hook filters fields and actions:
+When you pass a `scope` to `useDataForm` or `useDataTable`, the hook filters fields and actions:
 
 1. If a field/action has `.scopes()` — it's shown **only** if the current scope is in the list
 2. If a field/action has `.excludeScopes()` — it's shown **unless** the current scope is in the list

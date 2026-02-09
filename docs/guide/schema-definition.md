@@ -91,7 +91,7 @@ const schemaConfig = PersonSchema.provide()
 // { domain, identity, display, scopes, groups, fields, actions }
 ```
 
-This is the object you pass to `useSchemaForm` and `useSchemaTable`.
+This is the object you pass to `useDataForm` and `useDataTable`.
 
 ## events(), handlers(), hooks()
 

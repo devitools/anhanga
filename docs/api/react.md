@@ -4,10 +4,10 @@ Complete API reference for the React integration package.
 
 ## Hooks
 
-### useSchemaForm()
+### useDataForm()
 
 ```typescript
-function useSchemaForm(options: UseSchemaFormOptions): UseSchemaFormReturn
+function useDataForm(options: UseDataFormOptions): UseDataFormReturn
 ```
 
 Main hook for schema-driven forms.
@@ -15,7 +15,7 @@ Main hook for schema-driven forms.
 **Options:**
 
 ```typescript
-interface UseSchemaFormOptions {
+interface UseDataFormOptions {
   schema: SchemaProvide
   scope: ScopeValue
   events?: Record<string, Record<string, EventFn>>
@@ -31,7 +31,7 @@ interface UseSchemaFormOptions {
 **Returns:**
 
 ```typescript
-interface UseSchemaFormReturn {
+interface UseDataFormReturn {
   loading: boolean
   state: Record<string, unknown>
   fields: ResolvedField[]
@@ -50,14 +50,14 @@ interface UseSchemaFormReturn {
 }
 ```
 
-See [useSchemaForm](/react/use-schema-form) for detailed usage.
+See [useDataForm](/react/use-data-form) for detailed usage.
 
 ---
 
-### useSchemaTable()
+### useDataTable()
 
 ```typescript
-function useSchemaTable(options: UseSchemaTableOptions): UseSchemaTableReturn
+function useDataTable(options: UseDataTableOptions): UseDataTableReturn
 ```
 
 Hook for schema-driven data tables.
@@ -65,7 +65,7 @@ Hook for schema-driven data tables.
 **Options:**
 
 ```typescript
-interface UseSchemaTableOptions {
+interface UseDataTableOptions {
   schema: SchemaProvide
   scope: ScopeValue
   handlers?: Record<string, HandlerFn>
@@ -80,7 +80,7 @@ interface UseSchemaTableOptions {
 **Returns:**
 
 ```typescript
-interface UseSchemaTableReturn {
+interface UseDataTableReturn {
   rows: Record<string, unknown>[]
   loading: boolean
   empty: boolean
@@ -113,7 +113,7 @@ interface UseSchemaTableReturn {
 }
 ```
 
-See [useSchemaTable](/react/use-schema-table) for detailed usage.
+See [useDataTable](/react/use-data-table) for detailed usage.
 
 ---
 

@@ -38,10 +38,10 @@ interface ValidationRule {
 
 ## Form Validation
 
-The `useSchemaForm` hook provides validation methods:
+The `useDataForm` hook provides validation methods:
 
 ```typescript
-const form = useSchemaForm({ /* ... */ })
+const form = useDataForm({ /* ... */ })
 
 form.validate()  // validates all fields, returns boolean
 form.errors      // Record<string, string[]> — field errors

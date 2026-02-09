@@ -44,12 +44,12 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { useSchemaTable } from '@anhanga/vue'
-import type { UseSchemaTableOptions } from '@anhanga/vue'
+import { useDataTable } from '@anhanga/vue'
+import type { UseDataTableOptions } from '@anhanga/vue'
 import ActionBar from './ActionBar.vue'
 import SchemaButton from './SchemaButton.vue'
 
-const props = defineProps<UseSchemaTableOptions>()
+const props = defineProps<UseDataTableOptions>()
 
 const { t, te } = useI18n()
 const translateFn = (key: string, params?: Record<string, unknown>) => {
@@ -57,7 +57,7 @@ const translateFn = (key: string, params?: Record<string, unknown>) => {
   return t(key, params ?? {})
 }
 
-const table = useSchemaTable({ ...props, translate: props.translate ?? translateFn })
+const table = useDataTable({ ...props, translate: props.translate ?? translateFn })
 
 const qColumns = computed(() => {
   const cols = table.columns.map((col) => {

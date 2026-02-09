@@ -1,15 +1,15 @@
 import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Zap, RotateCcw, Check, RefreshCw, Plus, Minus } from "lucide-react";
-import { useSchemaForm, getRenderer } from "@anhanga/react";
-import type { UseSchemaFormOptions, ResolvedField, UseSchemaFormReturn, ResolvedAction } from "@anhanga/react";
+import { useDataForm, getRenderer } from "@anhanga/react";
+import type { UseDataFormOptions, ResolvedField, UseDataFormReturn, ResolvedAction } from "@anhanga/react";
 import type { PositionValue } from "@anhanga/core";
 import { fakeAll } from "@anhanga/demo";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
-interface SchemaFormProps extends UseSchemaFormOptions {
+interface SchemaFormProps extends UseDataFormOptions {
   debug?: boolean;
 }
 
@@ -40,7 +40,7 @@ function ActionBar ({ actions, position, domain }: {
 
 function FieldsGrid ({ fields, getFieldProps }: {
   fields: ResolvedField[];
-  getFieldProps: UseSchemaFormReturn["getFieldProps"];
+  getFieldProps: UseDataFormReturn["getFieldProps"];
 }) {
   return (
     <div style={{ display: "grid", gridTemplateColumns: "repeat(100, 1fr)", gap: "0.5rem" }}>
@@ -63,7 +63,7 @@ function FieldsGrid ({ fields, getFieldProps }: {
 
 export function SchemaForm ({ debug = true, ...props }: SchemaFormProps) {
   const { t } = useTranslation();
-  const form = useSchemaForm({ ...props, translate: props.translate ?? t });
+  const form = useDataForm({ ...props, translate: props.translate ?? t });
   const [debugExpanded, setDebugExpanded] = useState(false);
 
   const handleFill = useCallback(() => {

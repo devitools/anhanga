@@ -41,7 +41,7 @@ Visit the [full documentation](https://devitools.github.io/anhanga/) for guides,
 | Package | Description |
 |---------|-------------|
 | `@anhanga/core` | Schema definition, field types, actions, groups, type system |
-| `@anhanga/react` | `useSchemaForm` / `useSchemaTable` hooks, renderer registry, validation |
+| `@anhanga/react` | `useDataForm` / `useDataTable` hooks, renderer registry, validation |
 
 ## Installation
 

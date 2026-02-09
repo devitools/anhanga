@@ -22,9 +22,9 @@ export default defineConfig({
         text: 'Frameworks',
         activeMatch: '/react/|/react-native/|/vue/|/svelte/',
         items: [
-          { text: 'React + Shadcn', link: '/react/use-schema-form' },
+          { text: 'React + Shadcn', link: '/react/use-data-form' },
           { text: 'React Native', link: '/react-native/overview' },
-          { text: 'Vue + Quasar', link: '/vue/use-schema-form' },
+          { text: 'Vue + Quasar', link: '/vue/use-data-form' },
           { text: 'Svelte + SvelteKit', link: '/svelte/overview' },
         ],
       },
@@ -66,8 +66,8 @@ export default defineConfig({
         {
           text: 'React Integration',
           items: [
-            { text: 'useSchemaForm', link: '/react/use-schema-form' },
-            { text: 'useSchemaTable', link: '/react/use-schema-table' },
+            { text: 'useDataForm', link: '/react/use-data-form' },
+            { text: 'useDataTable', link: '/react/use-data-table' },
             { text: 'Renderer Registry', link: '/react/renderer-registry' },
           ],
         },
@@ -84,8 +84,8 @@ export default defineConfig({
         {
           text: 'Vue Integration',
           items: [
-            { text: 'useSchemaForm', link: '/vue/use-schema-form' },
-            { text: 'useSchemaTable', link: '/vue/use-schema-table' },
+            { text: 'useDataForm', link: '/vue/use-data-form' },
+            { text: 'useDataTable', link: '/vue/use-data-table' },
             { text: 'Renderer Registry', link: '/vue/renderer-registry' },
           ],
         },

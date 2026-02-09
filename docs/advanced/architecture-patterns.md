@@ -31,8 +31,8 @@ src/application/{name}/
 src/presentation/
   components/
     renderers/         ← field renderer components (.tsx)
-    SchemaForm.tsx     ← form component using useSchemaForm
-    SchemaTable.tsx    ← table component using useSchemaTable
+    DataForm.tsx     ← form component using useDataForm
+    DataTable.tsx    ← table component using useDataTable
   contracts/
     component.ts       ← ComponentContract (react-router-dom)
 ```
@@ -43,8 +43,8 @@ src/presentation/
 src/presentation/
   components/
     renderers/         ← field renderer components (.vue)
-    SchemaForm.vue     ← form component using useSchemaForm
-    SchemaTable.vue    ← table component using useSchemaTable
+    DataForm.vue     ← form component using useDataForm
+    DataTable.vue    ← table component using useDataTable
   contracts/
     component.ts       ← ComponentContract (vue-router)
 ```
@@ -55,8 +55,8 @@ src/presentation/
 src/presentation/
   components/
     renderers/         ← field renderer components (.svelte)
-    SchemaForm.svelte  ← form component using useSchemaForm
-    SchemaTable.svelte ← table component using useSchemaTable
+    DataForm.svelte  ← form component using useDataForm
+    DataTable.svelte ← table component using useDataTable
   contracts/
     component.ts       ← ComponentContract (SvelteKit goto)
 ```
