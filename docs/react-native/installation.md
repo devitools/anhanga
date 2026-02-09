@@ -12,9 +12,8 @@ cd my-app
 ## Install dependencies
 
 ```bash
-pnpm add @anhanga/core @anhanga/react @anhanga/react-native @anhanga/persistence
-pnpm add expo-router expo-status-bar expo-sqlite react-native-safe-area-context react-native-screens
-pnpm add i18next react-i18next @expo/vector-icons
+pnpm add @anhanga/core @anhanga/react-native @anhanga/persistence
+pnpm add expo-router @expo/vector-icons
 ```
 
 ## Configure `app.json`
@@ -55,111 +54,34 @@ Set the entry point to Expo Router:
 
 ## Configure i18n
 
-Anhanga resolves all labels through i18next. Create a translations file and initialize it using `createI18n` from `@anhanga/react-native`:
+Anhanga resolves all labels through i18next. The base translations (`common.*` and `validation.*`) ship with `@anhanga/core` — action labels, table UI, dialog buttons, scope names, and validation messages.
+
+Start by initializing i18n with the base translations only:
 
 ```typescript
-// settings/locales/en.ts
-export const en = {
-  common: {
-    actions: {
-      add: 'Add',
-      view: 'View',
-      edit: 'Edit',
-      create: 'Create',
-      update: 'Update',
-      cancel: 'Cancel',
-      destroy: 'Delete',
-      'create.invalid': 'Fix the errors before submitting',
-      'create.success': 'Record created successfully',
-      'update.invalid': 'Fix the errors before submitting',
-      'update.success': 'Record updated successfully',
-      'destroy.confirm': 'Are you sure you want to delete this record?',
-      'destroy.success': 'Record deleted successfully',
-    },
-    table: {
-      columns: 'Columns',
-      previous: 'Previous',
-      next: 'Next',
-      page: 'Page {{page}} of {{total}}',
-      empty: 'No records found',
-      selected: '{{count}} selected',
-      actions: 'Actions',
-      recordsPerPage: 'Records per page',
-    },
-    dialog: { confirm: 'Confirm', cancel: 'Cancel', ok: 'OK', alert: 'Alert' },
-    scopes: { index: 'List', add: 'Add', view: 'View', edit: 'Edit' },
-  },
-  validation: {
-    required: 'Required field',
-    minLength: 'Minimum {{value}} characters',
-    maxLength: 'Maximum {{value}} characters',
-    min: 'Minimum value is {{value}}',
-    max: 'Maximum value is {{value}}',
-    minDate: 'Date must be after {{value}}',
-    maxDate: 'Date must be before {{value}}',
-    pattern: 'Invalid format',
-  },
-  // domain-specific labels (add one block per domain)
-  product: {
-    title: 'Product',
-    fields: {
-      id: 'ID',
-      name: 'Name',
-      sku: 'SKU',
-      email: 'Email',
-      active: 'Active',
-      quantity: 'Quantity',
-      price: 'Price',
-    },
-    groups: {
-      info: 'Information',
-      pricing: 'Pricing',
-    },
-  },
-}
-```
+// src/settings/i18n.ts
+import { ptBR } from '@anhanga/core'
+import { configureI18n } from '@anhanga/react-native'
 
-```typescript
-// settings/i18n.ts
-import { createI18n } from '@anhanga/react-native'
-import { en } from './locales/en'
-
-export default createI18n({
+export default configureI18n({
   resources: {
-    en: { translation: en },
+    'pt-BR': { translation: ptBR },
   },
-  default: 'en',
-  fallback: 'en',
+  default: 'pt-BR',
+  fallback: 'pt-BR',
 })
 ```
 
-`createI18n` initializes i18next with `react-i18next` and the correct defaults (key separator, interpolation) — you don't need to configure those manually.
+`configureI18n` initializes i18next with `react-i18next` and the correct defaults (key separator, interpolation) — you don't need to configure those manually.
 
-The key convention is `{domain}.fields.{fieldName}` for field labels, `{domain}.groups.{groupName}` for group titles, and `common.actions.{actionName}` for action buttons. Anhanga resolves these automatically — you never hardcode labels in your schema.
-
-## Set up the persistence service
-
-`@anhanga/persistence` ships with a SQLite driver that auto-creates tables from your schema. Create a service for your domain:
-
-```typescript
-// domain/product/service.ts
-import { createService } from '@anhanga/core'
-import type { PersistenceContract } from '@anhanga/core'
-import { ProductSchema } from './schema'
-
-export function createProductService(driver: PersistenceContract) {
-  return createService(ProductSchema, driver)
-}
-```
-
-`createService` returns an object implementing `ServiceContract` — with `create`, `read`, `update`, `destroy`, and `paginate` methods. The driver handles the actual database operations; the service maps between your schema and the persistence layer.
+After defining your schema and its fields, you'll add domain-specific translations (field labels, group titles). That's covered in the [i18n](/react-native/i18n) page.
 
 ## Configure the theme
 
 Create a theme file that extends the default theme. This allows customization of colors, spacing, and typography:
 
 ```typescript
-// settings/theme.ts
+// src/settings/theme.ts
 import { defaultTheme } from '@anhanga/react-native'
 
 export const theme = { ...defaultTheme }
@@ -167,41 +89,6 @@ export const theme = { ...defaultTheme }
 
 You can override any property from `defaultTheme` (colors, spacing, borderRadius, fontSize, fontWeight).
 
-## Project structure
-
-After setup, your project should look like this:
-
-```
-my-app/
-  app/
-    _layout.tsx              ← root layout (withProviders + Stack)
-    index.tsx                ← redirect to /product
-    product/
-      @routes.ts             ← scope → path mapping
-      index.tsx              ← list screen
-      add.tsx                ← add screen
-      view/[id].tsx          ← view screen
-      edit/[id].tsx          ← edit screen
-  settings/
-    schema.ts                ← configure() base schema
-    handlers.ts              ← default CRUD handlers
-    hooks.ts                 ← default bootstrap/fetch hooks
-    i18n.ts                  ← createI18n() initialization
-    theme.ts                 ← theme configuration
-    locales/en.ts            ← translations
-  domain/product/
-    schema.ts                ← ProductSchema
-    events.ts                ← field events
-    handlers.ts              ← action handlers factory
-    hooks.ts                 ← lifecycle hooks factory
-    service.ts               ← persistence service
-  src/
-    setup.ts                 ← wire driver + service + handlers + hooks
-  app.json
-  package.json
-```
-
 ## Next Steps
 
 - [Domain Layer](/react-native/domain) — define your schema, events, handlers, and hooks
-- [Screens](/react-native/screens) — build the 4 CRUD screens

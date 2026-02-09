@@ -26,12 +26,12 @@ The root layout uses `withProviders` to wrap the app with `ThemeProvider` and `D
 
 ```tsx
 // app/_layout.tsx
-import '../settings/i18n'
+import '../src/settings/i18n'
 import { withProviders } from '@anhanga/react-native'
 import { Stack } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
 import { StyleSheet, View } from 'react-native'
-import { theme } from '../settings/theme'
+import { theme } from '../src/settings/theme'
 
 function RootLayout() {
   return (
@@ -57,7 +57,7 @@ The list screen uses `DataTable` with `Scope.index`. It renders columns marked w
 // app/product/index.tsx
 import { Scope } from '@anhanga/core'
 import { Page, DataTable, useComponent } from '@anhanga/react-native'
-import { ProductSchema } from '../../domain/product/schema'
+import { ProductSchema } from '../../src/domain/product/schema'
 import { productHandlers, productHooks } from '../../src/setup'
 import { scopes } from './@routes'
 
@@ -93,8 +93,8 @@ The add screen uses `DataForm` with `Scope.add`. Fields marked with `.excludeSco
 // app/product/add.tsx
 import { Scope } from '@anhanga/core'
 import { Page, DataForm, useComponent } from '@anhanga/react-native'
-import { ProductSchema } from '../../domain/product/schema'
-import { productEvents } from '../../domain/product/events'
+import { ProductSchema } from '../../src/domain/product/schema'
+import { productEvents } from '../../src/domain/product/events'
 import { productHandlers, productHooks } from '../../src/setup'
 import { scopes } from './@routes'
 
@@ -131,8 +131,8 @@ The view screen loads an existing record by ID and renders it read-only. The `bo
 import { useLocalSearchParams } from 'expo-router'
 import { Scope } from '@anhanga/core'
 import { Page, DataForm, useComponent } from '@anhanga/react-native'
-import { ProductSchema } from '../../../domain/product/schema'
-import { productEvents } from '../../../domain/product/events'
+import { ProductSchema } from '../../../src/domain/product/schema'
+import { productEvents } from '../../../src/domain/product/events'
 import { productHandlers, productHooks } from '../../../src/setup'
 import { scopes } from '../@routes'
 
@@ -167,8 +167,8 @@ The edit screen is nearly identical to view, but uses `Scope.edit` — so the bo
 import { useLocalSearchParams } from 'expo-router'
 import { Scope } from '@anhanga/core'
 import { Page, DataForm, useComponent } from '@anhanga/react-native'
-import { ProductSchema } from '../../../domain/product/schema'
-import { productEvents } from '../../../domain/product/events'
+import { ProductSchema } from '../../../src/domain/product/schema'
+import { productEvents } from '../../../src/domain/product/events'
 import { productHandlers, productHooks } from '../../../src/setup'
 import { scopes } from '../@routes'
 
@@ -201,3 +201,7 @@ All 4 screens follow the same pattern:
 3. `<DataForm>` or `<DataTable>` — the schema-driven component
 
 The **scope** is the only thing that changes between screens. The schema, handlers, hooks, and events are shared — the framework resolves which fields, actions, and behaviors apply to each scope automatically.
+
+## Next Steps
+
+- [Testing](/react-native/testing) — test your app with Vitest

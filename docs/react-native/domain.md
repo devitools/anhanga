@@ -7,7 +7,7 @@ The domain layer contains your schema definition, reactive events, action handle
 Create a shared configuration that all domains inherit:
 
 ```typescript
-// settings/schema.ts
+// src/settings/schema.ts
 import { configure, action, text, Scope, Position } from '@anhanga/core'
 
 export const schema = configure({
@@ -36,7 +36,7 @@ Every domain created from this `schema` inherits the `id` field and all CRUD act
 ## Domain Schema
 
 ```typescript
-// domain/product/schema.ts
+// src/domain/product/schema.ts
 import { text, Text, number, currency, toggle, group } from '@anhanga/core'
 import { schema } from '../../settings/schema'
 
@@ -61,7 +61,7 @@ export const ProductSchema = schema.create('product', {
 Events react to field changes — toggle visibility, disable fields, set visual states:
 
 ```typescript
-// domain/product/events.ts
+// src/domain/product/events.ts
 import { ProductSchema } from './schema'
 
 export const productEvents = ProductSchema.events({
@@ -86,7 +86,7 @@ export const productEvents = ProductSchema.events({
 Handlers define what happens when the user clicks an action:
 
 ```typescript
-// domain/product/handlers.ts
+// src/domain/product/handlers.ts
 import type { ServiceContract, HandlerContext } from '@anhanga/core'
 import { Scope } from '@anhanga/core'
 import { ProductSchema } from './schema'
@@ -143,7 +143,7 @@ export function createProductHandlers(service: ServiceContract) {
 Hooks define lifecycle behavior per scope — loading data on mount and fetching paginated lists:
 
 ```typescript
-// domain/product/hooks.ts
+// src/domain/product/hooks.ts
 import type { ServiceContract, BootstrapHookContext, FetchHookContext } from '@anhanga/core'
 import { Scope } from '@anhanga/core'
 import { ProductSchema } from './schema'
@@ -180,6 +180,23 @@ Key points:
 - **`fetch`** runs for table pagination — returns paginated results for the list
 - In `Scope.view`, the hook disables all fields after hydrating to make them read-only
 
+## Service
+
+The service lives in the `application/` layer — it depends on the domain schema but handles persistence concerns:
+
+```typescript
+// src/application/product/productService.ts
+import { createService } from '@anhanga/core'
+import type { PersistenceContract } from '@anhanga/core'
+import { ProductSchema } from '../../domain/product/schema'
+
+export function createProductService(driver: PersistenceContract) {
+  return createService(ProductSchema, driver)
+}
+```
+
+`createService` returns an object implementing `ServiceContract` — with `create`, `read`, `update`, `destroy`, and `paginate` methods. You can spread it and add custom methods specific to your domain.
+
 ## Wiring It Up
 
 Create a setup file that connects the persistence driver to your domain:
@@ -187,9 +204,9 @@ Create a setup file that connects the persistence driver to your domain:
 ```typescript
 // src/setup.ts
 import { createLocalDriver } from '@anhanga/persistence'
-import { createProductHandlers } from '../domain/product/handlers'
-import { createProductHooks } from '../domain/product/hooks'
-import { createProductService } from '../domain/product/service'
+import { createProductService } from './application/product/productService'
+import { createProductHandlers } from './domain/product/handlers'
+import { createProductHooks } from './domain/product/hooks'
 
 const driver = createLocalDriver()
 export const productService = createProductService(driver)
@@ -199,4 +216,4 @@ export const productHooks = createProductHooks(productService)
 
 ## Next Steps
 
-- [Screens](/react-native/screens) — build the 4 CRUD screens using this domain
+- [i18n](/react-native/i18n) — add field labels and group titles for your schema

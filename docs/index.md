@@ -34,46 +34,23 @@ features:
 
 Anhanga uses a **builder-pattern API** — not plain objects or JSON Schema. Each field type exposes only the methods that apply to it, giving you full TypeScript inference and compile-time safety.
 
-### 1. Configure a base schema
-
-```typescript
-import { configure, action, text, Scope, Position } from '@anhanga/core'
-
-export const schema = configure({
-  identity: 'id',
-  display: 'name',
-  fields: {
-    id: text().excludeScopes(Scope.add).disabled(),
-  },
-  actions: {
-    create: action().primary().positions(Position.footer).scopes(Scope.add),
-    cancel: action().start().positions(Position.footer).scopes(Scope.add, Scope.edit),
-  },
-})
-```
-
-### 2. Create a domain schema
+### Create a domain schema
 
 ```typescript
 import { text, Text, number, currency, toggle, group } from '@anhanga/core'
 
 const ProductSchema = schema.create('product', {
-  groups: {
-    info: group(),
-    pricing: group(),
-  },
   fields: {
-    name: text().width(60).required().minLength(3).column().group('info'),
-    sku: text().width(40).required().column().group('info'),
-    email: text().kind(Text.Email).width(50).group('info'),
-    quantity: number().min(0).max(10000).width(30).column().group('pricing'),
-    price: currency().min(0).precision(2).prefix('$').width(30).column().group('pricing'),
-    active: toggle().default(true).column().group('info'),
+    name: text().width(60).required().minLength(3).column(),
+    sku: text().width(40).required().column(),
+    quantity: number().min(0).max(10000).width(30).column(),
+    price: currency().min(0).precision(2).prefix('$').width(30).column(),
+    active: toggle().default(true).column(),
   },
 })
 ```
 
-### 3. Use it in any framework
+### Use it in any framework
 
 ::: code-group
 
