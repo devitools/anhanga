@@ -1,12 +1,14 @@
+import { useMemo } from "react";
 import { router } from "expo-router";
 import type { ComponentContract, DialogContract, ScopeValue, ScopeRoute } from "@anhanga/core";
 import i18n from "i18next";
+import { useDialog } from "../components/Dialog";
 
 const t = (key: string) => {
   return i18n.exists(key) ? i18n.t(key) : key;
 };
 
-function resolvePath (path: string, params?: Record<string, unknown>): string {
+function resolvePath(path: string, params?: Record<string, unknown>): string {
   if (!params) return path;
   return Object.entries(params).reduce(
     (result, [key, value]) => result.replace(`:${key}`, String(value)),
@@ -14,49 +16,59 @@ function resolvePath (path: string, params?: Record<string, unknown>): string {
   );
 }
 
-export function createComponent (
+export function createComponent(
   scope: ScopeValue,
   scopes: Record<ScopeValue, ScopeRoute>,
   dialog: DialogContract,
 ): ComponentContract {
-
   return {
     scope,
     scopes,
-    reload () {},
+    reload() {},
     navigator: {
-      push (path: string, params?: Record<string, unknown>) {
+      push(path: string, params?: Record<string, unknown>) {
         router.push(resolvePath(path, params) as any);
       },
-      back () {
+      back() {
         router.back();
       },
-      replace (path: string, params?: Record<string, unknown>) {
+      replace(path: string, params?: Record<string, unknown>) {
         router.replace(resolvePath(path, params) as any);
       },
     },
     dialog,
     toast: {
-      success (message: string) {
+      success(message: string) {
         console.log("[toast.success]", t(message));
       },
-      error (message: string) {
+      error(message: string) {
         console.log("[toast.error]", t(message));
       },
-      warning (message: string) {
+      warning(message: string) {
         console.log("[toast.warning]", t(message));
       },
-      info (message: string) {
+      info(message: string) {
         console.log("[toast.info]", t(message));
       },
     },
     loading: {
-      show () {
+      show() {
         console.log("[loading.show]");
       },
-      hide () {
+      hide() {
         console.log("[loading.hide]");
       },
     },
   };
+}
+
+export function useComponent(
+  scope: ScopeValue,
+  scopes: Record<ScopeValue, ScopeRoute>,
+): ComponentContract {
+  const dialog = useDialog();
+  return useMemo(
+    () => createComponent(scope, scopes, dialog),
+    [scope, scopes, dialog],
+  );
 }

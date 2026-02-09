@@ -2,7 +2,9 @@ import { useRef, useEffect } from "react";
 import { View, Text, Pressable, Animated, StyleSheet } from "react-native";
 import { useTranslation } from "react-i18next";
 import type { FieldRendererProps } from "@anhanga/react";
-import { theme } from "../../theme";
+import { useTheme } from "../theme/context";
+import type { Theme } from "../theme/default";
+import { ds } from "../support/ds";
 
 const TRACK_WIDTH = 44;
 const TRACK_HEIGHT = 22;
@@ -11,10 +13,10 @@ const THUMB_OFFSET = (THUMB_SIZE - TRACK_HEIGHT) / 2;
 const THUMB_OFF = -THUMB_OFFSET;
 const THUMB_ON = TRACK_WIDTH - THUMB_SIZE + THUMB_OFFSET;
 
-const ds = (id: string) => ({ dataSet: { id } }) as any;
-
 export function ToggleField({ domain, name, value, proxy, onChange }: FieldRendererProps) {
   const { t } = useTranslation();
+  const theme = useTheme();
+  const styles = createStyles(theme);
   const isOn = Boolean(value);
   const offset = useRef(new Animated.Value(isOn ? THUMB_ON : THUMB_OFF)).current;
 
@@ -54,7 +56,7 @@ export function ToggleField({ domain, name, value, proxy, onChange }: FieldRende
   );
 }
 
-const styles = StyleSheet.create({
+const createStyles = (theme: Theme) => StyleSheet.create({
   container: {
     paddingHorizontal: theme.spacing.xs,
     marginBottom: theme.spacing.md,

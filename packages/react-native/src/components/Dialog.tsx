@@ -2,7 +2,8 @@ import { createContext, useCallback, useContext, useRef, useState } from "react"
 import { Modal, Pressable, StyleSheet, Text, View } from "react-native";
 import { useTranslation } from "react-i18next";
 import type { DialogContract } from "@anhanga/core";
-import { theme } from "../theme";
+import { useTheme } from "../theme/context";
+import type { Theme } from "../theme/default";
 
 type DialogType = "confirm" | "alert";
 
@@ -14,8 +15,9 @@ interface DialogState {
 
 const DialogContext = createContext<DialogContract | null>(null);
 
-export function DialogProvider ({ children }: { children: React.ReactNode }) {
+export function DialogProvider({ children }: { children: React.ReactNode }) {
   const { t } = useTranslation();
+  const theme = useTheme();
   const resolveRef = useRef<((value: boolean) => void) | null>(null);
   const [dialog, setDialog] = useState<DialogState>({
     visible: false,
@@ -38,7 +40,7 @@ export function DialogProvider ({ children }: { children: React.ReactNode }) {
 
   const contract: DialogContract = {
     confirm: (message: string) => show("confirm", message),
-    async alert (message: string) {
+    async alert(message: string) {
       await show("alert", message);
     },
   };
@@ -46,6 +48,8 @@ export function DialogProvider ({ children }: { children: React.ReactNode }) {
   const title = dialog.type === "confirm"
     ? t("common.dialog.confirm")
     : t("common.dialog.alert");
+
+  const styles = createStyles(theme);
 
   return (
     <DialogContext.Provider value={contract}>
@@ -87,7 +91,7 @@ export function DialogProvider ({ children }: { children: React.ReactNode }) {
   );
 }
 
-export function useDialog (): DialogContract {
+export function useDialog(): DialogContract {
   const context = useContext(DialogContext);
   if (!context) {
     throw new Error("useDialog must be used within a DialogProvider");
@@ -95,7 +99,7 @@ export function useDialog (): DialogContract {
   return context;
 }
 
-const styles = StyleSheet.create({
+const createStyles = (theme: Theme) => StyleSheet.create({
   overlay: {
     flex: 1,
     backgroundColor: "rgba(0, 0, 0, 0.5)",

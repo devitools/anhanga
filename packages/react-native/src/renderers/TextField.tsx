@@ -1,15 +1,16 @@
 import { View, Text, TextInput, StyleSheet } from "react-native";
 import { useTranslation } from "react-i18next";
 import type { FieldRendererProps } from "@anhanga/react";
-import { theme } from "../../theme";
-
-const ds = (id: string) => ({ dataSet: { id } }) as any;
+import { useTheme } from "../theme/context";
+import type { Theme } from "../theme/default";
+import { ds } from "../support/ds";
 
 export function TextField({ domain, name, value, proxy, errors, onChange, onBlur, onFocus }: FieldRendererProps) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const theme = useTheme();
+  const styles = createStyles(theme);
   if (proxy.hidden) return null;
 
-  const { i18n } = useTranslation();
   const fieldLabel = t(`${domain}.fields.${name}`, { defaultValue: name });
   const placeholderKey = `${domain}.fields.${name}.placeholder`;
   const placeholder = i18n.exists(placeholderKey) ? t(placeholderKey) : undefined;
@@ -36,7 +37,7 @@ export function TextField({ domain, name, value, proxy, errors, onChange, onBlur
   );
 }
 
-const styles = StyleSheet.create({
+const createStyles = (theme: Theme) => StyleSheet.create({
   container: {
     paddingHorizontal: theme.spacing.xs,
   },

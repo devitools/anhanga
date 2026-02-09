@@ -3,23 +3,27 @@ import { useTranslation } from "react-i18next";
 import { Feather } from "@expo/vector-icons";
 import type { PositionValue } from "@anhanga/core";
 import { resolveActionLabel } from "@anhanga/react";
-import { theme } from "../theme";
+import { useTheme } from "../theme/context";
+import type { Theme } from "../theme/default";
+import { ds } from "../support/ds";
+import type { ActionButtonProps, ActionBarProps } from "../types";
 
-const ds = (id: string) => ({ dataSet: { id } }) as any;
-
-const variantStyles: Record<string, { bg: string; border: string; text: string }> = {
-  default: { bg: theme.colors.card, border: theme.colors.border, text: theme.colors.foreground },
-  primary: { bg: theme.colors.primary, border: theme.colors.primary, text: theme.colors.primaryForeground },
-  destructive: { bg: theme.colors.destructive, border: theme.colors.destructive, text: theme.colors.destructiveForeground },
-  warning: { bg: theme.colors.warning, border: theme.colors.warning, text: theme.colors.warningForeground },
-  success: { bg: theme.colors.success, border: theme.colors.success, text: theme.colors.successForeground },
-  info: { bg: theme.colors.info, border: theme.colors.info, text: theme.colors.infoForeground },
-  muted: { bg: theme.colors.muted, border: theme.colors.muted, text: theme.colors.mutedForeground },
-  accent: { bg: theme.colors.accent, border: theme.colors.accent, text: theme.colors.accentForeground },
-};
-
-export function ActionButton({ action, domain }: { action: { name: string; config: { icon?: string; variant: string }; execute: () => void }; domain: string }) {
+export function ActionButton({ action, domain }: ActionButtonProps) {
   const { t } = useTranslation();
+  const theme = useTheme();
+  const styles = createStyles(theme);
+
+  const variantStyles: Record<string, { bg: string; border: string; text: string }> = {
+    default: { bg: theme.colors.card, border: theme.colors.border, text: theme.colors.foreground },
+    primary: { bg: theme.colors.primary, border: theme.colors.primary, text: theme.colors.primaryForeground },
+    destructive: { bg: theme.colors.destructive, border: theme.colors.destructive, text: theme.colors.destructiveForeground },
+    warning: { bg: theme.colors.warning, border: theme.colors.warning, text: theme.colors.warningForeground },
+    success: { bg: theme.colors.success, border: theme.colors.success, text: theme.colors.successForeground },
+    info: { bg: theme.colors.info, border: theme.colors.info, text: theme.colors.infoForeground },
+    muted: { bg: theme.colors.muted, border: theme.colors.muted, text: theme.colors.mutedForeground },
+    accent: { bg: theme.colors.accent, border: theme.colors.accent, text: theme.colors.accentForeground },
+  };
+
   const variant = variantStyles[action.config.variant] ?? variantStyles.default;
   const actionLabel = resolveActionLabel(t, domain, action.name);
   return (
@@ -34,7 +38,9 @@ export function ActionButton({ action, domain }: { action: { name: string; confi
   );
 }
 
-export function ActionBar({ actions, position, domain }: { actions: { name: string; config: any; execute: () => void }[]; position: PositionValue; domain: string }) {
+export function ActionBar({ actions, position, domain }: ActionBarProps) {
+  const theme = useTheme();
+  const styles = createStyles(theme);
   const items = actions.filter((a) => a.config.positions.includes(position));
   if (items.length === 0) return null;
 
@@ -61,7 +67,7 @@ export function ActionBar({ actions, position, domain }: { actions: { name: stri
   );
 }
 
-const styles = StyleSheet.create({
+const createStyles = (theme: Theme) => StyleSheet.create({
   actionsRow: {
     flexDirection: "row",
     justifyContent: "space-between",

@@ -2,18 +2,21 @@ import type { ReactNode } from "react";
 import { View, Text, ScrollView, StyleSheet, ActivityIndicator } from "react-native";
 import { useTranslation } from "react-i18next";
 import type { ScopeValue } from "@anhanga/core";
-import { theme } from "../theme";
+import { useTheme } from "../theme/context";
+import type { Theme } from "../theme/default";
 
 interface PageProps {
-  domain: string
-  scope: ScopeValue
-  maxWidth?: number
-  loading?: boolean
-  children: ReactNode
+  domain: string;
+  scope: ScopeValue;
+  maxWidth?: number;
+  loading?: boolean;
+  children: ReactNode;
 }
 
 export function Page({ domain, scope, maxWidth = 960, loading, children }: PageProps) {
   const { t } = useTranslation();
+  const theme = useTheme();
+  const styles = createStyles(theme);
 
   if (loading) {
     return (
@@ -33,7 +36,7 @@ export function Page({ domain, scope, maxWidth = 960, loading, children }: PageP
   );
 }
 
-const styles = StyleSheet.create({
+const createStyles = (theme: Theme) => StyleSheet.create({
   scroll: {
     flex: 1,
     backgroundColor: theme.colors.background,
