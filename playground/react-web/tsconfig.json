@@ -8,7 +8,8 @@
       "@anhanga/demo": ["../../packages/demo/src"],
       "@anhanga/demo/*": ["../../packages/demo/src/*"],
       "@anhanga/persistence/*": ["../../packages/persistence/src/*"],
-      "@anhanga/react": ["../../packages/react/src"]
+      "@anhanga/react": ["../../packages/react/src"],
+      "@anhanga/react-web": ["../../packages/react-web/src"]
     }
   },
   "include": ["src"]

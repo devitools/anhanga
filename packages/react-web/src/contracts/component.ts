@@ -1,6 +1,7 @@
+import { useMemo } from "react";
 import type { ComponentContract, DialogContract, ScopeValue, ScopeRoute } from "@anhanga/core";
-import { toast } from "@/components/ui/sonner";
 import i18n from "i18next";
+import { useDialog } from "../components/Dialog";
 
 const t = (key: string) => {
   return i18n.exists(key) ? i18n.t(key) as string : key;
@@ -14,45 +15,41 @@ function resolvePath(path: string, params?: Record<string, unknown>): string {
   );
 }
 
-let navigateFn: (path: string) => void = () => {};
-
-export function setNavigate(fn: (path: string) => void) {
-  navigateFn = fn;
-}
-
 export function createComponent(
   scope: ScopeValue,
   scopes: Record<ScopeValue, ScopeRoute>,
   dialog: DialogContract,
+  navigate?: (path: string) => void,
 ): ComponentContract {
+  const nav = navigate ?? (() => {});
   return {
     scope,
     scopes,
     reload() {},
     navigator: {
       push(path: string, params?: Record<string, unknown>) {
-        navigateFn(resolvePath(path, params));
+        nav(resolvePath(path, params));
       },
       back() {
         window.history.back();
       },
       replace(path: string, params?: Record<string, unknown>) {
-        navigateFn(resolvePath(path, params));
+        nav(resolvePath(path, params));
       },
     },
     dialog,
     toast: {
       success(message: string) {
-        toast.success(t(message));
+        console.log("[toast.success]", t(message));
       },
       error(message: string) {
-        toast.error(t(message));
+        console.log("[toast.error]", t(message));
       },
       warning(message: string) {
-        toast.warning(t(message));
+        console.log("[toast.warning]", t(message));
       },
       info(message: string) {
-        toast.info(t(message));
+        console.log("[toast.info]", t(message));
       },
     },
     loading: {
@@ -60,4 +57,16 @@ export function createComponent(
       hide() {},
     },
   };
+}
+
+export function useComponent(
+  scope: ScopeValue,
+  scopes: Record<ScopeValue, ScopeRoute>,
+  navigate?: (path: string) => void,
+): ComponentContract {
+  const dialog = useDialog();
+  return useMemo(
+    () => createComponent(scope, scopes, dialog, navigate),
+    [scope, scopes, dialog, navigate],
+  );
 }

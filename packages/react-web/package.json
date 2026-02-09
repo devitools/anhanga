@@ -1,0 +1,36 @@
+{
+  "name": "@anhanga/react-web",
+  "version": "0.0.1",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsup"
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18",
+    "@anhanga/core": "workspace:*",
+    "@anhanga/react": "workspace:*",
+    "i18next": ">=23",
+    "react-i18next": ">=14"
+  },
+  "devDependencies": {
+    "@anhanga/core": "workspace:*",
+    "@anhanga/react": "workspace:*",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "i18next": "^25.8.4",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-i18next": "^16.5.4",
+    "tsup": "^8.0.0",
+    "typescript": "^5.7.0"
+  }
+}
