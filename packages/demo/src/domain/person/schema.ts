@@ -1,11 +1,10 @@
 import { action, date, group, Position, Scope, text, Text, toggle } from "@anhanga/core";
-import { Icon } from "../../settings/icon";
 import { schema } from "../../settings/schema";
 
 export const PersonSchema = schema.create("person", {
   groups: {
-    basic: group().icon(Icon.Person),
-    address: group().icon(Icon.Map),
+    basic: group(),
+    address: group(),
   },
 
   fields: {
@@ -19,7 +18,7 @@ export const PersonSchema = schema.create("person", {
   },
 
   actions: {
-    custom: action().icon(Icon.Send).order(-1).warning().positions(Position.footer).scopes(Scope.add),
+    custom: action().order(-1).warning().positions(Position.footer).scopes(Scope.add),
     save: action().hidden(),
   },
 });
