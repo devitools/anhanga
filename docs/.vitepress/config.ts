@@ -77,6 +77,9 @@ export default defineConfig({
           text: 'React Native',
           items: [
             { text: 'Overview', link: '/react-native/overview' },
+            { text: 'Installation', link: '/react-native/installation' },
+            { text: 'Domain Layer', link: '/react-native/domain' },
+            { text: 'Screens', link: '/react-native/screens' },
           ],
         },
       ],
