@@ -18,6 +18,9 @@ export { ActionDefinition, action } from './action'
 export { Icon } from './icon'
 export type { IconValue } from './icon'
 
+export { createFiller, fill, defaultFillers } from './filler'
+export type { FillerFn, FillerRegistry } from './filler'
+
 export { createService, extractPersistenceMeta } from './persistence'
 export type { PersistenceContract, PersistenceMeta } from './persistence'
 
