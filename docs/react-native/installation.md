@@ -55,7 +55,7 @@ Set the entry point to Expo Router:
 
 ## Configure i18n
 
-Anhanga resolves all labels through i18next. Create a translations file and initialize it:
+Anhanga resolves all labels through i18next. Create a translations file and initialize it using `createI18n` from `@anhanga/react-native`:
 
 ```typescript
 // settings/locales/en.ts
@@ -121,22 +121,19 @@ export const en = {
 
 ```typescript
 // settings/i18n.ts
-import i18n from 'i18next'
-import { initReactI18next } from 'react-i18next'
+import { createI18n } from '@anhanga/react-native'
 import { en } from './locales/en'
 
-i18n.use(initReactI18next).init({
+export default createI18n({
   resources: {
     en: { translation: en },
   },
-  lng: 'en',
-  fallbackLng: 'en',
-  interpolation: { escapeValue: false },
-  keySeparator: '.',
+  default: 'en',
+  fallback: 'en',
 })
-
-export default i18n
 ```
+
+`createI18n` initializes i18next with `react-i18next` and the correct defaults (key separator, interpolation) — you don't need to configure those manually.
 
 The key convention is `{domain}.fields.{fieldName}` for field labels, `{domain}.groups.{groupName}` for group titles, and `common.actions.{actionName}` for action buttons. Anhanga resolves these automatically — you never hardcode labels in your schema.
 
@@ -157,6 +154,19 @@ export function createProductService(driver: PersistenceContract) {
 
 `createService` returns an object implementing `ServiceContract` — with `create`, `read`, `update`, `destroy`, and `paginate` methods. The driver handles the actual database operations; the service maps between your schema and the persistence layer.
 
+## Configure the theme
+
+Create a theme file that extends the default theme. This allows customization of colors, spacing, and typography:
+
+```typescript
+// settings/theme.ts
+import { defaultTheme } from '@anhanga/react-native'
+
+export const theme = { ...defaultTheme }
+```
+
+You can override any property from `defaultTheme` (colors, spacing, borderRadius, fontSize, fontWeight).
+
 ## Project structure
 
 After setup, your project should look like this:
@@ -164,7 +174,7 @@ After setup, your project should look like this:
 ```
 my-app/
   app/
-    _layout.tsx              ← root layout (DialogProvider + Stack)
+    _layout.tsx              ← root layout (withProviders + Stack)
     index.tsx                ← redirect to /product
     product/
       @routes.ts             ← scope → path mapping
@@ -176,7 +186,8 @@ my-app/
     schema.ts                ← configure() base schema
     handlers.ts              ← default CRUD handlers
     hooks.ts                 ← default bootstrap/fetch hooks
-    i18n.ts                  ← i18next initialization
+    i18n.ts                  ← createI18n() initialization
+    theme.ts                 ← theme configuration
     locales/en.ts            ← translations
   domain/product/
     schema.ts                ← ProductSchema

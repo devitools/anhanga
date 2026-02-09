@@ -22,25 +22,31 @@ This map is used by `useComponent` to resolve navigation paths when handlers cal
 
 ## Layout
 
-The root layout provides the `DialogProvider` (for confirmation modals) and configures the Expo Router stack:
+The root layout uses `withProviders` to wrap the app with `ThemeProvider` and `DialogProvider`, and imports the i18n settings as a side-effect:
 
 ```tsx
 // app/_layout.tsx
+import '../settings/i18n'
+import { withProviders } from '@anhanga/react-native'
 import { Stack } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
-import { View } from 'react-native'
-import { DialogProvider } from '@anhanga/react-native'
+import { StyleSheet, View } from 'react-native'
+import { theme } from '../settings/theme'
 
-export default function RootLayout() {
+function RootLayout() {
   return (
-    <DialogProvider>
-      <View style={{ flex: 1 }}>
-        <StatusBar style="dark" />
-        <Stack screenOptions={{ headerShown: false, animation: 'fade' }} />
-      </View>
-    </DialogProvider>
+    <View style={styles.container}>
+      <StatusBar style="dark" />
+      <Stack screenOptions={{ headerShown: false, animation: 'fade' }} />
+    </View>
   )
 }
+
+export default withProviders(RootLayout, { theme })
+
+const styles = StyleSheet.create({
+  container: { flex: 1 },
+})
 ```
 
 ## List Screen

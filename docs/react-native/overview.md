@@ -30,11 +30,12 @@ The 4 screens share the **same schema, handlers, hooks, and events**. The only t
 
 | Component | Purpose |
 |-----------|---------|
+| `withProviders` | HOC that wraps the app with `ThemeProvider` + `DialogProvider` — eliminates manual provider nesting |
 | `Page` | Layout wrapper — renders title (`domain + scope`) and scroll container |
 | `DataForm` | Schema-driven form — renders fields, groups, actions, validation |
 | `DataTable` | Schema-driven table — renders columns, pagination, sorting, row actions |
-| `DialogProvider` | Context provider for confirmation modals |
 | `useComponent` | Hook that creates the `ComponentContract` (navigator, dialog, toast, loading) |
+| `createI18n` | Factory that initializes i18next with the correct configuration |
 
 ## Running the Playground
 
