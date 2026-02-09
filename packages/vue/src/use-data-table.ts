@@ -2,8 +2,8 @@ import { ref, computed, watch, onMounted } from 'vue'
 import type { FieldConfig, ScopeValue, TableContract } from '@anhanga/core'
 import { Position } from '@anhanga/core'
 import type {
-  UseSchemaTableOptions,
-  UseSchemaTableReturn,
+  UseDataTableOptions,
+  UseDataTableReturn,
   ResolvedColumn,
   ResolvedAction,
 } from './types'
@@ -18,7 +18,7 @@ function isActionInScope (config: { scopes: ScopeValue[] | null }, scope: ScopeV
   return config.scopes.includes(scope)
 }
 
-export function useSchemaTable (options: UseSchemaTableOptions): UseSchemaTableReturn {
+export function useDataTable (options: UseDataTableOptions): UseDataTableReturn {
   const { schema, scope, handlers, hooks, component, pageSize = 10 } = options
 
   const rows = ref<Record<string, unknown>[]>([])
