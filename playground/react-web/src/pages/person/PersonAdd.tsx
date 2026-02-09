@@ -1,27 +1,25 @@
-import { scopes } from "@/pages/@routes";
-import { personHandlers, personHooks } from "@/setup";
+import { personHandlers, personHooks } from "@/demo";
+import { scopes } from "@/pages/person/@routes";
 import { Scope } from "@anhanga/core";
 import { personEvents, PersonSchema } from "@anhanga/demo";
 import { DataForm, Page, useComponent } from "@anhanga/react-web";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-export function PersonView () {
-  const { id } = useParams<{ id: string }>();
+export function PersonAdd () {
   const navigate = useNavigate();
-  const component = useComponent(Scope.view, scopes, navigate);
+  const component = useComponent(Scope.add, scopes, navigate);
 
   return (
     <Page
       domain={PersonSchema.domain}
-      scope={Scope.view}
+      scope={Scope.add}
     >
       <DataForm
         schema={PersonSchema.provide()}
-        scope={Scope.view}
+        scope={Scope.add}
         events={personEvents}
         handlers={personHandlers}
         hooks={personHooks}
-        context={{ id }}
         component={component}
         debug={true}
       />

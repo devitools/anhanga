@@ -1,5 +1,5 @@
-import { scopes } from "@/pages/@routes";
-import { personHandlers, personHooks } from "@/setup";
+import { personHandlers, personHooks } from "@/demo";
+import { scopes } from "@/pages/person/@routes";
 import { Scope } from "@anhanga/core";
 import { PersonSchema } from "@anhanga/demo";
 import { DataTable, Page, useComponent } from "@anhanga/react-web";

@@ -1,7 +1,7 @@
 import { Scope } from "@anhanga/core";
 import { PersonSchema } from "@anhanga/demo";
-import { Page, DataTable, useComponent } from "@anhanga/react-native";
-import { personHandlers, personHooks } from "../../src/setup";
+import { DataTable, Page, useComponent } from "@anhanga/react-native";
+import { personHandlers, personHooks } from "../../src/demo";
 import { scopes } from "./@routes";
 
 export default function PersonIndexPage () {
