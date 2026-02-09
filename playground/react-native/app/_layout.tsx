@@ -1,24 +1,25 @@
-import "@anhanga/demo/settings/i18n";
+import "../src/settings/i18n";
+import { withProviders } from "@anhanga/react-native";
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import { View, StyleSheet } from "react-native";
-import { DialogProvider } from "@anhanga/react-native";
+import { StyleSheet, View } from "react-native";
+import { theme } from "../src/settings/theme";
 
-export default function RootLayout() {
+function RootLayout () {
   return (
-    <DialogProvider>
-      <View style={styles.container}>
-        <StatusBar style="dark" />
-        <Stack
-          screenOptions={{
-            headerShown: false,
-            animation: "fade",
-          }}
-        />
-      </View>
-    </DialogProvider>
+    <View style={styles.container}>
+      <StatusBar style="dark" />
+      <Stack
+        screenOptions={{
+          headerShown: false,
+          animation: "fade",
+        }}
+      />
+    </View>
   );
 }
+
+export default withProviders(RootLayout, { theme });
 
 const styles = StyleSheet.create({
   container: {
