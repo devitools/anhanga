@@ -6,11 +6,6 @@ export class GroupDefinition {
     this._config = {}
   }
 
-  icon(i: string): this {
-    this._config.icon = i
-    return this
-  }
-
   toConfig(): GroupConfig {
     return { ...this._config }
   }

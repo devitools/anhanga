@@ -14,11 +14,6 @@ export class ActionDefinition {
     };
   }
 
-  icon (i: string): this {
-    this._config.icon = i;
-    return this;
-  }
-
   primary (): this {
     this._config.variant = "primary";
     return this;

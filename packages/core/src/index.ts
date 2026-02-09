@@ -15,16 +15,19 @@ export type { TextKind } from './fields'
 
 export { GroupDefinition, group } from './group'
 export { ActionDefinition, action } from './action'
-export { Icon } from './icon'
-export type { IconValue } from './icon'
-
 export { createFiller, fill, defaultFillers } from './filler'
 export type { FillerFn, FillerRegistry } from './filler'
 
 export { createService, extractPersistenceMeta } from './persistence'
 export type { PersistenceContract, PersistenceMeta } from './persistence'
 
+export { isScopePermitted } from './permission'
+
+export { buildInitialState, isInScope } from './scope'
+
 export { Position, Scope } from './types'
+
+export { ptBR } from './locales/pt-BR'
 
 export type {
   PositionValue,

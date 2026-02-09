@@ -55,11 +55,9 @@ export interface FieldConfig {
 }
 
 export interface GroupConfig {
-  icon?: string;
 }
 
 export interface ActionConfig {
-  icon?: string;
   variant: "default" | "primary" | "destructive" | "secondary" | "muted" | "accent" | "success" | "warning" | "info";
   positions: PositionValue[];
   align: "start" | "end";
