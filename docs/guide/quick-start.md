@@ -1,5 +1,38 @@
 # Quick Start
 
+> **What you will build** — a complete schema-driven form in 5 steps. Here's the end result:
+
+```typescript
+import { text, number, toggle } from '@anhanga/core'
+
+// schema definition
+const TaskSchema = schema.create('task', {
+  fields: {
+    title: text().required().minLength(3).column(),
+    priority: number().min(1).max(5).default(3).column(),
+    done: toggle().default(false).column(),
+  },
+})
+
+// reactive events
+const taskEvents = TaskSchema.events({
+  done: {
+    change({ state, schema }) {
+      schema.priority.disabled = state.done
+    },
+  },
+})
+
+// action handler
+const taskHandlers = TaskSchema.handlers({
+  create({ state, form, component }) {
+    if (!form?.validate()) return
+    service.create(state)
+    component.toast.success('Task created!')
+  },
+})
+```
+
 This guide walks you through the 5 steps to set up a schema-driven form.
 
 ## 1. Configure a Base Schema

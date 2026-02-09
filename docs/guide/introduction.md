@@ -17,6 +17,47 @@ Traditional CRUD screens require wiring up fields, validation, visibility, layou
 - **i18n-native** — labels resolved via `{domain}.{field}`, never hardcoded
 - **Framework-agnostic core** — `@anhanga/core` has zero dependencies; bring your own UI
 
+## Traditional vs Anhanga
+
+::: code-group
+
+```typescript [Traditional]
+const fields = [
+  { name: 'name', type: 'string', label: 'Name', required: true,
+    validation: { minLength: 3 } },
+  { name: 'email', type: 'string', label: 'Email', inputType: 'email',
+    required: true },
+  { name: 'price', type: 'number', label: 'Price',
+    validation: { min: 0 }, format: 'currency', prefix: '$' },
+  { name: 'active', type: 'boolean', label: 'Active', default: true },
+]
+// + separate validation schema (Yup/Zod)
+// + separate table column config
+// + separate i18n keys
+// + separate visibility logic per scope
+// + no type inference from this definition
+```
+
+```typescript [Anhanga]
+import { text, Text, currency, toggle } from '@anhanga/core'
+
+const fields = {
+  name: text().required().minLength(3).column(),
+  email: text().kind(Text.Email).required().column(),
+  price: currency().min(0).precision(2).prefix('$').column(),
+  active: toggle().default(true).column(),
+}
+// validation is built-in (required, minLength, min)
+// table columns are declared inline (.column())
+// i18n resolves labels automatically
+// scopes control visibility (.scopes(), .excludeScopes())
+// InferRecord gives you full type inference
+```
+
+:::
+
+Each field type exposes **only the methods that apply to it** — `minLength()` exists on `text()` but not on `number()`, `precision()` exists on `currency()` but not on `toggle()`. This is not just convenience — it's compile-time type safety.
+
 ## Packages
 
 | Package | Description |
