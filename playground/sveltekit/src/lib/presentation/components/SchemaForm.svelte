@@ -1,8 +1,8 @@
 <script lang="ts">
   import { useDataForm, getRenderer } from '@anhanga/svelte'
   import type { UseDataFormOptions } from '@anhanga/svelte'
-  import { fakeAll } from '@anhanga/demo'
-  import { translate, hasTranslation } from '$lib/i18n'
+  import { fill } from '@anhanga/core'
+  import { translate, hasTranslation } from '$lib/settings/i18n'
   import ActionBar from './ActionBar.svelte'
 
   let props: UseDataFormOptions & { debug?: boolean } = $props()
@@ -35,8 +35,7 @@
   }
 
   function handleFill () {
-    const fakeData = fakeAll(props.schema.fields, props.schema.identity)
-    formStore.setValues(fakeData)
+    formStore.setValues(fill(props.schema.fields, props.schema.identity))
   }
 </script>
 

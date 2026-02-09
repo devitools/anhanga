@@ -1,7 +1,7 @@
 <script lang="ts">
   import { useDataTable } from '@anhanga/svelte'
   import type { UseDataTableOptions } from '@anhanga/svelte'
-  import { translate, hasTranslation } from '$lib/i18n'
+  import { translate, hasTranslation } from '$lib/settings/i18n'
   import ActionBar from './ActionBar.svelte'
   import SchemaButton from './SchemaButton.svelte'
 

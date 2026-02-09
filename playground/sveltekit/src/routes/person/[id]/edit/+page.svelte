@@ -4,7 +4,7 @@
   import { PersonSchema, personEvents } from '@anhanga/demo'
   import { personHandlers, personHooks } from '$lib/setup'
   import { createComponent } from '$lib/presentation/contracts/component'
-  import { translate, hasTranslation } from '$lib/i18n'
+  import { translate, hasTranslation } from '$lib/settings/i18n'
   import SchemaForm from '$lib/presentation/components/SchemaForm.svelte'
 
   const id = page.params.id

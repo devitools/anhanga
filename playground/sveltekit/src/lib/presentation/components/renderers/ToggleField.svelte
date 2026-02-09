@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { translate, hasTranslation } from '$lib/i18n'
+  import { translate, hasTranslation } from '$lib/settings/i18n'
 
   let { domain, name, value, proxy, onChange }: {
     domain: string
