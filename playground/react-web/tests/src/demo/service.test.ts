@@ -1,9 +1,9 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest'
+import { createMockDriver } from '@anhanga/core'
 import { createPersonService } from '@anhanga/demo'
-import { mockDriver } from '../../support/mocks'
+import { describe, it, expect, vi, beforeEach } from 'vitest'
 
 describe('createPersonService', () => {
-  const driver = mockDriver()
+  const driver = createMockDriver(vi.fn)
   let service: ReturnType<typeof createPersonService>
 
   beforeEach(() => {
