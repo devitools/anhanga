@@ -88,6 +88,9 @@ importers:
       '@anhanga/react':
         specifier: workspace:*
         version: link:../react
+      '@expo/vector-icons':
+        specifier: ^15.0.3
+        version: 15.0.3(expo-font@14.0.11(expo@54.0.33)(react-native@0.81.5(@babel/core@7.29.0)(@types/react@19.1.17)(react@19.1.0))(react@19.1.0))(react-native@0.81.5(@babel/core@7.29.0)(@types/react@19.1.17)(react@19.1.0))(react@19.1.0)
       i18next:
         specifier: ^25.8.4
         version: 25.8.4(typescript@5.9.3)
@@ -98,9 +101,6 @@ importers:
       '@anhanga/core':
         specifier: workspace:*
         version: link:../core
-      '@expo/vector-icons':
-        specifier: ^15.0.3
-        version: 15.0.3(expo-font@14.0.11(expo@54.0.33)(react-native@0.81.5(@babel/core@7.29.0)(@types/react@19.1.17)(react@19.1.0))(react@19.1.0))(react-native@0.81.5(@babel/core@7.29.0)(@types/react@19.1.17)(react@19.1.0))(react@19.1.0)
       '@types/react':
         specifier: ^19.0.0
         version: 19.1.17
@@ -310,12 +310,18 @@ importers:
       '@vitejs/plugin-react':
         specifier: ^4.0.0
         version: 4.7.0(vite@6.4.1(@types/node@25.2.1)(jiti@1.21.7)(lightningcss@1.31.1)(sass-embedded@1.97.3)(sass@1.97.3)(terser@5.46.0)(yaml@2.8.2))
+      '@vitest/coverage-v8':
+        specifier: ^3.0.0
+        version: 3.2.4(vitest@3.2.4(@types/node@25.2.1)(jiti@1.21.7)(lightningcss@1.31.1)(sass-embedded@1.97.3)(sass@1.97.3)(terser@5.46.0)(yaml@2.8.2))
       typescript:
         specifier: ^5.7.0
         version: 5.9.3
       vite:
         specifier: ^6.0.0
         version: 6.4.1(@types/node@25.2.1)(jiti@1.21.7)(lightningcss@1.31.1)(sass-embedded@1.97.3)(sass@1.97.3)(terser@5.46.0)(yaml@2.8.2)
+      vitest:
+        specifier: ^3.0.0
+        version: 3.2.4(@types/node@25.2.1)(jiti@1.21.7)(lightningcss@1.31.1)(sass-embedded@1.97.3)(sass@1.97.3)(terser@5.46.0)(yaml@2.8.2)
 
   playground/sveltekit:
     dependencies:
@@ -344,6 +350,9 @@ importers:
       '@sveltejs/vite-plugin-svelte':
         specifier: ^5.0.0
         version: 5.1.1(svelte@5.50.0)(vite@6.4.1(@types/node@25.2.1)(jiti@1.21.7)(lightningcss@1.31.1)(sass-embedded@1.97.3)(sass@1.97.3)(terser@5.46.0)(yaml@2.8.2))
+      '@vitest/coverage-v8':
+        specifier: ^3.0.0
+        version: 3.2.4(vitest@3.2.4(@types/node@25.2.1)(jiti@1.21.7)(lightningcss@1.31.1)(sass-embedded@1.97.3)(sass@1.97.3)(terser@5.46.0)(yaml@2.8.2))
       svelte:
         specifier: ^5.0.0
         version: 5.50.0
@@ -353,6 +362,9 @@ importers:
       vite:
         specifier: ^6.0.0
         version: 6.4.1(@types/node@25.2.1)(jiti@1.21.7)(lightningcss@1.31.1)(sass-embedded@1.97.3)(sass@1.97.3)(terser@5.46.0)(yaml@2.8.2)
+      vitest:
+        specifier: ^3.0.0
+        version: 3.2.4(@types/node@25.2.1)(jiti@1.21.7)(lightningcss@1.31.1)(sass-embedded@1.97.3)(sass@1.97.3)(terser@5.46.0)(yaml@2.8.2)
 
   playground/vue-quasar:
     dependencies:
@@ -390,6 +402,9 @@ importers:
       '@vitejs/plugin-vue':
         specifier: ^5.0.0
         version: 5.2.4(vite@6.4.1(@types/node@25.2.1)(jiti@1.21.7)(lightningcss@1.31.1)(sass-embedded@1.97.3)(sass@1.97.3)(terser@5.46.0)(yaml@2.8.2))(vue@3.5.27(typescript@5.9.3))
+      '@vitest/coverage-v8':
+        specifier: ^3.0.0
+        version: 3.2.4(vitest@3.2.4(@types/node@25.2.1)(jiti@1.21.7)(lightningcss@1.31.1)(sass-embedded@1.97.3)(sass@1.97.3)(terser@5.46.0)(yaml@2.8.2))
       sass-embedded:
         specifier: ^1.86.0
         version: 1.97.3
@@ -399,6 +414,9 @@ importers:
       vite:
         specifier: ^6.0.0
         version: 6.4.1(@types/node@25.2.1)(jiti@1.21.7)(lightningcss@1.31.1)(sass-embedded@1.97.3)(sass@1.97.3)(terser@5.46.0)(yaml@2.8.2)
+      vitest:
+        specifier: ^3.0.0
+        version: 3.2.4(@types/node@25.2.1)(jiti@1.21.7)(lightningcss@1.31.1)(sass-embedded@1.97.3)(sass@1.97.3)(terser@5.46.0)(yaml@2.8.2)
 
 packages:
 

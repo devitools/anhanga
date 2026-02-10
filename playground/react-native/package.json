@@ -1,5 +1,5 @@
 {
-  "name": "@anhanga/playground",
+  "name": "@anhanga/playground-react-native",
   "version": "0.0.1",
   "private": true,
   "main": "expo-router/entry",
