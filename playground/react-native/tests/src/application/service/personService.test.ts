@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { createPersonService } from '@anhanga/demo'
-import { mockDriver } from '../../support/mocks'
+import { mockDriver } from '../../../support/mocks'
 
 describe('createPersonService', () => {
   const driver = mockDriver()
