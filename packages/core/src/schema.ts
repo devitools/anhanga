@@ -8,7 +8,7 @@ type InferState<F extends Record<string, FieldDefinition>> = {
   [K in keyof F]: F[K] extends FieldDefinition<infer T> ? T : unknown
 }
 
-type EventContext<F extends Record<string, FieldDefinition>> = {
+export type EventContext<F extends Record<string, FieldDefinition>> = {
   state: InferState<F>
   schema: { [K in keyof F]: FieldProxy }
 }
