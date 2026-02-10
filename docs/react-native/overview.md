@@ -21,7 +21,6 @@ my-app/
 │   ├── settings/
 │   │   ├── locales/
 │   │   ├── handlers.ts
-│   │   ├── theme.ts
 │   │   ├── i18n.ts
 │   │   ├── icon.ts
 │   │   ├── schema.ts
