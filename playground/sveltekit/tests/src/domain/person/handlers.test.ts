@@ -1,7 +1,7 @@
 import { createMockContext, createMockDriver, Scope } from "@anhanga/core";
 import { createPersonHandlers, createPersonService, PersonSchema } from "@anhanga/demo";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { scopes } from "../../../src/pages/person/@routes";
+import { scopes } from "../../../../src/routes/person/@routes";
 
 describe("createPersonHandlers", () => {
   const driver = createMockDriver(vi.fn);
@@ -37,13 +37,13 @@ describe("createPersonHandlers", () => {
   it("view calls navigator's push with view path and id", () => {
     const { state, component } = createMockContext(PersonSchema, vi.fn).scopes(scopes).values({ id: "1" });
     handlers.view({ state, component } as any);
-    expect(component.navigator.push).toHaveBeenCalledWith("/person/view/:id", { id: "1" });
+    expect(component.navigator.push).toHaveBeenCalledWith("/person/:id", { id: "1" });
   });
 
   it("edit calls navigator's push with edit path and id", () => {
     const { state, component } = createMockContext(PersonSchema, vi.fn).scopes(scopes).values({ id: "2" });
     handlers.edit({ state, component } as any);
-    expect(component.navigator.push).toHaveBeenCalledWith("/person/edit/:id", { id: "2" });
+    expect(component.navigator.push).toHaveBeenCalledWith("/person/:id/edit", { id: "2" });
   });
 
   it("cancel calls navigator's push with 'index' path", () => {
