@@ -17,6 +17,9 @@ vi.mock('@anhanga/react-native', () => ({
     fontWeight: { regular: '400', medium: '500', semibold: '600', bold: '700' },
   },
   configureI18n: vi.fn(() => ({ t: (k: string) => k, language: 'pt-BR' })),
+  configureIcons: vi.fn(),
+  resolveActionIcon: vi.fn(),
+  resolveGroupIcon: vi.fn(),
 }))
 
 vi.mock('@anhanga/persistence', () => ({
