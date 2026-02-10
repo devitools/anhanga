@@ -1,7 +1,8 @@
-import { Scope } from "@anhanga/core";
-import { createPersonHooks, createPersonService } from "@anhanga/demo";
+import { createMockContext, Scope } from "@anhanga/core";
+import { createPersonHooks, createPersonService, PersonSchema } from "@anhanga/demo";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { mockComponent, mockDriver } from "../../../support/mocks";
+import { scopes } from "../../../../app/person/@routes";
+import { mockDriver } from "../../../support/mocks";
 
 describe("createPersonHooks", () => {
   const driver = mockDriver();
@@ -32,11 +33,7 @@ describe("createPersonHooks", () => {
     vi.mocked(driver.read).mockResolvedValue(data);
 
     const hydrate = vi.fn();
-    const schema: Record<string, Record<string, unknown>> = {
-      name: { disabled: false },
-      email: { disabled: false },
-    };
-    const component = mockComponent();
+    const { schema, component } = createMockContext(PersonSchema, vi.fn).scopes(scopes);
 
     await hooks.bootstrap![Scope.view]!({
       context: { id: "1" },
@@ -52,12 +49,12 @@ describe("createPersonHooks", () => {
 
   it("bootstrap[view] does nothing when context.id is missing", async () => {
     const hydrate = vi.fn();
-    const component = mockComponent();
+    const { schema, component } = createMockContext(PersonSchema, vi.fn).scopes(scopes);
 
     await hooks.bootstrap![Scope.view]!({
       context: {},
       hydrate,
-      schema: {},
+      schema,
       component,
     } as any);
 
@@ -69,10 +66,7 @@ describe("createPersonHooks", () => {
     vi.mocked(driver.read).mockResolvedValue(data);
 
     const hydrate = vi.fn();
-    const schema: Record<string, Record<string, unknown>> = {
-      name: { disabled: false },
-    };
-    const component = mockComponent();
+    const { schema, component } = createMockContext(PersonSchema, vi.fn).scopes(scopes);
 
     await hooks.bootstrap![Scope.edit]!({
       context: { id: "2" },
@@ -89,7 +83,7 @@ describe("createPersonHooks", () => {
     const data = { data: [{ id: "1" }], total: 1, page: 1, limit: 10 };
     vi.mocked(driver.search).mockResolvedValue(data);
 
-    const component = mockComponent();
+    const { component } = createMockContext(PersonSchema, vi.fn).scopes(scopes);
     const params = { page: 1, limit: 10 };
     const result = await hooks.fetch![Scope.index]!({ params, component } as any);
 
