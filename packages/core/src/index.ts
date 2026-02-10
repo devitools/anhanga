@@ -1,7 +1,7 @@
 export { configure, SchemaDefinition } from './schema'
 export type { SchemaOptions, SchemaFactory, BaseSchemaConfig, EventContext } from './schema'
 
-export { createMockContext } from './mock'
+export { createMockContext, createMockDriver } from './mock'
 
 export {
   FieldDefinition,

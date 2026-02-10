@@ -1,11 +1,10 @@
-import { createMockContext, Scope } from "@anhanga/core";
+import { createMockContext, createMockDriver, Scope } from "@anhanga/core";
 import { createPersonHooks, createPersonService, PersonSchema } from "@anhanga/demo";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { scopes } from "../../../../app/person/@routes";
-import { mockDriver } from "../../../support/mocks";
 
 describe("createPersonHooks", () => {
-  const driver = mockDriver();
+  const driver = createMockDriver(vi.fn);
   const service = createPersonService(driver);
   let hooks: ReturnType<typeof createPersonHooks>;
 

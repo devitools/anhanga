@@ -1,5 +1,6 @@
 import type { FieldDefinition } from "./fields"
 import type { ComponentContract, FieldProxy, FormContract, ScopeRoute, ScopeValue, TableContract } from './types'
+import type { PersistenceContract } from './persistence'
 import type { EventContext } from './schema'
 import { SchemaDefinition } from './schema'
 
@@ -131,4 +132,16 @@ export function createMockContext<F extends Record<string, FieldDefinition>> (
   }
 
   return context
+}
+
+export function createMockDriver (fn: MockFnFactory, overrides: Partial<PersistenceContract> = {}): PersistenceContract {
+  return {
+    initialize: fn(async () => undefined),
+    create: fn(async () => ({})),
+    read: fn(async () => null),
+    update: fn(async () => ({})),
+    destroy: fn(async () => undefined),
+    search: fn(async () => ({ data: [], total: 0, page: 1, limit: 10 })),
+    ...overrides,
+  }
 }
