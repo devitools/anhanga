@@ -1,5 +1,6 @@
 <script lang="ts">
 import { goto } from "$app/navigation";
+import { base } from "$app/paths";
 import { page } from "$app/state";
 import { scopes } from "$lib/routes/person";
 import { personHandlers, personHooks } from "$lib/setup";
@@ -9,7 +10,7 @@ import { createComponent, DataForm, DataPage } from "@anhanga/sveltekit";
 
 const id = page.params.id;
 const person = PersonSchema.provide();
-const component = createComponent(Scope.edit, scopes, goto);
+const component = createComponent(Scope.edit, scopes, goto, base);
 </script>
 
 <DataPage

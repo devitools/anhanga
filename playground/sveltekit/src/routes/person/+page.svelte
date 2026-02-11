@@ -1,5 +1,6 @@
 <script lang="ts">
   import { goto } from '$app/navigation'
+  import { base } from '$app/paths'
   import { Scope } from '@anhanga/core'
   import { allPermissions, PersonSchema } from '@anhanga/demo'
   import { DataTable, DataPage, createComponent } from '@anhanga/sveltekit'
@@ -7,7 +8,7 @@
   import { scopes } from '$lib/routes/person'
 
   const person = PersonSchema.provide()
-  const component = createComponent(Scope.index, scopes, goto)
+  const component = createComponent(Scope.index, scopes, goto, base)
 </script>
 
 <DataPage domain={person.domain} scope={Scope.index}>

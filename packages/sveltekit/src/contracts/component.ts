@@ -14,6 +14,7 @@ export function createComponent (
   scope: ScopeValue,
   scopes: Record<ScopeValue, ScopeRoute>,
   navigate: NavigateFn,
+  base: string = '',
 ): ComponentContract {
   return {
     scope,
@@ -21,13 +22,13 @@ export function createComponent (
     reload () {},
     navigator: {
       push (path: string, params?: Record<string, unknown>) {
-        navigate(resolvePath(path, params))
+        navigate(base + resolvePath(path, params))
       },
       back () {
         history.back()
       },
       replace (path: string, params?: Record<string, unknown>) {
-        navigate(resolvePath(path, params), { replaceState: true })
+        navigate(base + resolvePath(path, params), { replaceState: true })
       },
     },
     dialog: {
