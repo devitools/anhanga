@@ -122,6 +122,7 @@
 </template>
 
 <script setup lang="ts">
+import { QSpinner, QSeparator, QBtn } from 'quasar'
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useDataForm, getRenderer } from '@anhanga/vue'

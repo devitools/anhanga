@@ -15,6 +15,7 @@
 </template>
 
 <script setup lang="ts">
+import { QBtn } from 'quasar'
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import type { ResolvedAction } from '@anhanga/vue'

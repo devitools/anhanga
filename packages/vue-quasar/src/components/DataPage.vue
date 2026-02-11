@@ -14,6 +14,7 @@
   setup
   lang="ts"
 >
+import { QCard, QCardSection } from "quasar";
 import type { ScopeValue } from "@anhanga/core";
 import { computed } from "vue";
 import { useI18n } from "vue-i18n";
