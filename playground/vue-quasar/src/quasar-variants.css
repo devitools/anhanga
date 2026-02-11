@@ -1,20 +1,14 @@
-.schema-btn {
+.q-btn {
     border-radius: 4px !important;
+    color: #616161;
+    background: #f1f1f1;
 }
 
-.text-default {
-    color: #616161 !important;
-}
-
-.bg-default {
-    background: #616161 !important;
-}
-
-.text-primary {
+.q-btn.text-primary {
     color: #1976d2 !important;
 }
 
-.bg-primary {
+.q-btn.bg-primary {
     background: #1976d2 !important;
 }
 

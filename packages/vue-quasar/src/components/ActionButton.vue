@@ -3,9 +3,9 @@
       :label="label"
       :icon="resolvedIcon"
       :color="isDefault ? undefined : action.config.variant"
-      :outline="isDefault && !flat"
+      :outline="false"
       :unelevated="!isDefault && !flat"
-      :flat="flat"
+      :flat="isDefault || flat"
       :dense="dense"
       :size="size"
       no-caps
