@@ -159,6 +159,103 @@ const permissions = allPermissions(person)
 
 This generates scope permissions for every scope and action permissions for every non-open action.
 
+## DataPage Integration
+
+The `DataPage` component accepts an optional `permissions` prop that gates the entire page. When the current scope is not permitted, it renders a default forbidden state (icon + translated message). You can customize the forbidden UI using the framework's native mechanism.
+
+::: code-group
+```tsx [React]
+import { DataPage, DataForm } from '@anhanga/react-web'
+import { allPermissions, PersonSchema } from '@anhanga/demo'
+
+const person = PersonSchema.provide()
+
+<DataPage
+  domain={person.domain}
+  scope={Scope.add}
+  permissions={allPermissions(person)}
+>
+  <DataForm
+    schema={person}
+    scope={Scope.add}
+    permissions={allPermissions(person)}
+    // ...
+  />
+</DataPage>
+```
+
+```vue [Vue]
+<DataPage
+  :domain="'person'"
+  :scope="Scope.add"
+  :permissions="allPermissions(person)"
+>
+  <DataForm
+    :schema="person"
+    :scope="Scope.add"
+    :permissions="allPermissions(person)"
+  />
+</DataPage>
+```
+
+```svelte [Svelte]
+<DataPage
+  domain={person.domain}
+  scope={Scope.add}
+  permissions={allPermissions(person)}
+>
+  <DataForm
+    schema={person}
+    scope={Scope.add}
+    permissions={allPermissions(person)}
+  />
+</DataPage>
+```
+:::
+
+### Custom Forbidden UI
+
+Each framework supports customizing the forbidden state:
+
+::: code-group
+```tsx [React]
+<DataPage
+  domain={person.domain}
+  scope={Scope.add}
+  permissions={permissions}
+  forbidden={<div>You don't have access to this page.</div>}
+>
+  <DataForm ... />
+</DataPage>
+```
+
+```vue [Vue]
+<DataPage
+  :domain="'person'"
+  :scope="Scope.add"
+  :permissions="permissions"
+>
+  <template #forbidden>
+    <div>You don't have access to this page.</div>
+  </template>
+  <DataForm ... />
+</DataPage>
+```
+
+```svelte [Svelte]
+<DataPage
+  domain={person.domain}
+  scope={Scope.add}
+  permissions={permissions}
+  forbidden={forbiddenSnippet}
+>
+  <DataForm ... />
+</DataPage>
+```
+:::
+
+When `permissions` is omitted, the page renders normally (backwards compatible).
+
 ## Implementing in Production
 
 In a real application, fetch permissions from your auth system and pass them to your components:

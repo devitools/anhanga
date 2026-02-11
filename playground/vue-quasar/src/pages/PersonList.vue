@@ -2,6 +2,7 @@
   <DataPage
     :domain="'person'"
     :scope="Scope.index"
+    :permissions="allPermissions(person)"
   >
     <DataTable
       :schema="person"

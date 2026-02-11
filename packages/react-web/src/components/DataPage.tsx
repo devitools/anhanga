@@ -1,25 +1,40 @@
 import type { ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 import type { ScopeValue } from "@anhanga/core";
+import { isScopePermitted } from "@anhanga/core";
 import { useTheme } from "../theme/context";
 import type { Theme } from "../theme/default";
+import { Icon } from "../support/Icon";
 
 interface PageProps {
   domain: string;
   scope: ScopeValue;
   maxWidth?: number;
   loading?: boolean;
+  permissions?: string[];
+  forbidden?: ReactNode;
   children: ReactNode;
 }
 
-export function DataPage({ domain, scope, maxWidth = 960, loading, children }: PageProps) {
+export function DataPage({ domain, scope, maxWidth = 960, loading, permissions, forbidden, children }: PageProps) {
   const { t } = useTranslation();
   const theme = useTheme();
   const styles = createStyles(theme);
+  const permitted = !permissions || isScopePermitted(domain, scope, permissions);
 
   if (loading) {
     return (
       <div style={styles.loading}>Loading...</div>
+    );
+  }
+
+  if (!permitted) {
+    if (forbidden) return <>{forbidden}</>;
+    return (
+      <div style={styles.forbidden}>
+        <Icon name="shield-off" size={32} color={theme.colors.mutedForeground} />
+        <div style={styles.forbiddenText}>{t("common.forbidden")}</div>
+      </div>
     );
   }
 
@@ -59,6 +74,18 @@ const createStyles = (theme: Theme) => ({
     justifyContent: "center",
     alignItems: "center",
     minHeight: "100vh",
+    color: theme.colors.mutedForeground,
+  },
+  forbidden: {
+    display: "flex",
+    flexDirection: "column" as const,
+    justifyContent: "center",
+    alignItems: "center",
+    minHeight: "100vh",
+    gap: 8,
+  },
+  forbiddenText: {
+    fontSize: theme.fontSize.sm,
     color: theme.colors.mutedForeground,
   },
 });

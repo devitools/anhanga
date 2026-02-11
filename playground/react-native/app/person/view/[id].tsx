@@ -14,6 +14,7 @@ export default function PersonViewPage () {
     <DataPage
       domain={person.domain}
       scope={Scope.view}
+      permissions={allPermissions(person)}
     >
       <DataForm
         schema={person}

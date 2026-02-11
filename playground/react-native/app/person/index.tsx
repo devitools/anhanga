@@ -12,14 +12,15 @@ export default function PersonIndexPage () {
     <DataPage
       domain={person.domain}
       scope={Scope.index}
+      permissions={allPermissions(person)}
     >
       <DataTable
         schema={person}
         scope={Scope.index}
+        permissions={allPermissions(person)}
         handlers={personHandlers}
         hooks={personHooks}
         component={component}
-        permissions={allPermissions(person)}
         pageSize={3}
         debug={true}
       />

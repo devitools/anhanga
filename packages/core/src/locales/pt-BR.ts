@@ -27,6 +27,7 @@ export const ptBR = {
     },
     dialog: { confirm: "Confirmar", cancel: "Cancelar", ok: "OK", alert: "Alerta" },
     scopes: { index: "Listagem", add: "Cadastro", view: "Visualização", edit: "Edição" },
+    forbidden: "Acesso não permitido",
   },
   validation: {
     required: "Campo obrigatório",

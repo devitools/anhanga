@@ -34,6 +34,7 @@ const paths: Record<string, string> = {
   "list": "M8 6h13 M8 12h13 M8 18h13 M3 6h.01 M3 12h.01 M3 18h.01",
   "user": "M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2 M12 3a4 4 0 100 8 4 4 0 000-8z",
   "map-pin": "M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z M12 7a3 3 0 100 6 3 3 0 000-6z",
+  "shield-off": "M19.69 14a6.9 6.9 0 00.31-2V5l-8-3-3.16 1.18 M4.73 4.73L4 5v7c0 6 8 10 8 10a20.29 20.29 0 005.62-4.38 M1 1l22 22",
 };
 
 export function Icon({ name, size = 16, color = "currentColor", style }: IconProps) {

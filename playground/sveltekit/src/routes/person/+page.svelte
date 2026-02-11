@@ -11,7 +11,7 @@
   const component = createComponent(Scope.index, scopes, goto, base)
 </script>
 
-<DataPage domain={person.domain} scope={Scope.index}>
+<DataPage domain={person.domain} scope={Scope.index} permissions={allPermissions(person)}>
   <DataTable
     schema={person}
     scope={Scope.index}

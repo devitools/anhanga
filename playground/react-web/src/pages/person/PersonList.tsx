@@ -14,6 +14,7 @@ export function PersonList () {
     <DataPage
       domain={person.domain}
       scope={Scope.index}
+      permissions={allPermissions(person)}
     >
       <DataTable
         schema={person}

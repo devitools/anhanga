@@ -16,6 +16,7 @@ const component = createComponent(Scope.view, scopes, goto, base);
 <DataPage
   domain={person.domain}
   scope={Scope.view}
+  permissions={allPermissions(person)}
 >
   <DataForm
     schema={person}

@@ -15,6 +15,7 @@ export function PersonEdit () {
     <DataPage
       domain={person.domain}
       scope={Scope.edit}
+      permissions={allPermissions(person)}
     >
       <DataForm
         schema={person}

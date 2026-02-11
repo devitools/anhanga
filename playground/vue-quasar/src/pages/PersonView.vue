@@ -2,6 +2,7 @@
   <DataPage
     :domain="'person'"
     :scope="Scope.view"
+    :permissions="allPermissions(person)"
   >
     <DataForm
       :schema="person"
