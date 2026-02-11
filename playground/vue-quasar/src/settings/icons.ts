@@ -10,6 +10,7 @@ configureIcons({
       update: "save",
       cancel: "close",
       destroy: "delete",
+      custom: "send",
     },
   },
 });

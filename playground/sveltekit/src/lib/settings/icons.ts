@@ -1,5 +1,5 @@
 import { configureIcons } from "@anhanga/sveltekit";
-import { Eye, Pencil, Plus, Save, Trash2, X } from "lucide-svelte";
+import { Eye, Pencil, Plus, Save, Send, Trash2, X } from "lucide-svelte";
 
 configureIcons({
   common: {
@@ -11,6 +11,7 @@ configureIcons({
       update: Save,
       cancel: X,
       destroy: Trash2,
+      custom: Send,
     },
   },
 });

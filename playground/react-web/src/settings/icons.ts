@@ -10,6 +10,7 @@ configureIcons({
       update: 'save',
       cancel: 'x',
       destroy: 'trash-2',
+      custom: 'send',
     },
   },
 })
