@@ -51,9 +51,8 @@ To represent the different screens and states of your app, you define **scopes**
 
 ## Next Steps
 
-- [Domain Layer](/react-native/domain) — define schema, events, handlers, and hooks (framework-agnostic)
-- [i18n](/react-native/i18n) — add field labels and group titles (framework-agnostic)
+- [Installation](/react/installation) — set up a new project from scratch
+- [Domain Layer](/react/domain) — define schema, events, handlers, and hooks
+- [i18n](/react/i18n) — add field labels and group titles
 - [Screens](/react/screens) — build the 4 CRUD screens with react-router-dom
-- [useDataForm](/react/use-data-form) — full React hook API reference
-- [useDataTable](/react/use-data-table) — table hook API reference
 - [Testing](/react/testing) — test your app with Vitest

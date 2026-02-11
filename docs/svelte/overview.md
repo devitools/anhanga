@@ -61,7 +61,8 @@ To represent the different screens and states of your app, you define **scopes**
 
 ## Next Steps
 
-- [Domain Layer](/react-native/domain) — define schema, events, handlers, and hooks (framework-agnostic)
-- [i18n](/react-native/i18n) — add field labels and group titles (framework-agnostic)
+- [Installation](/svelte/installation) — set up a new project from scratch
+- [Domain Layer](/svelte/domain) — define schema, events, handlers, and hooks
+- [i18n](/svelte/i18n) — add field labels and group titles
 - [Screens](/svelte/screens) — build the 4 CRUD screens with SvelteKit routing
 - [Testing](/svelte/testing) — test your app with Vitest

@@ -67,11 +67,20 @@ export default defineConfig({
           text: 'React Integration',
           items: [
             { text: 'Overview', link: '/react/overview' },
+            { text: 'Installation', link: '/react/installation' },
+            { text: 'Domain Layer', link: '/react/domain' },
+            { text: 'i18n', link: '/react/i18n' },
             { text: 'Screens', link: '/react/screens' },
+            { text: 'Testing', link: '/react/testing' },
+          ],
+        },
+        {
+          text: 'Customization',
+          items: [
+            { text: 'Overview', link: '/react/customization' },
             { text: 'useDataForm', link: '/react/use-data-form' },
             { text: 'useDataTable', link: '/react/use-data-table' },
             { text: 'Renderer Registry', link: '/react/renderer-registry' },
-            { text: 'Testing', link: '/react/testing' },
           ],
         },
       ],
@@ -87,17 +96,35 @@ export default defineConfig({
             { text: 'Testing', link: '/react-native/testing' },
           ],
         },
+        {
+          text: 'Customization',
+          items: [
+            { text: 'Overview', link: '/react-native/customization' },
+            { text: 'useDataForm', link: '/react-native/use-data-form' },
+            { text: 'useDataTable', link: '/react-native/use-data-table' },
+            { text: 'Renderer Registry', link: '/react-native/renderer-registry' },
+          ],
+        },
       ],
       '/vue/': [
         {
           text: 'Vue Integration',
           items: [
             { text: 'Overview', link: '/vue/overview' },
+            { text: 'Installation', link: '/vue/installation' },
+            { text: 'Domain Layer', link: '/vue/domain' },
+            { text: 'i18n', link: '/vue/i18n' },
             { text: 'Screens', link: '/vue/screens' },
+            { text: 'Testing', link: '/vue/testing' },
+          ],
+        },
+        {
+          text: 'Customization',
+          items: [
+            { text: 'Overview', link: '/vue/customization' },
             { text: 'useDataForm', link: '/vue/use-data-form' },
             { text: 'useDataTable', link: '/vue/use-data-table' },
             { text: 'Renderer Registry', link: '/vue/renderer-registry' },
-            { text: 'Testing', link: '/vue/testing' },
           ],
         },
       ],
@@ -106,8 +133,20 @@ export default defineConfig({
           text: 'Svelte Integration',
           items: [
             { text: 'Overview', link: '/svelte/overview' },
+            { text: 'Installation', link: '/svelte/installation' },
+            { text: 'Domain Layer', link: '/svelte/domain' },
+            { text: 'i18n', link: '/svelte/i18n' },
             { text: 'Screens', link: '/svelte/screens' },
             { text: 'Testing', link: '/svelte/testing' },
+          ],
+        },
+        {
+          text: 'Customization',
+          items: [
+            { text: 'Overview', link: '/svelte/customization' },
+            { text: 'useDataForm', link: '/svelte/use-data-form' },
+            { text: 'useDataTable', link: '/svelte/use-data-table' },
+            { text: 'Renderer Registry', link: '/svelte/renderer-registry' },
           ],
         },
       ],

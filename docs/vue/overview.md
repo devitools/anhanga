@@ -51,9 +51,8 @@ To represent the different screens and states of your app, you define **scopes**
 
 ## Next Steps
 
-- [Domain Layer](/react-native/domain) — define schema, events, handlers, and hooks (framework-agnostic)
-- [i18n](/react-native/i18n) — add field labels and group titles (framework-agnostic)
+- [Installation](/vue/installation) — set up a new project from scratch
+- [Domain Layer](/vue/domain) — define schema, events, handlers, and hooks
+- [i18n](/vue/i18n) — add field labels and group titles
 - [Screens](/vue/screens) — build the 4 CRUD screens with vue-router
-- [useDataForm](/vue/use-data-form) — full Vue composable API reference
-- [useDataTable](/vue/use-data-table) — table composable API reference
 - [Testing](/vue/testing) — test your app with Vitest
