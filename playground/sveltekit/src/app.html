@@ -7,6 +7,12 @@
     %sveltekit.head%
   </head>
   <body data-sveltekit-preload-data="hover">
+    <script>
+    (function() {
+      var r = sessionStorage.getItem('spa-redirect');
+      if (r) { sessionStorage.removeItem('spa-redirect'); history.replaceState(null, '', r); }
+    })();
+    </script>
     <div id="app">%sveltekit.body%</div>
   </body>
 </html>

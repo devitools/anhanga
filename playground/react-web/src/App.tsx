@@ -9,7 +9,7 @@ import { theme } from "./settings/theme";
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
       <Routes>
         <Route path="/" element={<Navigate to="/person" replace />} />
         <Route path="/person" element={<PersonList />} />

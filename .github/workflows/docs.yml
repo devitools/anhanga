@@ -33,7 +33,22 @@ jobs:
 
       - run: pnpm install
 
+      - run: pnpm -r --filter './packages/*' build
+
+      - run: VITE_BASE_URL=/anhanga/demo/react-web/ pnpm --filter @anhanga/playground-react-web build
+      - run: VITE_BASE_URL=/anhanga/demo/vue-quasar/ pnpm --filter @anhanga/playground-vue-quasar build
+      - run: SVELTE_BASE_URL=/anhanga/demo/sveltekit pnpm --filter @anhanga/playground-sveltekit build
+      - run: EXPO_BASE_URL=/anhanga/demo/react-native pnpm --filter @anhanga/playground-react-native build:web
+
       - run: pnpm docs:build
+
+      - run: |
+          mkdir -p docs/.vitepress/dist/demo
+          cp -r playground/react-web/dist docs/.vitepress/dist/demo/react-web
+          cp -r playground/vue-quasar/dist docs/.vitepress/dist/demo/vue-quasar
+          cp -r playground/sveltekit/build docs/.vitepress/dist/demo/sveltekit
+          cp -r playground/react-native/dist docs/.vitepress/dist/demo/react-native
+          cp docs/spa-redirect.html docs/.vitepress/dist/404.html
 
       - uses: actions/upload-pages-artifact@v3
         with:

@@ -30,6 +30,15 @@ export default defineConfig({
       },
       { text: 'Advanced', link: '/advanced/lifecycle-hooks', activeMatch: '/advanced/' },
       { text: 'API', link: '/api/core', activeMatch: '/api/' },
+      {
+        text: 'Demos',
+        items: [
+          { text: 'React Web', link: '/demo/react-web/' },
+          { text: 'React Native', link: '/demo/react-native/' },
+          { text: 'Vue + Quasar', link: '/demo/vue-quasar/' },
+          { text: 'SvelteKit', link: '/demo/sveltekit/' },
+        ],
+      },
     ],
 
     sidebar: {

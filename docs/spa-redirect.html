@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<script>
+(function() {
+  var match = location.pathname.match(/^(\/anhanga\/demo\/[^/]+\/)/);
+  if (match) {
+    sessionStorage.setItem('spa-redirect', location.pathname + location.search + location.hash);
+    location.replace(match[1]);
+  }
+})();
+</script>
+</head>
+<body><p>Page not found. <a href="/anhanga/">Return to docs</a></p></body>
+</html>
