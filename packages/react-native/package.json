@@ -23,7 +23,8 @@
     "react": ">=18",
     "react-native": ">=0.74",
     "@anhanga/core": "workspace:*",
-    "expo-router": ">=4"
+    "expo-router": ">=4",
+    "vitest": ">=3"
   },
   "devDependencies": {
     "@anhanga/core": "workspace:*",

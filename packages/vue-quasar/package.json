@@ -25,7 +25,8 @@
     "vue-router": ">=4",
     "quasar": ">=2",
     "@anhanga/core": "workspace:*",
-    "@anhanga/vue": "workspace:*"
+    "@anhanga/vue": "workspace:*",
+    "vitest": ">=3"
   },
   "devDependencies": {
     "@anhanga/core": "workspace:*",
