@@ -1,6 +1,6 @@
 import { useState, useMemo, useCallback, useEffect, useRef } from "react";
 import type { FieldConfig, ScopeValue, TableContract } from "@anhanga/core";
-import { Position, isInScope, isScopePermitted } from "@anhanga/core";
+import { Position, isInScope, isScopePermitted, isActionPermitted } from "@anhanga/core";
 import type {
   UseDataTableOptions,
   UseDataTableReturn,
@@ -198,7 +198,7 @@ export function useDataTable (options: UseDataTableOptions): UseDataTableReturn 
   const actions = useMemo((): ResolvedAction[] => {
     return Object.entries(schema.actions)
       .filter(([, config]) => !config.hidden && isInScope(config, scope))
-      .filter(() => isScopePermitted(schema.domain, scope, permissions))
+      .filter(([name, config]) => isActionPermitted(schema.domain, name, config, permissions))
       .filter(([, config]) => !config.positions.includes(Position.row))
       .sort(([, a], [, b]) => a.order - b.order)
       .map(([name, config]) => ({
@@ -220,7 +220,7 @@ export function useDataTable (options: UseDataTableOptions): UseDataTableReturn 
     (record: Record<string, unknown>): ResolvedAction[] => {
       return Object.entries(schema.actions)
         .filter(([, config]) => !config.hidden && isInScope(config, scope))
-        .filter(() => isScopePermitted(schema.domain, scope, permissions))
+        .filter(([name, config]) => isActionPermitted(schema.domain, name, config, permissions))
         .filter(([, config]) => config.positions.includes(Position.row))
         .sort(([, a], [, b]) => a.order - b.order)
         .map(([name, config]) => ({
@@ -238,6 +238,11 @@ export function useDataTable (options: UseDataTableOptions): UseDataTableReturn 
         }));
     },
     [schema.actions, scope, handlers, component, tableContract, permissions],
+  );
+
+  const permitted = useMemo(
+    () => isScopePermitted(schema.domain, scope, permissions),
+    [schema.domain, scope, permissions],
   );
 
   return {
@@ -267,6 +272,7 @@ export function useDataTable (options: UseDataTableOptions): UseDataTableReturn 
     clearSelection,
     actions,
     getRowActions,
+    permitted,
     reload,
     formatValue,
     getIdentity,

@@ -1,6 +1,6 @@
 import { useState, useMemo, useCallback, useRef, useEffect } from "react";
 import type { FieldConfig, FieldProxy, ScopeValue, TranslateContract } from "@anhanga/core";
-import { buildInitialState, isInScope, isScopePermitted } from "@anhanga/core";
+import { buildInitialState, isInScope, isScopePermitted, isActionPermitted } from "@anhanga/core";
 import { createStateProxy, createSchemaProxy } from "./proxy";
 import { validateField, validateAllFields } from "./validation";
 import type {
@@ -243,7 +243,7 @@ export function useDataForm (options: UseDataFormOptions): UseDataFormReturn {
   const actions = useMemo((): ResolvedAction[] => {
     return Object.entries(schema.actions)
       .filter(([, config]) => !config.hidden && isInScope(config, scope))
-      .filter(() => isScopePermitted(schema.domain, scope, permissions))
+      .filter(([name, config]) => isActionPermitted(schema.domain, name, config, permissions))
       .sort(([, a], [, b]) => a.order - b.order)
       .map(([name, config]) => ({
         name,
@@ -292,6 +292,11 @@ export function useDataForm (options: UseDataFormOptions): UseDataFormReturn {
     [schema.fields, schema.domain, state, errors, scope, getProxy, setValue, fireEvent],
   );
 
+  const permitted = useMemo(
+    () => isScopePermitted(schema.domain, scope, permissions),
+    [schema.domain, scope, permissions],
+  );
+
   return {
     loading,
     state,
@@ -303,6 +308,7 @@ export function useDataForm (options: UseDataFormOptions): UseDataFormReturn {
     errors,
     dirty,
     valid,
+    permitted,
     setValue,
     setValues,
     reset,

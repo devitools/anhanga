@@ -1,6 +1,6 @@
 import { ref, computed, onMounted } from 'vue'
 import type { FieldConfig, FieldProxy, ScopeValue, TranslateContract } from '@anhanga/core'
-import { buildInitialState, isInScope, isScopePermitted } from '@anhanga/core'
+import { buildInitialState, isInScope, isScopePermitted, isActionPermitted } from '@anhanga/core'
 import { createStateProxy, createSchemaProxy } from './proxy'
 import { validateField, validateAllFields } from './validation'
 import type {
@@ -215,7 +215,7 @@ export function useDataForm (options: UseDataFormOptions): UseDataFormReturn {
   const actions = computed((): ResolvedAction[] => {
     return Object.entries(schema.actions)
       .filter(([, config]) => !config.hidden && isInScope(config, scope))
-      .filter(() => isScopePermitted(schema.domain, scope, permissions))
+      .filter(([name, config]) => isActionPermitted(schema.domain, name, config, permissions))
       .sort(([, a], [, b]) => a.order - b.order)
       .map(([name, config]) => ({
         name,
@@ -261,6 +261,8 @@ export function useDataForm (options: UseDataFormOptions): UseDataFormReturn {
     }
   }
 
+  const permitted = computed(() => isScopePermitted(schema.domain, scope, permissions))
+
   return {
     get loading () { return loading.value },
     get state () { return state.value },
@@ -272,6 +274,7 @@ export function useDataForm (options: UseDataFormOptions): UseDataFormReturn {
     get errors () { return errors.value },
     get dirty () { return dirty.value },
     get valid () { return valid.value },
+    get permitted () { return permitted.value },
     setValue,
     setValues,
     reset,

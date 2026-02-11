@@ -92,6 +92,7 @@ export interface UseDataFormReturn {
   errors: Record<string, string[]>
   dirty: boolean
   valid: boolean
+  permitted: boolean
   setValue(field: string, value: unknown): void
   setValues(values: Record<string, unknown>): void
   reset(values?: Record<string, unknown>): void
@@ -156,6 +157,7 @@ export interface UseDataTableReturn {
   actions: ResolvedAction[]
   getRowActions (record: Record<string, unknown>): ResolvedAction[]
 
+  permitted: boolean
   reload (): void
   formatValue (name: string, value: unknown, record: Record<string, unknown>): string
   getIdentity (record: Record<string, unknown>): string

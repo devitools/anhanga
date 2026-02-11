@@ -1,7 +1,7 @@
 import { writable, derived, get } from 'svelte/store'
 import type { Readable } from 'svelte/store'
 import type { FieldConfig, FieldProxy, ScopeValue, TranslateContract } from '@anhanga/core'
-import { buildInitialState, isInScope, isScopePermitted } from '@anhanga/core'
+import { buildInitialState, isInScope, isScopePermitted, isActionPermitted } from '@anhanga/core'
 import { createStateProxy, createSchemaProxy } from './proxy'
 import { validateField, validateAllFields } from './validation'
 import type {
@@ -222,7 +222,7 @@ export function useDataForm (options: UseDataFormOptions): UseDataFormStore {
   const actions = derived([errors, dirty, valid], ([$errors, $dirty, $valid]): ResolvedAction[] => {
     return Object.entries(schema.actions)
       .filter(([, config]) => !config.hidden && isInScope(config, scope))
-      .filter(() => isScopePermitted(schema.domain, scope, permissions))
+      .filter(([name, config]) => isActionPermitted(schema.domain, name, config, permissions))
       .sort(([, a], [, b]) => a.order - b.order)
       .map(([name, config]) => ({
         name,
@@ -268,6 +268,8 @@ export function useDataForm (options: UseDataFormOptions): UseDataFormStore {
     }
   }
 
+  const permitted = isScopePermitted(schema.domain, scope, permissions)
+
   const store = derived(
     [loading, state, resolvedFields, groups, ungrouped, sections, actions, errors, dirty, valid],
     ([$loading, $state, $fields, $groups, $ungrouped, $sections, $actions, $errors, $dirty, $valid]): UseDataFormReturn => ({
@@ -281,6 +283,7 @@ export function useDataForm (options: UseDataFormOptions): UseDataFormStore {
       errors: $errors,
       dirty: $dirty,
       valid: $valid,
+      permitted,
       setValue,
       setValues,
       reset,

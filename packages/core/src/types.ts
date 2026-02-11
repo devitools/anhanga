@@ -62,6 +62,7 @@ export interface ActionConfig {
   positions: PositionValue[];
   align: "start" | "end";
   hidden: boolean;
+  open: boolean;
   scopes: ScopeValue[] | null;
   order: number;
 }

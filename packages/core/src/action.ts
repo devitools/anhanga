@@ -9,6 +9,7 @@ export class ActionDefinition {
       positions: [],
       align: "end",
       hidden: false,
+      open: false,
       scopes: null,
       order: 0,
     };
@@ -76,6 +77,11 @@ export class ActionDefinition {
 
   hidden (h = true): this {
     this._config.hidden = h;
+    return this;
+  }
+
+  open (o = true): this {
+    this._config.open = o;
     return this;
   }
 

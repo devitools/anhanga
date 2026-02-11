@@ -11,12 +11,12 @@ export const schema = configure({
       .disabled(),
   },
   actions: {
-    add: action().primary().positions(Position.top).scopes(Scope.index),
-    view: action().positions(Position.row).scopes(Scope.index),
-    edit: action().positions(Position.row).scopes(Scope.index),
+    add: action().open().primary().positions(Position.top).scopes(Scope.index),
+    view: action().open().positions(Position.row).scopes(Scope.index),
+    edit: action().open().positions(Position.row).scopes(Scope.index),
     create: action().primary().order(999).positions(Position.footer).scopes(Scope.add),
     update: action().primary().order(999).positions(Position.footer).scopes(Scope.edit),
-    cancel: action().start().order(1).positions(Position.footer).scopes(Scope.view, Scope.add, Scope.edit),
+    cancel: action().open().start().order(1).positions(Position.footer).scopes(Scope.view, Scope.add, Scope.edit),
     destroy: action().start().order(2).positions(Position.footer, Position.row).destructive().excludeScopes(Scope.add, Scope.view),
   },
 });

@@ -1,6 +1,6 @@
 import { ref, computed, watch, onMounted } from 'vue'
 import type { FieldConfig, ScopeValue, TableContract } from '@anhanga/core'
-import { Position, isInScope, isScopePermitted } from '@anhanga/core'
+import { Position, isInScope, isScopePermitted, isActionPermitted } from '@anhanga/core'
 import type {
   UseDataTableOptions,
   UseDataTableReturn,
@@ -200,7 +200,7 @@ export function useDataTable (options: UseDataTableOptions): UseDataTableReturn 
   const actions = computed((): ResolvedAction[] => {
     return Object.entries(schema.actions)
       .filter(([, config]) => !config.hidden && isInScope(config, scope))
-      .filter(() => isScopePermitted(schema.domain, scope, permissions))
+      .filter(([name, config]) => isActionPermitted(schema.domain, name, config, permissions))
       .filter(([, config]) => !config.positions.includes(Position.row))
       .sort(([, a], [, b]) => a.order - b.order)
       .map(([name, config]) => ({
@@ -221,7 +221,7 @@ export function useDataTable (options: UseDataTableOptions): UseDataTableReturn 
   function getRowActions (record: Record<string, unknown>): ResolvedAction[] {
     return Object.entries(schema.actions)
       .filter(([, config]) => !config.hidden && isInScope(config, scope))
-      .filter(() => isScopePermitted(schema.domain, scope, permissions))
+      .filter(([name, config]) => isActionPermitted(schema.domain, name, config, permissions))
       .filter(([, config]) => config.positions.includes(Position.row))
       .sort(([, a], [, b]) => a.order - b.order)
       .map(([name, config]) => ({
@@ -238,6 +238,8 @@ export function useDataTable (options: UseDataTableOptions): UseDataTableReturn 
         },
       }))
   }
+
+  const permitted = computed(() => isScopePermitted(schema.domain, scope, permissions))
 
   return {
     get rows () { return rows.value },
@@ -266,6 +268,7 @@ export function useDataTable (options: UseDataTableOptions): UseDataTableReturn 
     clearSelection,
     get actions () { return actions.value },
     getRowActions,
+    get permitted () { return permitted.value },
     reload,
     formatValue,
     getIdentity,

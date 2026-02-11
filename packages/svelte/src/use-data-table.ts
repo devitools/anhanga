@@ -1,7 +1,7 @@
 import { writable, derived, get } from 'svelte/store'
 import type { Readable } from 'svelte/store'
 import type { FieldConfig, ScopeValue, TableContract } from '@anhanga/core'
-import { Position, isInScope, isScopePermitted } from '@anhanga/core'
+import { Position, isInScope, isScopePermitted, isActionPermitted } from '@anhanga/core'
 import type {
   UseDataTableOptions,
   UseDataTableReturn,
@@ -217,7 +217,7 @@ export function useDataTable (options: UseDataTableOptions): UseDataTableStore {
   const actions = derived([selected], (): ResolvedAction[] => {
     return Object.entries(schema.actions)
       .filter(([, config]) => !config.hidden && isInScope(config, scope))
-      .filter(() => isScopePermitted(schema.domain, scope, permissions))
+      .filter(([name, config]) => isActionPermitted(schema.domain, name, config, permissions))
       .filter(([, config]) => !config.positions.includes(Position.row))
       .sort(([, a], [, b]) => a.order - b.order)
       .map(([name, config]) => ({
@@ -238,7 +238,7 @@ export function useDataTable (options: UseDataTableOptions): UseDataTableStore {
   function getRowActions (record: Record<string, unknown>): ResolvedAction[] {
     return Object.entries(schema.actions)
       .filter(([, config]) => !config.hidden && isInScope(config, scope))
-      .filter(() => isScopePermitted(schema.domain, scope, permissions))
+      .filter(([name, config]) => isActionPermitted(schema.domain, name, config, permissions))
       .filter(([, config]) => config.positions.includes(Position.row))
       .sort(([, a], [, b]) => a.order - b.order)
       .map(([name, config]) => ({
@@ -255,6 +255,8 @@ export function useDataTable (options: UseDataTableOptions): UseDataTableStore {
         },
       }))
   }
+
+  const permitted = isScopePermitted(schema.domain, scope, permissions)
 
   const store = derived(
     [rows, loading, empty, columns, availableColumns, visibleColumns, page, limit, total, totalPages, sortField, sortOrder, filters, selected, actions],
@@ -285,6 +287,7 @@ export function useDataTable (options: UseDataTableOptions): UseDataTableStore {
       clearSelection,
       actions: $actions,
       getRowActions,
+      permitted,
       reload,
       formatValue,
       getIdentity,

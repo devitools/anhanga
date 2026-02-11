@@ -59,6 +59,7 @@ export default defineConfig({
             { text: 'Actions', link: '/guide/actions' },
             { text: 'Groups', link: '/guide/groups' },
             { text: 'Scopes', link: '/guide/scopes' },
+            { text: 'Permissions', link: '/guide/permissions' },
           ],
         },
         {

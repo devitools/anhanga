@@ -69,10 +69,13 @@ describe("PersonSchema", () => {
   it("allPermissions returns domain-scoped permissions", () => {
     expect(allPermissions(provided)).toEqual(
       expect.arrayContaining([
-        "person.index",
-        "person.add",
-        "person.view",
-        "person.edit",
+        "person.scope.index",
+        "person.scope.add",
+        "person.scope.view",
+        "person.scope.edit",
+        "person.action.create",
+        "person.action.update",
+        "person.action.destroy",
       ]),
     );
   });

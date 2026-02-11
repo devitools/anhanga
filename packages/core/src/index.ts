@@ -23,7 +23,7 @@ export type { FillerFn, FillerRegistry } from './filler'
 export { createService, extractPersistenceMeta } from './persistence'
 export type { PersistenceContract, PersistenceMeta } from './persistence'
 
-export { isScopePermitted } from './permission'
+export { isScopePermitted, isActionPermitted } from './permission'
 
 export { buildInitialState, isInScope } from './scope'
 
