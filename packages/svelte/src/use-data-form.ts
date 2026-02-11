@@ -41,15 +41,34 @@ export function useDataForm (options: UseDataFormOptions): UseDataFormStore {
 
       await hook({ context: context ?? {}, hydrate, schema: schemaResult.proxy, component })
 
-      if (hydratedData) {
-        const newState = buildInitialState(schema.fields, hydratedData)
-        state.set(newState)
-        Object.assign(initialState, newState)
+      let currentOverrides: Record<string, Partial<FieldProxy>> = {}
+      const bootstrapOverrides = schemaResult.getOverrides()
+      for (const [name, ov] of Object.entries(bootstrapOverrides)) {
+        currentOverrides[name] = { ...currentOverrides[name], ...ov }
       }
 
-      const overrides = schemaResult.getOverrides()
-      if (Object.keys(overrides).length > 0) {
-        fieldOverrides.set(overrides)
+      if (hydratedData) {
+        let currentState = buildInitialState(schema.fields, hydratedData)
+
+        if (events) {
+          for (const [fieldName, fieldEvents] of Object.entries(events)) {
+            if (!fieldEvents?.change) continue
+            const stateResult = createStateProxy(currentState)
+            const schemaProxy = createSchemaProxy(schema.fields, currentOverrides)
+            fieldEvents.change({ state: stateResult.proxy, schema: schemaProxy.proxy })
+            currentState = { ...currentState, ...stateResult.getChanges() }
+            for (const [name, ov] of Object.entries(schemaProxy.getOverrides())) {
+              currentOverrides[name] = { ...currentOverrides[name], ...ov }
+            }
+          }
+        }
+
+        state.set(currentState)
+        Object.assign(initialState, currentState)
+      }
+
+      if (Object.keys(currentOverrides).length > 0) {
+        fieldOverrides.set(currentOverrides)
       }
 
       loading.set(false)
