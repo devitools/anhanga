@@ -1,61 +1,34 @@
 <template>
-  <q-card>
-    <q-card-section>
-      <div class="text-h6">{{ t('person.title') }} — {{ t('common.scopes.view') }}</div>
-    </q-card-section>
-
-    <q-card-section>
-      <SchemaForm
-        :schema="PersonSchema.provide()"
-        :scope="Scope.view"
-        :events="personEvents"
-        :handlers="personHandlers"
-        :hooks="personHooks"
-        :context="{ id }"
-        :component="component"
-        :translate="translateFn"
-        :permissions="allPermissions(PersonSchema.provide())"
-      />
-    </q-card-section>
-  </q-card>
+  <DataPage
+    :domain="'person'"
+    :scope="Scope.view"
+  >
+    <DataForm
+      :schema="person"
+      :scope="Scope.view"
+      :events="personEvents"
+      :handlers="personHandlers"
+      :hooks="personHooks"
+      :context="{ id }"
+      :component="component"
+      :permissions="allPermissions(person)"
+    />
+  </DataPage>
 </template>
 
-<script setup lang="ts">
-import { useRouter, useRoute } from 'vue-router'
-import { useI18n } from 'vue-i18n'
-import { Scope } from '@anhanga/core'
-import { allPermissions, PersonSchema, personEvents } from '@anhanga/demo'
-import { personHandlers, personHooks } from '../setup'
-import { createComponent, setRouter } from '../presentation/contracts/component'
-import SchemaForm from '../presentation/components/SchemaForm.vue'
+<script
+  setup
+  lang="ts"
+>
+import { personHandlers, personHooks } from "@/setup";
+import { Scope } from "@anhanga/core";
+import { allPermissions, personEvents, PersonSchema } from "@anhanga/demo";
+import { DataForm, DataPage, useComponent } from "@anhanga/vue-quasar";
+import { useRoute } from "vue-router";
+import { scopes } from "./person/@routes";
 
-const { t, te } = useI18n()
-const router = useRouter()
-const route = useRoute()
-setRouter(router)
-
-const id = route.params.id as string
-
-const scopes = {
-  [Scope.index]: { path: '/person' },
-  [Scope.add]: { path: '/person/add' },
-  [Scope.view]: { path: '/person/view/:id' },
-  [Scope.edit]: { path: '/person/edit/:id' },
-}
-
-const dialog = {
-  async confirm (message: string) {
-    return window.confirm(message)
-  },
-  async alert (message: string) {
-    window.alert(message)
-  },
-}
-
-const translateFn = (key: string, params?: Record<string, unknown>) => {
-  if (!te(key)) return key
-  return t(key, params ?? {})
-}
-
-const component = createComponent(Scope.view, scopes, dialog)
+const route = useRoute();
+const id = route.params.id as string;
+const person = PersonSchema.provide();
+const component = useComponent(Scope.view, scopes);
 </script>

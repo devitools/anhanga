@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@anhanga/core": "workspace:*",
-    "@anhanga/vue": "workspace:*",
+    "@anhanga/vue-quasar": "workspace:*",
     "@anhanga/demo": "workspace:*",
     "@anhanga/persistence": "workspace:*",
     "@quasar/extras": "^1.16.0",

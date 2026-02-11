@@ -1,4 +1,4 @@
-import { resolveActionIcon } from '@anhanga/vue'
+import { resolveActionIcon } from '@anhanga/vue-quasar'
 import { describe, it, expect } from 'vitest'
 import '../../../src/settings/icons'
 

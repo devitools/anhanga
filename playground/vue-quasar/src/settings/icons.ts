@@ -1,4 +1,4 @@
-import { configureIcons } from "@anhanga/vue";
+import { configureIcons } from "@anhanga/vue-quasar";
 
 configureIcons({
   common: {
