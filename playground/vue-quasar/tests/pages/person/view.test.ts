@@ -1,4 +1,4 @@
-import '../mocks'
+import '@anhanga/vue-quasar/testing/page-mocks'
 import { describe, it, expect } from 'vitest'
 
 describe('pages/PersonView', () => {

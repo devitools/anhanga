@@ -46,7 +46,7 @@ describe("personEvents", () => {
       expect(schema.email.state).toBe("error");
     });
 
-    it("does not set error state when email contains @", () => {
+    it("it does not set the error state when an email contains @", () => {
       const { state, schema } = createMockContext(PersonSchema, { email: "user@example.com" });
       personEvents.email!.blur({ state, schema });
       expect(schema.email.state).toBe("");
