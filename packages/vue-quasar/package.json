@@ -1,0 +1,36 @@
+{
+  "name": "@anhanga/vue-quasar",
+  "version": "0.0.1",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "vite build"
+  },
+  "peerDependencies": {
+    "vue": ">=3.4",
+    "vue-i18n": ">=10",
+    "vue-router": ">=4",
+    "quasar": ">=2",
+    "@anhanga/core": "workspace:*",
+    "@anhanga/vue": "workspace:*"
+  },
+  "devDependencies": {
+    "@anhanga/core": "workspace:*",
+    "@anhanga/vue": "workspace:*",
+    "@vitejs/plugin-vue": "^5.0.0",
+    "quasar": "^2.17.0",
+    "typescript": "^5.7.0",
+    "vite": "^6.0.0",
+    "vite-plugin-dts": "^4.0.0",
+    "vue": "^3.5.0",
+    "vue-i18n": "^10.0.0",
+    "vue-router": "^4.5.0"
+  }
+}
