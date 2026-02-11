@@ -2,9 +2,9 @@
 
 Anhanga integration for Svelte using the `@anhanga/svelte` package.
 
-::: warning Coming Soon
-Full documentation for the Svelte integration is under construction.
-:::
+## Testing
+
+See the [Testing guide](./testing.md) for how to configure Vitest with Svelte, mock `$app/*` modules, and write route tests.
 
 ## Playground
 
