@@ -33,10 +33,10 @@ export default defineConfig({
       {
         text: 'Demos',
         items: [
-          { text: 'React Web', link: '/demo/react-web/' },
-          { text: 'React Native', link: '/demo/react-native/' },
-          { text: 'Vue + Quasar', link: '/demo/vue-quasar/' },
-          { text: 'SvelteKit', link: '/demo/sveltekit/' },
+          { text: 'React Web', link: '/demo/react-web/', target: '_blank' },
+          { text: 'React Native', link: '/demo/react-native/', target: '_blank' },
+          { text: 'Vue + Quasar', link: '/demo/vue-quasar/', target: '_blank' },
+          { text: 'SvelteKit', link: '/demo/sveltekit/', target: '_blank' },
         ],
       },
     ],
