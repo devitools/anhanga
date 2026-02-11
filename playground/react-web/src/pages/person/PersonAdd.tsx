@@ -2,7 +2,7 @@ import { personHandlers, personHooks } from "@/demo";
 import { scopes } from "@/pages/person/@routes";
 import { Scope } from "@anhanga/core";
 import { allPermissions, personEvents, PersonSchema } from "@anhanga/demo";
-import { DataForm, Page, useComponent } from "@anhanga/react-web";
+import { DataForm, DataPage, useComponent } from "@anhanga/react-web";
 import { useNavigate } from "react-router-dom";
 
 export function PersonAdd () {
@@ -10,7 +10,7 @@ export function PersonAdd () {
   const component = useComponent(Scope.add, scopes, navigate);
 
   return (
-    <Page
+    <DataPage
       domain={PersonSchema.domain}
       scope={Scope.add}
     >
@@ -24,6 +24,6 @@ export function PersonAdd () {
         permissions={allPermissions(PersonSchema.provide())}
         debug={true}
       />
-    </Page>
+    </DataPage>
   );
 }

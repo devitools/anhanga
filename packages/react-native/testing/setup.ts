@@ -4,7 +4,7 @@ import { createElement } from 'react'
 vi.mock('@anhanga/react-native', () => ({
   DataForm: (props: any) => createElement('div', { 'data-testid': 'DataForm', ...props }),
   DataTable: (props: any) => createElement('div', { 'data-testid': 'DataTable', ...props }),
-  Page: ({ children }: any) => createElement('div', { 'data-testid': 'Page' }, children),
+  DataPage: ({ children }: any) => createElement('div', { 'data-testid': 'DataPage' }, children),
   useComponent: vi.fn(() => ({ scope: 'index', scopes: {}, navigator: {}, dialog: {}, toast: {}, loading: {}, reload: vi.fn() })),
   withProviders: (Component: any) => Component,
   ThemeProvider: ({ children }: any) => children,

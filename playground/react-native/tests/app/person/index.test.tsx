@@ -6,7 +6,7 @@ describe('app/person/index', () => {
     expect(PersonIndexPage).toBeTypeOf('function')
   })
 
-  it('renders with Page and DataTable', async () => {
+  it('renders with DataPage and DataTable', async () => {
     const { default: PersonIndexPage } = await import('../../../app/person/index')
     const element = PersonIndexPage()
     expect(element).toBeDefined()

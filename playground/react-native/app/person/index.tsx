@@ -1,6 +1,6 @@
 import { Scope } from "@anhanga/core";
 import { allPermissions, PersonSchema } from "@anhanga/demo";
-import { DataTable, Page, useComponent } from "@anhanga/react-native";
+import { DataTable, DataPage, useComponent } from "@anhanga/react-native";
 import { personHandlers, personHooks } from "../../src/demo";
 import { scopes } from "./@routes";
 
@@ -8,7 +8,7 @@ export default function PersonIndexPage () {
   const component = useComponent(Scope.index, scopes);
 
   return (
-    <Page
+    <DataPage
       domain={PersonSchema.domain}
       scope={Scope.index}
     >
@@ -22,6 +22,6 @@ export default function PersonIndexPage () {
         pageSize={3}
         debug={true}
       />
-    </Page>
+    </DataPage>
   );
 }

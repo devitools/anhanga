@@ -1,6 +1,6 @@
 import { Scope } from "@anhanga/core";
 import { allPermissions, personEvents, PersonSchema } from "@anhanga/demo";
-import { DataForm, Page, useComponent } from "@anhanga/react-native";
+import { DataForm, DataPage, useComponent } from "@anhanga/react-native";
 import { useLocalSearchParams } from "expo-router";
 import { personHandlers, personHooks } from "../../../src/demo";
 import { scopes } from "../@routes";
@@ -10,7 +10,7 @@ export default function PersonViewPage () {
   const component = useComponent(Scope.view, scopes);
 
   return (
-    <Page
+    <DataPage
       domain={PersonSchema.domain}
       scope={Scope.view}
     >
@@ -25,6 +25,6 @@ export default function PersonViewPage () {
         permissions={allPermissions(PersonSchema.provide())}
         debug={true}
       />
-    </Page>
+    </DataPage>
   );
 }

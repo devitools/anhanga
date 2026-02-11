@@ -1,4 +1,4 @@
-export { Page } from './components/Page'
+export { DataPage } from './components/DataPage'
 export { DataForm } from './components/Form'
 export { DataTable } from './components/Table'
 export { ActionBar, ActionButton } from './components/ActionBar'

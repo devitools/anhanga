@@ -2,7 +2,7 @@ import { personHandlers, personHooks } from "@/demo";
 import { scopes } from "@/pages/person/@routes";
 import { Scope } from "@anhanga/core";
 import { allPermissions, PersonSchema } from "@anhanga/demo";
-import { DataTable, Page, useComponent } from "@anhanga/react-web";
+import { DataTable, DataPage, useComponent } from "@anhanga/react-web";
 import { useNavigate } from "react-router-dom";
 
 export function PersonList () {
@@ -10,7 +10,7 @@ export function PersonList () {
   const component = useComponent(Scope.index, scopes, navigate);
 
   return (
-    <Page
+    <DataPage
       domain={PersonSchema.domain}
       scope={Scope.index}
     >
@@ -24,6 +24,6 @@ export function PersonList () {
         pageSize={3}
         debug={true}
       />
-    </Page>
+    </DataPage>
   );
 }

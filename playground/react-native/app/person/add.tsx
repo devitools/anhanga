@@ -1,6 +1,6 @@
 import { Scope } from "@anhanga/core";
 import { allPermissions, personEvents, PersonSchema } from "@anhanga/demo";
-import { DataForm, Page, useComponent } from "@anhanga/react-native";
+import { DataForm, DataPage, useComponent } from "@anhanga/react-native";
 import { personHandlers, personHooks } from "../../src/demo";
 import { scopes } from "./@routes";
 
@@ -8,7 +8,7 @@ export default function PersonAddPage () {
   const component = useComponent(Scope.add, scopes);
 
   return (
-    <Page
+    <DataPage
       domain={PersonSchema.domain}
       scope={Scope.add}
     >
@@ -22,6 +22,6 @@ export default function PersonAddPage () {
         permissions={allPermissions(PersonSchema.provide())}
         debug={true}
       />
-    </Page>
+    </DataPage>
   );
 }

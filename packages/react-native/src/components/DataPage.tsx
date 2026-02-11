@@ -13,7 +13,7 @@ interface PageProps {
   children: ReactNode;
 }
 
-export function Page({ domain, scope, maxWidth = 960, loading, children }: PageProps) {
+export function DataPage({ domain, scope, maxWidth = 960, loading, children }: PageProps) {
   const { t } = useTranslation();
   const theme = useTheme();
   const styles = createStyles(theme);
