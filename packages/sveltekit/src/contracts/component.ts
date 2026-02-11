@@ -1,5 +1,4 @@
-import { goto } from '$app/navigation'
-import type { ComponentContract, DialogContract, ScopeValue, ScopeRoute } from '@anhanga/core'
+import type { ComponentContract, ScopeValue, ScopeRoute } from '@anhanga/core'
 
 function resolvePath (path: string, params?: Record<string, unknown>): string {
   if (!params) return path
@@ -9,10 +8,12 @@ function resolvePath (path: string, params?: Record<string, unknown>): string {
   )
 }
 
+type NavigateFn = (url: string, options?: { replaceState?: boolean }) => void
+
 export function createComponent (
   scope: ScopeValue,
   scopes: Record<ScopeValue, ScopeRoute>,
-  dialog: DialogContract,
+  navigate: NavigateFn,
 ): ComponentContract {
   return {
     scope,
@@ -20,29 +21,24 @@ export function createComponent (
     reload () {},
     navigator: {
       push (path: string, params?: Record<string, unknown>) {
-        goto(resolvePath(path, params))
+        navigate(resolvePath(path, params))
       },
       back () {
         history.back()
       },
       replace (path: string, params?: Record<string, unknown>) {
-        goto(resolvePath(path, params), { replaceState: true })
+        navigate(resolvePath(path, params), { replaceState: true })
       },
     },
-    dialog,
+    dialog: {
+      async confirm (message: string) { return window.confirm(message) },
+      async alert (message: string) { window.alert(message) },
+    },
     toast: {
-      success (message: string) {
-        window.alert(message)
-      },
-      error (message: string) {
-        window.alert(message)
-      },
-      warning (message: string) {
-        window.alert(message)
-      },
-      info (message: string) {
-        window.alert(message)
-      },
+      success (message: string) { window.alert(message) },
+      error (message: string) { window.alert(message) },
+      warning (message: string) { window.alert(message) },
+      info (message: string) { window.alert(message) },
     },
     loading: {
       show () {},

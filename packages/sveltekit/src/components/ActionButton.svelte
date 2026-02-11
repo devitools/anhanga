@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { ResolvedAction } from '@anhanga/svelte'
   import { resolveActionIcon } from '@anhanga/svelte'
-  import { translate, hasTranslation } from '$lib/settings/i18n'
+  import { translate, hasTranslation } from '../i18n'
 
   let { action, domain, flat = false, small = false }: {
     action: ResolvedAction

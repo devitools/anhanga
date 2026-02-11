@@ -14,7 +14,7 @@
     "@anhanga/core": "workspace:*",
     "@anhanga/demo": "workspace:*",
     "@anhanga/persistence": "workspace:*",
-    "@anhanga/svelte": "workspace:*",
+    "@anhanga/sveltekit": "workspace:*",
     "lucide-svelte": "^0.563.0"
   },
   "devDependencies": {

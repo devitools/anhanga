@@ -1,5 +1,10 @@
 import { vi, describe, it, expect } from 'vitest'
 
+vi.mock('@anhanga/sveltekit', () => ({
+  configureIcons: vi.fn(),
+  configureI18n: vi.fn(),
+}))
+
 vi.mock('lucide-svelte', () => ({
   Plus: 'Plus',
   Eye: 'Eye',

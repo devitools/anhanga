@@ -1,4 +1,4 @@
-import { configureIcons } from "@anhanga/svelte";
+import { configureIcons } from "@anhanga/sveltekit";
 import { Eye, Pencil, Plus, Save, Trash2, X } from "lucide-svelte";
 
 configureIcons({

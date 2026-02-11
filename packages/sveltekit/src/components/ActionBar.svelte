@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { ResolvedAction } from '@anhanga/svelte'
   import type { PositionValue } from '@anhanga/core'
-  import SchemaButton from './SchemaButton.svelte'
+  import ActionButton from './ActionButton.svelte'
 
   let { actions, position, domain }: {
     actions: ResolvedAction[]
@@ -26,12 +26,12 @@
   <div class="action-bar">
     <div class="action-group">
       {#each startActions() as action (action.name)}
-        <SchemaButton {action} {domain} />
+        <ActionButton {action} {domain} />
       {/each}
     </div>
     <div class="action-group">
       {#each endActions() as action (action.name)}
-        <SchemaButton {action} {domain} />
+        <ActionButton {action} {domain} />
       {/each}
     </div>
   </div>

@@ -2,7 +2,7 @@
   import { useDataForm, getRenderer } from '@anhanga/svelte'
   import type { UseDataFormOptions } from '@anhanga/svelte'
   import { fill } from '@anhanga/core'
-  import { translate, hasTranslation } from '$lib/settings/i18n'
+  import { translate, hasTranslation } from '../i18n'
   import ActionBar from './ActionBar.svelte'
 
   let props: UseDataFormOptions & { debug?: boolean } = $props()
@@ -76,7 +76,7 @@
         <button class="debug-btn" onclick={() => formStore.validate()}>Validate</button>
         <button class="debug-btn" onclick={() => globalThis.location.reload()}>Reload</button>
         <button class="debug-btn" onclick={() => debugExpanded = !debugExpanded}>
-          {debugExpanded ? '\u2212' : '+'}
+          {debugExpanded ? '−' : '+'}
         </button>
       </div>
 

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { translate, hasTranslation } from '$lib/settings/i18n'
+  import { translate, hasTranslation } from '../i18n'
 
   let { domain, name, value, proxy, errors, onChange, onBlur, onFocus }: {
     domain: string
@@ -23,13 +23,10 @@
     <label for={name}>{label()}</label>
     <input
       id={name}
-      type="number"
-      value={value != null ? String(value) : ''}
+      type="date"
+      value={String(value ?? '')}
       disabled={proxy.disabled}
-      oninput={(e) => {
-        const v = e.currentTarget.value
-        onChange(v === '' ? undefined : Number(v))
-      }}
+      oninput={(e) => onChange(e.currentTarget.value)}
       onblur={() => onBlur()}
       onfocus={() => onFocus()}
     />
