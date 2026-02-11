@@ -8,21 +8,22 @@ import { scopes } from "../@routes";
 export default function PersonViewPage () {
   const { id } = useLocalSearchParams<{ id: string }>();
   const component = useComponent(Scope.view, scopes);
+  const person = PersonSchema.provide();
 
   return (
     <DataPage
-      domain={PersonSchema.domain}
+      domain={person.domain}
       scope={Scope.view}
     >
       <DataForm
-        schema={PersonSchema.provide()}
+        schema={person}
         scope={Scope.view}
         events={personEvents}
         handlers={personHandlers}
         hooks={personHooks}
         context={{ id }}
         component={component}
-        permissions={allPermissions(PersonSchema.provide())}
+        permissions={allPermissions(person)}
         debug={true}
       />
     </DataPage>

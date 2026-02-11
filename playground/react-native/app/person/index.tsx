@@ -6,19 +6,20 @@ import { scopes } from "./@routes";
 
 export default function PersonIndexPage () {
   const component = useComponent(Scope.index, scopes);
+  const person = PersonSchema.provide();
 
   return (
     <DataPage
-      domain={PersonSchema.domain}
+      domain={person.domain}
       scope={Scope.index}
     >
       <DataTable
-        schema={PersonSchema.provide()}
+        schema={person}
         scope={Scope.index}
         handlers={personHandlers}
         hooks={personHooks}
         component={component}
-        permissions={allPermissions(PersonSchema.provide())}
+        permissions={allPermissions(person)}
         pageSize={3}
         debug={true}
       />

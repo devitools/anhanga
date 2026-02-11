@@ -8,21 +8,21 @@ import { scopes } from "../@routes";
 export default function PersonEditPage () {
   const { id } = useLocalSearchParams<{ id: string }>();
   const component = useComponent(Scope.edit, scopes);
-  const schema = PersonSchema.provide();
+  const person = PersonSchema.provide();
   return (
     <DataPage
-      domain={PersonSchema.domain}
+      domain={person.domain}
       scope={Scope.edit}
     >
       <DataForm
-        schema={schema}
+        schema={person}
         scope={Scope.edit}
         events={personEvents}
         handlers={personHandlers}
         hooks={personHooks}
         context={{ id }}
         component={component}
-        permissions={allPermissions(schema)}
+        permissions={allPermissions(person)}
         debug={true}
       />
     </DataPage>

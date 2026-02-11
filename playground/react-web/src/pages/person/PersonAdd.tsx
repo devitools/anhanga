@@ -8,20 +8,21 @@ import { useNavigate } from "react-router-dom";
 export function PersonAdd () {
   const navigate = useNavigate();
   const component = useComponent(Scope.add, scopes, navigate);
+  const person = PersonSchema.provide();
 
   return (
     <DataPage
-      domain={PersonSchema.domain}
+      domain={person.domain}
       scope={Scope.add}
     >
       <DataForm
-        schema={PersonSchema.provide()}
+        schema={person}
         scope={Scope.add}
         events={personEvents}
         handlers={personHandlers}
         hooks={personHooks}
         component={component}
-        permissions={allPermissions(PersonSchema.provide())}
+        permissions={allPermissions(person)}
         debug={true}
       />
     </DataPage>

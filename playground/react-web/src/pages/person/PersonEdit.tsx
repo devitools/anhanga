@@ -9,21 +9,22 @@ export function PersonEdit () {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const component = useComponent(Scope.edit, scopes, navigate);
+  const person = PersonSchema.provide();
 
   return (
     <DataPage
-      domain={PersonSchema.domain}
+      domain={person.domain}
       scope={Scope.edit}
     >
       <DataForm
-        schema={PersonSchema.provide()}
+        schema={person}
         scope={Scope.edit}
         events={personEvents}
         handlers={personHandlers}
         hooks={personHooks}
         context={{ id }}
         component={component}
-        permissions={allPermissions(PersonSchema.provide())}
+        permissions={allPermissions(person)}
         debug={true}
       />
     </DataPage>
