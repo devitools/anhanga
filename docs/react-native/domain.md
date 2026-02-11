@@ -1,5 +1,9 @@
 # Domain Layer
 
+::: tip Framework-Agnostic
+This entire page is **framework-agnostic**. The domain layer code shown here works identically in React Native, React Web, Vue, and Svelte. Only the presentation layer (screens, renderers) differs between frameworks.
+:::
+
 The domain layer contains your schema definition, reactive events, action handlers, and lifecycle hooks. This layer is **framework-agnostic** — the same code works in React Native, React Web, Vue, or Svelte.
 
 ## Base Schema Configuration

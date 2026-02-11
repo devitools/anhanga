@@ -22,9 +22,9 @@ export default defineConfig({
         text: 'Frameworks',
         activeMatch: '/react/|/react-native/|/vue/|/svelte/',
         items: [
-          { text: 'React + Shadcn', link: '/react/use-data-form' },
+          { text: 'React + Shadcn', link: '/react/overview' },
           { text: 'React Native', link: '/react-native/overview' },
-          { text: 'Vue + Quasar', link: '/vue/use-data-form' },
+          { text: 'Vue + Quasar', link: '/vue/overview' },
           { text: 'Svelte + SvelteKit', link: '/svelte/overview' },
         ],
       },
@@ -66,9 +66,12 @@ export default defineConfig({
         {
           text: 'React Integration',
           items: [
+            { text: 'Overview', link: '/react/overview' },
+            { text: 'Screens', link: '/react/screens' },
             { text: 'useDataForm', link: '/react/use-data-form' },
             { text: 'useDataTable', link: '/react/use-data-table' },
             { text: 'Renderer Registry', link: '/react/renderer-registry' },
+            { text: 'Testing', link: '/react/testing' },
           ],
         },
       ],
@@ -89,9 +92,12 @@ export default defineConfig({
         {
           text: 'Vue Integration',
           items: [
+            { text: 'Overview', link: '/vue/overview' },
+            { text: 'Screens', link: '/vue/screens' },
             { text: 'useDataForm', link: '/vue/use-data-form' },
             { text: 'useDataTable', link: '/vue/use-data-table' },
             { text: 'Renderer Registry', link: '/vue/renderer-registry' },
+            { text: 'Testing', link: '/vue/testing' },
           ],
         },
       ],
@@ -100,6 +106,8 @@ export default defineConfig({
           text: 'Svelte Integration',
           items: [
             { text: 'Overview', link: '/svelte/overview' },
+            { text: 'Screens', link: '/svelte/screens' },
+            { text: 'Testing', link: '/svelte/testing' },
           ],
         },
       ],

@@ -212,6 +212,27 @@ const form = useDataForm({
 </template>
 ```
 
+```svelte [Svelte]
+<script lang="ts">
+import { goto } from '$app/navigation'
+import { Scope } from '@anhanga/core'
+import { createComponent, DataForm, DataPage } from '@anhanga/sveltekit'
+
+const product = PersonSchema.provide()
+const component = createComponent(Scope.add, scopes, goto)
+</script>
+
+<DataPage domain={product.domain} scope={Scope.add}>
+  <DataForm
+    schema={product}
+    scope={Scope.add}
+    events={personEvents}
+    handlers={personHandlers}
+    {component}
+  />
+</DataPage>
+```
+
 :::
 
 ## Next Steps
@@ -221,4 +242,4 @@ const form = useDataForm({
 - [Events & Proxy](/guide/events-and-proxy) — reactive field events in depth
 - [useDataForm (React)](/react/use-data-form) — full React hook API reference
 - [useDataForm (Vue)](/vue/use-data-form) — full Vue composable API reference
-- useDataForm (Svelte) — Svelte store API reference _(coming soon)_
+- [Svelte + SvelteKit](/svelte/overview) — Svelte integration overview

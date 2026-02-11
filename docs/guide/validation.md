@@ -86,6 +86,16 @@ const errors = validateField(value, field.validations, translate)
 const allErrors = validateAllFields(state, schema.fields, translate)
 ```
 
+```typescript [Svelte]
+import { validateField, validateAllFields } from '@anhanga/svelte'
+
+// Validate a single field
+const errors = validateField(value, field.validations, translate)
+
+// Validate all fields
+const allErrors = validateAllFields(state, schema.fields, translate)
+```
+
 :::
 
 ## Custom Validators

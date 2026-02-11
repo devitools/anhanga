@@ -70,8 +70,13 @@ yarn add @anhanga/core @anhanga/svelte
 |---------|-----------------|
 | `@anhanga/core` | Schema definition, field types, actions, groups, scopes, type inference |
 | `@anhanga/react` | `useDataForm`, `useDataTable`, renderer registry, validation (React hooks) |
+| `@anhanga/react-web` | `DataForm`, `DataTable`, `DataPage`, `useComponent`, theme (React + Shadcn) |
+| `@anhanga/react-native` | `DataForm`, `DataTable`, `DataPage`, `useComponent`, theme (React Native + Expo) |
 | `@anhanga/vue` | `useDataForm`, `useDataTable`, renderer registry, validation (Vue composables) |
+| `@anhanga/vue-quasar` | `DataForm`, `DataTable`, `DataPage`, `useComponent` (Vue + Quasar) |
 | `@anhanga/svelte` | `useDataForm`, `useDataTable`, renderer registry, validation (Svelte stores) |
+| `@anhanga/sveltekit` | `DataForm`, `DataTable`, `DataPage`, `createComponent` (SvelteKit) |
+| `@anhanga/persistence` | `createLocalDriver`, `createWebDriver` — persistence drivers |
 | `@anhanga/demo` | Shared demo domain — person schema, services, settings, i18n |
 
 You can use `@anhanga/core` standalone if you're building your own UI integration. `@anhanga/react`, `@anhanga/vue`, and `@anhanga/svelte` provide ready-to-use integrations for their respective frameworks.
