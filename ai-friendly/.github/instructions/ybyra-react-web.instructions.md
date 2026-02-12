@@ -8,22 +8,31 @@ When editing React Web pages for Ybyra:
 
 ## Page Pattern
 
-```
-import { Scope } from "@ybyra/core";
-import { allPermissions, {Domain}Schema } from "@ybyra/demo";
-import { DataForm, DataPage, useComponent } from "@ybyra/react-web";
-import { useNavigate } from "react-router-dom";
+```tsx-no-check
+import { useNavigate } from 'react-router-dom';
+import { DataForm, DataPage, useComponent } from '@ybyra/react-web';
+import { permissions } from '@src/auth';
+import { ExampleSchema } from '@src/domain/example';
 
-export function {Domain}Page() {
+export function ExamplePage () {
   const navigate = useNavigate();
   const component = useComponent(scope, scopes, navigate);
-  const schema = {Domain}Schema.provide();
+  const schema = ExampleSchema.provide();
 
   return (
-    <DataPage domain={schema.domain} scope={scope} permissions={allPermissions(schema)}>
-      <DataForm schema={schema} scope={scope} ... />
+    <DataPage
+      domain={schema.domain}
+      scope={scope}
+      permissions={permissions}
+    >
+      <DataForm
+        schema={schema}
+        scope={scope}
+        permissions={permissions}
+        ...
+      />
     </DataPage>
-  );
+  )
 }
 ```
 
@@ -37,4 +46,4 @@ export function {Domain}Page() {
 
 ## Reference
 
-See `ai-friendly/frameworks/react-web.md` for complete guide.
+See the [React Web guide](https://devitools.github.io/ybyra/react/overview) for complete documentation.

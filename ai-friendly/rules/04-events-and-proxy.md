@@ -4,8 +4,8 @@
 
 Events are reactive handlers that fire when fields change, blur, or focus. They are defined using `Schema.events()`:
 
-```typescript
-import { PersonSchema } from "./schema";
+```ts-no-check
+import { PersonSchema } from "@/domain/person/schema";
 
 export const personEvents = PersonSchema.events({
   active: {
@@ -40,7 +40,7 @@ export const personEvents = PersonSchema.events({
 
 Every event handler receives an `EventContext` with two proxied objects:
 
-```typescript
+```ts-no-check
 ({ state, schema }) => {
   // state  — proxied record of all field values
   // schema — proxied record of all field property overrides
@@ -51,7 +51,7 @@ Every event handler receives an `EventContext` with two proxied objects:
 
 The `state` object lets you **read and mutate** field values:
 
-```typescript
+```ts-no-check
 change({ state }) {
   // Read values
   const name = state.name;
@@ -67,7 +67,7 @@ change({ state }) {
 
 The `schema` object lets you **dynamically override** field properties:
 
-```typescript
+```ts-no-check
 change({ state, schema }) {
   // Hide/show fields
   schema.birthDate.hidden = !state.active;
@@ -100,7 +100,7 @@ change({ state, schema }) {
 ## Common Patterns
 
 ### Conditional visibility
-```typescript
+```ts-no-check
 active: {
   change({ state, schema }) {
     schema.expirationDate.hidden = !state.active;
@@ -110,7 +110,7 @@ active: {
 ```
 
 ### Field validation on blur
-```typescript
+```ts-no-check
 email: {
   blur({ state, schema }) {
     if (!state.email.includes("@")) {
@@ -123,7 +123,7 @@ email: {
 ```
 
 ### Dependent field updates
-```typescript
+```ts-no-check
 category: {
   change({ state, schema }) {
     // Show price fields only for physical products
@@ -135,7 +135,7 @@ category: {
 ```
 
 ### Computed values
-```typescript
+```ts-no-check
 quantity: {
   change({ state }) {
     state.total = (state.price || 0) * (state.quantity || 0);

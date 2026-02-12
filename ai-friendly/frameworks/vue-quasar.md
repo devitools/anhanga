@@ -25,7 +25,7 @@ src/pages/
 
 ## Routes File
 
-```typescript
+```ts-no-check
 // src/pages/person/@routes.ts
 import { Scope, type ScopeRoute, type ScopeValue } from "@ybyra/core";
 
@@ -39,7 +39,7 @@ export const scopes: Record<ScopeValue, ScopeRoute> = {
 
 ## List Page (DataTable)
 
-```vue
+```vue-no-check
 <template>
   <DataPage
     :domain="'person'"
@@ -61,7 +61,7 @@ export const scopes: Record<ScopeValue, ScopeRoute> = {
 <script setup lang="ts">
 import { personHandlers, personHooks } from "@/setup";
 import { Scope } from "@ybyra/core";
-import { allPermissions, PersonSchema } from "@ybyra/demo";
+import { allPermissions, PersonSchema } from "@/domain/person";
 import { DataPage, DataTable, useComponent } from "@ybyra/vue-quasar";
 import { scopes } from "./person/@routes";
 
@@ -72,7 +72,7 @@ const component = useComponent(Scope.index, scopes);
 
 ## Add Page (DataForm)
 
-```vue
+```vue-no-check
 <template>
   <DataPage
     :domain="'person'"
@@ -94,7 +94,7 @@ const component = useComponent(Scope.index, scopes);
 <script setup lang="ts">
 import { personHandlers, personHooks } from "@/setup";
 import { Scope } from "@ybyra/core";
-import { allPermissions, personEvents, PersonSchema } from "@ybyra/demo";
+import { allPermissions, personEvents, PersonSchema } from "@/domain/person";
 import { DataForm, DataPage, useComponent } from "@ybyra/vue-quasar";
 import { scopes } from "./person/@routes";
 
@@ -105,7 +105,7 @@ const component = useComponent(Scope.add, scopes);
 
 ## View Page (DataForm with context)
 
-```vue
+```vue-no-check
 <template>
   <DataPage
     :domain="'person'"
@@ -128,7 +128,7 @@ const component = useComponent(Scope.add, scopes);
 <script setup lang="ts">
 import { personHandlers, personHooks } from "@/setup";
 import { Scope } from "@ybyra/core";
-import { allPermissions, personEvents, PersonSchema } from "@ybyra/demo";
+import { allPermissions, personEvents, PersonSchema } from "@/domain/person";
 import { DataForm, DataPage, useComponent } from "@ybyra/vue-quasar";
 import { useRoute } from "vue-router";
 import { scopes } from "./person/@routes";
@@ -144,7 +144,7 @@ const component = useComponent(Scope.view, scopes);
 
 Same as View but with `Scope.edit`:
 
-```vue
+```vue-no-check
 <template>
   <DataPage :domain="'person'" :scope="Scope.edit" :permissions="allPermissions(person)">
     <DataForm
@@ -158,7 +158,7 @@ Same as View but with `Scope.edit`:
 <script setup lang="ts">
 import { personHandlers, personHooks } from "@/setup";
 import { Scope } from "@ybyra/core";
-import { allPermissions, personEvents, PersonSchema } from "@ybyra/demo";
+import { allPermissions, personEvents, PersonSchema } from "@/domain/person";
 import { DataForm, DataPage, useComponent } from "@ybyra/vue-quasar";
 import { useRoute } from "vue-router";
 import { scopes } from "./person/@routes";
@@ -172,7 +172,7 @@ const component = useComponent(Scope.edit, scopes);
 
 ## Router Setup
 
-```typescript
+```ts-no-check
 import { createRouter, createWebHistory } from "vue-router";
 
 const routes = [
@@ -191,10 +191,10 @@ export const router = createRouter({
 
 ## Setup File
 
-```typescript
+```ts-no-check
 // src/setup.ts
 import { createWebDriver } from "@ybyra/persistence/web";
-import { createPersonService, createPersonHandlers, createPersonHooks } from "@ybyra/demo";
+import { createPersonService, createPersonHandlers, createPersonHooks } from "@/domain/person";
 
 const driver = createWebDriver();
 export const personService = createPersonService(driver);

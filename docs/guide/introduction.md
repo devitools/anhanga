@@ -1,12 +1,12 @@
 # Introduction
 
-Anhanga is a **schema-driven UI system for management applications**. You define your domain schema once — fields, actions, groups, scopes — and the framework derives forms, tables, validation, events, i18n, and type-safe records from that single source of truth.
+Ybyra is a **schema-driven UI system for management applications**. You define your domain schema once — fields, actions, groups, scopes — and the framework derives forms, tables, validation, events, i18n, and type-safe records from that single source of truth.
 
 The core is framework-agnostic. Official adapters are provided for **React**, **Vue**, and **Svelte**.
 
-## Why Anhanga?
+## Why Ybyra?
 
-Traditional CRUD screens require wiring up fields, validation, visibility, layout, tables, filters, and actions **by hand — for every screen**. Anhanga flips the approach: **describe your domain schema once**, and the framework derives everything else.
+Traditional CRUD screens require wiring up fields, validation, visibility, layout, tables, filters, and actions **by hand — for every screen**. Ybyra flips the approach: **describe your domain schema once**, and the framework derives everything else.
 
 - **Less code per feature** — a single schema definition generates forms, tables, validation, and i18n for any scope (add, edit, view, index)
 - **LLM-friendly** — declarative, consistent patterns make it easy for AI tools to generate and maintain schema code
@@ -17,7 +17,7 @@ Traditional CRUD screens require wiring up fields, validation, visibility, layou
 - **i18n-native** — labels resolved via `{domain}.{field}`, never hardcoded
 - **Framework-agnostic core** — `@ybyra/core` has zero dependencies; bring your own UI
 
-## Traditional vs Anhanga
+## Traditional vs Ybyra
 
 ::: code-group
 
@@ -38,7 +38,7 @@ const fields = [
 // + no type inference from this definition
 ```
 
-```typescript [Anhanga]
+```typescript [Ybyra]
 import { text, Text, currency, toggle } from '@ybyra/core'
 
 const fields = {

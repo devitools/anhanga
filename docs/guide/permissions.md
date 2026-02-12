@@ -1,6 +1,6 @@
 # Permissions
 
-Anhanga provides a two-layer permission model that controls both **scope access** (can the user see this page?) and **action access** (can the user perform this operation?).
+Ybyra provides a two-layer permission model that controls both **scope access** (can the user see this page?) and **action access** (can the user perform this operation?).
 
 ## Permission Format
 
@@ -274,4 +274,4 @@ const permissions = user.permissions
 />
 ```
 
-The permission strings are opaque to Anhanga — your backend defines what they mean. Anhanga only checks if the string is present in the array.
+The permission strings are opaque to Ybyra — your backend defines what they mean. Ybyra only checks if the string is present in the array.

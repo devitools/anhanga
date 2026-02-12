@@ -1,7 +1,7 @@
 import { defineConfig } from 'vitepress'
 
 export default defineConfig({
-  title: 'Anhanga',
+  title: 'Ybyra',
   description: 'Schema-driven UI for management systems — React, Vue & Svelte',
   base: '/ybyra/',
 

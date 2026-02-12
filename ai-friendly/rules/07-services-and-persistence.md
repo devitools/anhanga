@@ -4,7 +4,7 @@
 
 The `ServiceContract` interface defines standard CRUD operations:
 
-```typescript
+```ts-no-check
 interface ServiceContract<T = Record<string, unknown>> {
   paginate(params: PaginateParams): Promise<PaginatedResult<T>>;
   read(id: string): Promise<T>;
@@ -18,7 +18,7 @@ interface ServiceContract<T = Record<string, unknown>> {
 
 Services are created using `createService()` from `@ybyra/core` combined with a persistence driver:
 
-```typescript
+```ts-no-check
 import { createService } from "@ybyra/core";
 import type { PersistenceContract } from "@ybyra/core";
 import { ProductSchema } from "../../domain/product";
@@ -45,7 +45,7 @@ export function createProductService(driver: PersistenceContract) {
 `@ybyra/persistence` provides two built-in drivers:
 
 ### Local Driver (SQLite via expo-sqlite)
-```typescript
+```ts-no-check
 import { createLocalDriver } from "@ybyra/persistence";
 
 const driver = createLocalDriver();
@@ -53,7 +53,7 @@ const driver = createLocalDriver();
 Used in React Native apps with Expo.
 
 ### Web Driver (localStorage)
-```typescript
+```ts-no-check
 import { createWebDriver } from "@ybyra/persistence/web";
 
 const driver = createWebDriver();
@@ -66,7 +66,7 @@ Used in web apps (React Web, Vue, SvelteKit).
 
 In the playground/app setup file:
 
-```typescript
+```ts-no-check
 // setup.ts or demo.ts
 import { createWebDriver } from "@ybyra/persistence/web";
 import { createProductService, createProductHandlers, createProductHooks } from "./domain/product";
@@ -79,7 +79,7 @@ export const productHooks = createProductHooks(productService);
 
 ## PaginateParams and PaginatedResult
 
-```typescript
+```ts-no-check
 interface PaginateParams {
   page: number;
   limit: number;

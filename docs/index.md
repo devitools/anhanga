@@ -2,7 +2,7 @@
 layout: home
 
 hero:
-  name: Anhanga
+  name: Ybyra
   text: Schema-driven UI for management systems
   tagline: Define your domain once — get forms, tables, validation, i18n, and actions for React, Vue, and Svelte from a single source of truth.
   actions:
@@ -32,7 +32,7 @@ features:
 
 ## Define Once, Render Everywhere
 
-Anhanga uses a **builder-pattern API** — not plain objects or JSON Schema. Each field type exposes only the methods that apply to it, giving you full TypeScript inference and compile-time safety.
+Ybyra uses a **builder-pattern API** — not plain objects or JSON Schema. Each field type exposes only the methods that apply to it, giving you full TypeScript inference and compile-time safety.
 
 ### Create a domain schema
 

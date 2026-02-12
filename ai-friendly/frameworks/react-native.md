@@ -28,10 +28,10 @@ src/
 
 ## Setup File
 
-```typescript
+```ts-no-check
 // src/demo.ts
 import { createLocalDriver } from "@ybyra/persistence";
-import { createPersonService, createPersonHandlers, createPersonHooks } from "@ybyra/demo";
+import { createPersonService, createPersonHandlers, createPersonHooks } from "@/domain/person";
 
 const driver = createLocalDriver();
 export const personService = createPersonService(driver);
@@ -54,7 +54,7 @@ export const personHooks = createPersonHooks(personService);
 
 The overall pattern is the same as React Web — DataPage wraps DataTable or DataForm with the same props:
 
-```typescript
+```ts-no-check
 import { DataForm, DataPage, useComponent } from "@ybyra/react-native";
 // ... same pattern as React Web
 ```

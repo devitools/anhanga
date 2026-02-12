@@ -41,7 +41,7 @@ src/
 ## Import Patterns
 
 ### Field factory functions — always direct imports
-```typescript
+```ts-no-check
 // ✅ Correct
 import { text, date, toggle, number, select } from "@ybyra/core";
 
@@ -51,14 +51,14 @@ field.text(); // NOT supported
 ```
 
 ### Schema base — import from settings
-```typescript
-import { schema } from "../../settings/schema";
+```ts-no-check
+import { schema } from "@/settings/schema";
 // or from package if using demo
-import { schema } from "@ybyra/demo";
+import { schema } from "@/settings/schema";
 ```
 
 ### Types — import from core
-```typescript
+```ts-no-check
 import { Scope, Position, Text, type ServiceContract, type HandlerContext } from "@ybyra/core";
 ```
 
@@ -67,7 +67,7 @@ import { Scope, Position, Text, type ServiceContract, type HandlerContext } from
 ### Factory pattern for handlers and hooks
 Handlers and hooks are created via factory functions that receive the service:
 
-```typescript
+```ts-no-check
 // handlers.ts
 export function createProductHandlers(service: ServiceContract) {
   return ProductSchema.handlers({
@@ -85,7 +85,7 @@ export function createProductHooks(service: ServiceContract) {
 ### Service factory pattern
 Services are created via factory functions that receive a persistence driver:
 
-```typescript
+```ts-no-check
 export function createProductService(driver: PersistenceContract) {
   return {
     ...createService(ProductSchema, driver),
@@ -95,8 +95,8 @@ export function createProductService(driver: PersistenceContract) {
 ```
 
 ### Barrel exports in index.ts
-```typescript
-export { ProductSchema } from "./schema";
+```ts-no-check
+export { ProductSchema } from "@/domain/product/schema";
 export { productEvents } from "./events";
 export { createProductHandlers } from "./handlers";
 export { createProductHooks } from "./hooks";
@@ -117,10 +117,10 @@ export { createProductHooks } from "./hooks";
 
 Each playground has a setup file that wires dependencies:
 
-```typescript
+```ts-no-check
 // setup.ts or demo.ts
 import { createWebDriver } from "@ybyra/persistence/web";
-import { createProductService, createProductHandlers, createProductHooks } from "@ybyra/demo";
+import { createProductService, createProductHandlers, createProductHooks } from "@/domain/product";
 
 const driver = createWebDriver();
 export const productService = createProductService(driver);

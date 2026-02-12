@@ -36,7 +36,7 @@ src/lib/
 
 ## Routes File
 
-```typescript
+```ts-no-check
 // src/lib/routes/person.ts
 import { Scope } from "@ybyra/core";
 
@@ -52,13 +52,13 @@ export const scopes = {
 
 ## List Page (DataTable)
 
-```svelte
+```svelte-no-check
 <!-- src/routes/person/+page.svelte -->
 <script lang="ts">
   import { goto } from "$app/navigation";
   import { base } from "$app/paths";
   import { Scope } from "@ybyra/core";
-  import { allPermissions, PersonSchema } from "@ybyra/demo";
+  import { allPermissions, PersonSchema } from "@/domain/person";
   import { DataTable, DataPage, createComponent } from "@ybyra/sveltekit";
   import { personHandlers, personHooks } from "$lib/setup";
   import { scopes } from "$lib/routes/person";
@@ -82,7 +82,7 @@ export const scopes = {
 
 ## Add Page (DataForm)
 
-```svelte
+```svelte-no-check
 <!-- src/routes/person/add/+page.svelte -->
 <script lang="ts">
   import { goto } from "$app/navigation";
@@ -90,7 +90,7 @@ export const scopes = {
   import { scopes } from "$lib/routes/person";
   import { personHandlers, personHooks } from "$lib/setup";
   import { Scope } from "@ybyra/core";
-  import { allPermissions, personEvents, PersonSchema } from "@ybyra/demo";
+  import { allPermissions, personEvents, PersonSchema } from "@/domain/person";
   import { createComponent, DataForm, DataPage } from "@ybyra/sveltekit";
 
   const person = PersonSchema.provide();
@@ -112,7 +112,7 @@ export const scopes = {
 
 ## View Page (DataForm with context)
 
-```svelte
+```svelte-no-check
 <!-- src/routes/person/[id]/+page.svelte -->
 <script lang="ts">
   import { goto } from "$app/navigation";
@@ -121,7 +121,7 @@ export const scopes = {
   import { scopes } from "$lib/routes/person";
   import { personHandlers, personHooks } from "$lib/setup";
   import { Scope } from "@ybyra/core";
-  import { allPermissions, personEvents, PersonSchema } from "@ybyra/demo";
+  import { allPermissions, personEvents, PersonSchema } from "@/domain/person";
   import { createComponent, DataForm, DataPage } from "@ybyra/sveltekit";
 
   const id = page.params.id;
@@ -145,7 +145,7 @@ export const scopes = {
 
 ## Edit Page (DataForm with context)
 
-```svelte
+```svelte-no-check
 <!-- src/routes/person/[id]/edit/+page.svelte -->
 <script lang="ts">
   import { goto } from "$app/navigation";
@@ -154,7 +154,7 @@ export const scopes = {
   import { scopes } from "$lib/routes/person";
   import { personHandlers, personHooks } from "$lib/setup";
   import { Scope } from "@ybyra/core";
-  import { allPermissions, personEvents, PersonSchema } from "@ybyra/demo";
+  import { allPermissions, personEvents, PersonSchema } from "@/domain/person";
   import { createComponent, DataForm, DataPage } from "@ybyra/sveltekit";
 
   const id = page.params.id;
@@ -178,7 +178,7 @@ export const scopes = {
 
 ## Layout
 
-```svelte
+```svelte-no-check
 <!-- src/routes/+layout.svelte -->
 <script>
   import "../app.css";
@@ -194,17 +194,17 @@ export const scopes = {
 </div>
 ```
 
-```typescript
+```ts-no-check
 // src/routes/+layout.ts
 export const ssr = false;
 ```
 
 ## Setup File
 
-```typescript
+```ts-no-check
 // src/lib/setup.ts
 import { createWebDriver } from "@ybyra/persistence/web";
-import { createPersonService, createPersonHandlers, createPersonHooks } from "@ybyra/demo";
+import { createPersonService, createPersonHandlers, createPersonHooks } from "@/domain/person";
 
 const driver = createWebDriver();
 export const personService = createPersonService(driver);

@@ -8,7 +8,7 @@ Handlers define **what happens when an action is triggered** (button click). The
 
 Most projects define a `createDefault()` factory in `settings/handlers.ts` that provides standard CRUD behavior:
 
-```typescript
+```ts-no-check
 import type { ServiceContract, HandlerContext } from "@ybyra/core";
 import { Scope } from "@ybyra/core";
 
@@ -63,10 +63,10 @@ export function createDefault(service: ServiceContract) {
 
 Each domain extends the defaults with custom handlers:
 
-```typescript
+```ts-no-check
 import type { ServiceContract } from "@ybyra/core";
-import { ProductSchema } from "./schema";
-import { createDefault } from "../../settings/handlers";
+import { ProductSchema } from "@/domain/product/schema";
+import { createDefault } from "@/settings/handlers";
 
 export function createProductHandlers(service: ServiceContract) {
   return ProductSchema.handlers({
@@ -92,7 +92,7 @@ Every handler receives a `HandlerContext`:
 
 ### ComponentContract
 
-```typescript
+```ts-no-check
 component.navigator.push(path, params?)   // navigate to route
 component.dialog.confirm(messageKey)       // show confirmation dialog (returns Promise<boolean>)
 component.toast.success(messageKey)        // show success toast

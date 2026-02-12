@@ -21,7 +21,7 @@ description: Generate or update internationalization (i18n) locale files for an 
 
 Every domain locale must include:
 
-```typescript
+```ts-no-check
 export const ptBR = {
   {domain}: {
     title: "{Domain Title}",

@@ -22,9 +22,9 @@ src/domain/{domain}/
 
 ### 1. Define the Schema (`schema.ts`)
 
-```typescript
+```ts-no-check
 import { action, date, group, text, Text, toggle, number, select, Position, Scope } from "@ybyra/core";
-import { schema } from "../../settings/schema";
+import { schema } from "@/settings/schema";
 
 export const {Domain}Schema = schema.create("{domain}", {
   groups: {
@@ -57,8 +57,8 @@ export const {Domain}Schema = schema.create("{domain}", {
 
 ### 2. Define Events (`events.ts`)
 
-```typescript
-import { {Domain}Schema } from "./schema";
+```ts-no-check
+import { {Domain}Schema } from "@/domain/{domain}/schema";
 
 export const {domain}Events = {Domain}Schema.events({
   fieldName: {
@@ -83,10 +83,10 @@ export const {domain}Events = {Domain}Schema.events({
 
 ### 3. Define Handlers (`handlers.ts`)
 
-```typescript
+```ts-no-check
 import type { ServiceContract } from "@ybyra/core";
-import { {Domain}Schema } from "./schema";
-import { createDefault } from "../../settings/handlers";
+import { {Domain}Schema } from "@/domain/{domain}/schema";
+import { createDefault } from "@/settings/handlers";
 
 export function create{Domain}Handlers(service: ServiceContract) {
   return {Domain}Schema.handlers({
@@ -104,10 +104,10 @@ export function create{Domain}Handlers(service: ServiceContract) {
 
 ### 4. Define Hooks (`hooks.ts`)
 
-```typescript
+```ts-no-check
 import type { ServiceContract } from "@ybyra/core";
-import { {Domain}Schema } from "./schema";
-import { createDefault } from "../../settings/hooks";
+import { {Domain}Schema } from "@/domain/{domain}/schema";
+import { createDefault } from "@/settings/hooks";
 
 export function create{Domain}Hooks(service: ServiceContract) {
   return {Domain}Schema.hooks(createDefault(service));
@@ -121,8 +121,8 @@ export function create{Domain}Hooks(service: ServiceContract) {
 
 ### 5. Barrel Export (`index.ts`)
 
-```typescript
-export { {Domain}Schema } from "./schema";
+```ts-no-check
+export { {Domain}Schema } from "@/domain/{domain}/schema";
 export { {domain}Events } from "./events";
 export { create{Domain}Handlers } from "./handlers";
 export { create{Domain}Hooks } from "./hooks";

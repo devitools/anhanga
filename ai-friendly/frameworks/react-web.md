@@ -25,7 +25,7 @@ src/pages/{domain}/
 
 ## Routes File
 
-```typescript
+```ts-no-check
 // src/pages/person/@routes.ts
 import { Scope, type ScopeRoute, type ScopeValue } from "@ybyra/core";
 
@@ -39,11 +39,11 @@ export const scopes: Record<ScopeValue, ScopeRoute> = {
 
 ## List Page (DataTable)
 
-```typescript
+```ts-no-check
 import { personHandlers, personHooks } from "@/demo";
 import { scopes } from "@/pages/person/@routes";
 import { Scope } from "@ybyra/core";
-import { allPermissions, PersonSchema } from "@ybyra/demo";
+import { allPermissions, PersonSchema } from "@/domain/person";
 import { DataTable, DataPage, useComponent } from "@ybyra/react-web";
 import { useNavigate } from "react-router-dom";
 
@@ -74,11 +74,11 @@ export function PersonList() {
 
 ## Add Page (DataForm)
 
-```typescript
+```ts-no-check
 import { personHandlers, personHooks } from "@/demo";
 import { scopes } from "@/pages/person/@routes";
 import { Scope } from "@ybyra/core";
-import { allPermissions, personEvents, PersonSchema } from "@ybyra/demo";
+import { allPermissions, personEvents, PersonSchema } from "@/domain/person";
 import { DataForm, DataPage, useComponent } from "@ybyra/react-web";
 import { useNavigate } from "react-router-dom";
 
@@ -109,11 +109,11 @@ export function PersonAdd() {
 
 ## View Page (DataForm with context)
 
-```typescript
+```ts-no-check
 import { personHandlers, personHooks } from "@/demo";
 import { scopes } from "@/pages/person/@routes";
 import { Scope } from "@ybyra/core";
-import { allPermissions, personEvents, PersonSchema } from "@ybyra/demo";
+import { allPermissions, personEvents, PersonSchema } from "@/domain/person";
 import { DataForm, DataPage, useComponent } from "@ybyra/react-web";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -148,7 +148,7 @@ export function PersonView() {
 
 Same as View but with `Scope.edit`:
 
-```typescript
+```ts-no-check
 export function PersonEdit() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
@@ -174,7 +174,7 @@ export function PersonEdit() {
 
 ## App Router Setup
 
-```typescript
+```ts-no-check
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { withProviders } from "@ybyra/react-web";
 
@@ -197,10 +197,10 @@ export default withProviders(App, { theme });
 
 ## Setup File
 
-```typescript
+```ts-no-check
 // src/demo.ts
 import { createWebDriver } from "@ybyra/persistence/web";
-import { createPersonService, createPersonHandlers, createPersonHooks } from "@ybyra/demo";
+import { createPersonService, createPersonHandlers, createPersonHooks } from "@/domain/person";
 
 const driver = createWebDriver();
 export const personService = createPersonService(driver);

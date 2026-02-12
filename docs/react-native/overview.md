@@ -1,11 +1,11 @@
 # React Native
 
-Anhanga works with React Native through the `@ybyra/react` hooks and the `@ybyra/react-native` UI components. This
+Ybyra works with React Native through the `@ybyra/react` hooks and the `@ybyra/react-native` UI components. This
 guide shows how to build a complete CRUD flow — **list, add, view, edit** — using Expo Router.
 
 ## Architecture
 
-A typical Anhanga + React Native app structure to handle looks like this:
+A typical Ybyra + React Native app structure to handle looks like this:
 
 ```
 my-app/

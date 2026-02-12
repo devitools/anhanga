@@ -11,7 +11,7 @@ Add a new action button to an existing Ybyra domain.
 
 ### 1. Define Action in Schema (`schema.ts`)
 
-```typescript
+```ts-no-check
 import { action, Position, Scope } from "@ybyra/core";
 
 actions: {
@@ -43,7 +43,7 @@ export:
 
 ### 2. Implement Handler (`handlers.ts`)
 
-```typescript
+```ts-no-check
 export function create {Domain}
 
 Handlers(service
@@ -71,7 +71,7 @@ ServiceContract
 
 ### 3. Add i18n Key
 
-```typescript
+```ts-no-check
 {domain}
 :
 {
@@ -84,7 +84,7 @@ ServiceContract
 
 ### 4. Override or Remove Inherited Actions
 
-```typescript
+```ts-no-check
 actions: {
   save: action().hidden(),     // hide inherited save
     remove
@@ -98,7 +98,7 @@ actions: {
 
 ## Example: Custom Action with Dialog
 
-```typescript
+```ts-no-check
 async
 export
 ({ state, component })

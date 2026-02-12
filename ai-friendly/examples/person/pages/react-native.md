@@ -1,9 +1,10 @@
 # Person Domain — React Native Screens
 
 ## Setup (demo.ts)
-```typescript
+
+```ts-no-check
 import { createLocalDriver } from "@ybyra/persistence";
-import { createPersonService, createPersonHandlers, createPersonHooks } from "@ybyra/demo";
+import { createPersonService, createPersonHandlers, createPersonHooks } from "@/domain/person";
 
 const driver = createLocalDriver();
 export const personService = createPersonService(driver);

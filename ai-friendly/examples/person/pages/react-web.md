@@ -1,21 +1,26 @@
 # Person Domain — React Web Pages
 
 ## PersonList.tsx
-```typescript
-import { personHandlers, personHooks } from "@/demo";
-import { scopes } from "@/pages/person/@routes";
-import { Scope } from "@ybyra/core";
-import { allPermissions, PersonSchema } from "@ybyra/demo";
-import { DataTable, DataPage, useComponent } from "@ybyra/react-web";
-import { useNavigate } from "react-router-dom";
 
-export function PersonList() {
-  const navigate = useNavigate();
-  const component = useComponent(Scope.index, scopes, navigate);
-  const person = PersonSchema.provide();
+```tsx-no-check
+import { personHandlers, personHooks } from '@/demo'
+import { scopes } from '@/pages/person/@routes'
+import { Scope } from '@ybyra/core'
+import { allPermissions, PersonSchema } from '@/domain/person'
+import { DataPage, DataTable, useComponent } from '@ybyra/react-web'
+import { useNavigate } from 'react-router-dom'
+
+export function PersonList () {
+  const navigate = useNavigate()
+  const component = useComponent(Scope.index, scopes, navigate)
+  const person = PersonSchema.provide()
 
   return (
-    <DataPage domain={person.domain} scope={Scope.index} permissions={allPermissions(person)}>
+    <DataPage
+      domain={person.domain}
+      scope={Scope.index}
+      permissions={allPermissions(person)}
+    >
       <DataTable
         schema={person}
         scope={Scope.index}
@@ -27,26 +32,31 @@ export function PersonList() {
         debug={true}
       />
     </DataPage>
-  );
+  )
 }
 ```
 
 ## PersonAdd.tsx
-```typescript
+
+```tsx-no-check
 import { personHandlers, personHooks } from "@/demo";
 import { scopes } from "@/pages/person/@routes";
 import { Scope } from "@ybyra/core";
-import { allPermissions, personEvents, PersonSchema } from "@ybyra/demo";
+import { allPermissions, personEvents, PersonSchema } from "@/domain/person";
 import { DataForm, DataPage, useComponent } from "@ybyra/react-web";
 import { useNavigate } from "react-router-dom";
 
-export function PersonAdd() {
+export function PersonAdd () {
   const navigate = useNavigate();
   const component = useComponent(Scope.add, scopes, navigate);
   const person = PersonSchema.provide();
 
   return (
-    <DataPage domain={person.domain} scope={Scope.add} permissions={allPermissions(person)}>
+    <DataPage
+      domain={person.domain}
+      scope={Scope.add}
+      permissions={allPermissions(person)}
+    >
       <DataForm
         schema={person}
         scope={Scope.add}
@@ -63,22 +73,27 @@ export function PersonAdd() {
 ```
 
 ## PersonView.tsx
-```typescript
+
+```tsx-no-check
 import { personHandlers, personHooks } from "@/demo";
 import { scopes } from "@/pages/person/@routes";
 import { Scope } from "@ybyra/core";
-import { allPermissions, personEvents, PersonSchema } from "@ybyra/demo";
+import { allPermissions, personEvents, PersonSchema } from "@/domain/person";
 import { DataForm, DataPage, useComponent } from "@ybyra/react-web";
 import { useNavigate, useParams } from "react-router-dom";
 
-export function PersonView() {
+export function PersonView () {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const component = useComponent(Scope.view, scopes, navigate);
   const person = PersonSchema.provide();
 
   return (
-    <DataPage domain={person.domain} scope={Scope.view} permissions={allPermissions(person)}>
+    <DataPage
+      domain={person.domain}
+      scope={Scope.view}
+      permissions={allPermissions(person)}
+    >
       <DataForm
         schema={person}
         scope={Scope.view}
@@ -96,22 +111,27 @@ export function PersonView() {
 ```
 
 ## PersonEdit.tsx
-```typescript
+
+```tsx-no-check
 import { personHandlers, personHooks } from "@/demo";
 import { scopes } from "@/pages/person/@routes";
 import { Scope } from "@ybyra/core";
-import { allPermissions, personEvents, PersonSchema } from "@ybyra/demo";
+import { allPermissions, personEvents, PersonSchema } from "@/domain/person";
 import { DataForm, DataPage, useComponent } from "@ybyra/react-web";
 import { useNavigate, useParams } from "react-router-dom";
 
-export function PersonEdit() {
+export function PersonEdit () {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const component = useComponent(Scope.edit, scopes, navigate);
   const person = PersonSchema.provide();
 
   return (
-    <DataPage domain={person.domain} scope={Scope.edit} permissions={allPermissions(person)}>
+    <DataPage
+      domain={person.domain}
+      scope={Scope.edit}
+      permissions={allPermissions(person)}
+    >
       <DataForm
         schema={person}
         scope={Scope.edit}
@@ -129,7 +149,8 @@ export function PersonEdit() {
 ```
 
 ## @routes.ts
-```typescript
+
+```ts
 import { Scope, type ScopeRoute, type ScopeValue } from "@ybyra/core";
 
 export const scopes: Record<ScopeValue, ScopeRoute> = {
@@ -141,9 +162,10 @@ export const scopes: Record<ScopeValue, ScopeRoute> = {
 ```
 
 ## demo.ts (setup)
-```typescript
+
+```ts
 import { createWebDriver } from "@ybyra/persistence/web";
-import { createPersonService, createPersonHandlers, createPersonHooks } from "@ybyra/demo";
+import { createPersonService, createPersonHandlers, createPersonHooks } from "@/domain/person";
 
 const driver = createWebDriver();
 export const personService = createPersonService(driver);
@@ -152,7 +174,8 @@ export const personHooks = createPersonHooks(personService);
 ```
 
 ## App.tsx (router)
-```typescript
+
+```tsx-no-check
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { withProviders } from "@ybyra/react-web";
 import { PersonList } from "./pages/person/PersonList";
@@ -162,15 +185,33 @@ import { PersonEdit } from "./pages/person/PersonEdit";
 import { Toaster } from "sonner";
 import { theme } from "./settings/theme";
 
-function App() {
+function App () {
   return (
     <BrowserRouter basename={import.meta.env.BASE_URL}>
       <Routes>
-        <Route path="/" element={<Navigate to="/person" replace />} />
-        <Route path="/person" element={<PersonList />} />
-        <Route path="/person/add" element={<PersonAdd />} />
-        <Route path="/person/view/:id" element={<PersonView />} />
-        <Route path="/person/edit/:id" element={<PersonEdit />} />
+        <Route
+          path="/"
+          element={<Navigate
+            to="/person"
+            replace
+          />}
+        />
+        <Route
+          path="/person"
+          element={<PersonList />}
+        />
+        <Route
+          path="/person/add"
+          element={<PersonAdd />}
+        />
+        <Route
+          path="/person/view/:id"
+          element={<PersonView />}
+        />
+        <Route
+          path="/person/edit/:id"
+          element={<PersonEdit />}
+        />
       </Routes>
       <Toaster />
     </BrowserRouter>

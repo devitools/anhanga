@@ -1,4 +1,5 @@
-import { PersonSchema } from "./schema";
+// @ts-nocheck
+import { PersonSchema } from "@/domain/person/schema";
 
 export const personEvents = PersonSchema.events({
   active: {

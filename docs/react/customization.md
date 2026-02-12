@@ -1,6 +1,6 @@
 # Customization
 
-Anhanga's React integration ships with ready-to-use components via `@ybyra/react-web`. Forms, tables, field renderers, and action buttons all work out of the box — **no customization required** to get a fully functional CRUD.
+Ybyra's React integration ships with ready-to-use components via `@ybyra/react-web`. Forms, tables, field renderers, and action buttons all work out of the box — **no customization required** to get a fully functional CRUD.
 
 ## When to Customize
 
@@ -14,7 +14,7 @@ You might want to customize when:
 
 ## Extension Points
 
-Anhanga provides three main extension points, each covered in its own page:
+Ybyra provides three main extension points, each covered in its own page:
 
 | Extension | Purpose |
 |-----------|---------|

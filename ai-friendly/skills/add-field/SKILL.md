@@ -13,7 +13,7 @@ Add a new field to an existing Ybyra domain schema.
 
 Choose the right factory function and chain configuration methods:
 
-```typescript
+```ts-no-check
 fields: {
   // ... existing fields
   newField: text().width(50).required().column().group("basic"),
@@ -22,17 +22,17 @@ fields: {
 
 ### Field Type Reference
 
-| Type | Factory | Specific Methods |
-|------|---------|-----------------|
-| Text | `text()` | `.kind(Text.Email\|Phone\|Url\|...)`, `.minLength(n)`, `.maxLength(n)`, `.pattern(regex)` |
-| Number | `number()` | `.min(n)`, `.max(n)`, `.precision(n)` |
-| Date | `date()` | `.min(date)`, `.max(date)` |
-| Datetime | `datetime()` | `.min(date)`, `.max(date)` |
-| Currency | `currency()` | `.min(n)`, `.max(n)`, `.precision(n)`, `.prefix(str)` |
-| Toggle | `toggle()` | — |
-| Checkbox | `checkbox()` | — |
-| Select | `select<V>()` | generic over value type |
-| File | `file()` | `.accept(types)`, `.maxSize(bytes)` |
+| Type     | Factory       | Specific Methods                                                                          |
+|----------|---------------|-------------------------------------------------------------------------------------------|
+| Text     | `text()`      | `.kind(Text.Email\|Phone\|Url\|...)`, `.minLength(n)`, `.maxLength(n)`, `.pattern(regex)` |
+| Number   | `number()`    | `.min(n)`, `.max(n)`, `.precision(n)`                                                     |
+| Date     | `date()`      | `.min(date)`, `.max(date)`                                                                |
+| Datetime | `datetime()`  | `.min(date)`, `.max(date)`                                                                |
+| Currency | `currency()`  | `.min(n)`, `.max(n)`, `.precision(n)`, `.prefix(str)`                                     |
+| Toggle   | `toggle()`    | —                                                                                         |
+| Checkbox | `checkbox()`  | —                                                                                         |
+| Select   | `select<V>()` | generic over value type                                                                   |
+| File     | `file()`      | `.accept(types)`, `.maxSize(bytes)`                                                       |
 
 ### Common Methods (all fields)
 
@@ -54,21 +54,27 @@ fields: {
 
 In locale file (e.g., `locales/pt-BR.ts`):
 
-```typescript
-{domain}: {
+```ts-no-check
+{domain}
+:
+{
   // ... existing keys
   newField: "Label do Campo",
-  "newField[placeholder]": "Digite...",  // optional
+    "newField[placeholder]"
+:
+  "Digite...",  // optional
 }
 ```
 
 ### 3. Add Events (optional, in `events.ts`)
 
-```typescript
-export const {domain}Events = {Domain}Schema.events({
+```ts-no-check
+export const { domain }
+Events = { Domain }
+Schema.events({
   // ... existing events
   newField: {
-    change({ state, schema }) {
+    change ({ state, schema }) {
       // React to field changes
     },
   },
@@ -77,11 +83,12 @@ export const {domain}Events = {Domain}Schema.events({
 
 ### 4. Add Group (if new group needed, in `schema.ts`)
 
-```typescript
+```ts-no-check
 groups: {
   // ... existing groups
   newGroup: group(),
-},
+}
+,
 ```
 
 And add i18n key: `"{domain}#newGroup": "Group Label"`

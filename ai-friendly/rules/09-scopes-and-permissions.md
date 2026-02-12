@@ -4,7 +4,7 @@
 
 Scopes control **where fields and actions are visible**. Ybyra has four built-in scopes:
 
-```typescript
+```ts-no-check
 import { Scope } from "@ybyra/core";
 
 Scope.index  // list/table view
@@ -16,7 +16,7 @@ Scope.edit   // edit form
 ## Field Scoping
 
 ### Whitelist — show only in specific scopes
-```typescript
+```ts-no-check
 fields: {
   password: text().scopes(Scope.add),              // only in add form
   createdAt: date().scopes(Scope.view, Scope.edit), // only in view and edit
@@ -24,7 +24,7 @@ fields: {
 ```
 
 ### Blacklist — hide from specific scopes
-```typescript
+```ts-no-check
 fields: {
   id: text().excludeScopes(Scope.add),  // hidden in add form, visible everywhere else
 }
@@ -33,7 +33,7 @@ fields: {
 ## Action Scoping
 
 ### Whitelist
-```typescript
+```ts-no-check
 actions: {
   create: action().scopes(Scope.add),                    // only in add form
   update: action().scopes(Scope.edit),                    // only in edit form
@@ -43,7 +43,7 @@ actions: {
 ```
 
 ### Blacklist
-```typescript
+```ts-no-check
 actions: {
   destroy: action().excludeScopes(Scope.add, Scope.view), // hidden in add and view
 }
@@ -53,7 +53,7 @@ actions: {
 
 Actions marked with `.open()` are **navigation actions** that don't require permission checks:
 
-```typescript
+```ts-no-check
 actions: {
   add: action().open(),    // anyone can navigate to add form
   view: action().open(),   // anyone can navigate to view
@@ -68,7 +68,7 @@ Non-open actions require permission to be visible.
 
 Permissions are string-based and follow the pattern `{domain}.scope.{scope}` and `{domain}.action.{action}`:
 
-```typescript
+```ts-no-check
 import type { SchemaProvide } from "@ybyra/core";
 
 export function allPermissions(schema: SchemaProvide): string[] {
@@ -95,7 +95,7 @@ export function allPermissions(schema: SchemaProvide): string[] {
 ### Using `allPermissions()` in development
 During development, use `allPermissions()` to grant all permissions:
 
-```typescript
+```ts-no-check
 <DataForm
   permissions={allPermissions(person)}
   // ...
@@ -108,7 +108,7 @@ In production, replace with actual user permissions from your auth system.
 
 Each playground defines scope-to-route mappings:
 
-```typescript
+```ts-no-check
 import { Scope, type ScopeRoute, type ScopeValue } from "@ybyra/core";
 
 export const scopes: Record<ScopeValue, ScopeRoute> = {

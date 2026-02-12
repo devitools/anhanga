@@ -1,6 +1,6 @@
 # Architecture Patterns
 
-Recommended project layout and patterns for Anhanga-based applications.
+Recommended project layout and patterns for Ybyra-based applications.
 
 ## Recommended File Layout
 

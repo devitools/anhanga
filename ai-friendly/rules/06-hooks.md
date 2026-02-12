@@ -15,7 +15,7 @@ Hooks define **data lifecycle** operations — how data is loaded and fetched. T
 
 Most projects define a `createDefault()` factory in `settings/hooks.ts`:
 
-```typescript
+```ts-no-check
 import type { ServiceContract, BootstrapHookContext, FetchHookContext } from "@ybyra/core";
 import { Scope } from "@ybyra/core";
 
@@ -49,10 +49,10 @@ export function createDefault(service: ServiceContract) {
 
 Each domain extends the defaults:
 
-```typescript
+```ts-no-check
 import type { ServiceContract } from "@ybyra/core";
-import { ProductSchema } from "./schema";
-import { createDefault } from "../../settings/hooks";
+import { ProductSchema } from "@/domain/product/schema";
+import { createDefault } from "@/settings/hooks";
 
 export function createProductHooks(service: ServiceContract) {
   return ProductSchema.hooks(createDefault(service));
@@ -69,7 +69,7 @@ export function createProductHooks(service: ServiceContract) {
 
 ### Bootstrap patterns:
 
-```typescript
+```ts-no-check
 // View scope — load data and disable all fields
 async [Scope.view]({ context, schema, hydrate }: BootstrapHookContext) {
   const data = await service.read(context.id as string);
@@ -94,7 +94,7 @@ async [Scope.edit]({ context, hydrate }: BootstrapHookContext) {
 
 ### Fetch pattern:
 
-```typescript
+```ts-no-check
 // Index scope — paginate data
 async [Scope.index]({ params }: FetchHookContext) {
   return service.paginate(params);

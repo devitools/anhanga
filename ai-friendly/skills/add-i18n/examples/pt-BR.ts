@@ -1,3 +1,4 @@
+// @ts-nocheck
 export const ptBR = {
   person: {
     title: "Pessoa",

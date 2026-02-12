@@ -1,6 +1,6 @@
 # Installation
 
-This guide walks through setting up a new Vite + React project with Anhanga from scratch.
+This guide walks through setting up a new Vite + React project with Ybyra from scratch.
 
 ## Create the Vite project
 
@@ -18,7 +18,7 @@ pnpm add react-router-dom
 
 ## Configure i18n
 
-Anhanga resolves all labels through i18next. The base translations (`common.*` and `validation.*`) ship with `@ybyra/core` — action labels, table UI, dialog buttons, scope names, and validation messages.
+Ybyra resolves all labels through i18next. The base translations (`common.*` and `validation.*`) ship with `@ybyra/core` — action labels, table UI, dialog buttons, scope names, and validation messages.
 
 Start by initializing i18n with the base translations only:
 

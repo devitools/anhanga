@@ -1,10 +1,10 @@
 # React + Shadcn
 
-Anhanga works with React Web through the `@ybyra/react` hooks and the `@ybyra/react-web` UI components. This guide shows how to build a complete CRUD flow — **list, add, view, edit** — using react-router-dom.
+Ybyra works with React Web through the `@ybyra/react` hooks and the `@ybyra/react-web` UI components. This guide shows how to build a complete CRUD flow — **list, add, view, edit** — using react-router-dom.
 
 ## Architecture
 
-A typical Anhanga + React Web app structure looks like this:
+A typical Ybyra + React Web app structure looks like this:
 
 ```
 my-app/

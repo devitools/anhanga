@@ -1,12 +1,13 @@
 # Person Domain — SvelteKit Routes
 
 ## List — src/routes/person/+page.svelte
-```svelte
+
+```svelte-no-check
 <script lang="ts">
   import { goto } from "$app/navigation";
   import { base } from "$app/paths";
   import { Scope } from "@ybyra/core";
-  import { allPermissions, PersonSchema } from "@ybyra/demo";
+  import { allPermissions, PersonSchema } from "@/domain/person";
   import { DataTable, DataPage, createComponent } from "@ybyra/sveltekit";
   import { personHandlers, personHooks } from "$lib/setup";
   import { scopes } from "$lib/routes/person";
@@ -29,14 +30,15 @@
 ```
 
 ## Add — src/routes/person/add/+page.svelte
-```svelte
+
+```svelte-no-check
 <script lang="ts">
   import { goto } from "$app/navigation";
   import { base } from "$app/paths";
   import { scopes } from "$lib/routes/person";
   import { personHandlers, personHooks } from "$lib/setup";
   import { Scope } from "@ybyra/core";
-  import { allPermissions, personEvents, PersonSchema } from "@ybyra/demo";
+  import { allPermissions, personEvents, PersonSchema } from "@/domain/person";
   import { createComponent, DataForm, DataPage } from "@ybyra/sveltekit";
 
   const person = PersonSchema.provide();
@@ -57,7 +59,8 @@
 ```
 
 ## View — src/routes/person/[id]/+page.svelte
-```svelte
+
+```svelte-no-check
 <script lang="ts">
   import { goto } from "$app/navigation";
   import { base } from "$app/paths";
@@ -65,7 +68,7 @@
   import { scopes } from "$lib/routes/person";
   import { personHandlers, personHooks } from "$lib/setup";
   import { Scope } from "@ybyra/core";
-  import { allPermissions, personEvents, PersonSchema } from "@ybyra/demo";
+  import { allPermissions, personEvents, PersonSchema } from "@/domain/person";
   import { createComponent, DataForm, DataPage } from "@ybyra/sveltekit";
 
   const id = page.params.id;
@@ -88,7 +91,8 @@
 ```
 
 ## Edit — src/routes/person/[id]/edit/+page.svelte
-```svelte
+
+```svelte-no-check
 <script lang="ts">
   import { goto } from "$app/navigation";
   import { base } from "$app/paths";
@@ -96,7 +100,7 @@
   import { scopes } from "$lib/routes/person";
   import { personHandlers, personHooks } from "$lib/setup";
   import { Scope } from "@ybyra/core";
-  import { allPermissions, personEvents, PersonSchema } from "@ybyra/demo";
+  import { allPermissions, personEvents, PersonSchema } from "@/domain/person";
   import { createComponent, DataForm, DataPage } from "@ybyra/sveltekit";
 
   const id = page.params.id;
@@ -119,7 +123,8 @@
 ```
 
 ## Routes — src/lib/routes/person.ts
-```typescript
+
+```ts-no-check
 import { Scope } from "@ybyra/core";
 
 export const scopes = {
@@ -131,9 +136,10 @@ export const scopes = {
 ```
 
 ## Setup — src/lib/setup.ts
-```typescript
+
+```ts-no-check
 import { createWebDriver } from "@ybyra/persistence/web";
-import { createPersonService, createPersonHandlers, createPersonHooks } from "@ybyra/demo";
+import { createPersonService, createPersonHandlers, createPersonHooks } from "@/domain/person";
 
 const driver = createWebDriver();
 export const personService = createPersonService(driver);

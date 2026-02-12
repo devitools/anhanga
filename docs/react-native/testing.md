@@ -1,6 +1,6 @@
 # Testing
 
-Anhanga provides testing helpers that mock React Native, Expo, and `@ybyra/react-native` internals so you can run tests with Vitest in a plain Node environment — no emulator needed.
+Ybyra provides testing helpers that mock React Native, Expo, and `@ybyra/react-native` internals so you can run tests with Vitest in a plain Node environment — no emulator needed.
 
 ## Install dev dependencies
 

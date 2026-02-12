@@ -1,5 +1,6 @@
+// @ts-nocheck
 import { action, date, group, text, Text, toggle, Position, Scope } from "@ybyra/core";
-import { schema } from "../../settings/schema";
+import { schema } from "@/settings/schema";
 
 export const PersonSchema = schema.create("person", {
   groups: {

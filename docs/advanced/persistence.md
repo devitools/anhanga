@@ -1,6 +1,6 @@
 # Persistence
 
-Anhanga provides a persistence abstraction that connects schemas to storage backends. The `PersistenceContract` defines the storage interface, and `createService()` builds a `ServiceContract` from a schema and persistence driver.
+Ybyra provides a persistence abstraction that connects schemas to storage backends. The `PersistenceContract` defines the storage interface, and `createService()` builds a `ServiceContract` from a schema and persistence driver.
 
 ## PersistenceContract
 

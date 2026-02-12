@@ -8,7 +8,7 @@ When editing Vue pages for Ybyra:
 
 ## Page Pattern
 
-```
+```vue-no-check
 <template>
   <DataPage :domain="domain" :scope="scope" :permissions="permissions">
     <DataForm :schema="schema" :scope="scope" ... />
@@ -17,10 +17,11 @@ When editing Vue pages for Ybyra:
 
 <script setup lang="ts">
 import { Scope } from "@ybyra/core";
-import { allPermissions, {Domain}Schema } from "@ybyra/demo";
+import { permissions } from "@src/auth";
+import { ExampleSchema } from "@/domain/example";
 import { DataForm, DataPage, useComponent } from "@ybyra/vue-quasar";
 
-const schema = {Domain}Schema.provide();
+const schema = ExampleSchema.provide();
 const component = useComponent(scope, scopes);
 </script>
 ```
@@ -34,4 +35,4 @@ const component = useComponent(scope, scopes);
 
 ## Reference
 
-See `ai-friendly/frameworks/vue-quasar.md` for complete guide.
+See the [Vue + Quasar guide](https://devitools.github.io/ybyra/vue/overview) for complete documentation.

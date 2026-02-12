@@ -16,7 +16,7 @@ src/application/{domain}/
 
 ## Template
 
-```typescript
+```ts-no-check
 import { createService } from "@ybyra/core";
 import type { PersistenceContract } from "@ybyra/core";
 import { {Domain}Schema } from "../../domain/{domain}";
@@ -40,19 +40,19 @@ export function create{Domain}Service(driver: PersistenceContract) {
 ## Driver Setup by Platform
 
 ### Web (localStorage)
-```typescript
+```ts-no-check
 import { createWebDriver } from "@ybyra/persistence/web";
 const driver = createWebDriver();
 ```
 
 ### React Native (SQLite)
-```typescript
+```ts-no-check
 import { createLocalDriver } from "@ybyra/persistence";
 const driver = createLocalDriver();
 ```
 
 ### API (custom)
-```typescript
+```ts-no-check
 import type { PersistenceContract } from "@ybyra/core";
 
 const driver: PersistenceContract = {
@@ -68,7 +68,7 @@ const driver: PersistenceContract = {
 
 Each application creates a setup file that wires service → handlers → hooks:
 
-```typescript
+```ts-no-check
 // src/setup.ts or src/demo.ts
 import { createWebDriver } from "@ybyra/persistence/web";
 import { create{Domain}Service } from "./application/{domain}/{domain}Service";

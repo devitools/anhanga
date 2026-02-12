@@ -1,10 +1,10 @@
 # Vue + Quasar
 
-Anhanga works with Vue through the `@ybyra/vue` composables and the `@ybyra/vue-quasar` UI components. This guide shows how to build a complete CRUD flow — **list, add, view, edit** — using vue-router.
+Ybyra works with Vue through the `@ybyra/vue` composables and the `@ybyra/vue-quasar` UI components. This guide shows how to build a complete CRUD flow — **list, add, view, edit** — using vue-router.
 
 ## Architecture
 
-A typical Anhanga + Vue app structure looks like this:
+A typical Ybyra + Vue app structure looks like this:
 
 ```
 my-app/

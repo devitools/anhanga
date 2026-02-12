@@ -4,7 +4,7 @@
 
 All field types are imported directly from `@ybyra/core`:
 
-```typescript
+```ts-no-check
 import { text, number, date, datetime, currency, file, select, toggle, checkbox } from "@ybyra/core";
 ```
 
@@ -31,7 +31,7 @@ Every `FieldDefinition` inherits these methods:
 
 ## Text Field
 
-```typescript
+```ts-no-check
 import { text, Text } from "@ybyra/core";
 
 text()                           // basic text input
@@ -56,7 +56,7 @@ text().kind(Text.Cnpj)           // CNPJ (Brazilian company ID)
 
 ## Number Field
 
-```typescript
+```ts-no-check
 import { number } from "@ybyra/core";
 
 number()                         // basic number input
@@ -73,7 +73,7 @@ number().precision(2)            // decimal places
 
 ## Date Field
 
-```typescript
+```ts-no-check
 import { date } from "@ybyra/core";
 
 date()                           // date picker (no time)
@@ -83,7 +83,7 @@ date().max("2030-12-31")         // maximum date
 
 ## Datetime Field
 
-```typescript
+```ts-no-check
 import { datetime } from "@ybyra/core";
 
 datetime()                       // date + time picker
@@ -99,7 +99,7 @@ datetime().max("2030-12-31T23:59")
 
 ## Currency Field
 
-```typescript
+```ts-no-check
 import { currency } from "@ybyra/core";
 
 currency()                       // currency input
@@ -119,7 +119,7 @@ currency().prefix("R$")         // currency prefix
 
 ## File Field
 
-```typescript
+```ts-no-check
 import { file } from "@ybyra/core";
 
 file()                           // file upload
@@ -135,7 +135,7 @@ file().maxSize(5 * 1024 * 1024)  // max file size in bytes
 
 ## Select Field
 
-```typescript
+```ts-no-check
 import { select } from "@ybyra/core";
 
 select<string>()                 // generic over value type
@@ -146,7 +146,7 @@ select<number>()                 // number values
 
 ## Toggle Field
 
-```typescript
+```ts-no-check
 import { toggle } from "@ybyra/core";
 
 toggle()                         // boolean toggle/switch
@@ -155,7 +155,7 @@ toggle().default(true)           // default to on
 
 ## Checkbox Field
 
-```typescript
+```ts-no-check
 import { checkbox } from "@ybyra/core";
 
 checkbox()                       // boolean checkbox
@@ -164,7 +164,7 @@ checkbox().default(false)        // default to unchecked
 
 ## Complete Example
 
-```typescript
+```ts-no-check
 import { text, Text, number, date, currency, toggle, select, group } from "@ybyra/core";
 
 fields: {

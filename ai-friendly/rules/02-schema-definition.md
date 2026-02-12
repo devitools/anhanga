@@ -4,7 +4,7 @@
 
 Every project starts with a base schema configuration using `configure()`. This defines shared defaults for all domains:
 
-```typescript
+```ts-no-check
 import { configure, action, text, Scope, Position } from "@ybyra/core";
 
 export const schema = configure({
@@ -40,9 +40,9 @@ export const schema = configure({
 
 Each domain extends the base configuration:
 
-```typescript
+```ts-no-check
 import { action, date, group, Position, Scope, text, Text, toggle } from "@ybyra/core";
-import { schema } from "../../settings/schema";
+import { schema } from "@/settings/schema";
 
 export const PersonSchema = schema.create("person", {
   groups: {
@@ -94,7 +94,7 @@ The `SchemaDefinition` returned by `schema.create()` provides these methods:
 
 Field widths represent **percentage of the row**. They should add up to ~100 per visual row:
 
-```typescript
+```ts-no-check
 fields: {
   name: text().width(100),           // full row
   sku: text().width(40),             // 40% of row
@@ -106,7 +106,7 @@ fields: {
 
 Actions use a builder pattern with these methods:
 
-```typescript
+```ts-no-check
 action()
   .primary()           // variant: primary, secondary, destructive, warning, success, info, accent, muted
   .positions(Position.footer, Position.row)  // where to render
@@ -129,7 +129,7 @@ action()
 
 Groups organize fields visually into sections:
 
-```typescript
+```ts-no-check
 import { group } from "@ybyra/core";
 
 groups: {

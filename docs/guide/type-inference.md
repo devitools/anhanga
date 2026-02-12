@@ -1,6 +1,6 @@
 # Type Inference
 
-Anhanga provides full TypeScript inference. `InferRecord` extracts a typed record directly from your schema definition.
+Ybyra provides full TypeScript inference. `InferRecord` extracts a typed record directly from your schema definition.
 
 ## InferRecord
 

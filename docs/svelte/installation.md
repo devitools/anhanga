@@ -1,6 +1,6 @@
 # Installation
 
-This guide walks through setting up a new SvelteKit project with Anhanga from scratch.
+This guide walks through setting up a new SvelteKit project with Ybyra from scratch.
 
 ## Create the SvelteKit project
 
@@ -17,7 +17,7 @@ pnpm add @ybyra/core @ybyra/svelte @ybyra/sveltekit
 
 ## Configure SSR
 
-Anhanga uses localStorage internally, which is not available during server-side rendering. Disable SSR in your root layout:
+Ybyra uses localStorage internally, which is not available during server-side rendering. Disable SSR in your root layout:
 
 ```typescript
 // src/routes/+layout.ts
@@ -26,7 +26,7 @@ export const ssr = false
 
 ## Configure i18n
 
-Anhanga resolves all labels through i18next. The base translations (`common.*` and `validation.*`) ship with `@ybyra/core` — action labels, table UI, dialog buttons, scope names, and validation messages.
+Ybyra resolves all labels through i18next. The base translations (`common.*` and `validation.*`) ship with `@ybyra/core` — action labels, table UI, dialog buttons, scope names, and validation messages.
 
 Start by initializing i18n with the base translations only:
 

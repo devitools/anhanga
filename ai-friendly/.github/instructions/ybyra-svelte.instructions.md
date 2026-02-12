@@ -8,19 +8,20 @@ When editing SvelteKit pages for Ybyra:
 
 ## Page Pattern
 
-```
+```svelte-no-check
 <script lang="ts">
   import { goto } from "$app/navigation";
   import { base } from "$app/paths";
   import { Scope } from "@ybyra/core";
-  import { allPermissions, {Domain}Schema } from "@ybyra/demo";
+  import { permissions } from "@src/auth";
+  import { ExampleSchema } from "@/domain/example";
   import { createComponent, DataForm, DataPage } from "@ybyra/sveltekit";
 
-  const schema = {Domain}Schema.provide();
+  const schema = ExampleSchema.provide();
   const component = createComponent(scope, scopes, goto, base);
 </script>
 
-<DataPage domain={schema.domain} scope={scope} permissions={allPermissions(schema)}>
+<DataPage domain={schema.domain} scope={scope} permissions={permissions}>
   <DataForm schema={schema} scope={scope} ... />
 </DataPage>
 ```
@@ -35,4 +36,4 @@ When editing SvelteKit pages for Ybyra:
 
 ## Reference
 
-See `ai-friendly/frameworks/sveltekit.md` for complete guide.
+See the [SvelteKit guide](https://devitools.github.io/ybyra/svelte/overview) for complete documentation.

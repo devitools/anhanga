@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { action, Position, Scope } from '@ybyra/core'
 
 // Example: Adding a custom "export" action to person schema

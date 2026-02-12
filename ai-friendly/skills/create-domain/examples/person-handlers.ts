@@ -1,6 +1,7 @@
+// @ts-nocheck
 import type { ServiceContract } from "@ybyra/core";
-import { PersonSchema } from "./schema";
-import { createDefault } from "../../settings/handlers";
+import { PersonSchema } from "@/domain/person/schema";
+import { createDefault } from "@/settings/handlers";
 
 export function createPersonHandlers (service: ServiceContract) {
   return PersonSchema.handlers({

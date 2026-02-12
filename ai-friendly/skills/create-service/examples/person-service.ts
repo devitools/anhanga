@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { createService } from "@ybyra/core";
 import type { PersistenceContract } from "@ybyra/core";
 import { PersonSchema } from "../../domain/person";

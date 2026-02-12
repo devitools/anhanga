@@ -1,10 +1,10 @@
 # Svelte + SvelteKit
 
-Anhanga works with Svelte through the `@ybyra/svelte` stores and the `@ybyra/sveltekit` UI components. This guide shows how to build a complete CRUD flow — **list, add, view, edit** — using SvelteKit file-based routing.
+Ybyra works with Svelte through the `@ybyra/svelte` stores and the `@ybyra/sveltekit` UI components. This guide shows how to build a complete CRUD flow — **list, add, view, edit** — using SvelteKit file-based routing.
 
 ## Architecture
 
-A typical Anhanga + SvelteKit app structure looks like this:
+A typical Ybyra + SvelteKit app structure looks like this:
 
 ```
 my-app/

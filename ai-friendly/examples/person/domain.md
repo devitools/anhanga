@@ -2,9 +2,9 @@
 
 ## Schema Definition (`domain/person/schema.ts`)
 
-```typescript
+```ts-no-check
 import { action, date, group, text, Text, toggle, Position, Scope } from "@ybyra/core";
-import { schema } from "../../settings/schema";
+import { schema } from "@/settings/schema";
 
 export const PersonSchema = schema.create("person", {
   groups: {
@@ -29,8 +29,8 @@ export const PersonSchema = schema.create("person", {
 
 ## Events (`domain/person/events.ts`)
 
-```typescript
-import { PersonSchema } from "./schema";
+```ts-no-check
+import { PersonSchema } from "@/domain/person/schema";
 
 export const personEvents = PersonSchema.events({
   active: {
@@ -55,10 +55,10 @@ export const personEvents = PersonSchema.events({
 
 ## Handlers (`domain/person/handlers.ts`)
 
-```typescript
+```ts-no-check
 import type { ServiceContract } from "@ybyra/core";
-import { PersonSchema } from "./schema";
-import { createDefault } from "../../settings/handlers";
+import { PersonSchema } from "@/domain/person/schema";
+import { createDefault } from "@/settings/handlers";
 
 export function createPersonHandlers(service: ServiceContract) {
   return PersonSchema.handlers({
@@ -72,10 +72,10 @@ export function createPersonHandlers(service: ServiceContract) {
 
 ## Hooks (`domain/person/hooks.ts`)
 
-```typescript
+```ts-no-check
 import type { ServiceContract } from "@ybyra/core";
-import { PersonSchema } from "./schema";
-import { createDefault } from "../../settings/hooks";
+import { PersonSchema } from "@/domain/person/schema";
+import { createDefault } from "@/settings/hooks";
 
 export function createPersonHooks(service: ServiceContract) {
   return PersonSchema.hooks(createDefault(service));
@@ -84,8 +84,8 @@ export function createPersonHooks(service: ServiceContract) {
 
 ## Barrel Export (`domain/person/index.ts`)
 
-```typescript
-export { PersonSchema } from "./schema";
+```ts-no-check
+export { PersonSchema } from "@/domain/person/schema";
 export { personEvents } from "./events";
 export { createPersonHandlers } from "./handlers";
 export { createPersonHooks } from "./hooks";

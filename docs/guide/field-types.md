@@ -1,6 +1,6 @@
 # Field Types
 
-Anhanga provides factory functions for each field type. All fields use the builder pattern — chain methods to configure behavior.
+Ybyra provides factory functions for each field type. All fields use the builder pattern — chain methods to configure behavior.
 
 ## Field Factories
 

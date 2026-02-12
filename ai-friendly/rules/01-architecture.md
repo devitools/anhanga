@@ -18,10 +18,10 @@ packages/
 └── demo/           ← Shared demo domain code (person schema, services, settings)
 
 playground/
-├── react-web/      ← Vite + React app consuming @ybyra/demo
-├── react-native/   ← Expo app consuming @ybyra/demo
-├── vue-quasar/     ← Vite + Vue + Quasar app consuming @ybyra/demo
-└── sveltekit/      ← SvelteKit app consuming @ybyra/demo
+├── react-web/      ← Vite + React app consuming domain packages
+├── react-native/   ← Expo app consuming domain packages
+├── vue-quasar/     ← Vite + Vue + Quasar app consuming domain packages
+└── sveltekit/      ← SvelteKit app consuming domain packages
 ```
 
 ## Layer Architecture
@@ -76,7 +76,7 @@ Four built-in scopes control visibility: `index` (list), `add` (create form), `v
 
 ### Builder Pattern
 All definitions (fields, actions, groups) use a fluent builder pattern:
-```typescript
+```ts-no-check
 text().width(60).required().column().group("basic")
 ```
 

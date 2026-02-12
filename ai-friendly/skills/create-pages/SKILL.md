@@ -63,7 +63,7 @@ Every page follows the same structure:
 
 ### Routes File (`@routes.ts`)
 
-```typescript
+```ts-no-check
 import { Scope, type ScopeRoute, type ScopeValue } from "@ybyra/core";
 
 export const scopes: Record<ScopeValue, ScopeRoute> = {
@@ -100,7 +100,7 @@ export const scopes: Record<ScopeValue, ScopeRoute> = {
 ## Router Registration
 
 ### React Web (react-router-dom)
-```tsx
+```tsx-no-check
 <Route path="/{domain}" element={<{Domain}List />} />
 <Route path="/{domain}/add" element={<{Domain}Add />} />
 <Route path="/{domain}/view/:id" element={<{Domain}View />} />
@@ -108,7 +108,7 @@ export const scopes: Record<ScopeValue, ScopeRoute> = {
 ```
 
 ### Vue (vue-router)
-```typescript
+```ts-no-check
 { path: "/{domain}", component: () => import("./pages/{Domain}List.vue") },
 { path: "/{domain}/add", component: () => import("./pages/{Domain}Add.vue") },
 { path: "/{domain}/view/:id", component: () => import("./pages/{Domain}View.vue") },

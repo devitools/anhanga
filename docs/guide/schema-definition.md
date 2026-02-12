@@ -1,6 +1,6 @@
 # Schema Definition
 
-The schema is the central concept in Anhanga. It describes your domain's fields, groups, actions, and configuration in a single object.
+The schema is the central concept in Ybyra. It describes your domain's fields, groups, actions, and configuration in a single object.
 
 ## configure()
 
