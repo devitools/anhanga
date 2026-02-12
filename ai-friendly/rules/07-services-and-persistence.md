@@ -21,7 +21,7 @@ Services are created using `createService()` from `@ybyra/core` combined with a 
 ```ts-no-check
 import { createService } from "@ybyra/core";
 import type { PersistenceContract } from "@ybyra/core";
-import { ProductSchema } from "../../domain/product";
+import { ProductSchema } from "@/domain/product";
 
 export function createProductService(driver: PersistenceContract) {
   return {

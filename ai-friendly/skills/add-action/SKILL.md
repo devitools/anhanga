@@ -16,8 +16,7 @@ import { action, Position, Scope } from "@ybyra/core";
 
 actions: {
   // ... existing actions
-export:
-  action()
+  export: action()
     .order(2)                              // display order
     .primary()                             // variant: primary | destructive | warning | info | success
     .positions(Position.header)            // header | footer | floating
@@ -44,15 +43,8 @@ export:
 ### 2. Implement Handler (`handlers.ts`)
 
 ```ts-no-check
-export function create {Domain}
-
-Handlers(service
-:
-ServiceContract
-)
-{
-  return { Domain }
-  Schema.handlers({
+export function create ExampleHandlers(service: ServiceContract) {
+  return ExampleSchema.handlers({
     ...createDefault(service),
     // Handler name must match action name
     export ({ state, component, form, table }) {
@@ -72,13 +64,11 @@ ServiceContract
 ### 3. Add i18n Key
 
 ```ts-no-check
-{domain}
-:
-{
+{domain}: {
   // ... existing keys
-  "@export"
-:
-  "Export",  // action labels use @ prefix
+  actions: {
+    export: "Export",
+  },
 }
 ```
 
@@ -87,30 +77,21 @@ ServiceContract
 ```ts-no-check
 actions: {
   save: action().hidden(),     // hide inherited save
-    remove
-:
-  null,                // completely remove inherited remove
-    back
-:
-  action().order(-100),  // reorder inherited back
+  remove: null,                // completely remove inherited remove
+  back: action().order(-100),  // reorder inherited back
 }
 ```
 
 ## Example: Custom Action with Dialog
 
 ```ts-no-check
-async
-export
-({ state, component })
-{
-  const confirmed = await component.dialog.confirm(
-    "Export all records?"
-  );
+async export({ state, component }) {
+  const confirmed = await component.dialog.confirm("person.export.confirm");
   if (confirmed) {
     component.loading.show();
     try {
       await service.exportAll();
-      component.toast.success("Export complete");
+      component.toast.success("person.export.success");
     } finally {
       component.loading.hide();
     }

@@ -48,5 +48,37 @@ export const ptBR = {
 - Standard actions (add, view, edit, create, update, cancel, destroy) use `common.*` keys from `@ybyra/core`
 - Only custom actions need domain-specific labels
 
-## Reference
-See `examples/pt-BR.ts` for a complete locale file.
+## Example (pt-BR)
+
+```ts-no-check
+// settings/locales/pt-BR.ts
+export const ptBR = {
+  person: {
+    title: "Pessoa",
+    fields: {
+      id: "ID",
+      name: "Nome",
+      "name.placeholder": "Digite seu nome aqui",
+      email: "E-mail",
+      birthDate: "Data de Nascimento",
+      active: "Ativo",
+    },
+    groups: {
+      basic: "Informações Básicas",
+      address: "Endereço",
+    },
+    actions: {
+      custom: "Enviar",
+    },
+  },
+};
+```
+
+Merge with core translations:
+
+```ts-no-check
+import { ptBR } from "@ybyra/core";
+import { ptBR as local } from "./locales/pt-BR";
+
+const merged = { ...ptBR, ...local };
+```

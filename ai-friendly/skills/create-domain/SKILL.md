@@ -43,8 +43,10 @@ export const {Domain}Schema = schema.create("{domain}", {
 ```
 
 **Rules:**
+
 - `schema.create(domain, ...)` — domain is the i18n key prefix
-- Fields are factory functions: `text()`, `date()`, `number()`, `toggle()`, `select()`, `currency()`, `file()`, `checkbox()`, `datetime()`
+- Fields are factory functions: `text()`, `date()`, `number()`, `toggle()`, `select()`, `currency()`, `file()`,
+  `checkbox()`, `datetime()`
 - `.width(N)` — percentage of row (100 = full width)
 - `.column()` — visible in table view
 - `.filterable()` — searchable in table
@@ -76,6 +78,7 @@ export const {domain}Events = {Domain}Schema.events({
 ```
 
 **Rules:**
+
 - `state` is a proxy — mutations are tracked automatically
 - `schema` proxy allows dynamic overrides of field properties
 - Event names match field names from the schema
@@ -98,8 +101,10 @@ export function create{Domain}Handlers(service: ServiceContract) {
 ```
 
 **Rules:**
+
 - Always spread `createDefault(service)` for CRUD handlers (save, remove, back)
-- Custom handlers receive `HandlerContext` with: `state`, `component` (navigator, dialog, toast, loading), `form` (validate, reset), `table` (reload)
+- Custom handlers receive `HandlerContext` with: `state`, `component` (navigator, dialog, toast, loading), `form` (
+  validate, reset), `table` (reload)
 - Handler names match action names from the schema
 
 ### 4. Define Hooks (`hooks.ts`)
@@ -115,6 +120,7 @@ export function create{Domain}Hooks(service: ServiceContract) {
 ```
 
 **Rules:**
+
 - `createDefault(service)` provides `bootstrap` and `fetch` hooks
 - `bootstrap` runs on form mount (load initial data, set defaults)
 - `fetch` runs for table pagination (search, sort, paginate)
@@ -130,11 +136,11 @@ export { create{Domain}Hooks } from "./hooks";
 
 ## Naming Conventions
 
-| Item | Pattern | Example |
-|------|---------|---------|
-| Schema | `{Domain}Schema` | `ProductSchema` |
-| Events | `{domain}Events` | `productEvents` |
+| Item             | Pattern                  | Example                 |
+|------------------|--------------------------|-------------------------|
+| Schema           | `{Domain}Schema`         | `ProductSchema`         |
+| Events           | `{domain}Events`         | `productEvents`         |
 | Handlers factory | `create{Domain}Handlers` | `createProductHandlers` |
-| Hooks factory | `create{Domain}Hooks` | `createProductHooks` |
-| Service factory | `create{Domain}Service` | `createProductService` |
-| Directory | `src/domain/{domain}/` | `src/domain/product/` |
+| Hooks factory    | `create{Domain}Hooks`    | `createProductHooks`    |
+| Service factory  | `create{Domain}Service`  | `createProductService`  |
+| Directory        | `src/domain/{domain}/`   | `src/domain/product/`   |

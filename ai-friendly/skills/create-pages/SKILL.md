@@ -10,6 +10,7 @@ Generate the presentation layer (pages + routes) for a Ybyra domain.
 ## What This Skill Creates
 
 ### React Web / React Native
+
 ```
 src/pages/{domain}/
   {Domain}List.tsx
@@ -20,6 +21,7 @@ src/pages/{domain}/
 ```
 
 ### Vue + Quasar
+
 ```
 src/pages/{domain}/
   {Domain}List.vue
@@ -30,6 +32,7 @@ src/pages/{domain}/
 ```
 
 ### SvelteKit
+
 ```
 src/routes/{domain}/
   +page.svelte          ← list
@@ -50,16 +53,16 @@ Every page follows the same structure:
 
 ### Key Props
 
-| Prop | List | Add | View | Edit |
-|------|------|-----|------|------|
-| `schema` | ✅ | ✅ | ✅ | ✅ |
-| `scope` | `Scope.index` | `Scope.add` | `Scope.view` | `Scope.edit` |
-| `events` | ❌ | ✅ | ✅ | ✅ |
-| `handlers` | ✅ | ✅ | ✅ | ✅ |
-| `hooks` | ✅ | ✅ | ✅ | ✅ |
-| `component` | ✅ | ✅ | ✅ | ✅ |
-| `permissions` | ✅ | ✅ | ✅ | ✅ |
-| `context` | ❌ | ❌ | `{ id }` | `{ id }` |
+| Prop          | List          | Add         | View         | Edit         |
+|---------------|---------------|-------------|--------------|--------------|
+| `schema`      | ✅             | ✅           | ✅            | ✅            |
+| `scope`       | `Scope.index` | `Scope.add` | `Scope.view` | `Scope.edit` |
+| `events`      | ❌             | ✅           | ✅            | ✅            |
+| `handlers`    | ✅             | ✅           | ✅            | ✅            |
+| `hooks`       | ✅             | ✅           | ✅            | ✅            |
+| `component`   | ✅             | ✅           | ✅            | ✅            |
+| `permissions` | ✅             | ✅           | ✅            | ✅            |
+| `context`     | ❌             | ❌           | `{ id }`     | `{ id }`     |
 
 ### Routes File (`@routes.ts`)
 
@@ -67,32 +70,36 @@ Every page follows the same structure:
 import { Scope, type ScopeRoute, type ScopeValue } from "@ybyra/core";
 
 export const scopes: Record<ScopeValue, ScopeRoute> = {
-  [Scope.index]: { path: "/{domain}" },
-  [Scope.add]: { path: "/{domain}/add" },
-  [Scope.view]: { path: "/{domain}/view/:id" },  // SvelteKit: "/{domain}/:id"
-  [Scope.edit]: { path: "/{domain}/edit/:id" },  // SvelteKit: "/{domain}/:id/edit"
+  [Scope.index]: { path: "/{path}" },
+  [Scope.add]: { path: "/{path}/add" },
+  [Scope.view]: { path: "/{path}/view/:id" },  // SvelteKit: "/{path}/:id"
+  [Scope.edit]: { path: "/{path}/edit/:id" },  // SvelteKit: "/{path}/:id/edit"
 };
 ```
 
 ## Framework-Specific Patterns
 
 ### React Web
+
 - `useComponent(scope, scopes, navigate)` from `@ybyra/react-web`
 - `useNavigate()` from `react-router-dom`
 - `useParams<{ id: string }>()` for view/edit
 
 ### Vue + Quasar
+
 - `useComponent(scope, scopes)` from `@ybyra/vue-quasar`
 - `useRoute().params.id` for view/edit
 - SFC `<script setup lang="ts">` pattern
 
 ### SvelteKit
+
 - `createComponent(scope, scopes, goto, base)` from `@ybyra/sveltekit`
 - `goto` from `$app/navigation`, `base` from `$app/paths`
 - `page.params.id` from `$app/state`
 - File-based routing: `[id]` for params, nested `edit/` for edit scope
 
 ### React Native
+
 - `useComponent(scope, scopes, router)` from `@ybyra/react-native`
 - `useRouter()` / `useLocalSearchParams()` from `expo-router`
 - Same DataForm/DataTable API as React Web
@@ -100,6 +107,7 @@ export const scopes: Record<ScopeValue, ScopeRoute> = {
 ## Router Registration
 
 ### React Web (react-router-dom)
+
 ```tsx-no-check
 <Route path="/{domain}" element={<{Domain}List />} />
 <Route path="/{domain}/add" element={<{Domain}Add />} />
@@ -108,6 +116,7 @@ export const scopes: Record<ScopeValue, ScopeRoute> = {
 ```
 
 ### Vue (vue-router)
+
 ```ts-no-check
 { path: "/{domain}", component: () => import("./pages/{Domain}List.vue") },
 { path: "/{domain}/add", component: () => import("./pages/{Domain}Add.vue") },

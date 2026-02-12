@@ -55,14 +55,13 @@ fields: {
 In locale file (e.g., `locales/pt-BR.ts`):
 
 ```ts-no-check
-{domain}
-:
-{
+{domain}: {
   // ... existing keys
-  newField: "Label do Campo",
-    "newField[placeholder]"
-:
-  "Digite...",  // optional
+  fields: {
+    // ... existing keys
+    "newField": "Label do Campo",
+    "newField.placeholder":"Digite...",  // optional
+  }
 }
 ```
 
@@ -81,14 +80,27 @@ Schema.events({
 });
 ```
 
-### 4. Add Group (if new group needed, in `schema.ts`)
+### 4. Add Group (if a new group needed, in `schema.ts`)
+
+And add i18n key:
 
 ```ts-no-check
-groups: {
-  // ... existing groups
-  newGroup: group(),
+export const ExampleSchema = schema.create("example", {
+  // ... existing keys
+  groups: {
+    // ... existing keys
+    newGroup: group(),
+  }
+  // ... existing keys
 }
-,
 ```
 
-And add i18n key: `"{domain}#newGroup": "Group Label"`
+```ts-no-check
+{domain}: {
+  // ... existing keys
+  groups: {
+    // ... existing keys
+    "newGroup": "The group label",
+  }
+},
+```

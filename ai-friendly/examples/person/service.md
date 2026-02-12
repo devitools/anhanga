@@ -5,7 +5,7 @@
 ```ts-no-check
 import { createService } from "@ybyra/core";
 import type { PersistenceContract } from "@ybyra/core";
-import { PersonSchema } from "../../domain/person";
+import { PersonSchema } from "@/domain/person";
 
 export function createPersonService(driver: PersistenceContract) {
   return {
