@@ -9,12 +9,14 @@ Add a new field to an existing entity in this Ybyra project.
 
 ## Instructions
 
-1. Read `ai-friendly/rules/03-field-types.md` for available types and methods
+1. Read the [field types documentation](https://devitools.github.io/ybyra/guide/field-types) for available types and
+   methods
 2. Use the `add-field` skill for the step-by-step process
 
 ## Required Information
 
 Ask the user for:
+
 - **Entity name** (which schema to modify)
 - **Field name** (camelCase)
 - **Field type** (text, number, date, toggle, select, currency, file, checkbox, datetime)

@@ -30,11 +30,11 @@ export const personEvents = PersonSchema.events({
 
 ## Event Types
 
-| Event | When it fires |
-|-------|--------------|
+| Event    | When it fires                |
+|----------|------------------------------|
 | `change` | When the field value changes |
-| `blur` | When the field loses focus |
-| `focus` | When the field gains focus |
+| `blur`   | When the field loses focus   |
+| `focus`  | When the field gains focus   |
 
 ## Event Context
 
@@ -89,17 +89,18 @@ change({ state, schema }) {
 
 ### Available Schema Proxy Properties
 
-| Property | Type | Description |
-|----------|------|-------------|
-| `hidden` | `boolean` | Show/hide the field |
-| `disabled` | `boolean` | Enable/disable the field |
-| `width` | `number` | Override width percentage |
-| `height` | `number` | Override height in pixels |
-| `state` | `string` | Set visual state (e.g., "error", "new") |
+| Property   | Type      | Description                             |
+|------------|-----------|-----------------------------------------|
+| `hidden`   | `boolean` | Show/hide the field                     |
+| `disabled` | `boolean` | Enable/disable the field                |
+| `width`    | `number`  | Override width percentage               |
+| `height`   | `number`  | Override height in pixels               |
+| `state`    | `string`  | Set visual state (e.g., "error", "new") |
 
 ## Common Patterns
 
 ### Conditional visibility
+
 ```ts-no-check
 active: {
   change({ state, schema }) {
@@ -110,6 +111,7 @@ active: {
 ```
 
 ### Field validation on blur
+
 ```ts-no-check
 email: {
   blur({ state, schema }) {
@@ -123,6 +125,7 @@ email: {
 ```
 
 ### Dependent field updates
+
 ```ts-no-check
 category: {
   change({ state, schema }) {
@@ -135,6 +138,7 @@ category: {
 ```
 
 ### Computed values
+
 ```ts-no-check
 quantity: {
   change({ state }) {

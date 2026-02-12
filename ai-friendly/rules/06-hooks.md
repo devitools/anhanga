@@ -6,10 +6,10 @@ Hooks define **data lifecycle** operations — how data is loaded and fetched. T
 
 ## Hook Types
 
-| Hook | When it fires | Purpose |
-|------|--------------|---------|
-| `bootstrap[scope]` | When a form mounts | Load initial data (e.g., fetch record for edit/view) |
-| `fetch[scope]` | When a table needs data | Paginate/load data for listings |
+| Hook               | When it fires           | Purpose                                              |
+|--------------------|-------------------------|------------------------------------------------------|
+| `bootstrap[scope]` | When a form mounts      | Load initial data (e.g., fetch record for edit/view) |
+| `fetch[scope]`     | When a table needs data | Paginate/load data for listings                      |
 
 ## Default Hook Pattern
 
@@ -61,11 +61,11 @@ export function createProductHooks(service: ServiceContract) {
 
 ## Bootstrap Hook Context
 
-| Property | Type | Description |
-|----------|------|-------------|
-| `context` | `Record<string, unknown>` | Route params (e.g., `{ id: "123" }`) |
-| `schema` | `Record<string, FieldProxy>` | Schema proxy (can set disabled, hidden, etc.) |
-| `hydrate` | `(data: Record) => void` | Function to populate form state with data |
+| Property  | Type                         | Description                                   |
+|-----------|------------------------------|-----------------------------------------------|
+| `context` | `Record<string, unknown>`    | Route params (e.g., `{ id: "123" }`)          |
+| `schema`  | `Record<string, FieldProxy>` | Schema proxy (can set disabled, hidden, etc.) |
+| `hydrate` | `(data: Record) => void`     | Function to populate form state with data     |
 
 ### Bootstrap patterns:
 
@@ -88,8 +88,8 @@ async [Scope.edit]({ context, hydrate }: BootstrapHookContext) {
 
 ## Fetch Hook Context
 
-| Property | Type | Description |
-|----------|------|-------------|
+| Property | Type             | Description                                       |
+|----------|------------------|---------------------------------------------------|
 | `params` | `PaginateParams` | Pagination parameters (page, limit, sort, filter) |
 
 ### Fetch pattern:

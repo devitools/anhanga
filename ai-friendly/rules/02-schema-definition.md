@@ -30,6 +30,7 @@ export const schema = configure({
 ```
 
 ### Key Points
+
 - `identity` — the field that holds the unique ID (usually `"id"`)
 - `display` — the field used as human-readable label
 - `scopes` — the scopes this schema supports
@@ -80,15 +81,15 @@ export const PersonSchema = schema.create("person", {
 
 The `SchemaDefinition` returned by `schema.create()` provides these methods:
 
-| Method | Purpose |
-|--------|---------|
-| `Schema.events({...})` | Define field event handlers (change, blur, focus) |
-| `Schema.handlers({...})` | Define action handlers (create, update, custom) |
-| `Schema.hooks({...})` | Define lifecycle hooks (bootstrap, fetch) |
-| `Schema.provide()` | Extract schema config for components |
-| `Schema.extend({...})` | Create a new schema extending this one |
-| `Schema.pick(...)` | Create schema with only specified fields |
-| `Schema.omit(...)` | Create schema without specified fields |
+| Method                   | Purpose                                           |
+|--------------------------|---------------------------------------------------|
+| `Schema.events({...})`   | Define field event handlers (change, blur, focus) |
+| `Schema.handlers({...})` | Define action handlers (create, update, custom)   |
+| `Schema.hooks({...})`    | Define lifecycle hooks (bootstrap, fetch)         |
+| `Schema.provide()`       | Extract schema config for components              |
+| `Schema.extend({...})`   | Create a new schema extending this one            |
+| `Schema.pick(...)`       | Create schema with only specified fields          |
+| `Schema.omit(...)`       | Create schema without specified fields            |
 
 ## Field Width System
 
@@ -120,6 +121,7 @@ action()
 ```
 
 ### Positions
+
 - `Position.top` — above the form/table (typically "Add" button)
 - `Position.footer` — below the form (typically "Save", "Cancel")
 - `Position.row` — inline with each table row (typically "View", "Edit", "Delete")

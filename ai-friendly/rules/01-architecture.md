@@ -1,6 +1,7 @@
 # Architecture
 
-Ybyra is a **schema-driven form and table system** for TypeScript applications. It uses a builder-pattern API to define forms declaratively, then renders them across multiple UI frameworks.
+Ybyra is a **schema-driven form and table system** for TypeScript applications. It uses a builder-pattern API to define
+forms declaratively, then renders them across multiple UI frameworks.
 
 ## Monorepo Structure
 
@@ -31,17 +32,17 @@ playground/
 │  Playground / Application                           │
 │  (pages, routes, setup, i18n config, icons)         │
 ├─────────────────────────────────────────────────────┤
-│  UI Components Package (@ybyra/react-web, etc.)   │
+│  UI Components Package (@ybyra/react-web, etc.)     │
 │  (DataForm, DataTable, DataPage, field renderers)   │
 ├─────────────────────────────────────────────────────┤
-│  Framework Adapter (@ybyra/react, vue, svelte)    │
+│  Framework Adapter (@ybyra/react, vue, svelte)      │
 │  (useDataForm, useDataTable, registry, validation)  │
 ├─────────────────────────────────────────────────────┤
-│  Core (@ybyra/core)                               │
+│  Core (@ybyra/core)                                 │
 │  (SchemaDefinition, FieldDefinition, ActionDef,     │
 │   GroupDef, types, contracts, scopes, i18n keys)    │
 ├─────────────────────────────────────────────────────┤
-│  Persistence (@ybyra/persistence)                 │
+│  Persistence (@ybyra/persistence)                   │
 │  (ServiceContract, PersistenceContract, drivers)    │
 └─────────────────────────────────────────────────────┘
 ```
@@ -69,22 +70,31 @@ src/
 ## Key Concepts
 
 ### Schema Definition
-Schemas are created using `configure()` for base settings and `schema.create()` for specific domains. Fields are defined as object literals using factory functions (`text()`, `date()`, `toggle()`, etc.).
+
+Schemas are created using `configure()` for base settings and `schema.create()` for specific domains. Fields are defined
+as object literals using factory functions (`text()`, `date()`, `toggle()`, etc.).
 
 ### Scopes
-Four built-in scopes control visibility: `index` (list), `add` (create form), `view` (read-only form), `edit` (edit form). Fields and actions can be scoped using `.scopes()` or `.excludeScopes()`.
+
+Four built-in scopes control visibility: `index` (list), `add` (create form), `view` (read-only form), `edit` (edit
+form). Fields and actions can be scoped using `.scopes()` or `.excludeScopes()`.
 
 ### Builder Pattern
+
 All definitions (fields, actions, groups) use a fluent builder pattern:
+
 ```ts-no-check
 text().width(60).required().column().group("basic")
 ```
 
 ### Separation of Concerns
+
 - `schema.ts` → WHAT (structure, layout)
 - `events.ts` → WHEN (field reactions)
 - `handlers.ts` → HOW (action execution)
 - `hooks.ts` → LOAD (data lifecycle)
 
 ### Framework Agnostic Core
-`@ybyra/core` has zero UI dependencies. Framework adapters (`@ybyra/react`, `@ybyra/vue`, `@ybyra/svelte`) bridge to their respective ecosystems. UI component packages provide the actual rendered components.
+
+`@ybyra/core` has zero UI dependencies. Framework adapters (`@ybyra/react`, `@ybyra/vue`, `@ybyra/svelte`) bridge to
+their respective ecosystems. UI component packages provide the actual rendered components.

@@ -16,6 +16,7 @@ Scope.edit   // edit form
 ## Field Scoping
 
 ### Whitelist — show only in specific scopes
+
 ```ts-no-check
 fields: {
   password: text().scopes(Scope.add),              // only in add form
@@ -24,6 +25,7 @@ fields: {
 ```
 
 ### Blacklist — hide from specific scopes
+
 ```ts-no-check
 fields: {
   id: text().excludeScopes(Scope.add),  // hidden in add form, visible everywhere else
@@ -33,6 +35,7 @@ fields: {
 ## Action Scoping
 
 ### Whitelist
+
 ```ts-no-check
 actions: {
   create: action().scopes(Scope.add),                    // only in add form
@@ -43,6 +46,7 @@ actions: {
 ```
 
 ### Blacklist
+
 ```ts-no-check
 actions: {
   destroy: action().excludeScopes(Scope.add, Scope.view), // hidden in add and view
@@ -83,6 +87,7 @@ export function allPermissions(schema: SchemaProvide): string[] {
 ```
 
 ### Permission examples for "person" domain:
+
 - `person.scope.index` — can see the list
 - `person.scope.add` — can access add form
 - `person.scope.view` — can access view form
@@ -93,6 +98,7 @@ export function allPermissions(schema: SchemaProvide): string[] {
 - `person.action.custom` — can execute custom action
 
 ### Using `allPermissions()` in development
+
 During development, use `allPermissions()` to grant all permissions:
 
 ```ts-no-check

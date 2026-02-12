@@ -35,6 +35,7 @@ export function createProductService(driver: PersistenceContract) {
 ```
 
 ### Key Points:
+
 1. **`createService()` generates standard CRUD** — paginate, read, create, update, destroy
 2. **Spread `createService()` result** — then add custom methods
 3. **Factory function pattern** — receives a `PersistenceContract` driver
@@ -45,19 +46,23 @@ export function createProductService(driver: PersistenceContract) {
 `@ybyra/persistence` provides two built-in drivers:
 
 ### Local Driver (SQLite via expo-sqlite)
+
 ```ts-no-check
 import { createLocalDriver } from "@ybyra/persistence";
 
 const driver = createLocalDriver();
 ```
+
 Used in React Native apps with Expo.
 
 ### Web Driver (localStorage)
+
 ```ts-no-check
 import { createWebDriver } from "@ybyra/persistence/web";
 
 const driver = createWebDriver();
 ```
+
 Used in web apps (React Web, Vue, SvelteKit).
 
 > Note the different import paths: `@ybyra/persistence` vs `@ybyra/persistence/web`.

@@ -9,12 +9,13 @@ Add a new action button to an existing entity in this Ybyra project.
 
 ## Instructions
 
-1. Read `ai-friendly/rules/05-handlers.md` for handler patterns
+1. Read the [handlers documentation](https://devitools.github.io/ybyra/guide/actions) for handler patterns
 2. Use the `add-action` skill for the step-by-step process
 
 ## Required Information
 
 Ask the user for:
+
 - **Entity name** (which schema to modify)
 - **Action name** (camelCase)
 - **Variant** (primary, destructive, warning, info, success)

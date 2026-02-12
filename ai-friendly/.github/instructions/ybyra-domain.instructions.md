@@ -33,4 +33,4 @@ When editing files in `domain/` directories, follow these rules:
 
 ## Reference
 
-See the [Core Concepts](https://devitools.github.io/ybyra/guide/schema-definition) and [Domain Layer](https://devitools.github.io/ybyra/react/domain) guides for full details.
+See the [Core Concepts](https://devitools.github.io/ybyra/guide/schema-definition)

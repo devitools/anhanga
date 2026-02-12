@@ -12,22 +12,22 @@ import { text, number, date, datetime, currency, file, select, toggle, checkbox 
 
 Every `FieldDefinition` inherits these methods:
 
-| Method | Description | Example |
-|--------|-------------|---------|
-| `.width(n)` | Width as percentage of row (0-100) | `.width(60)` |
-| `.height(n)` | Height in pixels | `.height(200)` |
-| `.hidden()` | Hide the field | `.hidden()` |
-| `.disabled()` | Make read-only | `.disabled()` |
-| `.order(n)` | Sort order (lower = first) | `.order(1)` |
-| `.default(value)` | Default value | `.default("")` |
-| `.group(name)` | Assign to a group | `.group("basic")` |
-| `.scopes(...scopes)` | Whitelist scopes | `.scopes(Scope.add, Scope.edit)` |
-| `.excludeScopes(...scopes)` | Blacklist scopes | `.excludeScopes(Scope.index)` |
-| `.states(...states)` | Define visual states | `.states("new", "error")` |
-| `.column()` | Show in table column | `.column()` |
-| `.filterable()` | Enable table filtering | `.filterable()` |
-| `.sortable()` | Enable table sorting | `.sortable()` |
-| `.required()` | Mark as required | `.required()` |
+| Method                      | Description                        | Example                          |
+|-----------------------------|------------------------------------|----------------------------------|
+| `.width(n)`                 | Width as percentage of row (0-100) | `.width(60)`                     |
+| `.height(n)`                | Height in pixels                   | `.height(200)`                   |
+| `.hidden()`                 | Hide the field                     | `.hidden()`                      |
+| `.disabled()`               | Make read-only                     | `.disabled()`                    |
+| `.order(n)`                 | Sort order (lower = first)         | `.order(1)`                      |
+| `.default(value)`           | Default value                      | `.default("")`                   |
+| `.group(name)`              | Assign to a group                  | `.group("basic")`                |
+| `.scopes(...scopes)`        | Whitelist scopes                   | `.scopes(Scope.add, Scope.edit)` |
+| `.excludeScopes(...scopes)` | Blacklist scopes                   | `.excludeScopes(Scope.index)`    |
+| `.states(...states)`        | Define visual states               | `.states("new", "error")`        |
+| `.column()`                 | Show in table column               | `.column()`                      |
+| `.filterable()`             | Enable table filtering             | `.filterable()`                  |
+| `.sortable()`               | Enable table sorting               | `.sortable()`                    |
+| `.required()`               | Mark as required                   | `.required()`                    |
 
 ## Text Field
 
@@ -47,11 +47,12 @@ text().kind(Text.Cnpj)           // CNPJ (Brazilian company ID)
 ```
 
 ### Text-specific methods:
-| Method | Description |
-|--------|-------------|
-| `.kind(Text.X)` | Input specialization |
-| `.minLength(n)` | Minimum character count |
-| `.maxLength(n)` | Maximum character count |
+
+| Method            | Description              |
+|-------------------|--------------------------|
+| `.kind(Text.X)`   | Input specialization     |
+| `.minLength(n)`   | Minimum character count  |
+| `.maxLength(n)`   | Maximum character count  |
 | `.pattern(regex)` | Validation regex pattern |
 
 ## Number Field
@@ -65,10 +66,11 @@ number().precision(2)            // decimal places
 ```
 
 ### Number-specific methods:
-| Method | Description |
-|--------|-------------|
-| `.min(n)` | Minimum value |
-| `.max(n)` | Maximum value |
+
+| Method          | Description       |
+|-----------------|-------------------|
+| `.min(n)`       | Minimum value     |
+| `.max(n)`       | Maximum value     |
 | `.precision(n)` | Decimal precision |
 
 ## Date Field
@@ -92,8 +94,9 @@ datetime().max("2030-12-31T23:59")
 ```
 
 ### Date/Datetime-specific methods:
-| Method | Description |
-|--------|-------------|
+
+| Method          | Description  |
+|-----------------|--------------|
 | `.min(dateStr)` | Minimum date |
 | `.max(dateStr)` | Maximum date |
 
@@ -110,12 +113,13 @@ currency().prefix("R$")         // currency prefix
 ```
 
 ### Currency-specific methods:
-| Method | Description |
-|--------|-------------|
-| `.min(n)` | Minimum value |
-| `.max(n)` | Maximum value |
-| `.precision(n)` | Decimal precision |
-| `.prefix(str)` | Currency symbol prefix |
+
+| Method          | Description            |
+|-----------------|------------------------|
+| `.min(n)`       | Minimum value          |
+| `.max(n)`       | Maximum value          |
+| `.precision(n)` | Decimal precision      |
+| `.prefix(str)`  | Currency symbol prefix |
 
 ## File Field
 
@@ -128,10 +132,11 @@ file().maxSize(5 * 1024 * 1024)  // max file size in bytes
 ```
 
 ### File-specific methods:
-| Method | Description |
-|--------|-------------|
-| `.accept(mime)` | Accepted MIME types |
-| `.maxSize(bytes)` | Maximum file size |
+
+| Method            | Description         |
+|-------------------|---------------------|
+| `.accept(mime)`   | Accepted MIME types |
+| `.maxSize(bytes)` | Maximum file size   |
 
 ## Select Field
 

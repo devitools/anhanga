@@ -83,12 +83,12 @@ export function createProductHandlers(service: ServiceContract) {
 
 Every handler receives a `HandlerContext`:
 
-| Property | Type | Description |
-|----------|------|-------------|
-| `state` | `Record` | Current form/row state values |
-| `component` | `ComponentContract` | Navigator, dialog, toast, loading, scope |
-| `form` | `FormContract \| undefined` | Form API (validate, reset) — only in form scopes |
-| `table` | `TableContract \| undefined` | Table API (reload) — only in index scope |
+| Property    | Type                         | Description                                      |
+|-------------|------------------------------|--------------------------------------------------|
+| `state`     | `Record`                     | Current form/row state values                    |
+| `component` | `ComponentContract`          | Navigator, dialog, toast, loading, scope         |
+| `form`      | `FormContract \| undefined`  | Form API (validate, reset) — only in form scopes |
+| `table`     | `TableContract \| undefined` | Table API (reload) — only in index scope         |
 
 ### ComponentContract
 
