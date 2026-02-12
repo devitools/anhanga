@@ -11,10 +11,10 @@ pnpm -r --filter './packages/*' build
 
 echo ""
 echo "Building playgrounds..."
-VITE_BASE_URL=/anhanga/demo/react-web/ pnpm --filter @anhanga/playground-react-web build
-VITE_BASE_URL=/anhanga/demo/vue-quasar/ pnpm --filter @anhanga/playground-vue-quasar build
-SVELTE_BASE_URL=/anhanga/demo/sveltekit pnpm --filter @anhanga/playground-sveltekit build
-EXPO_BASE_URL=/anhanga/demo/react-native pnpm --filter @anhanga/playground-react-native build:web
+VITE_BASE_URL=/ybyra/demo/react-web/ pnpm --filter @ybyra/playground-react-web build
+VITE_BASE_URL=/ybyra/demo/vue-quasar/ pnpm --filter @ybyra/playground-vue-quasar build
+SVELTE_BASE_URL=/ybyra/demo/sveltekit pnpm --filter @ybyra/playground-sveltekit build
+EXPO_BASE_URL=/ybyra/demo/react-native pnpm --filter @ybyra/playground-react-native build:web
 
 echo ""
 echo "Building docs..."
@@ -31,18 +31,18 @@ cp "$ROOT/docs/spa-redirect.html" "$DIST/404.html"
 
 echo ""
 echo "Preparing server directory..."
-rm -rf "$SERVE_DIR/anhanga"
-mkdir -p "$SERVE_DIR/anhanga"
-cp -r "$DIST"/* "$SERVE_DIR/anhanga/"
+rm -rf "$SERVE_DIR/ybyra"
+mkdir -p "$SERVE_DIR/ybyra"
+cp -r "$DIST"/* "$SERVE_DIR/ybyra/"
 
 echo ""
-echo "Serving at http://localhost:$PORT/anhanga/"
+echo "Serving at http://localhost:$PORT/ybyra/"
 echo ""
-echo "  Docs:        http://localhost:$PORT/anhanga/"
-echo "  React Web:   http://localhost:$PORT/anhanga/demo/react-web/"
-echo "  Vue Quasar:  http://localhost:$PORT/anhanga/demo/vue-quasar/"
-echo "  SvelteKit:   http://localhost:$PORT/anhanga/demo/sveltekit/"
-echo "  React Native: http://localhost:$PORT/anhanga/demo/react-native/"
+echo "  Docs:        http://localhost:$PORT/ybyra/"
+echo "  React Web:   http://localhost:$PORT/ybyra/demo/react-web/"
+echo "  Vue Quasar:  http://localhost:$PORT/ybyra/demo/vue-quasar/"
+echo "  SvelteKit:   http://localhost:$PORT/ybyra/demo/sveltekit/"
+echo "  React Native: http://localhost:$PORT/ybyra/demo/react-native/"
 echo ""
 echo "Press Ctrl+C to stop."
 npx serve "$SERVE_DIR" -l "$PORT"

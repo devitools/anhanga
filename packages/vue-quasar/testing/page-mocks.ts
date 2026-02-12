@@ -53,7 +53,7 @@ export function createPageMocks(options?: PageMocksOptions) {
     QPageContainer: { name: 'QPageContainer', template: '<div><slot /></div>' },
   }))
 
-  vi.mock('@anhanga/vue-quasar', () => ({
+  vi.mock('@ybyra/vue-quasar', () => ({
     DataForm: { name: 'DataForm', template: '<div><slot /></div>' },
     DataTable: { name: 'DataTable', template: '<div><slot /></div>' },
     DataPage: { name: 'DataPage', template: '<div><slot /></div>' },

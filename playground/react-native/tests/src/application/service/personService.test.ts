@@ -1,5 +1,5 @@
-import { createMockDriver } from '@anhanga/core'
-import { createPersonService } from '@anhanga/demo'
+import { createMockDriver } from '@ybyra/core'
+import { createPersonService } from '@ybyra/demo'
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 
 describe('createPersonService', () => {

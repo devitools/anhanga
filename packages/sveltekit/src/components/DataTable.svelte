@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { useDataTable } from '@anhanga/svelte'
-  import type { UseDataTableOptions } from '@anhanga/svelte'
+  import { useDataTable } from '@ybyra/svelte'
+  import type { UseDataTableOptions } from '@ybyra/svelte'
   import { translate, hasTranslation } from '../i18n'
   import ActionBar from './ActionBar.svelte'
   import ActionButton from './ActionButton.svelte'

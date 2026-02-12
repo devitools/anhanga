@@ -7,7 +7,7 @@ The schema is the central concept in Anhanga. It describes your domain's fields,
 `configure()` creates a `SchemaFactory` with base configuration that all domain schemas inherit:
 
 ```typescript
-import { configure, action, text, Scope, Position } from '@anhanga/core'
+import { configure, action, text, Scope, Position } from '@ybyra/core'
 
 export const schema = configure({
   identity: 'id',

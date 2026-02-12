@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { resolveActionLabel, resolveActionIcon } from "@anhanga/react";
+import { resolveActionLabel, resolveActionIcon } from "@ybyra/react";
 import { useTheme } from "../theme/context";
 import type { Theme } from "../theme/default";
 import { Icon } from "../support/Icon";

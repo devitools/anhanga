@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
-import { useDataTable, resolveActionLabel, resolveActionIcon } from "@anhanga/react";
-import type { UseDataTableOptions, ResolvedAction, ResolvedColumn } from "@anhanga/react";
+import { useDataTable, resolveActionLabel, resolveActionIcon } from "@ybyra/react";
+import type { UseDataTableOptions, ResolvedAction, ResolvedColumn } from "@ybyra/react";
 import { useTheme } from "../theme/context";
 import type { Theme } from "../theme/default";
 import { ActionBar, ActionButton } from "./ActionBar";

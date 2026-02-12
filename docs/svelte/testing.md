@@ -76,13 +76,13 @@ export const page = {
 
 ### Setup file
 
-The setup file mocks `@anhanga/persistence/web` globally since `createWebDriver` uses `localStorage`:
+The setup file mocks `@ybyra/persistence/web` globally since `createWebDriver` uses `localStorage`:
 
 ```typescript
 // tests/setup.ts
 import { vi } from 'vitest'
 
-vi.mock('@anhanga/persistence/web', () => ({
+vi.mock('@ybyra/persistence/web', () => ({
   createWebDriver: vi.fn(() => ({
     initialize: vi.fn(),
     create: vi.fn(),

@@ -15,7 +15,7 @@ Traditional CRUD screens require wiring up fields, validation, visibility, layou
 - **Scoped visibility** — fields and actions appear/hide based on scope (index, add, view, edit)
 - **Reactive events** — field changes can mutate other fields, toggle visibility, set states
 - **i18n-native** — labels resolved via `{domain}.{field}`, never hardcoded
-- **Framework-agnostic core** — `@anhanga/core` has zero dependencies; bring your own UI
+- **Framework-agnostic core** — `@ybyra/core` has zero dependencies; bring your own UI
 
 ## Traditional vs Anhanga
 
@@ -39,7 +39,7 @@ const fields = [
 ```
 
 ```typescript [Anhanga]
-import { text, Text, currency, toggle } from '@anhanga/core'
+import { text, Text, currency, toggle } from '@ybyra/core'
 
 const fields = {
   name: text().required().minLength(3).column(),
@@ -62,11 +62,11 @@ Each field type exposes **only the methods that apply to it** — `minLength()` 
 
 | Package | Description |
 |---------|-------------|
-| `@anhanga/core` | Schema definition, field types, actions, groups, type system |
-| `@anhanga/react` | `useDataForm` / `useDataTable` hooks, renderer registry, validation |
-| `@anhanga/vue` | `useDataForm` / `useDataTable` composables, renderer registry, validation |
-| `@anhanga/svelte` | `useDataForm` / `useDataTable` stores, renderer registry, validation |
-| `@anhanga/demo` | Shared demo domain (person schema, services, settings, i18n) |
+| `@ybyra/core` | Schema definition, field types, actions, groups, type system |
+| `@ybyra/react` | `useDataForm` / `useDataTable` hooks, renderer registry, validation |
+| `@ybyra/vue` | `useDataForm` / `useDataTable` composables, renderer registry, validation |
+| `@ybyra/svelte` | `useDataForm` / `useDataTable` stores, renderer registry, validation |
+| `@ybyra/demo` | Shared demo domain (person schema, services, settings, i18n) |
 
 ## How It Works
 
@@ -77,7 +77,7 @@ Each field type exposes **only the methods that apply to it** — `minLength()` 
 5. **Render** using framework hooks/composables that resolve fields, validation, and actions automatically
 
 ```typescript
-import { text, Text, date, toggle, group, action, Position, Scope } from '@anhanga/core'
+import { text, Text, date, toggle, group, action, Position, Scope } from '@ybyra/core'
 
 const PersonSchema = schema.create('person', {
   groups: {

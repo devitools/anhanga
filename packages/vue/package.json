@@ -1,5 +1,5 @@
 {
-  "name": "@anhanga/vue",
+  "name": "@ybyra/vue",
   "version": "0.0.1",
   "type": "module",
   "main": "dist/index.js",
@@ -16,13 +16,19 @@
   },
   "peerDependencies": {
     "vue": ">=3.4",
-    "@anhanga/core": "workspace:*"
+    "@ybyra/core": "workspace:*"
   },
   "devDependencies": {
-    "@anhanga/core": "workspace:*",
+    "@ybyra/core": "workspace:*",
     "vue": "^3.5.0",
     "tsup": "^8.0.0",
     "typescript": "^5.7.0",
     "vitest": "^3.0.0"
+  },
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
   }
 }

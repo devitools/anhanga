@@ -24,8 +24,8 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import type { ResolvedAction } from '@anhanga/vue'
-import type { PositionValue } from '@anhanga/core'
+import type { ResolvedAction } from '@ybyra/vue'
+import type { PositionValue } from '@ybyra/core'
 import ActionButton from './ActionButton.vue'
 
 const props = defineProps<{

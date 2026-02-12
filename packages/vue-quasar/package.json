@@ -1,5 +1,5 @@
 {
-  "name": "@anhanga/vue-quasar",
+  "name": "@ybyra/vue-quasar",
   "version": "0.0.1",
   "type": "module",
   "main": "dist/index.js",
@@ -24,13 +24,13 @@
     "vue-i18n": ">=10",
     "vue-router": ">=4",
     "quasar": ">=2",
-    "@anhanga/core": "workspace:*",
-    "@anhanga/vue": "workspace:*",
+    "@ybyra/core": "workspace:*",
+    "@ybyra/vue": "workspace:*",
     "vitest": ">=3"
   },
   "devDependencies": {
-    "@anhanga/core": "workspace:*",
-    "@anhanga/vue": "workspace:*",
+    "@ybyra/core": "workspace:*",
+    "@ybyra/vue": "workspace:*",
     "@vitejs/plugin-vue": "^6.0.0",
     "quasar": "^2.17.0",
     "typescript": "^5.7.0",
@@ -39,5 +39,11 @@
     "vue": "^3.5.0",
     "vue-i18n": "^10.0.0",
     "vue-router": "^4.5.0"
+  },
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
   }
 }

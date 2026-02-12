@@ -67,7 +67,7 @@ All framework packages export identical validation utilities:
 ::: code-group
 
 ```typescript [React]
-import { validateField, validateAllFields } from '@anhanga/react'
+import { validateField, validateAllFields } from '@ybyra/react'
 
 // Validate a single field
 const errors = validateField(value, field.validations, translate)
@@ -77,7 +77,7 @@ const allErrors = validateAllFields(state, schema.fields, translate)
 ```
 
 ```typescript [Vue]
-import { validateField, validateAllFields } from '@anhanga/vue'
+import { validateField, validateAllFields } from '@ybyra/vue'
 
 // Validate a single field
 const errors = validateField(value, field.validations, translate)
@@ -87,7 +87,7 @@ const allErrors = validateAllFields(state, schema.fields, translate)
 ```
 
 ```typescript [Svelte]
-import { validateField, validateAllFields } from '@anhanga/svelte'
+import { validateField, validateAllFields } from '@ybyra/svelte'
 
 // Validate a single field
 const errors = validateField(value, field.validations, translate)
@@ -103,7 +103,7 @@ const allErrors = validateAllFields(state, schema.fields, translate)
 Register custom validators to extend the built-in set:
 
 ```typescript
-import { registerValidator } from '@anhanga/react' // or '@anhanga/vue' or '@anhanga/svelte'
+import { registerValidator } from '@ybyra/react' // or '@ybyra/vue' or '@ybyra/svelte'
 
 registerValidator('cpf', (value, params, translate) => {
   if (!value) return null

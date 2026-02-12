@@ -1,5 +1,5 @@
 {
-  "name": "@anhanga/playground-sveltekit",
+  "name": "@ybyra/playground-sveltekit",
   "version": "0.0.1",
   "private": true,
   "type": "module",
@@ -11,10 +11,10 @@
     "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
-    "@anhanga/core": "workspace:*",
-    "@anhanga/demo": "workspace:*",
-    "@anhanga/persistence": "workspace:*",
-    "@anhanga/sveltekit": "workspace:*",
+    "@ybyra/core": "workspace:*",
+    "@ybyra/demo": "workspace:*",
+    "@ybyra/persistence": "workspace:*",
+    "@ybyra/sveltekit": "workspace:*",
     "lucide-svelte": "^0.563.0"
   },
   "devDependencies": {

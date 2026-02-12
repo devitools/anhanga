@@ -1,6 +1,6 @@
 <script lang="ts">
-  import type { ResolvedAction } from '@anhanga/svelte'
-  import { resolveActionIcon } from '@anhanga/svelte'
+  import type { ResolvedAction } from '@ybyra/svelte'
+  import { resolveActionIcon } from '@ybyra/svelte'
   import { translate, hasTranslation } from '../i18n'
 
   let { action, domain, flat = false, small = false }: {

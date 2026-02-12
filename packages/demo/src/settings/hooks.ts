@@ -1,5 +1,5 @@
-import type { ServiceContract, BootstrapHookContext, FetchHookContext } from "@anhanga/core";
-import { Scope } from "@anhanga/core";
+import type { ServiceContract, BootstrapHookContext, FetchHookContext } from "@ybyra/core";
+import { Scope } from "@ybyra/core";
 
 export function createDefault (service: ServiceContract) {
   return {

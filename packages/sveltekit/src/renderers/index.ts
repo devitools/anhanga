@@ -1,4 +1,4 @@
-import { registerRenderers } from '@anhanga/svelte'
+import { registerRenderers } from '@ybyra/svelte'
 import TextField from './TextField.svelte'
 import NumberField from './NumberField.svelte'
 import ToggleField from './ToggleField.svelte'

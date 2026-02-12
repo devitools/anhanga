@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { withProviders } from "@anhanga/react-web";
+import { withProviders } from "@ybyra/react-web";
 import { PersonList } from "./pages/person/PersonList";
 import { PersonAdd } from "./pages/person/PersonAdd";
 import { PersonView } from "./pages/person/PersonView";

@@ -1,4 +1,4 @@
-import { configureIcons } from '@anhanga/react-native'
+import { configureIcons } from '@ybyra/react-native'
 import { describe, it, expect } from 'vitest'
 
 describe('icons', () => {

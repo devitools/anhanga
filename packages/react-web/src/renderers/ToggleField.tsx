@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import type { FieldRendererProps } from "@anhanga/react";
+import type { FieldRendererProps } from "@ybyra/react";
 import { useTheme } from "../theme/context";
 import type { Theme } from "../theme/default";
 import { ds } from "../support/ds";

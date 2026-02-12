@@ -34,7 +34,7 @@ interface PersistenceMeta {
 Factory function that wraps a persistence driver into a `ServiceContract`:
 
 ```typescript
-import { createService } from '@anhanga/core'
+import { createService } from '@ybyra/core'
 
 const personService = createService(PersonSchema, localStorageDriver)
 ```
@@ -69,7 +69,7 @@ export const personService = {
 Extracts persistence metadata from a schema for use in custom drivers:
 
 ```typescript
-import { extractPersistenceMeta } from '@anhanga/core'
+import { extractPersistenceMeta } from '@ybyra/core'
 
 const meta = extractPersistenceMeta(PersonSchema)
 // { resource: 'person', identity: 'id', fields: { name: { dataType: 'string' }, ... } }
@@ -77,11 +77,11 @@ const meta = extractPersistenceMeta(PersonSchema)
 
 ## Built-in Local Driver
 
-The `@anhanga/demo` package includes a `createLocalDriver()` that implements `PersistenceContract` using in-memory storage. It's useful for prototyping and testing without a backend:
+The `@ybyra/demo` package includes a `createLocalDriver()` that implements `PersistenceContract` using in-memory storage. It's useful for prototyping and testing without a backend:
 
 ```typescript
-import { createLocalDriver } from '@anhanga/demo'
-import { createService } from '@anhanga/core'
+import { createLocalDriver } from '@ybyra/demo'
+import { createService } from '@ybyra/core'
 
 const localDriver = createLocalDriver()
 const personService = createService(PersonSchema, localDriver)

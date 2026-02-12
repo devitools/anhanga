@@ -1,6 +1,6 @@
 import { vi, describe, it, expect } from 'vitest'
 
-vi.mock('@anhanga/sveltekit', () => ({
+vi.mock('@ybyra/sveltekit', () => ({
   configureIcons: vi.fn(),
   configureI18n: vi.fn(),
 }))

@@ -1,4 +1,4 @@
-import { createPageMocks } from '@anhanga/vue-quasar/testing/page-mocks'
+import { createPageMocks } from '@ybyra/vue-quasar/testing/page-mocks'
 
 createPageMocks({
   route: { params: { id: '1' }, path: '/person' },

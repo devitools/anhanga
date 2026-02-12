@@ -1,6 +1,6 @@
 <script lang="ts">
-  import type { ScopeValue } from '@anhanga/core'
-  import { isScopePermitted } from '@anhanga/core'
+  import type { ScopeValue } from '@ybyra/core'
+  import { isScopePermitted } from '@ybyra/core'
   import { translate, hasTranslation } from '../i18n'
   import type { Snippet } from 'svelte'
 

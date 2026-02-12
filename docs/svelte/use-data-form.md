@@ -6,8 +6,8 @@ The main Svelte store for schema-driven forms. It manages field state, applies e
 
 ```svelte
 <script lang="ts">
-import { useDataForm, getRenderer } from '@anhanga/svelte'
-import { Scope } from '@anhanga/core'
+import { useDataForm, getRenderer } from '@ybyra/svelte'
+import { Scope } from '@ybyra/core'
 
 const formStore = useDataForm({
   schema: PersonSchema.provide(),
@@ -144,7 +144,7 @@ interface FieldRendererProps {
 
 ```svelte
 <script lang="ts">
-import { useDataForm, getRenderer } from '@anhanga/svelte'
+import { useDataForm, getRenderer } from '@ybyra/svelte'
 
 const formStore = useDataForm({ /* ... */ })
 let form = $derived($formStore)

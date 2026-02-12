@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { useTranslation } from "react-i18next";
-import type { ScopeValue } from "@anhanga/core";
-import { isScopePermitted } from "@anhanga/core";
+import type { ScopeValue } from "@ybyra/core";
+import { isScopePermitted } from "@ybyra/core";
 import { useTheme } from "../theme/context";
 import type { Theme } from "../theme/default";
 import { Icon } from "../support/Icon";

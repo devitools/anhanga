@@ -21,9 +21,9 @@
   lang="ts"
 >
 import { personHandlers, personHooks } from "@/setup";
-import { Scope } from "@anhanga/core";
-import { allPermissions, PersonSchema } from "@anhanga/demo";
-import { DataPage, DataTable, useComponent } from "@anhanga/vue-quasar";
+import { Scope } from "@ybyra/core";
+import { allPermissions, PersonSchema } from "@ybyra/demo";
+import { DataPage, DataTable, useComponent } from "@ybyra/vue-quasar";
 import { scopes } from "./person/@routes";
 
 const person = PersonSchema.provide();

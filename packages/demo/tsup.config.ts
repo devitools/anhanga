@@ -6,5 +6,5 @@ export default defineConfig({
   dts: true,
   clean: true,
   sourcemap: true,
-  external: ['@anhanga/core', '@faker-js/faker'],
+  external: ['@ybyra/core', '@faker-js/faker'],
 })

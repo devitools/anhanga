@@ -41,7 +41,7 @@ export default defineConfig({
 
 ## Mock strategy
 
-Page components depend on `react-router-dom`, `@anhanga/react-web`, `@anhanga/persistence/web`, and `sonner`. A shared `tests/pages/mocks.ts` file stubs them all:
+Page components depend on `react-router-dom`, `@ybyra/react-web`, `@ybyra/persistence/web`, and `sonner`. A shared `tests/pages/mocks.ts` file stubs them all:
 
 ```typescript
 // tests/pages/mocks.ts
@@ -57,7 +57,7 @@ vi.mock('react-router-dom', () => ({
   useParams: vi.fn(() => ({ id: '1' })),
 }))
 
-vi.mock('@anhanga/react-web', () => ({
+vi.mock('@ybyra/react-web', () => ({
   DataForm: () => createElement('div', { 'data-testid': 'DataForm' }),
   DataTable: () => createElement('div', { 'data-testid': 'DataTable' }),
   Page: ({ children }: any) => createElement('div', { 'data-testid': 'Page' }, children),
@@ -78,7 +78,7 @@ vi.mock('@anhanga/react-web', () => ({
   resolveGroupIcon: vi.fn(),
 }))
 
-vi.mock('@anhanga/persistence/web', () => ({
+vi.mock('@ybyra/persistence/web', () => ({
   createWebDriver: vi.fn(() => ({
     initialize: vi.fn(),
     create: vi.fn(),

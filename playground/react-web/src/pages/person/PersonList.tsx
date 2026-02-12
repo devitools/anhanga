@@ -1,8 +1,8 @@
 import { personHandlers, personHooks } from "@/demo";
 import { scopes } from "@/pages/person/@routes";
-import { Scope } from "@anhanga/core";
-import { allPermissions, PersonSchema } from "@anhanga/demo";
-import { DataTable, DataPage, useComponent } from "@anhanga/react-web";
+import { Scope } from "@ybyra/core";
+import { allPermissions, PersonSchema } from "@ybyra/demo";
+import { DataTable, DataPage, useComponent } from "@ybyra/react-web";
 import { useNavigate } from "react-router-dom";
 
 export function PersonList () {

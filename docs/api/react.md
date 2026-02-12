@@ -1,4 +1,4 @@
-# @anhanga/react API
+# @ybyra/react API
 
 Complete API reference for the React integration package.
 

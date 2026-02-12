@@ -1,6 +1,6 @@
 import { useState, useMemo, useCallback, useEffect, useRef } from "react";
-import type { FieldConfig, ScopeValue, TableContract } from "@anhanga/core";
-import { Position, isInScope, isScopePermitted, isActionPermitted } from "@anhanga/core";
+import type { FieldConfig, ScopeValue, TableContract } from "@ybyra/core";
+import { Position, isInScope, isScopePermitted, isActionPermitted } from "@ybyra/core";
 import type {
   UseDataTableOptions,
   UseDataTableReturn,

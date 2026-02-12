@@ -1,8 +1,8 @@
-import type { PersistenceContract, PersistenceMeta } from '@anhanga/core'
-import type { PaginateParams, PaginatedResult } from '@anhanga/core'
+import type { PersistenceContract, PersistenceMeta } from '@ybyra/core'
+import type { PaginateParams, PaginatedResult } from '@ybyra/core'
 
 function getStorageKey(resource: string): string {
-  return `anhanga:${resource}`
+  return `ybyra:${resource}`
 }
 
 function readTable(resource: string): Record<string, Record<string, unknown>> {

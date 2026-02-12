@@ -1,5 +1,5 @@
 {
-  "name": "@anhanga/playground-react-native",
+  "name": "@ybyra/playground-react-native",
   "version": "0.0.1",
   "private": true,
   "main": "expo-router/entry",
@@ -14,11 +14,11 @@
     "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
-    "@anhanga/core": "workspace:*",
-    "@anhanga/demo": "workspace:*",
-    "@anhanga/persistence": "workspace:*",
-    "@anhanga/react": "workspace:*",
-    "@anhanga/react-native": "workspace:*",
+    "@ybyra/core": "workspace:*",
+    "@ybyra/demo": "workspace:*",
+    "@ybyra/persistence": "workspace:*",
+    "@ybyra/react": "workspace:*",
+    "@ybyra/react-native": "workspace:*",
     "@expo/metro-runtime": "~6.1.2",
     "@expo/vector-icons": "^15.0.3",
     "@faker-js/faker": "^10.3.0",

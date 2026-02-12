@@ -1,4 +1,4 @@
-import { resolveActionIcon } from '@anhanga/sveltekit'
+import { resolveActionIcon } from '@ybyra/sveltekit'
 import { describe, it, expect, vi } from 'vitest'
 
 vi.mock('lucide-svelte', () => ({

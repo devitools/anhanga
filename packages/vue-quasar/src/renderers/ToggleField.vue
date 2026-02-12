@@ -12,7 +12,7 @@
 import { QToggle } from 'quasar'
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
-import type { FieldRendererProps } from '@anhanga/vue'
+import type { FieldRendererProps } from '@ybyra/vue'
 
 const props = defineProps<FieldRendererProps>()
 const { t, te } = useI18n()

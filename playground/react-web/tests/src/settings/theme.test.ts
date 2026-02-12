@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { defaultTheme } from '@anhanga/react-web'
+import { defaultTheme } from '@ybyra/react-web'
 import { theme } from '../../../src/settings/theme'
 
 describe('theme', () => {

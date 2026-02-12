@@ -45,8 +45,8 @@
 import { QTable, QTd } from 'quasar'
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { useDataTable } from '@anhanga/vue'
-import type { UseDataTableOptions } from '@anhanga/vue'
+import { useDataTable } from '@ybyra/vue'
+import type { UseDataTableOptions } from '@ybyra/vue'
 import ActionBar from './ActionBar.vue'
 import ActionButton from './ActionButton.vue'
 

@@ -1,7 +1,7 @@
 import { writable, derived, get } from 'svelte/store'
 import type { Readable } from 'svelte/store'
-import type { FieldConfig, FieldProxy, ScopeValue, TranslateContract } from '@anhanga/core'
-import { buildInitialState, isInScope, isScopePermitted, isActionPermitted } from '@anhanga/core'
+import type { FieldConfig, FieldProxy, ScopeValue, TranslateContract } from '@ybyra/core'
+import { buildInitialState, isInScope, isScopePermitted, isActionPermitted } from '@ybyra/core'
 import { createStateProxy, createSchemaProxy } from './proxy'
 import { validateField, validateAllFields } from './validation'
 import type {

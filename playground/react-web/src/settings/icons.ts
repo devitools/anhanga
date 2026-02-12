@@ -1,4 +1,4 @@
-import { configureIcons } from '@anhanga/react-web'
+import { configureIcons } from '@ybyra/react-web'
 
 configureIcons({
   common: {

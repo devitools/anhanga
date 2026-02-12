@@ -1,5 +1,5 @@
-import { ptBR } from '@anhanga/core'
-import { configureI18n } from '@anhanga/react-native'
+import { ptBR } from '@ybyra/core'
+import { configureI18n } from '@ybyra/react-native'
 import { ptBR as local } from './locales/pt-BR'
 
 export default configureI18n({

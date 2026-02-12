@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { defaultTheme } from '@anhanga/react-native'
+import { defaultTheme } from '@ybyra/react-native'
 import { theme } from '../../../src/settings/theme'
 
 describe('src/settings/theme', () => {

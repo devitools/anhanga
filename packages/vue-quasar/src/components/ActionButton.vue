@@ -18,8 +18,8 @@
 import { QBtn } from 'quasar'
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
-import type { ResolvedAction } from '@anhanga/vue'
-import { resolveActionIcon } from '@anhanga/vue'
+import type { ResolvedAction } from '@ybyra/vue'
+import { resolveActionIcon } from '@ybyra/vue'
 
 const props = withDefaults(defineProps<{
   action: ResolvedAction

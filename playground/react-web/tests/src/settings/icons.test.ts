@@ -1,4 +1,4 @@
-import { resolveActionIcon } from '@anhanga/react-web'
+import { resolveActionIcon } from '@ybyra/react-web'
 import { describe, it, expect } from 'vitest'
 import '../../../src/settings/icons'
 

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { PersonSchema, allPermissions } from '@anhanga/demo'
+import { PersonSchema, allPermissions } from '@ybyra/demo'
 
 const provided = PersonSchema.provide()
 

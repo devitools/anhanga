@@ -1,5 +1,5 @@
 {
-  "name": "@anhanga/react-web",
+  "name": "@ybyra/react-web",
   "version": "0.0.1",
   "type": "module",
   "main": "dist/index.js",
@@ -16,14 +16,14 @@
   "peerDependencies": {
     "react": ">=18",
     "react-dom": ">=18",
-    "@anhanga/core": "workspace:*",
-    "@anhanga/react": "workspace:*",
+    "@ybyra/core": "workspace:*",
+    "@ybyra/react": "workspace:*",
     "i18next": ">=23",
     "react-i18next": ">=14"
   },
   "devDependencies": {
-    "@anhanga/core": "workspace:*",
-    "@anhanga/react": "workspace:*",
+    "@ybyra/core": "workspace:*",
+    "@ybyra/react": "workspace:*",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "i18next": "^25.8.4",
@@ -32,5 +32,11 @@
     "react-i18next": "^16.5.4",
     "tsup": "^8.0.0",
     "typescript": "^5.7.0"
+  },
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
   }
 }

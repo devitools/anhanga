@@ -18,8 +18,8 @@ export default defineConfig({
       external: [
         'svelte',
         /^svelte\//,
-        '@anhanga/core',
-        '@anhanga/svelte',
+        '@ybyra/core',
+        '@ybyra/svelte',
       ],
     },
     cssCodeSplit: false,

@@ -1,4 +1,4 @@
-import type { TranslateContract } from '@anhanga/core'
+import type { TranslateContract } from '@ybyra/core'
 
 export function resolveFieldLabel (t: TranslateContract, domain: string, field: string, state: string): string {
   if (state) {

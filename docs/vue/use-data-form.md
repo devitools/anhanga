@@ -6,8 +6,8 @@ The main Vue composable for schema-driven forms. It manages field state, applies
 
 ```vue
 <script setup lang="ts">
-import { useDataForm, getRenderer } from '@anhanga/vue'
-import { Scope } from '@anhanga/core'
+import { useDataForm, getRenderer } from '@ybyra/vue'
+import { Scope } from '@ybyra/core'
 
 const form = useDataForm({
   schema: PersonSchema.provide(),
@@ -150,7 +150,7 @@ interface FieldRendererProps {
 
 ```vue
 <script setup lang="ts">
-import { useDataForm, getRenderer } from '@anhanga/vue'
+import { useDataForm, getRenderer } from '@ybyra/vue'
 
 const form = useDataForm({ /* ... */ })
 </script>

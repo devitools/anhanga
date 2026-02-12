@@ -1,6 +1,6 @@
 # Screens
 
-This page shows how to build the 4 CRUD screens using react-router-dom and the `@anhanga/react-web` components.
+This page shows how to build the 4 CRUD screens using react-router-dom and the `@ybyra/react-web` components.
 
 ## Route Map
 
@@ -8,7 +8,7 @@ First, map each scope to its router path:
 
 ```typescript
 // src/pages/product/@routes.ts
-import { Scope, type ScopeRoute, type ScopeValue } from '@anhanga/core'
+import { Scope, type ScopeRoute, type ScopeValue } from '@ybyra/core'
 
 export const scopes: Record<ScopeValue, ScopeRoute> = {
   [Scope.index]: { path: '/product' },
@@ -27,7 +27,7 @@ The root `App` component sets up react-router-dom routes and wraps the app with 
 ```tsx
 // src/App.tsx
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
-import { withProviders } from '@anhanga/react-web'
+import { withProviders } from '@ybyra/react-web'
 import { ProductList } from './pages/product/ProductList'
 import { ProductAdd } from './pages/product/ProductAdd'
 import { ProductView } from './pages/product/ProductView'
@@ -57,9 +57,9 @@ The list screen uses `DataTable` with `Scope.index`. It renders columns marked w
 
 ```tsx
 // src/pages/product/ProductList.tsx
-import { Scope } from '@anhanga/core'
+import { Scope } from '@ybyra/core'
 import { ProductSchema } from '../../domain/product/schema'
-import { DataTable, DataPage, useComponent } from '@anhanga/react-web'
+import { DataTable, DataPage, useComponent } from '@ybyra/react-web'
 import { productHandlers, productHooks } from '../../setup'
 import { scopes } from './@routes'
 import { useNavigate } from 'react-router-dom'
@@ -96,10 +96,10 @@ The add screen uses `DataForm` with `Scope.add`. Fields marked with `.excludeSco
 
 ```tsx
 // src/pages/product/ProductAdd.tsx
-import { Scope } from '@anhanga/core'
+import { Scope } from '@ybyra/core'
 import { ProductSchema } from '../../domain/product/schema'
 import { productEvents } from '../../domain/product/events'
-import { DataForm, DataPage, useComponent } from '@anhanga/react-web'
+import { DataForm, DataPage, useComponent } from '@ybyra/react-web'
 import { productHandlers, productHooks } from '../../setup'
 import { scopes } from './@routes'
 import { useNavigate } from 'react-router-dom'
@@ -137,10 +137,10 @@ The view screen loads an existing record by ID and renders it read-only. The `bo
 ```tsx
 // src/pages/product/ProductView.tsx
 import { useParams } from 'react-router-dom'
-import { Scope } from '@anhanga/core'
+import { Scope } from '@ybyra/core'
 import { ProductSchema } from '../../domain/product/schema'
 import { productEvents } from '../../domain/product/events'
-import { DataForm, DataPage, useComponent } from '@anhanga/react-web'
+import { DataForm, DataPage, useComponent } from '@ybyra/react-web'
 import { productHandlers, productHooks } from '../../setup'
 import { scopes } from './@routes'
 import { useNavigate } from 'react-router-dom'
@@ -176,10 +176,10 @@ The edit screen is nearly identical to view, but uses `Scope.edit` — so the bo
 ```tsx
 // src/pages/product/ProductEdit.tsx
 import { useParams } from 'react-router-dom'
-import { Scope } from '@anhanga/core'
+import { Scope } from '@ybyra/core'
 import { ProductSchema } from '../../domain/product/schema'
 import { productEvents } from '../../domain/product/events'
-import { DataForm, DataPage, useComponent } from '@anhanga/react-web'
+import { DataForm, DataPage, useComponent } from '@ybyra/react-web'
 import { productHandlers, productHooks } from '../../setup'
 import { scopes } from './@routes'
 import { useNavigate } from 'react-router-dom'

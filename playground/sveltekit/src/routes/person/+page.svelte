@@ -1,9 +1,9 @@
 <script lang="ts">
   import { goto } from '$app/navigation'
   import { base } from '$app/paths'
-  import { Scope } from '@anhanga/core'
-  import { allPermissions, PersonSchema } from '@anhanga/demo'
-  import { DataTable, DataPage, createComponent } from '@anhanga/sveltekit'
+  import { Scope } from '@ybyra/core'
+  import { allPermissions, PersonSchema } from '@ybyra/demo'
+  import { DataTable, DataPage, createComponent } from '@ybyra/sveltekit'
   import { personHandlers, personHooks } from '$lib/setup'
   import { scopes } from '$lib/routes/person'
 

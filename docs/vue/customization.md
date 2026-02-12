@@ -1,6 +1,6 @@
 # Customization
 
-Anhanga's Vue integration ships with ready-to-use components via `@anhanga/vue-quasar`. Forms, tables, field renderers, and action buttons all work out of the box — **no customization required** to get a fully functional CRUD.
+Anhanga's Vue integration ships with ready-to-use components via `@ybyra/vue-quasar`. Forms, tables, field renderers, and action buttons all work out of the box — **no customization required** to get a fully functional CRUD.
 
 ## When to Customize
 

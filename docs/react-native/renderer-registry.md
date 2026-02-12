@@ -2,12 +2,12 @@
 
 The renderer registry maps field component types to React Native components. When the form resolves a field, it looks up the renderer by the field's `component` property.
 
-React Native uses the same registry API from `@anhanga/react`.
+React Native uses the same registry API from `@ybyra/react`.
 
 ## Registering Renderers
 
 ```typescript
-import { registerRenderers } from '@anhanga/react'
+import { registerRenderers } from '@ybyra/react'
 import { TextField, NumberField, DateField, ToggleField, SelectField } from './renderers'
 
 registerRenderers({
@@ -27,7 +27,7 @@ registerRenderers({
 ## Getting a Renderer
 
 ```typescript
-import { getRenderer } from '@anhanga/react'
+import { getRenderer } from '@ybyra/react'
 
 const Renderer = getRenderer('text')
 // Returns the TextField component, or undefined if not registered
@@ -38,7 +38,7 @@ const Renderer = getRenderer('text')
 For multi-tenant apps or testing, create an isolated registry:
 
 ```typescript
-import { createRegistry } from '@anhanga/react'
+import { createRegistry } from '@ybyra/react'
 
 const registry = createRegistry()
 
@@ -55,7 +55,7 @@ const Renderer = registry.get('text')
 Every renderer receives `FieldRendererProps`:
 
 ```typescript
-import type { FieldRendererProps } from '@anhanga/react'
+import type { FieldRendererProps } from '@ybyra/react'
 import { View, TextInput, Text } from 'react-native'
 
 function TextField({ name, value, config, proxy, errors, onChange, onBlur, onFocus }: FieldRendererProps) {

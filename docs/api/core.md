@@ -1,4 +1,4 @@
-# @anhanga/core API
+# @ybyra/core API
 
 Complete API reference for the core package.
 

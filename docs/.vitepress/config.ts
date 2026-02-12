@@ -3,7 +3,7 @@ import { defineConfig } from 'vitepress'
 export default defineConfig({
   title: 'Anhanga',
   description: 'Schema-driven UI for management systems — React, Vue & Svelte',
-  base: '/anhanga/',
+  base: '/ybyra/',
 
   appearance: 'dark',
 
@@ -175,20 +175,20 @@ export default defineConfig({
         {
           text: 'API Reference',
           items: [
-            { text: '@anhanga/core', link: '/api/core' },
-            { text: '@anhanga/react', link: '/api/react' },
-            { text: '@anhanga/vue', link: '/api/vue' },
+            { text: '@ybyra/core', link: '/api/core' },
+            { text: '@ybyra/react', link: '/api/react' },
+            { text: '@ybyra/vue', link: '/api/vue' },
           ],
         },
       ],
     },
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/devitools/anhanga' },
+      { icon: 'github', link: 'https://github.com/devitools/ybyra' },
     ],
 
     editLink: {
-      pattern: 'https://github.com/devitools/anhanga/edit/main/docs/:path',
+      pattern: 'https://github.com/devitools/ybyra/edit/main/docs/:path',
       text: 'Edit this page on GitHub',
     },
 

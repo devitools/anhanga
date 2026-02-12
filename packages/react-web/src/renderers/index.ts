@@ -1,4 +1,4 @@
-import { registerRenderers } from "@anhanga/react";
+import { registerRenderers } from "@ybyra/react";
 import { TextField } from "./TextField";
 import { NumberField } from "./NumberField";
 import { ToggleField } from "./ToggleField";

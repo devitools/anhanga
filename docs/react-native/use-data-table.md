@@ -2,13 +2,13 @@
 
 Hook for schema-driven data tables with pagination, sorting, filtering, and selection.
 
-React Native uses the same `useDataTable` hook from `@anhanga/react`.
+React Native uses the same `useDataTable` hook from `@ybyra/react`.
 
 ## Basic Usage
 
 ```tsx
-import { useDataTable } from '@anhanga/react'
-import { Scope } from '@anhanga/core'
+import { useDataTable } from '@ybyra/react'
+import { Scope } from '@ybyra/core'
 
 function PersonList() {
   const table = useDataTable({

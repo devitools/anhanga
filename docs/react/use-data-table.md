@@ -5,8 +5,8 @@ Hook for schema-driven data tables with pagination, sorting, filtering, and sele
 ## Basic Usage
 
 ```tsx
-import { useDataTable } from '@anhanga/react'
-import { Scope } from '@anhanga/core'
+import { useDataTable } from '@ybyra/react'
+import { Scope } from '@ybyra/core'
 
 function PersonTable() {
   const table = useDataTable({

@@ -1,4 +1,4 @@
-import { action, date, group, Position, Scope, text, Text, toggle } from "@anhanga/core";
+import { action, date, group, Position, Scope, text, Text, toggle } from "@ybyra/core";
 import { schema } from "../../settings/schema";
 
 export const PersonSchema = schema.create("person", {

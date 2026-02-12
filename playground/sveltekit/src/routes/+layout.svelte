@@ -1,6 +1,6 @@
 <script>
 import "../app.css";
-import "@anhanga/sveltekit/styles.css";
+import "@ybyra/sveltekit/styles.css";
 import "$lib/settings/icons";
 import "$lib/settings/i18n-setup";
 

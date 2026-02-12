@@ -5,7 +5,7 @@ The renderer registry maps field component types to Vue components. When the for
 ## Registering Renderers
 
 ```typescript
-import { registerRenderers } from '@anhanga/vue'
+import { registerRenderers } from '@ybyra/vue'
 import TextField from './renderers/TextField.vue'
 import NumberField from './renderers/NumberField.vue'
 import DateField from './renderers/DateField.vue'
@@ -30,7 +30,7 @@ registerRenderers({
 ## Getting a Renderer
 
 ```typescript
-import { getRenderer } from '@anhanga/vue'
+import { getRenderer } from '@ybyra/vue'
 
 const Renderer = getRenderer('text')
 // Returns the Vue component, or undefined if not registered
@@ -41,7 +41,7 @@ const Renderer = getRenderer('text')
 For multi-tenant apps or testing, create an isolated registry:
 
 ```typescript
-import { createRegistry } from '@anhanga/vue'
+import { createRegistry } from '@ybyra/vue'
 
 const registry = createRegistry()
 
@@ -59,7 +59,7 @@ Every renderer receives `FieldRendererProps` as props:
 
 ```vue
 <script setup lang="ts">
-import type { FieldRendererProps } from '@anhanga/vue'
+import type { FieldRendererProps } from '@ybyra/vue'
 
 const props = defineProps<FieldRendererProps>()
 </script>
@@ -102,7 +102,7 @@ Text fields have a `kind` property for specialization:
 
 ```vue
 <script setup lang="ts">
-import type { FieldRendererProps } from '@anhanga/vue'
+import type { FieldRendererProps } from '@ybyra/vue'
 
 const props = defineProps<FieldRendererProps>()
 </script>
@@ -129,7 +129,7 @@ The `proxy.state` property provides the current visual state:
 
 ```vue
 <script setup lang="ts">
-import type { FieldRendererProps } from '@anhanga/vue'
+import type { FieldRendererProps } from '@ybyra/vue'
 
 const props = defineProps<FieldRendererProps>()
 </script>

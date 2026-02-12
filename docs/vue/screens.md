@@ -1,6 +1,6 @@
 # Screens
 
-This page shows how to build the 4 CRUD screens using vue-router and the `@anhanga/vue-quasar` components.
+This page shows how to build the 4 CRUD screens using vue-router and the `@ybyra/vue-quasar` components.
 
 ## Route Map
 
@@ -8,7 +8,7 @@ First, map each scope to its router path:
 
 ```typescript
 // src/pages/product/@routes.ts
-import { Scope, type ScopeRoute, type ScopeValue } from '@anhanga/core'
+import { Scope, type ScopeRoute, type ScopeValue } from '@ybyra/core'
 
 export const scopes: Record<ScopeValue, ScopeRoute> = {
   [Scope.index]: { path: '/product' },
@@ -65,9 +65,9 @@ The list screen uses `DataTable` with `Scope.index`. It renders columns marked w
 
 <script setup lang="ts">
 import { productHandlers, productHooks } from '@/setup'
-import { Scope } from '@anhanga/core'
+import { Scope } from '@ybyra/core'
 import { ProductSchema } from '@/domain/product/schema'
-import { DataPage, DataTable, useComponent } from '@anhanga/vue-quasar'
+import { DataPage, DataTable, useComponent } from '@ybyra/vue-quasar'
 import { scopes } from './product/@routes'
 
 const product = ProductSchema.provide()
@@ -102,9 +102,9 @@ The add screen uses `DataForm` with `Scope.add`. Fields marked with `.excludeSco
 
 <script setup lang="ts">
 import { productHandlers, productHooks } from '@/setup'
-import { Scope } from '@anhanga/core'
+import { Scope } from '@ybyra/core'
 import { productEvents, ProductSchema } from '@/domain/product/schema'
-import { DataForm, DataPage, useComponent } from '@anhanga/vue-quasar'
+import { DataForm, DataPage, useComponent } from '@ybyra/vue-quasar'
 import { scopes } from './product/@routes'
 
 const product = ProductSchema.provide()
@@ -140,9 +140,9 @@ The view screen loads an existing record by ID and renders it read-only. The `bo
 
 <script setup lang="ts">
 import { productHandlers, productHooks } from '@/setup'
-import { Scope } from '@anhanga/core'
+import { Scope } from '@ybyra/core'
 import { productEvents, ProductSchema } from '@/domain/product/schema'
-import { DataForm, DataPage, useComponent } from '@anhanga/vue-quasar'
+import { DataForm, DataPage, useComponent } from '@ybyra/vue-quasar'
 import { useRoute } from 'vue-router'
 import { scopes } from './product/@routes'
 
@@ -177,9 +177,9 @@ The edit screen is nearly identical to view, but uses `Scope.edit` — so the bo
 
 <script setup lang="ts">
 import { productHandlers, productHooks } from '@/setup'
-import { Scope } from '@anhanga/core'
+import { Scope } from '@ybyra/core'
 import { productEvents, ProductSchema } from '@/domain/product/schema'
-import { DataForm, DataPage, useComponent } from '@anhanga/vue-quasar'
+import { DataForm, DataPage, useComponent } from '@ybyra/vue-quasar'
 import { useRoute } from 'vue-router'
 import { scopes } from './product/@routes'
 

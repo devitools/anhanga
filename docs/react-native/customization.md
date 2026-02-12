@@ -1,6 +1,6 @@
 # Customization
 
-Anhanga's React Native integration ships with ready-to-use components via `@anhanga/react-native`. Forms, tables, field renderers, and action buttons all work out of the box — **no customization required** to get a fully functional CRUD.
+Anhanga's React Native integration ships with ready-to-use components via `@ybyra/react-native`. Forms, tables, field renderers, and action buttons all work out of the box — **no customization required** to get a fully functional CRUD.
 
 ## When to Customize
 

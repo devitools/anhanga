@@ -1,6 +1,6 @@
 import type { ReactNode, ComponentType } from "react";
-import type { ResolvedAction, ResolvedField, UseDataFormReturn, ResolvedColumn } from "@anhanga/react";
-import type { PositionValue } from "@anhanga/core";
+import type { ResolvedAction, ResolvedField, UseDataFormReturn, ResolvedColumn } from "@ybyra/react";
+import type { PositionValue } from "@ybyra/core";
 
 export interface ActionButtonProps {
   action: { name: string; config: { variant: string }; execute: () => void };

@@ -12,19 +12,19 @@ pnpm build              # runs tsup in core, react, and demo
 pnpm test               # runs vitest in core and react
 
 # Test a single package
-pnpm --filter @anhanga/core test
-pnpm --filter @anhanga/react test
+pnpm --filter @ybyra/core test
+pnpm --filter @ybyra/react test
 
 # Run a single test file
-pnpm --filter @anhanga/core exec vitest run src/some.test.ts
+pnpm --filter @ybyra/core exec vitest run src/some.test.ts
 
 # Playground React Native (Expo)
-pnpm --filter @anhanga/playground start       # dev server
-pnpm --filter @anhanga/playground web         # web only
-pnpm --filter @anhanga/playground start:clear  # clear cache
+pnpm --filter @ybyra/playground start       # dev server
+pnpm --filter @ybyra/playground web         # web only
+pnpm --filter @ybyra/playground start:clear  # clear cache
 
 # Playground React Web (Vite)
-pnpm --filter @anhanga/playground-web dev     # dev server
+pnpm --filter @ybyra/playground-web dev     # dev server
 ```
 
 ## Architecture
@@ -33,11 +33,11 @@ pnpm --filter @anhanga/playground-web dev     # dev server
 
 | Package | Purpose | Bundler |
 |---------|---------|---------|
-| `@anhanga/core` | Schema definition, field types, actions, groups, type system | tsup (ESM) |
-| `@anhanga/react` | `useDataForm` hook, renderer registry, validation, proxy system | tsup (ESM) |
-| `@anhanga/demo` | Shared demo domain (person schema, services, settings, i18n) | tsup (ESM) |
-| `@anhanga/playground` | Expo app (`playground/react-native`) demonstrating the full stack | Expo/Metro |
-| `@anhanga/playground-web` | Vite + React web app (`playground/react-web`) demonstrating reuse of `@anhanga/demo` | Vite |
+| `@ybyra/core` | Schema definition, field types, actions, groups, type system | tsup (ESM) |
+| `@ybyra/react` | `useDataForm` hook, renderer registry, validation, proxy system | tsup (ESM) |
+| `@ybyra/demo` | Shared demo domain (person schema, services, settings, i18n) | tsup (ESM) |
+| `@ybyra/playground` | Expo app (`playground/react-native`) demonstrating the full stack | Expo/Metro |
+| `@ybyra/playground-web` | Vite + React web app (`playground/react-web`) demonstrating reuse of `@ybyra/demo` | Vite |
 
 ### Core (`packages/core/src`)
 
@@ -90,7 +90,7 @@ application/support/
 
 ### Playground React Native (`playground/react-native`)
 
-Expo app consuming `@anhanga/demo`. Contains only platform-specific presentation:
+Expo app consuming `@ybyra/demo`. Contains only platform-specific presentation:
 
 ```
 src/presentation/
@@ -101,7 +101,7 @@ src/presentation/
 
 ### Playground React Web (`playground/react-web`)
 
-Vite + React web app consuming `@anhanga/demo`. Demonstrates reuse of the same domain in a pure web context:
+Vite + React web app consuming `@ybyra/demo`. Demonstrates reuse of the same domain in a pure web context:
 
 ```
 src/presentation/
@@ -123,3 +123,17 @@ src/pages/
 - **`null` removes** inherited entries (actions), **`.hidden()` hides** them
 - **Scopes on fields and actions**: `.scopes()` whitelist, `.excludeScopes()` blacklist
 - **`.kind(Text.Email)`** scoped to field type for specialization
+
+## AI-Friendly Documentation
+
+For detailed conventions, skills, and examples, see the `ai-friendly/` folder:
+
+| Folder | Purpose |
+|--------|---------|
+| `ai-friendly/rules/` | 10 rule files covering architecture, schema, fields, events, handlers, hooks, services, i18n, scopes, conventions |
+| `ai-friendly/skills/` | Task-oriented generation guides: `create-domain`, `create-service`, `create-pages`, `add-field`, `add-action`, `add-i18n` |
+| `ai-friendly/frameworks/` | Framework-specific guides for React Web, React Native, Vue/Quasar, SvelteKit |
+| `ai-friendly/examples/` | Complete person domain examples (domain, service, pages per framework, i18n) |
+| `ai-friendly/prompts/` | Prompt templates: `new-crud`, `new-field`, `new-action` |
+
+When generating new domains, services, or pages, **always read the relevant skill first** for step-by-step instructions and real code examples.

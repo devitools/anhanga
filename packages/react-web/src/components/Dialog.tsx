@@ -1,7 +1,7 @@
 import { createContext, useCallback, useContext, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
-import type { DialogContract } from "@anhanga/core";
+import type { DialogContract } from "@ybyra/core";
 import { useTheme } from "../theme/context";
 import type { Theme } from "../theme/default";
 

@@ -1,4 +1,4 @@
-import { getRenderer } from "@anhanga/react";
+import { getRenderer } from "@ybyra/react";
 import { ds } from "../../support/ds";
 import type { FieldsGridProps } from "../../types";
 

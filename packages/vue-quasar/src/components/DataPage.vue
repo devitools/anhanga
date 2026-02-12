@@ -24,8 +24,8 @@
   lang="ts"
 >
 import { QCard, QCardSection, QIcon } from "quasar";
-import type { ScopeValue } from "@anhanga/core";
-import { isScopePermitted } from "@anhanga/core";
+import type { ScopeValue } from "@ybyra/core";
+import { isScopePermitted } from "@ybyra/core";
 import { computed } from "vue";
 import { useI18n } from "vue-i18n";
 

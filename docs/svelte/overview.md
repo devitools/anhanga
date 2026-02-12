@@ -1,6 +1,6 @@
 # Svelte + SvelteKit
 
-Anhanga works with Svelte through the `@anhanga/svelte` stores and the `@anhanga/sveltekit` UI components. This guide shows how to build a complete CRUD flow — **list, add, view, edit** — using SvelteKit file-based routing.
+Anhanga works with Svelte through the `@ybyra/svelte` stores and the `@ybyra/sveltekit` UI components. This guide shows how to build a complete CRUD flow — **list, add, view, edit** — using SvelteKit file-based routing.
 
 ## Architecture
 

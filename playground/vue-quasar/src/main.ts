@@ -7,7 +7,7 @@ import App from './App.vue'
 import { router } from './router'
 import { i18n } from './settings/i18n'
 import './settings/icons'
-import '@anhanga/vue-quasar'
+import '@ybyra/vue-quasar'
 
 const app = createApp(App)
 

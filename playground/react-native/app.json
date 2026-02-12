@@ -1,12 +1,12 @@
 {
   "expo": {
     "name": "Anhanga Playground",
-    "slug": "anhanga-playground",
+    "slug": "ybyra-playground",
     "version": "0.0.1",
     "orientation": "portrait",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
-    "scheme": "anhanga",
+    "scheme": "ybyra",
     "web": {
       "bundler": "metro",
       "output": "static"

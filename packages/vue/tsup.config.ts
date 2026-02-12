@@ -6,5 +6,5 @@ export default defineConfig({
   dts: true,
   clean: true,
   sourcemap: true,
-  external: ['vue', '@anhanga/core'],
+  external: ['vue', '@ybyra/core'],
 })

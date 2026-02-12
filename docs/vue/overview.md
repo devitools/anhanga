@@ -1,6 +1,6 @@
 # Vue + Quasar
 
-Anhanga works with Vue through the `@anhanga/vue` composables and the `@anhanga/vue-quasar` UI components. This guide shows how to build a complete CRUD flow — **list, add, view, edit** — using vue-router.
+Anhanga works with Vue through the `@ybyra/vue` composables and the `@ybyra/vue-quasar` UI components. This guide shows how to build a complete CRUD flow — **list, add, view, edit** — using vue-router.
 
 ## Architecture
 

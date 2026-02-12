@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { useDataForm, getRenderer } from '@anhanga/svelte'
-  import type { UseDataFormOptions } from '@anhanga/svelte'
-  import { fill } from '@anhanga/core'
+  import { useDataForm, getRenderer } from '@ybyra/svelte'
+  import type { UseDataFormOptions } from '@ybyra/svelte'
+  import { fill } from '@ybyra/core'
   import { translate, hasTranslation } from '../i18n'
   import ActionBar from './ActionBar.svelte'
 

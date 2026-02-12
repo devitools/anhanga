@@ -9,4 +9,4 @@ export { default as DataPage } from './components/DataPage.svelte'
 export { createComponent } from './contracts/component'
 export { configureI18n } from './i18n'
 
-export { configureIcons, resolveActionIcon, resolveGroupIcon } from '@anhanga/svelte'
+export { configureIcons, resolveActionIcon, resolveGroupIcon } from '@ybyra/svelte'

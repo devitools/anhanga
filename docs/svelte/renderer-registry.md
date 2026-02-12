@@ -5,7 +5,7 @@ The renderer registry maps field component types to Svelte components. When the 
 ## Registering Renderers
 
 ```typescript
-import { registerRenderers } from '@anhanga/svelte'
+import { registerRenderers } from '@ybyra/svelte'
 import TextField from './renderers/TextField.svelte'
 import NumberField from './renderers/NumberField.svelte'
 import DateField from './renderers/DateField.svelte'
@@ -30,7 +30,7 @@ registerRenderers({
 ## Getting a Renderer
 
 ```typescript
-import { getRenderer } from '@anhanga/svelte'
+import { getRenderer } from '@ybyra/svelte'
 
 const Renderer = getRenderer('text')
 // Returns the Svelte component, or undefined if not registered
@@ -41,7 +41,7 @@ const Renderer = getRenderer('text')
 For multi-tenant apps or testing, create an isolated registry:
 
 ```typescript
-import { createRegistry } from '@anhanga/svelte'
+import { createRegistry } from '@ybyra/svelte'
 
 const registry = createRegistry()
 
@@ -59,7 +59,7 @@ Every renderer receives `FieldRendererProps` as props:
 
 ```svelte
 <script lang="ts">
-import type { FieldRendererProps } from '@anhanga/svelte'
+import type { FieldRendererProps } from '@ybyra/svelte'
 
 let props = $props<FieldRendererProps>()
 </script>
@@ -102,7 +102,7 @@ Text fields have a `kind` property for specialization:
 
 ```svelte
 <script lang="ts">
-import type { FieldRendererProps } from '@anhanga/svelte'
+import type { FieldRendererProps } from '@ybyra/svelte'
 
 let props = $props<FieldRendererProps>()
 </script>
@@ -128,7 +128,7 @@ The `proxy.state` property provides the current visual state:
 
 ```svelte
 <script lang="ts">
-import type { FieldRendererProps } from '@anhanga/svelte'
+import type { FieldRendererProps } from '@ybyra/svelte'
 
 let props = $props<FieldRendererProps>()
 </script>

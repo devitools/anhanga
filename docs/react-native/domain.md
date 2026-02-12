@@ -12,7 +12,7 @@ Create a shared configuration that all domains inherit:
 
 ```typescript
 // src/settings/schema.ts
-import { configure, action, text, Scope, Position } from '@anhanga/core'
+import { configure, action, text, Scope, Position } from '@ybyra/core'
 
 export const schema = configure({
   identity: 'id',
@@ -41,7 +41,7 @@ Every domain created from this `schema` inherits the `id` field and all CRUD act
 
 ```typescript
 // src/domain/product/schema.ts
-import { text, Text, number, currency, toggle, group } from '@anhanga/core'
+import { text, Text, number, currency, toggle, group } from '@ybyra/core'
 import { schema } from '../../settings/schema'
 
 export const ProductSchema = schema.create('product', {
@@ -91,8 +91,8 @@ Handlers define what happens when the user clicks an action:
 
 ```typescript
 // src/domain/product/handlers.ts
-import type { ServiceContract, HandlerContext } from '@anhanga/core'
-import { Scope } from '@anhanga/core'
+import type { ServiceContract, HandlerContext } from '@ybyra/core'
+import { Scope } from '@ybyra/core'
 import { ProductSchema } from './schema'
 
 export function createProductHandlers(service: ServiceContract) {
@@ -148,8 +148,8 @@ Hooks define lifecycle behavior per scope — loading data on mount and fetching
 
 ```typescript
 // src/domain/product/hooks.ts
-import type { ServiceContract, BootstrapHookContext, FetchHookContext } from '@anhanga/core'
-import { Scope } from '@anhanga/core'
+import type { ServiceContract, BootstrapHookContext, FetchHookContext } from '@ybyra/core'
+import { Scope } from '@ybyra/core'
 import { ProductSchema } from './schema'
 
 export function createProductHooks(service: ServiceContract) {
@@ -190,8 +190,8 @@ The service lives in the `application/` layer — it depends on the domain schem
 
 ```typescript
 // src/application/product/productService.ts
-import { createService } from '@anhanga/core'
-import type { PersistenceContract } from '@anhanga/core'
+import { createService } from '@ybyra/core'
+import type { PersistenceContract } from '@ybyra/core'
 import { ProductSchema } from '../../domain/product/schema'
 
 export function createProductService(driver: PersistenceContract) {
@@ -207,7 +207,7 @@ Create a setup file that connects the persistence driver to your domain:
 
 ```typescript
 // src/setup.ts
-import { createLocalDriver } from '@anhanga/persistence'
+import { createLocalDriver } from '@ybyra/persistence'
 import { createProductService } from './application/product/productService'
 import { createProductHandlers } from './domain/product/handlers'
 import { createProductHooks } from './domain/product/hooks'

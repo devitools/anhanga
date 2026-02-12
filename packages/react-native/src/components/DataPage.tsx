@@ -2,8 +2,8 @@ import type { ReactNode } from "react";
 import { View, Text, ScrollView, StyleSheet, ActivityIndicator } from "react-native";
 import { useTranslation } from "react-i18next";
 import { Feather } from "@expo/vector-icons";
-import type { ScopeValue } from "@anhanga/core";
-import { isScopePermitted } from "@anhanga/core";
+import type { ScopeValue } from "@ybyra/core";
+import { isScopePermitted } from "@ybyra/core";
 import { useTheme } from "../theme/context";
 import type { Theme } from "../theme/default";
 

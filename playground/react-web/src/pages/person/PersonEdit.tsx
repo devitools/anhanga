@@ -1,8 +1,8 @@
 import { personHandlers, personHooks } from "@/demo";
 import { scopes } from "@/pages/person/@routes";
-import { Scope } from "@anhanga/core";
-import { allPermissions, personEvents, PersonSchema } from "@anhanga/demo";
-import { DataForm, DataPage, useComponent } from "@anhanga/react-web";
+import { Scope } from "@ybyra/core";
+import { allPermissions, personEvents, PersonSchema } from "@ybyra/demo";
+import { DataForm, DataPage, useComponent } from "@ybyra/react-web";
 import { useNavigate, useParams } from "react-router-dom";
 
 export function PersonEdit () {

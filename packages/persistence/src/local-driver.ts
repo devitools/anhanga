@@ -1,6 +1,6 @@
 import * as SQLite from 'expo-sqlite'
-import type { PersistenceContract, PersistenceMeta } from '@anhanga/core'
-import type { PaginateParams, PaginatedResult } from '@anhanga/core'
+import type { PersistenceContract, PersistenceMeta } from '@ybyra/core'
+import type { PaginateParams, PaginatedResult } from '@ybyra/core'
 import type { SQLiteBindValue } from 'expo-sqlite'
 
 const DATA_TYPE_MAP: Record<string, string> = {
@@ -58,7 +58,7 @@ async function ensureTable(db: SQLite.SQLiteDatabase, meta: PersistenceMeta): Pr
   }
 }
 
-export function createLocalDriver(dbName = 'anhanga.db'): PersistenceContract {
+export function createLocalDriver(dbName = 'ybyra.db'): PersistenceContract {
   let dbInstance: SQLite.SQLiteDatabase | null = null
 
   async function getDatabase(): Promise<SQLite.SQLiteDatabase> {

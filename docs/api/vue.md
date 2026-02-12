@@ -1,4 +1,4 @@
-# @anhanga/vue API
+# @ybyra/vue API
 
 Complete API reference for the Vue integration package.
 

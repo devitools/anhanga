@@ -8,7 +8,7 @@ export { ThemeProvider, useTheme } from './theme/context'
 export { defaultTheme } from './theme/default'
 export type { Theme } from './theme/default'
 
-export { configureIcons, resolveActionIcon, resolveGroupIcon } from '@anhanga/react'
+export { configureIcons, resolveActionIcon, resolveGroupIcon } from '@ybyra/react'
 
 export { createComponent, useComponent } from './contracts/component'
 export { configureI18n } from './i18n'

@@ -1,4 +1,4 @@
-import { Scope } from '@anhanga/core'
+import { Scope } from '@ybyra/core'
 
 export const scopes = {
   [Scope.index]: { path: '/person' },

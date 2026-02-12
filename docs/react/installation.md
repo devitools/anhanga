@@ -12,20 +12,20 @@ cd my-app
 ## Install dependencies
 
 ```bash
-pnpm add @anhanga/core @anhanga/react @anhanga/react-web
+pnpm add @ybyra/core @ybyra/react @ybyra/react-web
 pnpm add react-router-dom
 ```
 
 ## Configure i18n
 
-Anhanga resolves all labels through i18next. The base translations (`common.*` and `validation.*`) ship with `@anhanga/core` — action labels, table UI, dialog buttons, scope names, and validation messages.
+Anhanga resolves all labels through i18next. The base translations (`common.*` and `validation.*`) ship with `@ybyra/core` — action labels, table UI, dialog buttons, scope names, and validation messages.
 
 Start by initializing i18n with the base translations only:
 
 ```typescript
 // src/settings/i18n.ts
-import { ptBR } from '@anhanga/core'
-import { configureI18n } from '@anhanga/react'
+import { ptBR } from '@ybyra/core'
+import { configureI18n } from '@ybyra/react'
 
 export default configureI18n({
   resources: {

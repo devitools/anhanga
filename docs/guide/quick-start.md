@@ -3,7 +3,7 @@
 > **What you will build** — a complete schema-driven form in 5 steps. Here's the end result:
 
 ```typescript
-import { text, number, toggle } from '@anhanga/core'
+import { text, number, toggle } from '@ybyra/core'
 
 // schema definition
 const TaskSchema = schema.create('task', {
@@ -41,7 +41,7 @@ Create a shared configuration with identity, default actions, and common fields:
 
 ```typescript
 // settings/schema.ts
-import { configure, action, text, Scope, Position } from '@anhanga/core'
+import { configure, action, text, Scope, Position } from '@ybyra/core'
 
 export const schema = configure({
   identity: 'id',
@@ -75,7 +75,7 @@ The `configure()` function returns a `SchemaFactory`. Every domain schema create
 
 ```typescript
 // domain/person/schema.ts
-import { text, Text, date, toggle, group } from '@anhanga/core'
+import { text, Text, date, toggle, group } from '@ybyra/core'
 import { schema } from '../../settings/schema'
 
 export const PersonSchema = schema.create('person', {
@@ -145,7 +145,7 @@ export const personHandlers = PersonSchema.handlers({
 ::: code-group
 
 ```tsx [React]
-import { useDataForm, getRenderer } from '@anhanga/react'
+import { useDataForm, getRenderer } from '@ybyra/react'
 
 function PersonForm({ scope }) {
   const form = useDataForm({
@@ -177,8 +177,8 @@ function PersonForm({ scope }) {
 
 ```vue [Vue]
 <script setup lang="ts">
-import { useDataForm, getRenderer } from '@anhanga/vue'
-import { Scope } from '@anhanga/core'
+import { useDataForm, getRenderer } from '@ybyra/vue'
+import { Scope } from '@ybyra/core'
 
 const props = defineProps<{ scope: string }>()
 
@@ -215,8 +215,8 @@ const form = useDataForm({
 ```svelte [Svelte]
 <script lang="ts">
 import { goto } from '$app/navigation'
-import { Scope } from '@anhanga/core'
-import { createComponent, DataForm, DataPage } from '@anhanga/sveltekit'
+import { Scope } from '@ybyra/core'
+import { createComponent, DataForm, DataPage } from '@ybyra/sveltekit'
 
 const product = PersonSchema.provide()
 const component = createComponent(Scope.add, scopes, goto)

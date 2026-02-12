@@ -1,9 +1,9 @@
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { useDataForm } from "@anhanga/react";
-import type { UseDataFormOptions } from "@anhanga/react";
-import { fill, createFiller } from "@anhanga/core";
-import type { FillerRegistry } from "@anhanga/core";
+import { useDataForm } from "@ybyra/react";
+import type { UseDataFormOptions } from "@ybyra/react";
+import { fill, createFiller } from "@ybyra/core";
+import type { FillerRegistry } from "@ybyra/core";
 import { useTheme } from "../theme/context";
 import type { Theme } from "../theme/default";
 import { ActionBar } from "./ActionBar";

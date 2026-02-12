@@ -1,14 +1,20 @@
 {
-  "name": "anhanga",
+  "name": "ybyra",
   "private": true,
   "scripts": {
-    "build": "pnpm -r build",
+    "build": "pnpm -r --filter './packages/*' build",
     "test": "pnpm -r test",
-    "docs:dev": "pnpm --filter @anhanga/docs dev",
-    "docs:build": "pnpm --filter @anhanga/docs build",
-    "docs:preview": "pnpm --filter @anhanga/docs preview",
-    "docs:build:playgrounds": "VITE_BASE_URL=/anhanga/demo/react-web/ pnpm --filter @anhanga/playground-react-web build && VITE_BASE_URL=/anhanga/demo/vue-quasar/ pnpm --filter @anhanga/playground-vue-quasar build && SVELTE_BASE_URL=/anhanga/demo/sveltekit pnpm --filter @anhanga/playground-sveltekit build && EXPO_BASE_URL=/anhanga/demo/react-native pnpm --filter @anhanga/playground-react-native build:web",
+    "changeset": "changeset",
+    "version-packages": "changeset version",
+    "release": "pnpm build && changeset publish",
+    "docs:dev": "pnpm --filter @ybyra/docs dev",
+    "docs:build": "pnpm --filter @ybyra/docs build",
+    "docs:preview": "pnpm --filter @ybyra/docs preview",
+    "docs:build:playgrounds": "VITE_BASE_URL=/ybyra/demo/react-web/ pnpm --filter @ybyra/playground-react-web build && VITE_BASE_URL=/ybyra/demo/vue-quasar/ pnpm --filter @ybyra/playground-vue-quasar build && SVELTE_BASE_URL=/ybyra/demo/sveltekit pnpm --filter @ybyra/playground-sveltekit build && EXPO_BASE_URL=/ybyra/demo/react-native pnpm --filter @ybyra/playground-react-native build:web",
     "docs:assemble": "mkdir -p docs/.vitepress/dist/demo && cp -r playground/react-web/dist docs/.vitepress/dist/demo/react-web && cp -r playground/vue-quasar/dist docs/.vitepress/dist/demo/vue-quasar && cp -r playground/sveltekit/build docs/.vitepress/dist/demo/sveltekit && cp -r playground/react-native/dist docs/.vitepress/dist/demo/react-native && cp docs/spa-redirect.html docs/.vitepress/dist/404.html",
     "docs:build:full": "pnpm -r --filter './packages/*' build && pnpm docs:build:playgrounds && pnpm docs:build && pnpm docs:assemble"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.29.8"
   }
 }

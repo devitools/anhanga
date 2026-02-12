@@ -1,4 +1,4 @@
-import { Scope, type ScopeRoute, type ScopeValue } from "@anhanga/core";
+import { Scope, type ScopeRoute, type ScopeValue } from "@ybyra/core";
 
 export const scopes: Record<ScopeValue, ScopeRoute> = {
   [Scope.index]: { path: "/person" },

@@ -1,5 +1,5 @@
-import { configureI18n } from '@anhanga/vue-quasar'
-import { ptBR } from '@anhanga/core'
+import { configureI18n } from '@ybyra/vue-quasar'
+import { ptBR } from '@ybyra/core'
 import { ptBR as local } from './locales/pt-BR'
 
 export const i18n = configureI18n({

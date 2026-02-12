@@ -1,4 +1,4 @@
-import { configureIcons } from "@anhanga/react-native";
+import { configureIcons } from "@ybyra/react-native";
 
 configureIcons({
   common: {

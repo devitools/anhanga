@@ -4,9 +4,9 @@ import { base } from "$app/paths";
 import { page } from "$app/state";
 import { scopes } from "$lib/routes/person";
 import { personHandlers, personHooks } from "$lib/setup";
-import { Scope } from "@anhanga/core";
-import { allPermissions, personEvents, PersonSchema } from "@anhanga/demo";
-import { createComponent, DataForm, DataPage } from "@anhanga/sveltekit";
+import { Scope } from "@ybyra/core";
+import { allPermissions, personEvents, PersonSchema } from "@ybyra/demo";
+import { createComponent, DataForm, DataPage } from "@ybyra/sveltekit";
 
 const id = page.params.id;
 const person = PersonSchema.provide();

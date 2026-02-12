@@ -1,7 +1,7 @@
 import { vi } from 'vitest'
 import { createElement } from 'react'
 
-vi.mock('@anhanga/react-native', () => ({
+vi.mock('@ybyra/react-native', () => ({
   DataForm: (props: any) => createElement('div', { 'data-testid': 'DataForm', ...props }),
   DataTable: (props: any) => createElement('div', { 'data-testid': 'DataTable', ...props }),
   DataPage: ({ children }: any) => createElement('div', { 'data-testid': 'DataPage' }, children),
@@ -22,7 +22,7 @@ vi.mock('@anhanga/react-native', () => ({
   resolveGroupIcon: vi.fn(),
 }))
 
-vi.mock('@anhanga/persistence', () => ({
+vi.mock('@ybyra/persistence', () => ({
   createLocalDriver: vi.fn(() => ({
     initialize: vi.fn(),
     create: vi.fn(),

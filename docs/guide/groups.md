@@ -5,7 +5,7 @@ Groups organize related fields into visual sections within a form.
 ## Defining Groups
 
 ```typescript
-import { group, Icon } from '@anhanga/core'
+import { group, Icon } from '@ybyra/core'
 
 const PersonSchema = schema.create('person', {
   groups: {

@@ -10,7 +10,7 @@ vi.mock('react-router-dom', () => ({
   useParams: vi.fn(() => ({ id: '1' })),
 }))
 
-vi.mock('@anhanga/react-web', () => ({
+vi.mock('@ybyra/react-web', () => ({
   DataForm: () => createElement('div', { 'data-testid': 'DataForm' }),
   DataTable: () => createElement('div', { 'data-testid': 'DataTable' }),
   DataPage: ({ children }: any) => createElement('div', { 'data-testid': 'DataPage' }, children),
@@ -31,7 +31,7 @@ vi.mock('@anhanga/react-web', () => ({
   resolveGroupIcon: vi.fn(),
 }))
 
-vi.mock('@anhanga/persistence/web', () => ({
+vi.mock('@ybyra/persistence/web', () => ({
   createWebDriver: vi.fn(() => ({
     initialize: vi.fn(),
     create: vi.fn(),

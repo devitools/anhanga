@@ -43,7 +43,7 @@ Every field type inherits these methods from `FieldDefinition<T>`:
 ### text()
 
 ```typescript
-import { text, Text } from '@anhanga/core'
+import { text, Text } from '@ybyra/core'
 
 text()
   .kind(Text.Email)   // specialize the text input
@@ -70,7 +70,7 @@ Specialize text fields with `.kind()`:
 ### number()
 
 ```typescript
-import { number } from '@anhanga/core'
+import { number } from '@ybyra/core'
 
 number()
   .min(0)          // minimum value
@@ -81,7 +81,7 @@ number()
 ### currency()
 
 ```typescript
-import { currency } from '@anhanga/core'
+import { currency } from '@ybyra/core'
 
 currency()
   .min(0)
@@ -93,7 +93,7 @@ currency()
 ### date() / datetime()
 
 ```typescript
-import { date, datetime } from '@anhanga/core'
+import { date, datetime } from '@ybyra/core'
 
 date()
   .min('2020-01-01')   // minimum date
@@ -107,7 +107,7 @@ datetime()
 ### file() / image()
 
 ```typescript
-import { file, image } from '@anhanga/core'
+import { file, image } from '@ybyra/core'
 
 file()
   .accept('.pdf,.doc,.docx')   // accepted file types
@@ -121,7 +121,7 @@ image()
 ### select()
 
 ```typescript
-import { select } from '@anhanga/core'
+import { select } from '@ybyra/core'
 
 // Generic over the option value type
 select<string>()
@@ -133,7 +133,7 @@ select<number>()
 No type-specific methods. Use common methods only:
 
 ```typescript
-import { toggle, checkbox } from '@anhanga/core'
+import { toggle, checkbox } from '@ybyra/core'
 
 toggle().default(true).width(20)
 checkbox().default(false)

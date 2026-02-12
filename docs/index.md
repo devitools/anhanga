@@ -11,7 +11,7 @@ hero:
       link: /guide/introduction
     - theme: alt
       text: View on GitHub
-      link: https://github.com/devitools/anhanga
+      link: https://github.com/devitools/ybyra
 
 features:
   - title: Type-Safe
@@ -23,7 +23,7 @@ features:
   - title: i18n-Native
     details: Labels are never hardcoded. The translate function resolves keys following the {domain}.{field} convention.
   - title: Framework-Agnostic Core
-    details: "@anhanga/core has zero dependencies. Define schemas once, bring your own UI framework."
+    details: "@ybyra/core has zero dependencies. Define schemas once, bring your own UI framework."
   - title: Table Support
     details: useDataTable provides pagination, sorting, filtering, selection, and row actions out of the box.
 ---
@@ -37,7 +37,7 @@ Anhanga uses a **builder-pattern API** — not plain objects or JSON Schema. Eac
 ### Create a domain schema
 
 ```typescript
-import { text, Text, number, currency, toggle, group } from '@anhanga/core'
+import { text, Text, number, currency, toggle, group } from '@ybyra/core'
 
 const ProductSchema = schema.create('product', {
   fields: {
@@ -55,14 +55,14 @@ const ProductSchema = schema.create('product', {
 ::: code-group
 
 ```tsx [React]
-import { useDataForm } from '@anhanga/react'
+import { useDataForm } from '@ybyra/react'
 
 const form = useDataForm({ schema: ProductSchema.provide(), scope: 'add' })
 ```
 
 ```vue [Vue]
 <script setup>
-import { useDataForm } from '@anhanga/vue'
+import { useDataForm } from '@ybyra/vue'
 
 const form = useDataForm({ schema: ProductSchema.provide(), scope: 'add' })
 </script>
@@ -70,7 +70,7 @@ const form = useDataForm({ schema: ProductSchema.provide(), scope: 'add' })
 
 ```svelte [Svelte]
 <script>
-import { useDataForm } from '@anhanga/svelte'
+import { useDataForm } from '@ybyra/svelte'
 
 const form = useDataForm({ schema: ProductSchema.provide(), scope: 'add' })
 </script>

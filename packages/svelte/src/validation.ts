@@ -1,4 +1,4 @@
-import type { ValidationRule, FieldConfig, TranslateContract } from '@anhanga/core'
+import type { ValidationRule, FieldConfig, TranslateContract } from '@ybyra/core'
 
 type ValidatorFn = (value: unknown, params?: Record<string, unknown>, translate?: TranslateContract) => string | null
 

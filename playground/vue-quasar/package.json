@@ -1,5 +1,5 @@
 {
-  "name": "@anhanga/playground-vue-quasar",
+  "name": "@ybyra/playground-vue-quasar",
   "version": "0.0.1",
   "private": true,
   "type": "module",
@@ -11,10 +11,10 @@
     "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
-    "@anhanga/core": "workspace:*",
-    "@anhanga/vue-quasar": "workspace:*",
-    "@anhanga/demo": "workspace:*",
-    "@anhanga/persistence": "workspace:*",
+    "@ybyra/core": "workspace:*",
+    "@ybyra/vue-quasar": "workspace:*",
+    "@ybyra/demo": "workspace:*",
+    "@ybyra/persistence": "workspace:*",
     "@quasar/extras": "^1.16.0",
     "quasar": "^2.17.0",
     "vue": "^3.5.0",

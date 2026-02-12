@@ -1,7 +1,7 @@
 import { defineConfig } from 'vitest/config'
 import vue from '@vitejs/plugin-vue'
 import { resolve } from 'path'
-import { createSetupFiles } from "@anhanga/vue-quasar/testing/vitest"
+import { createSetupFiles } from "@ybyra/vue-quasar/testing/vitest"
 
 export default defineConfig({
   // @ts-ignore vitest 3.x types reference vite 6 while @vitejs/plugin-vue 6.x references vite 7

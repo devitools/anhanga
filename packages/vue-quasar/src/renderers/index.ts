@@ -1,4 +1,4 @@
-import { registerRenderers } from '@anhanga/vue'
+import { registerRenderers } from '@ybyra/vue'
 import TextField from './TextField.vue'
 import NumberField from './NumberField.vue'
 import ToggleField from './ToggleField.vue'

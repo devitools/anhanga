@@ -1,4 +1,4 @@
-import { allPermissions, PersonSchema } from "@anhanga/demo";
+import { allPermissions, PersonSchema } from "@ybyra/demo";
 import { describe, expect, it } from "vitest";
 
 const provided = PersonSchema.provide();

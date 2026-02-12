@@ -9,8 +9,8 @@ export default defineConfig({
   external: [
     'react',
     'react-dom',
-    '@anhanga/core',
-    '@anhanga/react',
+    '@ybyra/core',
+    '@ybyra/react',
     'i18next',
     'react-i18next',
   ],

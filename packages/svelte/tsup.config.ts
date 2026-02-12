@@ -6,5 +6,5 @@ export default defineConfig({
   dts: true,
   clean: true,
   sourcemap: true,
-  external: ['svelte', 'svelte/store', '@anhanga/core'],
+  external: ['svelte', 'svelte/store', '@ybyra/core'],
 })

@@ -1,9 +1,9 @@
-# Anhanga
+# Ybyra
 
-**Schema-driven forms for React.** Define your fields once, get type-safe forms, tables, validation, events, and actions — all from a single source of truth.
+**Schema-driven forms for React, Vue, and Svelte.** Define your fields once, get type-safe forms, tables, validation, events, and actions — all from a single source of truth.
 
 ```typescript
-import { text, Text, date, toggle, group, action, Position, Scope } from '@anhanga/core'
+import { text, Text, date, toggle, group, action, Position, Scope } from '@ybyra/core'
 
 const PersonSchema = schema.create('person', {
   groups: {
@@ -29,34 +29,67 @@ No labels in code. No boilerplate. Full TypeScript inference.
 
 ## Documentation
 
-Visit the [full documentation](https://devitools.github.io/anhanga/) for guides, API reference, and examples.
+Visit the [full documentation](https://devitools.github.io/ybyra/) for guides, API reference, and examples.
 
-- [Getting Started](https://devitools.github.io/anhanga/guide/introduction)
-- [Installation](https://devitools.github.io/anhanga/guide/installation)
-- [Quick Start](https://devitools.github.io/anhanga/guide/quick-start)
-- [API Reference](https://devitools.github.io/anhanga/api/core)
+- [Getting Started](https://devitools.github.io/ybyra/guide/introduction)
+- [Installation](https://devitools.github.io/ybyra/guide/installation)
+- [Quick Start](https://devitools.github.io/ybyra/guide/quick-start)
+- [API Reference](https://devitools.github.io/ybyra/api/core)
 
 ## Packages
 
 | Package | Description |
 |---------|-------------|
-| `@anhanga/core` | Schema definition, field types, actions, groups, type system |
-| `@anhanga/react` | `useDataForm` / `useDataTable` hooks, renderer registry, validation |
+| `@ybyra/core` | Schema definition, field types, actions, groups, type system |
+| `@ybyra/react` | `useDataForm` / `useDataTable` hooks, renderer registry, validation |
+| `@ybyra/vue` | `useDataForm` / `useDataTable` composables for Vue |
+| `@ybyra/svelte` | `useDataForm` / `useDataTable` stores for Svelte |
+| `@ybyra/react-web` | Ready-made field renderers for React web |
+| `@ybyra/react-native` | Ready-made field renderers for React Native |
+| `@ybyra/vue-quasar` | Ready-made field renderers for Vue + Quasar |
+| `@ybyra/sveltekit` | Ready-made field renderers for SvelteKit |
+| `@ybyra/persistence` | Local and web persistence drivers |
 
 ## Installation
 
 ```bash
-pnpm add @anhanga/core @anhanga/react
+pnpm add @ybyra/core @ybyra/react
 ```
 
 ## Development
 
 ```bash
 pnpm install
-pnpm build          # build core and react
+pnpm build          # build all packages
 pnpm test           # run all tests
 pnpm docs:dev       # documentation dev server
 ```
+
+## Publishing
+
+This project uses [changesets](https://github.com/changesets/changesets) for versioning and publishing.
+
+### Creating a changeset
+
+After making changes, run:
+
+```bash
+pnpm changeset
+```
+
+Follow the prompts to select which packages changed and the semver bump type (patch/minor/major).
+
+### Versioning and releasing
+
+```bash
+# Apply version bumps and generate changelogs
+pnpm version-packages
+
+# Build and publish to npm
+pnpm release
+```
+
+> **Note:** You must be logged in to npm (`npm login`) and be a member of the `@ybyra` organization.
 
 ## License
 

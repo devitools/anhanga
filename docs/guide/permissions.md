@@ -147,10 +147,10 @@ Each domain is independently controlled — a user can be read-only for persons 
 
 ## Full Access for Development
 
-During development, you can grant all permissions using the `allPermissions()` helper from `@anhanga/demo`:
+During development, you can grant all permissions using the `allPermissions()` helper from `@ybyra/demo`:
 
 ```typescript
-import { allPermissions } from '@anhanga/demo'
+import { allPermissions } from '@ybyra/demo'
 import { person } from './domain/person/schema'
 
 const permissions = allPermissions(person)
@@ -165,8 +165,8 @@ The `DataPage` component accepts an optional `permissions` prop that gates the e
 
 ::: code-group
 ```tsx [React]
-import { DataPage, DataForm } from '@anhanga/react-web'
-import { allPermissions, PersonSchema } from '@anhanga/demo'
+import { DataPage, DataForm } from '@ybyra/react-web'
+import { allPermissions, PersonSchema } from '@ybyra/demo'
 
 const person = PersonSchema.provide()
 

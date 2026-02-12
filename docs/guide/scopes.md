@@ -12,7 +12,7 @@ Scopes control the visibility of fields and actions based on the current context
 | `Scope.edit` | Update form |
 
 ```typescript
-import { Scope } from '@anhanga/core'
+import { Scope } from '@ybyra/core'
 ```
 
 ## Configuring Available Scopes

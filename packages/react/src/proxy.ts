@@ -1,4 +1,4 @@
-import type { FieldProxy, FieldConfig } from '@anhanga/core'
+import type { FieldProxy, FieldConfig } from '@ybyra/core'
 
 export interface StateProxyResult {
   proxy: Record<string, unknown>

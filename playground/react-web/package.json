@@ -1,5 +1,5 @@
 {
-  "name": "@anhanga/playground-react-web",
+  "name": "@ybyra/playground-react-web",
   "version": "0.0.1",
   "private": true,
   "type": "module",
@@ -11,11 +11,11 @@
     "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
-    "@anhanga/core": "workspace:*",
-    "@anhanga/demo": "workspace:*",
-    "@anhanga/persistence": "workspace:*",
-    "@anhanga/react": "workspace:*",
-    "@anhanga/react-web": "workspace:*",
+    "@ybyra/core": "workspace:*",
+    "@ybyra/demo": "workspace:*",
+    "@ybyra/persistence": "workspace:*",
+    "@ybyra/react": "workspace:*",
+    "@ybyra/react-web": "workspace:*",
     "i18next": "^25.8.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

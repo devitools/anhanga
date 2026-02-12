@@ -1,6 +1,6 @@
 import { vi } from 'vitest'
 
-vi.mock('@anhanga/persistence/web', () => ({
+vi.mock('@ybyra/persistence/web', () => ({
   createWebDriver: vi.fn(() => ({
     initialize: vi.fn(),
     create: vi.fn(),

@@ -1,6 +1,6 @@
-import { Scope } from "@anhanga/core";
-import { allPermissions, PersonSchema } from "@anhanga/demo";
-import { DataTable, DataPage, useComponent } from "@anhanga/react-native";
+import { Scope } from "@ybyra/core";
+import { allPermissions, PersonSchema } from "@ybyra/demo";
+import { DataTable, DataPage, useComponent } from "@ybyra/react-native";
 import { personHandlers, personHooks } from "../../src/demo";
 import { scopes } from "./@routes";
 

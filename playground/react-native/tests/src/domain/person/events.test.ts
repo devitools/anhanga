@@ -1,5 +1,5 @@
-import { createMockContext } from "@anhanga/core";
-import { personEvents, PersonSchema } from "@anhanga/demo";
+import { createMockContext } from "@ybyra/core";
+import { personEvents, PersonSchema } from "@ybyra/demo";
 import { describe, expect, it } from "vitest";
 
 describe("personEvents", () => {

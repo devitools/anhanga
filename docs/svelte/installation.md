@@ -12,7 +12,7 @@ cd my-app
 ## Install dependencies
 
 ```bash
-pnpm add @anhanga/core @anhanga/svelte @anhanga/sveltekit
+pnpm add @ybyra/core @ybyra/svelte @ybyra/sveltekit
 ```
 
 ## Configure SSR
@@ -26,14 +26,14 @@ export const ssr = false
 
 ## Configure i18n
 
-Anhanga resolves all labels through i18next. The base translations (`common.*` and `validation.*`) ship with `@anhanga/core` — action labels, table UI, dialog buttons, scope names, and validation messages.
+Anhanga resolves all labels through i18next. The base translations (`common.*` and `validation.*`) ship with `@ybyra/core` — action labels, table UI, dialog buttons, scope names, and validation messages.
 
 Start by initializing i18n with the base translations only:
 
 ```typescript
 // src/lib/settings/i18n.ts
-import { ptBR } from '@anhanga/core'
-import { configureI18n } from '@anhanga/svelte'
+import { ptBR } from '@ybyra/core'
+import { configureI18n } from '@ybyra/svelte'
 
 export default configureI18n({
   resources: {

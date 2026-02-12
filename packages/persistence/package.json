@@ -1,5 +1,5 @@
 {
-  "name": "@anhanga/persistence",
+  "name": "@ybyra/persistence",
   "version": "0.0.1",
   "type": "module",
   "main": "dist/index.js",
@@ -22,12 +22,18 @@
     "expo-sqlite": "~16.0.10"
   },
   "peerDependencies": {
-    "@anhanga/core": "workspace:*"
+    "@ybyra/core": "workspace:*"
   },
   "devDependencies": {
-    "@anhanga/core": "workspace:*",
+    "@ybyra/core": "workspace:*",
     "tsup": "^8.0.0",
     "typescript": "^5.7.0",
     "vitest": "^3.0.0"
+  },
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
   }
 }

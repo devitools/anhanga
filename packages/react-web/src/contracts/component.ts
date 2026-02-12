@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import type { ComponentContract, DialogContract, ScopeValue, ScopeRoute } from "@anhanga/core";
+import type { ComponentContract, DialogContract, ScopeValue, ScopeRoute } from "@ybyra/core";
 import i18n from "i18next";
 import { useDialog } from "../components/Dialog";
 

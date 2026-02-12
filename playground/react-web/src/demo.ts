@@ -1,5 +1,5 @@
-import { createWebDriver } from '@anhanga/persistence/web'
-import { createPersonService, createPersonHandlers, createPersonHooks } from '@anhanga/demo'
+import { createWebDriver } from '@ybyra/persistence/web'
+import { createPersonService, createPersonHandlers, createPersonHooks } from '@ybyra/demo'
 
 const driver = createWebDriver()
 export const personService = createPersonService(driver)

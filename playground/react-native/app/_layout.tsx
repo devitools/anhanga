@@ -1,6 +1,6 @@
 import "../src/settings/i18n";
 import "../src/settings/icons";
-import { withProviders } from "@anhanga/react-native";
+import { withProviders } from "@ybyra/react-native";
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View } from "react-native";

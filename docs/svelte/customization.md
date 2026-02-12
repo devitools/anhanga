@@ -1,6 +1,6 @@
 # Customization
 
-Anhanga's Svelte integration ships with ready-to-use components via `@anhanga/sveltekit`. Forms, tables, field renderers, and action buttons all work out of the box — **no customization required** to get a fully functional CRUD.
+Anhanga's Svelte integration ships with ready-to-use components via `@ybyra/sveltekit`. Forms, tables, field renderers, and action buttons all work out of the box — **no customization required** to get a fully functional CRUD.
 
 ## When to Customize
 

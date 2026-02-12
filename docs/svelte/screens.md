@@ -1,6 +1,6 @@
 # Screens
 
-This page shows how to build the 4 CRUD screens using SvelteKit file-based routing and the `@anhanga/sveltekit` components.
+This page shows how to build the 4 CRUD screens using SvelteKit file-based routing and the `@ybyra/sveltekit` components.
 
 ## Route Map
 
@@ -8,7 +8,7 @@ First, map each scope to its SvelteKit route path:
 
 ```typescript
 // src/lib/routes/product.ts
-import { Scope, type ScopeRoute, type ScopeValue } from '@anhanga/core'
+import { Scope, type ScopeRoute, type ScopeValue } from '@ybyra/core'
 
 export const scopes: Record<ScopeValue, ScopeRoute> = {
   [Scope.index]: { path: '/product' },
@@ -28,7 +28,7 @@ The root layout imports global styles and settings as side-effects:
 <!-- src/routes/+layout.svelte -->
 <script>
 import '../app.css'
-import '@anhanga/sveltekit/styles.css'
+import '@ybyra/sveltekit/styles.css'
 import '$lib/settings/icons'
 import '$lib/settings/i18n-setup'
 
@@ -55,9 +55,9 @@ The list screen uses `DataTable` with `Scope.index`. It renders columns marked w
 <!-- src/routes/product/+page.svelte -->
 <script lang="ts">
 import { goto } from '$app/navigation'
-import { Scope } from '@anhanga/core'
-import { ProductSchema } from '@anhanga/demo'
-import { DataTable, DataPage, createComponent } from '@anhanga/sveltekit'
+import { Scope } from '@ybyra/core'
+import { ProductSchema } from '@ybyra/demo'
+import { DataTable, DataPage, createComponent } from '@ybyra/sveltekit'
 import { productHandlers, productHooks } from '$lib/setup'
 import { scopes } from '$lib/routes/product'
 
@@ -91,9 +91,9 @@ The add screen uses `DataForm` with `Scope.add`. Fields marked with `.excludeSco
 <!-- src/routes/product/add/+page.svelte -->
 <script lang="ts">
 import { goto } from '$app/navigation'
-import { Scope } from '@anhanga/core'
-import { productEvents, ProductSchema } from '@anhanga/demo'
-import { createComponent, DataForm, DataPage } from '@anhanga/sveltekit'
+import { Scope } from '@ybyra/core'
+import { productEvents, ProductSchema } from '@ybyra/demo'
+import { createComponent, DataForm, DataPage } from '@ybyra/sveltekit'
 import { productHandlers, productHooks } from '$lib/setup'
 import { scopes } from '$lib/routes/product'
 
@@ -128,9 +128,9 @@ The view screen loads an existing record by ID and renders it read-only. The `bo
 <script lang="ts">
 import { goto } from '$app/navigation'
 import { page } from '$app/state'
-import { Scope } from '@anhanga/core'
-import { productEvents, ProductSchema } from '@anhanga/demo'
-import { createComponent, DataForm, DataPage } from '@anhanga/sveltekit'
+import { Scope } from '@ybyra/core'
+import { productEvents, ProductSchema } from '@ybyra/demo'
+import { createComponent, DataForm, DataPage } from '@ybyra/sveltekit'
 import { productHandlers, productHooks } from '$lib/setup'
 import { scopes } from '$lib/routes/product'
 
@@ -163,9 +163,9 @@ The edit screen is nearly identical to view, but uses `Scope.edit` — so the bo
 <script lang="ts">
 import { goto } from '$app/navigation'
 import { page } from '$app/state'
-import { Scope } from '@anhanga/core'
-import { productEvents, ProductSchema } from '@anhanga/demo'
-import { createComponent, DataForm, DataPage } from '@anhanga/sveltekit'
+import { Scope } from '@ybyra/core'
+import { productEvents, ProductSchema } from '@ybyra/demo'
+import { createComponent, DataForm, DataPage } from '@ybyra/sveltekit'
 import { productHandlers, productHooks } from '$lib/setup'
 import { scopes } from '$lib/routes/product'
 

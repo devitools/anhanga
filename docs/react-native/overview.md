@@ -1,6 +1,6 @@
 # React Native
 
-Anhanga works with React Native through the `@anhanga/react` hooks and the `@anhanga/react-native` UI components. This
+Anhanga works with React Native through the `@ybyra/react` hooks and the `@ybyra/react-native` UI components. This
 guide shows how to build a complete CRUD flow — **list, add, view, edit** — using Expo Router.
 
 ## Architecture

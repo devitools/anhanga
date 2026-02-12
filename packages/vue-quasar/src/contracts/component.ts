@@ -1,4 +1,4 @@
-import type { ComponentContract, DialogContract, ScopeValue, ScopeRoute } from '@anhanga/core'
+import type { ComponentContract, DialogContract, ScopeValue, ScopeRoute } from '@ybyra/core'
 import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { Notify, Dialog, Loading } from 'quasar'

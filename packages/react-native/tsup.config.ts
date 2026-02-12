@@ -9,8 +9,8 @@ export default defineConfig({
   external: [
     'react',
     'react-native',
-    '@anhanga/core',
-    '@anhanga/react',
+    '@ybyra/core',
+    '@ybyra/react',
     '@expo/vector-icons',
     'expo-router',
     'i18next',

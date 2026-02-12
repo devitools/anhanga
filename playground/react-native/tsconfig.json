@@ -3,10 +3,10 @@
   "compilerOptions": {
     "strict": true,
     "paths": {
-      "@anhanga/core": ["../../packages/core/src"],
-      "@anhanga/demo": ["../../packages/demo/src"],
-      "@anhanga/react": ["../../packages/react/src"],
-      "@anhanga/persistence": ["../../packages/persistence/src"]
+      "@ybyra/core": ["../../packages/core/src"],
+      "@ybyra/demo": ["../../packages/demo/src"],
+      "@ybyra/react": ["../../packages/react/src"],
+      "@ybyra/persistence": ["../../packages/persistence/src"]
     }
   },
   "include": [

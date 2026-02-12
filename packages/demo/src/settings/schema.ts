@@ -1,4 +1,4 @@
-import { configure, action, text, Scope, Position } from "@anhanga/core";
+import { configure, action, text, Scope, Position } from "@ybyra/core";
 
 export const schema = configure({
   identity: "id",

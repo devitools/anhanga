@@ -12,13 +12,13 @@ cd my-app
 ## Install dependencies
 
 ```bash
-pnpm add @anhanga/core @anhanga/react-native @anhanga/persistence
+pnpm add @ybyra/core @ybyra/react-native @ybyra/persistence
 pnpm add expo-router @expo/vector-icons
 ```
 
 ## Configure `app.json`
 
-Enable Expo Router, SQLite (used by `@anhanga/persistence`), and typed routes:
+Enable Expo Router, SQLite (used by `@ybyra/persistence`), and typed routes:
 
 ```json
 {
@@ -54,14 +54,14 @@ Set the entry point to Expo Router:
 
 ## Configure i18n
 
-Anhanga resolves all labels through i18next. The base translations (`common.*` and `validation.*`) ship with `@anhanga/core` — action labels, table UI, dialog buttons, scope names, and validation messages.
+Anhanga resolves all labels through i18next. The base translations (`common.*` and `validation.*`) ship with `@ybyra/core` — action labels, table UI, dialog buttons, scope names, and validation messages.
 
 Start by initializing i18n with the base translations only:
 
 ```typescript
 // src/settings/i18n.ts
-import { ptBR } from '@anhanga/core'
-import { configureI18n } from '@anhanga/react-native'
+import { ptBR } from '@ybyra/core'
+import { configureI18n } from '@ybyra/react-native'
 
 export default configureI18n({
   resources: {
@@ -82,7 +82,7 @@ Create a theme file that extends the default theme. This allows customization of
 
 ```typescript
 // src/settings/theme.ts
-import { defaultTheme } from '@anhanga/react-native'
+import { defaultTheme } from '@ybyra/react-native'
 
 export const theme = { ...defaultTheme }
 ```

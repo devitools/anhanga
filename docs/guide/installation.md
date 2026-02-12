@@ -13,15 +13,15 @@
 ::: code-group
 
 ```bash [pnpm]
-pnpm add @anhanga/core @anhanga/react
+pnpm add @ybyra/core @ybyra/react
 ```
 
 ```bash [npm]
-npm install @anhanga/core @anhanga/react
+npm install @ybyra/core @ybyra/react
 ```
 
 ```bash [yarn]
-yarn add @anhanga/core @anhanga/react
+yarn add @ybyra/core @ybyra/react
 ```
 
 :::
@@ -31,15 +31,15 @@ yarn add @anhanga/core @anhanga/react
 ::: code-group
 
 ```bash [pnpm]
-pnpm add @anhanga/core @anhanga/vue
+pnpm add @ybyra/core @ybyra/vue
 ```
 
 ```bash [npm]
-npm install @anhanga/core @anhanga/vue
+npm install @ybyra/core @ybyra/vue
 ```
 
 ```bash [yarn]
-yarn add @anhanga/core @anhanga/vue
+yarn add @ybyra/core @ybyra/vue
 ```
 
 :::
@@ -49,34 +49,34 @@ yarn add @anhanga/core @anhanga/vue
 ::: code-group
 
 ```bash [pnpm]
-pnpm add @anhanga/core @anhanga/svelte
+pnpm add @ybyra/core @ybyra/svelte
 ```
 
 ```bash [npm]
-npm install @anhanga/core @anhanga/svelte
+npm install @ybyra/core @ybyra/svelte
 ```
 
 ```bash [yarn]
-yarn add @anhanga/core @anhanga/svelte
+yarn add @ybyra/core @ybyra/svelte
 ```
 
 :::
 
-`@anhanga/core` has **zero dependencies**. `@anhanga/react` requires React 18+, `@anhanga/vue` requires Vue 3.4+, and `@anhanga/svelte` requires Svelte 5+ as peer dependencies.
+`@ybyra/core` has **zero dependencies**. `@ybyra/react` requires React 18+, `@ybyra/vue` requires Vue 3.4+, and `@ybyra/svelte` requires Svelte 5+ as peer dependencies.
 
 ## Package Overview
 
 | Package | What it provides |
 |---------|-----------------|
-| `@anhanga/core` | Schema definition, field types, actions, groups, scopes, type inference |
-| `@anhanga/react` | `useDataForm`, `useDataTable`, renderer registry, validation (React hooks) |
-| `@anhanga/react-web` | `DataForm`, `DataTable`, `DataPage`, `useComponent`, theme (React + Shadcn) |
-| `@anhanga/react-native` | `DataForm`, `DataTable`, `DataPage`, `useComponent`, theme (React Native + Expo) |
-| `@anhanga/vue` | `useDataForm`, `useDataTable`, renderer registry, validation (Vue composables) |
-| `@anhanga/vue-quasar` | `DataForm`, `DataTable`, `DataPage`, `useComponent` (Vue + Quasar) |
-| `@anhanga/svelte` | `useDataForm`, `useDataTable`, renderer registry, validation (Svelte stores) |
-| `@anhanga/sveltekit` | `DataForm`, `DataTable`, `DataPage`, `createComponent` (SvelteKit) |
-| `@anhanga/persistence` | `createLocalDriver`, `createWebDriver` — persistence drivers |
-| `@anhanga/demo` | Shared demo domain — person schema, services, settings, i18n |
+| `@ybyra/core` | Schema definition, field types, actions, groups, scopes, type inference |
+| `@ybyra/react` | `useDataForm`, `useDataTable`, renderer registry, validation (React hooks) |
+| `@ybyra/react-web` | `DataForm`, `DataTable`, `DataPage`, `useComponent`, theme (React + Shadcn) |
+| `@ybyra/react-native` | `DataForm`, `DataTable`, `DataPage`, `useComponent`, theme (React Native + Expo) |
+| `@ybyra/vue` | `useDataForm`, `useDataTable`, renderer registry, validation (Vue composables) |
+| `@ybyra/vue-quasar` | `DataForm`, `DataTable`, `DataPage`, `useComponent` (Vue + Quasar) |
+| `@ybyra/svelte` | `useDataForm`, `useDataTable`, renderer registry, validation (Svelte stores) |
+| `@ybyra/sveltekit` | `DataForm`, `DataTable`, `DataPage`, `createComponent` (SvelteKit) |
+| `@ybyra/persistence` | `createLocalDriver`, `createWebDriver` — persistence drivers |
+| `@ybyra/demo` | Shared demo domain — person schema, services, settings, i18n |
 
-You can use `@anhanga/core` standalone if you're building your own UI integration. `@anhanga/react`, `@anhanga/vue`, and `@anhanga/svelte` provide ready-to-use integrations for their respective frameworks.
+You can use `@ybyra/core` standalone if you're building your own UI integration. `@ybyra/react`, `@ybyra/vue`, and `@ybyra/svelte` provide ready-to-use integrations for their respective frameworks.

@@ -1,6 +1,6 @@
 <script lang="ts">
-  import type { ResolvedAction } from '@anhanga/svelte'
-  import type { PositionValue } from '@anhanga/core'
+  import type { ResolvedAction } from '@ybyra/svelte'
+  import type { PositionValue } from '@ybyra/core'
   import ActionButton from './ActionButton.svelte'
 
   let { actions, position, domain }: {

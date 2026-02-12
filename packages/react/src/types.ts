@@ -10,7 +10,7 @@ import type {
   FormContract,
   TableContract,
   TranslateContract,
-} from '@anhanga/core'
+} from '@ybyra/core'
 
 export interface FieldRendererProps {
   domain: string

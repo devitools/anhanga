@@ -6,8 +6,8 @@ Composable for schema-driven data tables with pagination, sorting, filtering, an
 
 ```vue
 <script setup lang="ts">
-import { useDataTable } from '@anhanga/vue'
-import { Scope } from '@anhanga/core'
+import { useDataTable } from '@ybyra/vue'
+import { Scope } from '@ybyra/core'
 
 const table = useDataTable({
   schema: PersonSchema.provide(),

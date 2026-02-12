@@ -5,7 +5,7 @@ Anhanga provides full TypeScript inference. `InferRecord` extracts a typed recor
 ## InferRecord
 
 ```typescript
-import type { InferRecord } from '@anhanga/core'
+import type { InferRecord } from '@ybyra/core'
 
 type PersonRecord = InferRecord<typeof PersonSchema>
 // {

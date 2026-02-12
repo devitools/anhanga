@@ -5,7 +5,7 @@ Actions represent operations that users can trigger — create, update, delete, 
 ## Defining Actions
 
 ```typescript
-import { action, Position, Scope, Icon } from '@anhanga/core'
+import { action, Position, Scope, Icon } from '@ybyra/core'
 
 const PersonSchema = schema.create('person', {
   fields: { /* ... */ },
@@ -76,7 +76,7 @@ action().order(-1)    // negative numbers appear before 0
 Attach an icon to an action:
 
 ```typescript
-import { Icon } from '@anhanga/core'
+import { Icon } from '@ybyra/core'
 
 action().icon(Icon.Save)
 action().icon(Icon.Trash)

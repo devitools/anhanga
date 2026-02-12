@@ -1,8 +1,8 @@
 import { View, Text, Pressable, StyleSheet } from "react-native";
 import { useTranslation } from "react-i18next";
 import { Feather } from "@expo/vector-icons";
-import type { PositionValue } from "@anhanga/core";
-import { resolveActionLabel, resolveActionIcon } from "@anhanga/react";
+import type { PositionValue } from "@ybyra/core";
+import { resolveActionLabel, resolveActionIcon } from "@ybyra/react";
 import { useTheme } from "../theme/context";
 import type { Theme } from "../theme/default";
 import { ds } from "../support/ds";

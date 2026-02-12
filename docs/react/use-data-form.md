@@ -5,8 +5,8 @@ The main React hook for schema-driven forms. It manages field state, applies eve
 ## Basic Usage
 
 ```tsx
-import { useDataForm, getRenderer } from '@anhanga/react'
-import { Scope } from '@anhanga/core'
+import { useDataForm, getRenderer } from '@ybyra/react'
+import { Scope } from '@ybyra/core'
 
 function PersonForm() {
   const form = useDataForm({

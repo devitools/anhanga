@@ -1,6 +1,6 @@
 # Testing
 
-Anhanga provides testing helpers that mock React Native, Expo, and `@anhanga/react-native` internals so you can run tests with Vitest in a plain Node environment — no emulator needed.
+Anhanga provides testing helpers that mock React Native, Expo, and `@ybyra/react-native` internals so you can run tests with Vitest in a plain Node environment — no emulator needed.
 
 ## Install dev dependencies
 
@@ -10,12 +10,12 @@ pnpm add -D vitest @vitest/coverage-v8
 
 ## Configure Vitest
 
-Create a `vitest.config.mts` that uses the helpers from `@anhanga/react-native/testing/vitest`:
+Create a `vitest.config.mts` that uses the helpers from `@ybyra/react-native/testing/vitest`:
 
 ```typescript
 // vitest.config.mts
 import { defineConfig } from 'vitest/config'
-import { createAliases, createSetupFiles } from '@anhanga/react-native/testing/vitest'
+import { createAliases, createSetupFiles } from '@ybyra/react-native/testing/vitest'
 
 export default defineConfig({
   esbuild: {
@@ -36,7 +36,7 @@ export default defineConfig({
 })
 ```
 
-`createAliases()` maps `react-native`, `expo-router`, `expo-status-bar`, `expo-sqlite`, `@expo/vector-icons`, and `react-i18next` to lightweight mocks. `createSetupFiles()` registers global mocks for `@anhanga/react-native` components (`DataForm`, `DataTable`, `Page`, `useComponent`, `withProviders`) and `@anhanga/persistence`.
+`createAliases()` maps `react-native`, `expo-router`, `expo-status-bar`, `expo-sqlite`, `@expo/vector-icons`, and `react-i18next` to lightweight mocks. `createSetupFiles()` registers global mocks for `@ybyra/react-native` components (`DataForm`, `DataTable`, `Page`, `useComponent`, `withProviders`) and `@ybyra/persistence`.
 
 ## Testing settings
 
@@ -59,7 +59,7 @@ describe('src/settings/i18n', () => {
 ```typescript
 // tests/src/settings/theme.test.ts
 import { describe, it, expect } from 'vitest'
-import { defaultTheme } from '@anhanga/react-native'
+import { defaultTheme } from '@ybyra/react-native'
 import { theme } from '../../../src/settings/theme'
 
 describe('src/settings/theme', () => {

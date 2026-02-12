@@ -6,8 +6,8 @@ Store for schema-driven data tables with pagination, sorting, filtering, and sel
 
 ```svelte
 <script lang="ts">
-import { useDataTable } from '@anhanga/svelte'
-import { Scope } from '@anhanga/core'
+import { useDataTable } from '@ybyra/svelte'
+import { Scope } from '@ybyra/core'
 
 const tableStore = useDataTable({
   schema: PersonSchema.provide(),

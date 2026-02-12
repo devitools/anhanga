@@ -1,6 +1,6 @@
 # Customization
 
-Anhanga's React integration ships with ready-to-use components via `@anhanga/react-web`. Forms, tables, field renderers, and action buttons all work out of the box — **no customization required** to get a fully functional CRUD.
+Anhanga's React integration ships with ready-to-use components via `@ybyra/react-web`. Forms, tables, field renderers, and action buttons all work out of the box — **no customization required** to get a fully functional CRUD.
 
 ## When to Customize
 

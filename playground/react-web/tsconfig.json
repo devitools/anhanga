@@ -4,12 +4,12 @@
     "jsx": "react-jsx",
     "paths": {
       "@/*": ["./src/*"],
-      "@anhanga/core": ["../../packages/core/src"],
-      "@anhanga/demo": ["../../packages/demo/src"],
-      "@anhanga/demo/*": ["../../packages/demo/src/*"],
-      "@anhanga/persistence/*": ["../../packages/persistence/src/*"],
-      "@anhanga/react": ["../../packages/react/src"],
-      "@anhanga/react-web": ["../../packages/react-web/src"]
+      "@ybyra/core": ["../../packages/core/src"],
+      "@ybyra/demo": ["../../packages/demo/src"],
+      "@ybyra/demo/*": ["../../packages/demo/src/*"],
+      "@ybyra/persistence/*": ["../../packages/persistence/src/*"],
+      "@ybyra/react": ["../../packages/react/src"],
+      "@ybyra/react-web": ["../../packages/react-web/src"]
     }
   },
   "include": ["src"]

@@ -1,4 +1,4 @@
-import type { ComponentContract, ScopeValue, ScopeRoute } from '@anhanga/core'
+import type { ComponentContract, ScopeValue, ScopeRoute } from '@ybyra/core'
 
 function resolvePath (path: string, params?: Record<string, unknown>): string {
   if (!params) return path

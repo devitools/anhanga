@@ -8,11 +8,11 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      '@anhanga/core': resolve(__dirname, '../../packages/core/src'),
-      '@anhanga/demo': resolve(__dirname, '../../packages/demo/src'),
-      '@anhanga/react-native': resolve(__dirname, '../../packages/react-native/src'),
-      '@anhanga/react': resolve(__dirname, '../../packages/react/src'),
-      '@anhanga/persistence': resolve(__dirname, '../../packages/persistence/src'),
+      '@ybyra/core': resolve(__dirname, '../../packages/core/src'),
+      '@ybyra/demo': resolve(__dirname, '../../packages/demo/src'),
+      '@ybyra/react-native': resolve(__dirname, '../../packages/react-native/src'),
+      '@ybyra/react': resolve(__dirname, '../../packages/react/src'),
+      '@ybyra/persistence': resolve(__dirname, '../../packages/persistence/src'),
       ...createAliases(),
     },
   },

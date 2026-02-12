@@ -1,6 +1,6 @@
 # React + Shadcn
 
-Anhanga works with React Web through the `@anhanga/react` hooks and the `@anhanga/react-web` UI components. This guide shows how to build a complete CRUD flow — **list, add, view, edit** — using react-router-dom.
+Anhanga works with React Web through the `@ybyra/react` hooks and the `@ybyra/react-web` UI components. This guide shows how to build a complete CRUD flow — **list, add, view, edit** — using react-router-dom.
 
 ## Architecture
 

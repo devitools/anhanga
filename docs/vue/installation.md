@@ -12,7 +12,7 @@ cd my-app
 ## Install dependencies
 
 ```bash
-pnpm add @anhanga/core @anhanga/vue @anhanga/vue-quasar
+pnpm add @ybyra/core @ybyra/vue @ybyra/vue-quasar
 pnpm add vue-router quasar @quasar/extras
 pnpm add -D @quasar/vite-plugin
 ```
@@ -37,14 +37,14 @@ export default defineConfig({
 
 ## Configure i18n
 
-Anhanga resolves all labels through vue-i18n. The base translations (`common.*` and `validation.*`) ship with `@anhanga/core` — action labels, table UI, dialog buttons, scope names, and validation messages.
+Anhanga resolves all labels through vue-i18n. The base translations (`common.*` and `validation.*`) ship with `@ybyra/core` — action labels, table UI, dialog buttons, scope names, and validation messages.
 
 Start by initializing i18n with the base translations only:
 
 ```typescript
 // src/settings/i18n.ts
-import { ptBR } from '@anhanga/core'
-import { configureI18n } from '@anhanga/vue'
+import { ptBR } from '@ybyra/core'
+import { configureI18n } from '@ybyra/vue'
 
 export default configureI18n({
   resources: {

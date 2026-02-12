@@ -125,9 +125,9 @@
 import { QSpinner, QSeparator, QBtn } from 'quasar'
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { useDataForm, getRenderer } from '@anhanga/vue'
-import type { UseDataFormOptions } from '@anhanga/vue'
-import { fill } from '@anhanga/core'
+import { useDataForm, getRenderer } from '@ybyra/vue'
+import type { UseDataFormOptions } from '@ybyra/vue'
+import { fill } from '@ybyra/core'
 import ActionBar from './ActionBar.vue'
 
 interface DataFormProps extends UseDataFormOptions {

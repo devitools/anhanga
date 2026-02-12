@@ -1,4 +1,4 @@
-import { ptBR } from '@anhanga/core'
+import { ptBR } from '@ybyra/core'
 import { ptBR as local } from './locales/pt-BR'
 
 const messages = { ...ptBR, ...local } as Record<string, unknown>

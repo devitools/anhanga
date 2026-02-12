@@ -1,6 +1,6 @@
 # Screens
 
-This page shows how to build the 4 CRUD screens using Expo Router and the `@anhanga/react-native` components.
+This page shows how to build the 4 CRUD screens using Expo Router and the `@ybyra/react-native` components.
 
 ## Route Map
 
@@ -8,7 +8,7 @@ First, map each scope to its Expo Router path:
 
 ```typescript
 // app/product/@routes.ts
-import { Scope, ScopeRoute, ScopeValue } from '@anhanga/core'
+import { Scope, ScopeRoute, ScopeValue } from '@ybyra/core'
 
 export const scopes: Record<ScopeValue, ScopeRoute> = {
   [Scope.index]: { path: '/product' },
@@ -27,7 +27,7 @@ The root layout uses `withProviders` to wrap the app with `ThemeProvider` and `D
 ```tsx
 // app/_layout.tsx
 import '../src/settings/i18n'
-import { withProviders } from '@anhanga/react-native'
+import { withProviders } from '@ybyra/react-native'
 import { Stack } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
 import { StyleSheet, View } from 'react-native'
@@ -55,8 +55,8 @@ The list screen uses `DataTable` with `Scope.index`. It renders columns marked w
 
 ```tsx
 // app/product/index.tsx
-import { Scope } from '@anhanga/core'
-import { Page, DataTable, useComponent } from '@anhanga/react-native'
+import { Scope } from '@ybyra/core'
+import { Page, DataTable, useComponent } from '@ybyra/react-native'
 import { ProductSchema } from '../../src/domain/product/schema'
 import { productHandlers, productHooks } from '../../src/setup'
 import { scopes } from './@routes'
@@ -91,8 +91,8 @@ The add screen uses `DataForm` with `Scope.add`. Fields marked with `.excludeSco
 
 ```tsx
 // app/product/add.tsx
-import { Scope } from '@anhanga/core'
-import { Page, DataForm, useComponent } from '@anhanga/react-native'
+import { Scope } from '@ybyra/core'
+import { Page, DataForm, useComponent } from '@ybyra/react-native'
 import { ProductSchema } from '../../src/domain/product/schema'
 import { productEvents } from '../../src/domain/product/events'
 import { productHandlers, productHooks } from '../../src/setup'
@@ -129,8 +129,8 @@ The view screen loads an existing record by ID and renders it read-only. The `bo
 ```tsx
 // app/product/view/[id].tsx
 import { useLocalSearchParams } from 'expo-router'
-import { Scope } from '@anhanga/core'
-import { Page, DataForm, useComponent } from '@anhanga/react-native'
+import { Scope } from '@ybyra/core'
+import { Page, DataForm, useComponent } from '@ybyra/react-native'
 import { ProductSchema } from '../../../src/domain/product/schema'
 import { productEvents } from '../../../src/domain/product/events'
 import { productHandlers, productHooks } from '../../../src/setup'
@@ -165,8 +165,8 @@ The edit screen is nearly identical to view, but uses `Scope.edit` — so the bo
 ```tsx
 // app/product/edit/[id].tsx
 import { useLocalSearchParams } from 'expo-router'
-import { Scope } from '@anhanga/core'
-import { Page, DataForm, useComponent } from '@anhanga/react-native'
+import { Scope } from '@ybyra/core'
+import { Page, DataForm, useComponent } from '@ybyra/react-native'
 import { ProductSchema } from '../../../src/domain/product/schema'
 import { productEvents } from '../../../src/domain/product/events'
 import { productHandlers, productHooks } from '../../../src/setup'
