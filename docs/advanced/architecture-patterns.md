@@ -111,17 +111,17 @@ export function createDefault(service: ServiceContract) {
     create({ state, form, component }) {
       if (!form?.validate()) return
       service.create(state)
-      component.toast.success('Created!')
+      component.toast.success('common.actions.create.success')
       component.navigator.push(component.scopes[Scope.index].path)
     },
     update({ state, form, component }) {
       if (!form?.validate()) return
       service.update(state.id, state)
-      component.toast.success('Updated!')
+      component.toast.success('common.actions.update.success')
     },
     destroy({ state, component }) {
       service.destroy(state.id)
-      component.toast.success('Deleted!')
+      component.toast.success('common.actions.destroy.success')
       component.navigator.push(component.scopes[Scope.index].path)
     },
     cancel({ component }) {

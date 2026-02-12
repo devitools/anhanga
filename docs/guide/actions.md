@@ -124,7 +124,7 @@ const personHandlers = PersonSchema.handlers({
   create({ state, component, form }) {
     if (!form?.validate()) return
     service.create(state)
-    component.toast.success('Created!')
+    component.toast.success('common.actions.create.success')
     component.navigator.push(component.scopes[Scope.index].path)
   },
   cancel({ component }) {
@@ -132,7 +132,7 @@ const personHandlers = PersonSchema.handlers({
   },
   destroy({ state, component }) {
     service.destroy(state.id)
-    component.toast.success('Deleted!')
+    component.toast.success('common.actions.destroy.success')
     component.navigator.push(component.scopes[Scope.index].path)
   },
 })

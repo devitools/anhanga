@@ -28,7 +28,7 @@ const taskHandlers = TaskSchema.handlers({
   create({ state, form, component }) {
     if (!form?.validate()) return
     service.create(state)
-    component.toast.success('Task created!')
+    component.toast.success('common.actions.create.success')
   },
 })
 ```
@@ -131,7 +131,7 @@ export const personHandlers = PersonSchema.handlers({
   create({ state, component, form }) {
     if (!form?.validate()) return
     service.create(state)
-    component.toast.success('Created!')
+    component.toast.success('common.actions.create.success')
     component.navigator.push(component.scopes[Scope.index].path)
   },
   cancel({ component }) {
