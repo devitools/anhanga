@@ -7,6 +7,9 @@ const validators: Record<string, ValidatorFn> = {
     if (value === undefined || value === null || value === '') {
       return t ? t('validation.required') : 'Field is required'
     }
+    if (Array.isArray(value) && value.length === 0) {
+      return t ? t('validation.required') : 'Field is required'
+    }
     return null
   },
   minLength (value, params, t) {
@@ -48,6 +51,34 @@ const validators: Record<string, ValidatorFn> = {
     const max = params?.value as string
     if (typeof value === 'string' && value > max) {
       return t ? t('validation.maxDate', { value: max }) : `Date must be before ${max}`
+    }
+    return null
+  },
+  minTime (value, params, t) {
+    const min = params?.value as string
+    if (typeof value === 'string' && value < min) {
+      return t ? t('validation.minTime', { value: min }) : `Time must be after ${min}`
+    }
+    return null
+  },
+  maxTime (value, params, t) {
+    const max = params?.value as string
+    if (typeof value === 'string' && value > max) {
+      return t ? t('validation.maxTime', { value: max }) : `Time must be before ${max}`
+    }
+    return null
+  },
+  minItems (value, params, t) {
+    const min = params?.value as number
+    if (Array.isArray(value) && value.length < min) {
+      return t ? t('validation.minItems', { value: min }) : `Minimum ${min} items required`
+    }
+    return null
+  },
+  maxItems (value, params, t) {
+    const max = params?.value as number
+    if (Array.isArray(value) && value.length > max) {
+      return t ? t('validation.maxItems', { value: max }) : `Maximum ${max} items allowed`
     }
     return null
   },

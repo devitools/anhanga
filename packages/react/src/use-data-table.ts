@@ -222,6 +222,7 @@ export function useDataTable (options: UseDataTableOptions): UseDataTableReturn 
         .filter(([, config]) => !config.hidden && isInScope(config, scope))
         .filter(([name, config]) => isActionPermitted(schema.domain, name, config, permissions))
         .filter(([, config]) => config.positions.includes(Position.row))
+        .filter(([, config]) => !config.condition || config.condition(record))
         .sort(([, a], [, b]) => a.order - b.order)
         .map(([name, config]) => ({
           name,
