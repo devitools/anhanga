@@ -4,6 +4,9 @@ import { resolve } from 'path'
 
 export default defineConfig({
   plugins: [svelte({ hot: false })],
+  esbuild: {
+    tsconfigRaw: '{}',
+  },
   resolve: {
     alias: {
       '$lib': resolve(__dirname, './src/lib'),
