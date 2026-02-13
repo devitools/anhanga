@@ -3,7 +3,11 @@
   "compilerOptions": {
     "outDir": "dist",
     "rootDir": "src",
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "paths": {
+      "@ybyra/core": ["../core/dist/index.d.ts"],
+      "@ybyra/vue": ["../vue/dist/index.d.ts"]
+    }
   },
   "include": ["src/**/*.ts", "src/**/*.vue"]
 }
