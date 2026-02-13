@@ -1,5 +1,17 @@
 import { resolveActionIcon } from '@ybyra/sveltekit'
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, vi } from 'vitest'
+
+vi.mock('lucide-svelte', () => ({
+  Plus: 'Plus',
+  Eye: 'Eye',
+  Pencil: 'Pencil',
+  Save: 'Save',
+  Send: 'Send',
+  X: 'X',
+  Trash2: 'Trash2',
+}))
+
+import('../../../src/lib/settings/icons')
 
 describe('icons', () => {
   it('configures common action icons', async () => {

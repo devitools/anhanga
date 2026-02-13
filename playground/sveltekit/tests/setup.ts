@@ -12,11 +12,11 @@ vi.mock('@ybyra/persistence/web', () => ({
 }))
 
 vi.mock('lucide-svelte', () => ({
-  Plus: 'Plus',
   Eye: 'Eye',
   Pencil: 'Pencil',
+  Plus: 'Plus',
   Save: 'Save',
   Send: 'Send',
-  X: 'X',
   Trash2: 'Trash2',
+  X: 'X',
 }))
