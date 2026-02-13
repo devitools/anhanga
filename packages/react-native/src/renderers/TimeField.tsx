@@ -5,7 +5,7 @@ import { useTheme } from "../theme/context";
 import type { Theme } from "../theme/default";
 import { ds } from "../support/ds";
 
-export function TextField({ domain, name, value, config, proxy, errors, onChange, onBlur, onFocus }: FieldRendererProps) {
+export function TimeField({ domain, name, value, proxy, errors, onChange, onBlur, onFocus }: FieldRendererProps) {
   const { t, i18n } = useTranslation();
   const theme = useTheme();
   const styles = createStyles(theme);
@@ -13,10 +13,10 @@ export function TextField({ domain, name, value, config, proxy, errors, onChange
 
   const fieldLabel = t(`${domain}.fields.${name}`, { defaultValue: name });
   const placeholderKey = `${domain}.fields.${name}.placeholder`;
-  const placeholder = i18n.exists(placeholderKey) ? t(placeholderKey) : undefined;
+  const placeholder = i18n.exists(placeholderKey) ? t(placeholderKey) : "HH:MM";
 
   return (
-    <View style={styles.container} {...ds(`TextField:${name}`)}>
+    <View style={styles.container} {...ds(`TimeField:${name}`)}>
       <Text style={styles.label}>{fieldLabel}</Text>
       <TextInput
         style={[styles.input, proxy.disabled && styles.inputDisabled, errors.length > 0 && styles.inputError]}
@@ -27,7 +27,7 @@ export function TextField({ domain, name, value, config, proxy, errors, onChange
         editable={!proxy.disabled}
         placeholder={placeholder}
         placeholderTextColor={theme.colors.mutedForeground}
-        secureTextEntry={config.kind === "password"}
+        keyboardType="numbers-and-punctuation"
       />
       <View style={styles.errorSlot}>
         {errors.map((error, i) => (

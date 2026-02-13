@@ -3,10 +3,11 @@
     v-if="!props.proxy.hidden"
     :model-value="String(props.value ?? '')"
     :label="label"
-    :type="inputType"
     :disable="props.proxy.disabled"
     :error="props.errors.length > 0"
     :error-message="props.errors[0]"
+    :rows="rows"
+    type="textarea"
     outlined
     dense
     @update:model-value="props.onChange($event)"
@@ -29,5 +30,5 @@ const label = computed(() => {
   return te(key) ? t(key) : props.name
 })
 
-const inputType = computed(() => props.config.kind === 'password' ? 'password' : 'text')
+const rows = computed(() => props.proxy.height || props.config.form.height || 3)
 </script>

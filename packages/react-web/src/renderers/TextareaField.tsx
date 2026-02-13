@@ -1,11 +1,10 @@
-import { View, Text, TextInput, StyleSheet } from "react-native";
 import { useTranslation } from "react-i18next";
 import type { FieldRendererProps } from "@ybyra/react";
 import { useTheme } from "../theme/context";
 import type { Theme } from "../theme/default";
 import { ds } from "../support/ds";
 
-export function TextField({ domain, name, value, config, proxy, errors, onChange, onBlur, onFocus }: FieldRendererProps) {
+export function TextareaField({ domain, name, value, config, proxy, errors, onChange, onBlur, onFocus }: FieldRendererProps) {
   const { t, i18n } = useTranslation();
   const theme = useTheme();
   const styles = createStyles(theme);
@@ -14,49 +13,58 @@ export function TextField({ domain, name, value, config, proxy, errors, onChange
   const fieldLabel = t(`${domain}.fields.${name}`, { defaultValue: name });
   const placeholderKey = `${domain}.fields.${name}.placeholder`;
   const placeholder = i18n.exists(placeholderKey) ? t(placeholderKey) : undefined;
+  const hasError = errors.length > 0;
+  const rows = proxy.height || config.form.height || 3;
 
   return (
-    <View style={styles.container} {...ds(`TextField:${name}`)}>
-      <Text style={styles.label}>{fieldLabel}</Text>
-      <TextInput
-        style={[styles.input, proxy.disabled && styles.inputDisabled, errors.length > 0 && styles.inputError]}
+    <div style={styles.container} {...ds(`TextareaField:${name}`)}>
+      <label style={{ ...styles.label, ...(hasError ? styles.labelError : {}) }}>{fieldLabel}</label>
+      <textarea
+        style={{ ...styles.input, ...(proxy.disabled ? styles.inputDisabled : {}), ...(hasError ? styles.inputError : {}) }}
         value={String(value ?? "")}
-        onChangeText={onChange}
+        rows={rows}
+        onChange={(e) => onChange(e.target.value)}
         onBlur={onBlur}
         onFocus={onFocus}
-        editable={!proxy.disabled}
+        disabled={proxy.disabled}
         placeholder={placeholder}
-        placeholderTextColor={theme.colors.mutedForeground}
-        secureTextEntry={config.kind === "password"}
       />
-      <View style={styles.errorSlot}>
+      <div style={styles.errorSlot}>
         {errors.map((error, i) => (
-          <Text key={i} style={styles.error}>{error}</Text>
+          <p key={i} style={styles.error}>{error}</p>
         ))}
-      </View>
-    </View>
+      </div>
+    </div>
   );
 }
 
-const createStyles = (theme: Theme) => StyleSheet.create({
+const createStyles = (theme: Theme) => ({
   container: {
-    paddingHorizontal: theme.spacing.xs,
+    padding: `0 ${theme.spacing.xs}px`,
   },
   label: {
+    display: "block",
     fontSize: theme.fontSize.sm,
     fontWeight: theme.fontWeight.semibold,
     marginBottom: theme.spacing.xs,
     color: theme.colors.foreground,
   },
+  labelError: {
+    color: theme.colors.destructive,
+  },
   input: {
-    borderWidth: 1,
-    borderColor: theme.colors.input,
+    display: "block",
+    width: "100%",
+    boxSizing: "border-box" as const,
+    border: `1px solid ${theme.colors.input}`,
     borderRadius: theme.borderRadius.md,
-    paddingHorizontal: theme.spacing.md,
-    paddingVertical: 10,
+    padding: `10px ${theme.spacing.md}px`,
     fontSize: theme.fontSize.md,
     backgroundColor: theme.colors.card,
     color: theme.colors.cardForeground,
+    fontFamily: "inherit",
+    outline: "none",
+    resize: "vertical" as const,
   },
   inputDisabled: {
     backgroundColor: theme.colors.muted,
@@ -72,5 +80,6 @@ const createStyles = (theme: Theme) => StyleSheet.create({
   error: {
     fontSize: theme.fontSize.xs,
     color: theme.colors.destructive,
+    margin: 0,
   },
 });

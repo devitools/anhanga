@@ -1,11 +1,10 @@
 <script lang="ts">
   import { translate, hasTranslation } from '../i18n'
 
-  let { domain, name, value, config, proxy, errors, onChange, onBlur, onFocus }: {
+  let { domain, name, value, proxy, errors, onChange, onBlur, onFocus }: {
     domain: string
     name: string
     value: unknown
-    config: { kind?: string }
     proxy: { hidden: boolean; disabled: boolean }
     errors: string[]
     onChange: (v: unknown) => void
@@ -17,8 +16,6 @@
     const key = `${domain}.fields.${name}`
     return hasTranslation(key) ? translate(key) : name
   })
-
-  let inputType = $derived(config.kind === 'password' ? 'password' : 'text')
 </script>
 
 {#if !proxy.hidden}
@@ -26,7 +23,7 @@
     <label for={name}>{label()}</label>
     <input
       id={name}
-      type={inputType}
+      type="time"
       value={String(value ?? '')}
       disabled={proxy.disabled}
       oninput={(e) => onChange(e.currentTarget.value)}

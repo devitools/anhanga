@@ -4,7 +4,7 @@ import { useTheme } from "../theme/context";
 import type { Theme } from "../theme/default";
 import { ds } from "../support/ds";
 
-export function TextField({ domain, name, value, proxy, errors, onChange, onBlur, onFocus }: FieldRendererProps) {
+export function TextField({ domain, name, value, config, proxy, errors, onChange, onBlur, onFocus }: FieldRendererProps) {
   const { t, i18n } = useTranslation();
   const theme = useTheme();
   const styles = createStyles(theme);
@@ -14,12 +14,13 @@ export function TextField({ domain, name, value, proxy, errors, onChange, onBlur
   const placeholderKey = `${domain}.fields.${name}.placeholder`;
   const placeholder = i18n.exists(placeholderKey) ? t(placeholderKey) : undefined;
   const hasError = errors.length > 0;
+  const inputType = config.kind === "password" ? "password" : "text";
 
   return (
     <div style={styles.container} {...ds(`TextField:${name}`)}>
       <label style={{ ...styles.label, ...(hasError ? styles.labelError : {}) }}>{fieldLabel}</label>
       <input
-        type="text"
+        type={inputType}
         style={{ ...styles.input, ...(proxy.disabled ? styles.inputDisabled : {}), ...(hasError ? styles.inputError : {}) }}
         value={String(value ?? "")}
         onChange={(e) => onChange(e.target.value)}

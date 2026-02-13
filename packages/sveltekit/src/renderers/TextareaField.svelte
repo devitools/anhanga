@@ -5,8 +5,8 @@
     domain: string
     name: string
     value: unknown
-    config: { kind?: string }
-    proxy: { hidden: boolean; disabled: boolean }
+    config: { form: { height: number } }
+    proxy: { hidden: boolean; disabled: boolean; height: number }
     errors: string[]
     onChange: (v: unknown) => void
     onBlur: () => void
@@ -18,21 +18,21 @@
     return hasTranslation(key) ? translate(key) : name
   })
 
-  let inputType = $derived(config.kind === 'password' ? 'password' : 'text')
+  let rows = $derived(proxy.height || config.form.height || 3)
 </script>
 
 {#if !proxy.hidden}
   <div class="form-field" class:has-error={errors.length > 0}>
     <label for={name}>{label()}</label>
-    <input
+    <textarea
       id={name}
-      type={inputType}
+      {rows}
       value={String(value ?? '')}
       disabled={proxy.disabled}
       oninput={(e) => onChange(e.currentTarget.value)}
       onblur={() => onBlur()}
       onfocus={() => onFocus()}
-    />
+    ></textarea>
     {#if errors.length > 0}
       <span class="field-error">{errors[0]}</span>
     {/if}

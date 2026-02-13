@@ -3,10 +3,10 @@
     v-if="!props.proxy.hidden"
     :model-value="String(props.value ?? '')"
     :label="label"
-    :type="inputType"
     :disable="props.proxy.disabled"
     :error="props.errors.length > 0"
     :error-message="props.errors[0]"
+    type="time"
     outlined
     dense
     @update:model-value="props.onChange($event)"
@@ -28,6 +28,4 @@ const label = computed(() => {
   const key = `${props.domain}.fields.${props.name}`
   return te(key) ? t(key) : props.name
 })
-
-const inputType = computed(() => props.config.kind === 'password' ? 'password' : 'text')
 </script>
