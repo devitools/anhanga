@@ -65,6 +65,7 @@ export interface ActionConfig {
   open: boolean;
   scopes: ScopeValue[] | null;
   order: number;
+  condition?: (record: Record<string, unknown>) => boolean;
 }
 
 export interface FieldProxy {

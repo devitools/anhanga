@@ -96,6 +96,12 @@ export class ActionDefinition {
     return this;
   }
 
+
+  condition (fn: (record: Record<string, unknown>) => boolean): this {
+    this._config.condition = fn
+    return this
+  }
+
   toConfig (): ActionConfig {
     return { ...this._config };
   }

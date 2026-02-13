@@ -5,13 +5,17 @@ export { createMockContext, createMockDriver } from './mock'
 
 export {
   FieldDefinition,
-  TextFieldDefinition, Text, text,
+  TextFieldDefinition, Text, text, textarea,
   NumberFieldDefinition, number,
   DateFieldDefinition, DatetimeFieldDefinition, date, datetime,
+  TimeFieldDefinition, time,
   ToggleFieldDefinition, CheckboxFieldDefinition, toggle, checkbox,
   SelectFieldDefinition, select,
+  MultiSelectFieldDefinition, multiselect,
   CurrencyFieldDefinition, currency,
   FileFieldDefinition, file, image,
+  ListFieldDefinition, list,
+  TreeFieldDefinition, tree,
 } from './fields'
 export type { TextKind } from './fields'
 

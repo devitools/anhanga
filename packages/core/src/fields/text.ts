@@ -9,13 +9,14 @@ export const Text = {
   Cep: 'cep',
   Street: 'street',
   City: 'city',
+  Password: 'password',
 } as const
 
 export type TextKind = typeof Text[keyof typeof Text]
 
 export class TextFieldDefinition extends FieldDefinition<string> {
-  constructor(attrs: Record<string, unknown> = {}) {
-    super('text', 'string', attrs)
+  constructor(component = 'text', attrs: Record<string, unknown> = {}) {
+    super(component, 'string', attrs)
   }
 
   kind(k: TextKind): this {
@@ -40,5 +41,9 @@ export class TextFieldDefinition extends FieldDefinition<string> {
 }
 
 export function text(attrs?: Record<string, unknown>): TextFieldDefinition {
-  return new TextFieldDefinition(attrs)
+  return new TextFieldDefinition('text', attrs)
+}
+
+export function textarea(attrs?: Record<string, unknown>): TextFieldDefinition {
+  return new TextFieldDefinition('textarea', attrs)
 }
