@@ -1,0 +1,44 @@
+<template>
+  <q-select
+    v-if="!props.proxy.hidden"
+    :model-value="selected"
+    :label="label"
+    :options="options"
+    :disable="props.proxy.disabled"
+    :error="props.errors.length > 0"
+    :error-message="props.errors[0]"
+    multiple
+    use-chips
+    emit-value
+    map-options
+    outlined
+    dense
+    @update:model-value="props.onChange($event)"
+    @blur="props.onBlur()"
+    @focus="props.onFocus()"
+  />
+</template>
+
+<script setup lang="ts">
+import { QSelect } from 'quasar'
+import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
+import type { FieldRendererProps } from '@ybyra/vue'
+
+const props = defineProps<FieldRendererProps>()
+const { t, te } = useI18n()
+
+const label = computed(() => {
+  const key = `${props.domain}.fields.${props.name}`
+  return te(key) ? t(key) : props.name
+})
+
+const options = computed(() => {
+  const raw = (props.config.attrs.options ?? []) as (string | number)[]
+  return raw.map((opt) => {
+    const key = `${props.domain}.fields.${props.name}.${opt}`
+    return { label: te(key) ? t(key) : String(opt), value: opt }
+  })
+})
+const selected = computed(() => Array.isArray(props.value) ? props.value : [])
+</script>

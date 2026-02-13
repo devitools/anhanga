@@ -6,6 +6,6 @@ export class SelectFieldDefinition<V = string> extends FieldDefinition<V> {
   }
 }
 
-export function select<V = string>(attrs?: Record<string, unknown>): SelectFieldDefinition<V> {
-  return new SelectFieldDefinition<V>(attrs)
+export function select<V = string>(options?: (string | number)[]): SelectFieldDefinition<V> {
+  return new SelectFieldDefinition<V>(options ? { options } : {})
 }
