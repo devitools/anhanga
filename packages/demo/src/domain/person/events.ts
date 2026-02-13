@@ -18,4 +18,9 @@ export const personEvents = PersonSchema.events({
       }
     },
   },
+  role: {
+    change ({ state, schema }) {
+      schema.tags.disabled = state.role === "viewer";
+    },
+  },
 });
