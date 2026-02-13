@@ -8,6 +8,7 @@ export default defineConfig({
     alias: {
       '$lib': resolve(__dirname, './src/lib'),
       '$app/navigation': resolve(__dirname, './tests/mocks/$app/navigation.ts'),
+      '$app/paths': resolve(__dirname, './tests/mocks/$app/paths.ts'),
       '$app/state': resolve(__dirname, './tests/mocks/$app/state.ts'),
     },
   },

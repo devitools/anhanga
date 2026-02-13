@@ -12,7 +12,7 @@
   },
   "scripts": {
     "build": "tsup",
-    "test": "vitest run"
+    "test": "vitest run --passWithNoTests"
   },
   "peerDependencies": {
     "react": ">=18",

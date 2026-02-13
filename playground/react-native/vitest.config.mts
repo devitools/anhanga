@@ -12,6 +12,7 @@ export default defineConfig({
       '@ybyra/demo': resolve(__dirname, '../../packages/demo/src'),
       '@ybyra/react-native': resolve(__dirname, '../../packages/react-native/src'),
       '@ybyra/react': resolve(__dirname, '../../packages/react/src'),
+      '@ybyra/persistence/web': resolve(__dirname, '../../packages/persistence/src/web-driver.ts'),
       '@ybyra/persistence': resolve(__dirname, '../../packages/persistence/src'),
       ...createAliases(),
     },

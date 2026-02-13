@@ -10,6 +10,7 @@ vi.mock('lucide-svelte', () => ({
   Eye: 'Eye',
   Pencil: 'Pencil',
   Save: 'Save',
+  Send: 'Send',
   X: 'X',
   Trash2: 'Trash2',
 }))

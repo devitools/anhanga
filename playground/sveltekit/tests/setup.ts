@@ -10,3 +10,13 @@ vi.mock('@ybyra/persistence/web', () => ({
     search: vi.fn(),
   })),
 }))
+
+vi.mock('lucide-svelte', () => ({
+  Plus: 'Plus',
+  Eye: 'Eye',
+  Pencil: 'Pencil',
+  Save: 'Save',
+  Send: 'Send',
+  X: 'X',
+  Trash2: 'Trash2',
+}))
