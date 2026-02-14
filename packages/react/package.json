@@ -15,12 +15,13 @@
     "test": "vitest run --passWithNoTests"
   },
   "peerDependencies": {
-    "react": ">=18",
-    "@ybyra/core": "workspace:*"
+    "@ybyra/core": "workspace:*",
+    "react": ">=18"
   },
   "devDependencies": {
-    "@ybyra/core": "workspace:*",
     "@types/react": "^19.0.0",
+    "@vitest/coverage-v8": "^3.2.4",
+    "@ybyra/core": "workspace:*",
     "react": "^19.0.0",
     "tsup": "^8.0.0",
     "typescript": "^5.7.0",
