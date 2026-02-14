@@ -12,13 +12,16 @@
     }
   },
   "scripts": {
-    "build": "tsup"
+    "build": "tsup",
+    "test": "vitest run"
   },
   "dependencies": {
     "@ybyra/core": "workspace:*"
   },
   "devDependencies": {
+    "@vitest/coverage-v8": "^3.2.4",
     "tsup": "^8.0.0",
-    "typescript": "^5.7.0"
+    "typescript": "^5.7.0",
+    "vitest": "^3.0.0"
   }
 }

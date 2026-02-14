@@ -25,6 +25,7 @@
     "@ybyra/core": "workspace:*"
   },
   "devDependencies": {
+    "@vitest/coverage-v8": "^3.2.4",
     "@ybyra/core": "workspace:*",
     "tsup": "^8.0.0",
     "typescript": "^5.7.0",
