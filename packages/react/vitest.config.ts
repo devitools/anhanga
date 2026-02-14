@@ -10,6 +10,12 @@ export default defineConfig({
         'src/**/index.ts',
         'src/types.ts',
       ],
+      thresholds: {
+        lines: 80,
+        branches: 80,
+        functions: 80,
+        statements: 80,
+      },
     },
   },
 })
