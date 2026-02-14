@@ -11,6 +11,12 @@ export default defineConfig({
         'src/locales/**',
         'src/mock.ts',
       ],
+      thresholds: {
+        lines: 80,
+        branches: 80,
+        functions: 80,
+        statements: 80,
+      },
     },
   },
 })
