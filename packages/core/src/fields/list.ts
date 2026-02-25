@@ -7,7 +7,7 @@ export class ListFieldDefinition extends FieldDefinition<Record<string, unknown>
   }
 
   itemSchema(schema: SchemaDefinition<any>): this {
-    this._config.attrs = { ...this._config.attrs, itemSchema: schema }
+    this._config.attrs = { ...this._config.attrs, itemSchema: schema.provide() }
     return this
   }
 

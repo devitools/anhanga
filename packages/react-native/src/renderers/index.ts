@@ -9,6 +9,8 @@ import { SelectField } from "./SelectField";
 import { MultiSelectField } from "./MultiSelectField";
 import { ListField } from "./ListField";
 import { TreeField } from "./TreeField";
+import { CurrencyField } from "./CurrencyField";
+import { FileField } from "./FileField";
 
 registerRenderers({
   text: TextField,
@@ -23,4 +25,7 @@ registerRenderers({
   multiselect: MultiSelectField,
   list: ListField,
   tree: TreeField,
+  currency: CurrencyField,
+  file: FileField,
+  image: FileField,
 });

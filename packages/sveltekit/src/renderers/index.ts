@@ -9,6 +9,8 @@ import SelectField from './SelectField.svelte'
 import MultiSelectField from './MultiSelectField.svelte'
 import ListField from './ListField.svelte'
 import TreeField from './TreeField.svelte'
+import CurrencyField from './CurrencyField.svelte'
+import FileField from './FileField.svelte'
 
 registerRenderers({
   text: TextField,
@@ -23,4 +25,7 @@ registerRenderers({
   multiselect: MultiSelectField,
   list: ListField,
   tree: TreeField,
+  currency: CurrencyField,
+  file: FileField,
+  image: FileField,
 })
