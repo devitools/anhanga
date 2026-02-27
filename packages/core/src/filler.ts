@@ -8,6 +8,7 @@ export type FillerRegistry = Record<string, FillerFn>
 const textKindGenerators: Record<string, () => string> = {
   email: () => faker.internet.email(),
   phone: () => faker.phone.number(),
+  password: () => faker.internet.password({ length: 12 }),
   cpf: () => faker.string.numeric({ length: 11, allowLeadingZeros: true }).replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4'),
   cnpj: () => faker.string.numeric({ length: 14, allowLeadingZeros: true }).replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, '$1.$2.$3/$4-$5'),
   cep: () => faker.location.zipCode(),
@@ -43,6 +44,31 @@ export const defaultFillers: FillerRegistry = {
   },
   checkbox() {
     return faker.datatype.boolean()
+  },
+  textarea() {
+    return faker.lorem.paragraph()
+  },
+  time() {
+    const hour = faker.number.int({ min: 0, max: 23 }).toString().padStart(2, '0')
+    const minute = faker.number.int({ min: 0, max: 59 }).toString().padStart(2, '0')
+    return `${hour}:${minute}`
+  },
+  select(config) {
+    const options = (config.attrs.options ?? []) as (string | number)[]
+    if (options.length === 0) return undefined
+    return faker.helpers.arrayElement(options)
+  },
+  multiselect(config) {
+    const options = (config.attrs.options ?? []) as (string | number)[]
+    if (options.length === 0) return []
+    const count = faker.number.int({ min: 1, max: Math.min(3, options.length) })
+    return faker.helpers.arrayElements(options, count)
+  },
+  file() {
+    return undefined
+  },
+  image() {
+    return undefined
   },
 }
 

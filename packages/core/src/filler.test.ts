@@ -150,6 +150,56 @@ describe('defaultFillers', () => {
     const value = defaultFillers.checkbox(makeFieldConfig({ component: 'checkbox' }))
     expect(value).toBeTypeOf('boolean')
   })
+
+  it('generates password for text with password kind', () => {
+    const value = defaultFillers.text(makeFieldConfig({ component: 'text', kind: 'password' }))
+    expect(value).toBeTypeOf('string')
+    expect((value as string).length).toBeGreaterThanOrEqual(8)
+  })
+
+  it('generates paragraph for textarea', () => {
+    const value = defaultFillers.textarea(makeFieldConfig({ component: 'textarea' }))
+    expect(value).toBeTypeOf('string')
+    expect((value as string).length).toBeGreaterThan(10)
+  })
+
+  it('generates time string for time', () => {
+    const value = defaultFillers.time(makeFieldConfig({ component: 'time' }))
+    expect(value).toBeTypeOf('string')
+    expect(value as string).toMatch(/^\d{2}:\d{2}$/)
+  })
+
+  it('generates value from options for select', () => {
+    const value = defaultFillers.select(makeFieldConfig({
+      component: 'select',
+      attrs: { options: ['a', 'b', 'c'] },
+    }))
+    expect(['a', 'b', 'c']).toContain(value)
+  })
+
+  it('returns undefined for select without options', () => {
+    const value = defaultFillers.select(makeFieldConfig({ component: 'select' }))
+    expect(value).toBeUndefined()
+  })
+
+  it('generates subset of options for multiselect', () => {
+    const value = defaultFillers.multiselect(makeFieldConfig({
+      component: 'multiselect',
+      attrs: { options: ['a', 'b', 'c', 'd'] },
+    }))
+    expect(Array.isArray(value)).toBe(true)
+    const arr = value as string[]
+    expect(arr.length).toBeGreaterThanOrEqual(1)
+    expect(arr.length).toBeLessThanOrEqual(3)
+    for (const item of arr) {
+      expect(['a', 'b', 'c', 'd']).toContain(item)
+    }
+  })
+
+  it('returns empty array for multiselect without options', () => {
+    const value = defaultFillers.multiselect(makeFieldConfig({ component: 'multiselect' }))
+    expect(value).toEqual([])
+  })
 })
 
 describe('fill', () => {
