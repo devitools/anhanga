@@ -1,6 +1,14 @@
 import type { ReactNode, ComponentType } from "react";
 import type { ResolvedAction, ResolvedField, UseDataFormReturn, ResolvedColumn } from "@ybyra/react";
-import type { PositionValue } from "@ybyra/core";
+import type { FieldProxy, PositionValue, ScopeValue } from "@ybyra/core";
+
+export interface SlotRendererProps {
+  domain: string;
+  name: string;
+  value: unknown;
+  proxy: FieldProxy;
+  scope: ScopeValue;
+}
 
 export interface ActionButtonProps {
   action: { name: string; config: { variant: string }; execute: () => void };
@@ -16,6 +24,7 @@ export interface ActionBarProps {
 export interface FieldsGridProps {
   fields: ResolvedField[];
   getFieldProps: UseDataFormReturn["getFieldProps"];
+  slots?: Record<string, ComponentType<SlotRendererProps>>;
 }
 
 export interface GroupWrapperProps {
@@ -35,6 +44,7 @@ export interface DataFormComponents {
   GroupWrapper?: ComponentType<GroupWrapperProps>;
   Loading?: ComponentType<LoadingProps>;
   Divider?: ComponentType<DividerProps>;
+  Slot?: ComponentType<SlotRendererProps>;
 }
 
 export interface PaginationProps {
