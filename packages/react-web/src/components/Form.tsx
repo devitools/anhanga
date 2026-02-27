@@ -1,4 +1,5 @@
 import { useCallback } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import { useDataForm } from "@ybyra/react";
 import type { UseDataFormOptions } from "@ybyra/react";
@@ -10,16 +11,17 @@ import { ActionBar } from "./ActionBar";
 import { FieldsGrid as DefaultFieldsGrid } from "./defaults/FieldsGrid";
 import { DebugPanel } from "./defaults/DebugPanel";
 import { ds } from "../support/ds";
-import type { DataFormComponents } from "../types";
+import type { DataFormComponents, SlotRendererProps } from "../types";
 import "../renderers";
 
 interface DataFormProps extends UseDataFormOptions {
   debug?: boolean;
   components?: DataFormComponents;
   filler?: FillerRegistry;
+  slots?: Record<string, React.ComponentType<SlotRendererProps>>;
 }
 
-export function DataForm({ debug, components, filler, ...props }: DataFormProps) {
+export function DataForm({ debug, components, filler, slots, ...props }: DataFormProps) {
   const { t } = useTranslation();
   const theme = useTheme();
   const form = useDataForm({ ...props, translate: props.translate ?? t });
@@ -61,6 +63,7 @@ export function DataForm({ debug, components, filler, ...props }: DataFormProps)
                 <ResolvedFieldsGrid
                   fields={section.fields}
                   getFieldProps={form.getFieldProps}
+                  slots={slots}
                 />
               </GroupWrapper>
             );
@@ -77,6 +80,7 @@ export function DataForm({ debug, components, filler, ...props }: DataFormProps)
               <ResolvedFieldsGrid
                 fields={section.fields}
                 getFieldProps={form.getFieldProps}
+                slots={slots}
               />
             </div>
           );
@@ -90,6 +94,7 @@ export function DataForm({ debug, components, filler, ...props }: DataFormProps)
             <ResolvedFieldsGrid
               fields={section.fields}
               getFieldProps={form.getFieldProps}
+              slots={slots}
             />
           </div>
         );

@@ -16,6 +16,7 @@ export {
   FileFieldDefinition, file, image,
   ListFieldDefinition, list,
   TreeFieldDefinition, tree,
+  SlotFieldDefinition, slot,
 } from './fields'
 export type { TextKind } from './fields'
 

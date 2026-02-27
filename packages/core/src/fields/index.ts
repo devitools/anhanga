@@ -10,5 +10,6 @@ export { CurrencyFieldDefinition, currency } from './currency'
 export { FileFieldDefinition, file, image } from './file'
 export { ListFieldDefinition, list } from './list'
 export { TreeFieldDefinition, tree } from './tree'
+export { SlotFieldDefinition, slot } from './slot'
 
 export type { TextKind } from './text'

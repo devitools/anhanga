@@ -24,6 +24,7 @@ export type {
   LoadingProps,
   DividerProps,
   DataFormComponents,
+  SlotRendererProps,
   PaginationProps,
   ColumnSelectorProps,
   EmptyStateProps,
