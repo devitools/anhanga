@@ -54,6 +54,16 @@ describe('built-in validators', () => {
       expect(errors).toHaveLength(0)
     })
 
+    it('returns error for empty array', () => {
+      const errors = validateField([], [rule])
+      expect(errors).toHaveLength(1)
+      expect(errors[0]).toBe('Field is required')
+    })
+
+    it('returns null for non-empty array', () => {
+      expect(validateField([1, 2], [rule])).toHaveLength(0)
+    })
+
     it('uses translate function when provided', () => {
       const t: TranslateContract = vi.fn((key: string) => `translated: ${key}`)
       const errors = validateField(undefined, [rule], t)
@@ -160,6 +170,70 @@ describe('built-in validators', () => {
     it('returns null when date string is before max', () => {
       const errors = validateField('2024-06-15', [rule])
       expect(errors).toHaveLength(0)
+    })
+  })
+
+  describe('minTime', () => {
+    const rule: ValidationRule = { rule: 'minTime', params: { value: '09:00' } }
+
+    it('returns error when time is before min', () => {
+      const errors = validateField('08:00', [rule])
+      expect(errors).toHaveLength(1)
+      expect(errors[0]).toBe('Time must be after 09:00')
+    })
+
+    it('returns null when time is after min', () => {
+      expect(validateField('10:00', [rule])).toHaveLength(0)
+    })
+
+    it('returns null for non-string values', () => {
+      expect(validateField(42, [rule])).toHaveLength(0)
+    })
+  })
+
+  describe('maxTime', () => {
+    const rule: ValidationRule = { rule: 'maxTime', params: { value: '17:00' } }
+
+    it('returns error when time is after max', () => {
+      const errors = validateField('18:00', [rule])
+      expect(errors).toHaveLength(1)
+      expect(errors[0]).toBe('Time must be before 17:00')
+    })
+
+    it('returns null when time is before max', () => {
+      expect(validateField('12:00', [rule])).toHaveLength(0)
+    })
+  })
+
+  describe('minItems', () => {
+    const rule: ValidationRule = { rule: 'minItems', params: { value: 3 } }
+
+    it('returns error when array has fewer items', () => {
+      const errors = validateField([1], [rule])
+      expect(errors).toHaveLength(1)
+      expect(errors[0]).toBe('Minimum 3 items required')
+    })
+
+    it('returns null when array meets min', () => {
+      expect(validateField([1, 2, 3], [rule])).toHaveLength(0)
+    })
+
+    it('returns null for non-array values', () => {
+      expect(validateField('hello', [rule])).toHaveLength(0)
+    })
+  })
+
+  describe('maxItems', () => {
+    const rule: ValidationRule = { rule: 'maxItems', params: { value: 2 } }
+
+    it('returns error when array exceeds max', () => {
+      const errors = validateField([1, 2, 3], [rule])
+      expect(errors).toHaveLength(1)
+      expect(errors[0]).toBe('Maximum 2 items allowed')
+    })
+
+    it('returns null when array is within max', () => {
+      expect(validateField([1], [rule])).toHaveLength(0)
     })
   })
 

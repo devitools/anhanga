@@ -11,6 +11,7 @@
         </q-item-section>
         <q-item-section side>
           <div class="row no-wrap q-gutter-xs">
+            <q-btn v-if="itemSchema && !props.proxy.disabled" flat dense icon="edit" size="sm" @click="openEdit(index)" />
             <template v-if="reorderable">
               <q-btn flat dense icon="arrow_upward" size="sm" :disable="props.proxy.disabled || index === 0" @click="moveUp(index)" />
               <q-btn flat dense icon="arrow_downward" size="sm" :disable="props.proxy.disabled || index >= items.length - 1" @click="moveDown(index)" />
@@ -20,16 +21,28 @@
         </q-item-section>
       </q-item>
     </q-list>
-    <q-btn v-if="!props.proxy.disabled" flat dense icon="add" class="full-width q-mt-xs" @click="add" />
+    <q-btn v-if="!props.proxy.disabled" flat dense icon="add" class="full-width q-mt-xs" @click="openAdd" />
     <div v-if="props.errors.length > 0" class="text-negative text-caption q-mt-xs">{{ props.errors[0] }}</div>
   </div>
+
+  <ListItemFormModal
+    v-if="modalOpen && itemSchema"
+    :key="modalKey"
+    :item-schema="itemSchema"
+    :scope="props.scope"
+    :initial-values="editIndex !== null ? items[editIndex] : undefined"
+    @save="saveModal"
+    @cancel="cancelModal"
+  />
 </template>
 
 <script setup lang="ts">
 import { QList, QItem, QItemSection, QBtn } from 'quasar'
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import type { FieldRendererProps } from '@ybyra/vue'
+import type { SchemaProvide } from '@ybyra/core'
+import ListItemFormModal from './ListItemFormModal.vue'
 
 const props = defineProps<FieldRendererProps>()
 const { t, te } = useI18n()
@@ -41,13 +54,52 @@ const label = computed(() => {
 
 const items = computed(() => Array.isArray(props.value) ? (props.value as Record<string, unknown>[]) : [])
 const reorderable = computed(() => props.config.attrs.reorderable === true)
+const itemSchema = computed(() => {
+  const raw = props.config.attrs.itemSchema
+  return raw && typeof raw === 'object' && 'fields' in raw && 'domain' in raw
+    ? (raw as SchemaProvide)
+    : undefined
+})
+
+const modalOpen = ref(false)
+const editIndex = ref<number | null>(null)
+const modalKey = ref(0)
+
+function openAdd() {
+  if (itemSchema.value) {
+    editIndex.value = null
+    modalKey.value++
+    modalOpen.value = true
+  } else {
+    props.onChange([...items.value, {}])
+  }
+}
+
+function openEdit(index: number) {
+  if (!itemSchema.value) return
+  editIndex.value = index
+  modalKey.value++
+  modalOpen.value = true
+}
+
+function saveModal(values: Record<string, unknown>) {
+  if (editIndex.value !== null) {
+    const next = [...items.value]
+    next[editIndex.value] = values
+    props.onChange(next)
+  } else {
+    props.onChange([...items.value, values])
+  }
+  cancelModal()
+}
+
+function cancelModal() {
+  modalOpen.value = false
+  editIndex.value = null
+}
 
 function remove(index: number) {
   props.onChange(items.value.filter((_, i) => i !== index))
-}
-
-function add() {
-  props.onChange([...items.value, {}])
 }
 
 function moveUp(index: number) {

@@ -9,6 +9,8 @@ import SelectField from './SelectField.vue'
 import MultiSelectField from './MultiSelectField.vue'
 import ListField from './ListField.vue'
 import TreeField from './TreeField.vue'
+import CurrencyField from './CurrencyField.vue'
+import FileField from './FileField.vue'
 
 registerRenderers({
   text: TextField,
@@ -23,4 +25,7 @@ registerRenderers({
   multiselect: MultiSelectField,
   list: ListField,
   tree: TreeField,
+  currency: CurrencyField,
+  file: FileField,
+  image: FileField,
 })

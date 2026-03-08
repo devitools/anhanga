@@ -19,6 +19,10 @@ dist/
 # pnpm
 .pnpm-debug.log*
 
+# Coverage
+coverage/
+.coverage/
+
 # Local settings
 *.local.json
 
