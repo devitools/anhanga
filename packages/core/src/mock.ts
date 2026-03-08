@@ -74,6 +74,7 @@ export function createMockContext<F extends Record<string, FieldDefinition>> (
       push: fn(),
       back: fn(),
       replace: fn(),
+      open: fn(),
     },
     dialog: {
       confirm: fn(async () => true),
@@ -97,6 +98,7 @@ export function createMockContext<F extends Record<string, FieldDefinition>> (
     valid: true,
     validate: fn(() => true),
     reset: fn(),
+    setErrors: fn(),
   }
 
   const table: TableContract = {

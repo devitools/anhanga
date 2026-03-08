@@ -21,25 +21,30 @@ export function useDataForm (options: UseDataFormOptions): UseDataFormReturn {
   const fieldOverrides = ref<Record<string, Partial<FieldProxy>>>({})
   const errors = ref<Record<string, string[]>>({})
   const initialState = buildInitialState(schema.fields, initialValues)
-  const loading = ref(!!hooks?.bootstrap?.[scope])
+  const loading = ref(!!(hooks?.fetch?.[scope] || hooks?.bootstrap?.[scope]))
 
   onMounted(() => {
-    const hook = hooks?.bootstrap?.[scope]
-    if (!hook) return
+    const fetchHook = hooks?.fetch?.[scope]
+    const bootstrapHook = hooks?.bootstrap?.[scope]
+    if (!fetchHook && !bootstrapHook) return
 
     const run = async () => {
       let hydratedData: Record<string, unknown> | undefined
-      const schemaResult = createSchemaProxy(schema.fields, {})
-      const hydrate = (data: Record<string, unknown>) => { hydratedData = data }
-
-      await hook({ context: context ?? {}, hydrate, schema: schemaResult.proxy, component })
-
       let currentOverrides: Record<string, Partial<FieldProxy>> = {}
-      const bootstrapOverrides = schemaResult.getOverrides()
-      for (const [name, ov] of Object.entries(bootstrapOverrides)) {
-        currentOverrides[name] = { ...currentOverrides[name], ...ov }
+
+      // 1. fetch → hidrata os dados
+      if (fetchHook) {
+        const hydrate = (data: Record<string, unknown>) => { hydratedData = data }
+        await fetchHook({
+          type: 'record',
+          context: context ?? {},
+          params: { page: 1, limit: 1 },
+          hydrate,
+          component,
+        })
       }
 
+      // 2. aplica hydrate e dispara events
       if (hydratedData) {
         let currentState = buildInitialState(schema.fields, hydratedData)
 
@@ -58,6 +63,15 @@ export function useDataForm (options: UseDataFormOptions): UseDataFormReturn {
 
         state.value = currentState
         Object.assign(initialState, currentState)
+      }
+
+      // 3. bootstrap → orquestra estado do schema (roda após hydrate)
+      if (bootstrapHook) {
+        const schemaResult = createSchemaProxy(schema.fields, currentOverrides)
+        await bootstrapHook({ context: context ?? {}, schema: schemaResult.proxy, component })
+        for (const [name, ov] of Object.entries(schemaResult.getOverrides())) {
+          currentOverrides[name] = { ...currentOverrides[name], ...ov }
+        }
       }
 
       if (Object.keys(currentOverrides).length > 0) {
@@ -251,6 +265,7 @@ export function useDataForm (options: UseDataFormOptions): UseDataFormReturn {
               valid: valid.value,
               reset,
               validate,
+              setErrors: (errs: Record<string, string[]>) => { errors.value = errs },
             },
           })
         },

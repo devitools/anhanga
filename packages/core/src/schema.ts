@@ -45,7 +45,6 @@ type SchemaHandlers<F extends Record<string, FieldDefinition>> =
 
 type HookBootstrapContext<F extends Record<string, FieldDefinition>> = {
   context: Record<string, unknown>
-  hydrate(data: Record<string, unknown>): void
   schema: { [K in keyof F]: FieldProxy }
   component: ComponentContract
 }
@@ -53,12 +52,11 @@ type HookBootstrapContext<F extends Record<string, FieldDefinition>> = {
 type HookBootstrapFn<F extends Record<string, FieldDefinition>> =
   (ctx: HookBootstrapContext<F>) => void | Promise<void>
 
-type HookFetchContext = {
-  params: PaginateParams
-  component: ComponentContract
-}
+type HookFetchContext =
+  | { type: 'record'; context: Record<string, unknown>; params: PaginateParams; hydrate(data: Record<string, unknown>): void; component: ComponentContract }
+  | { type: 'collection'; context: Record<string, unknown>; params: PaginateParams; hydrate(result: PaginatedResult<Record<string, unknown>>): void; component: ComponentContract }
 
-type HookFetchFn = (ctx: HookFetchContext) => Promise<PaginatedResult<Record<string, unknown>>>
+type HookFetchFn = (ctx: HookFetchContext) => void | Promise<void>
 
 type SchemaHooks<F extends Record<string, FieldDefinition>> = {
   bootstrap?: Partial<Record<ScopeValue, HookBootstrapFn<F>>>

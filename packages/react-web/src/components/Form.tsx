@@ -1,18 +1,19 @@
-import { useCallback } from "react";
-import React from "react";
-import { useTranslation } from "react-i18next";
-import { useDataForm } from "@ybyra/react";
-import type { UseDataFormOptions } from "@ybyra/react";
-import { fill, createFiller } from "@ybyra/core";
-import type { FillerRegistry } from "@ybyra/core";
-import { useTheme } from "../theme/context";
-import type { Theme } from "../theme/default";
-import { ActionBar } from "./ActionBar";
-import { FieldsGrid as DefaultFieldsGrid } from "./defaults/FieldsGrid";
-import { DebugPanel } from "./defaults/DebugPanel";
-import { ds } from "../support/ds";
-import type { DataFormComponents, SlotRendererProps } from "../types";
-import "../renderers";
+import React, { useCallback, useLayoutEffect } from 'react'
+import { useTranslation } from 'react-i18next'
+import type { UseDataFormOptions } from '@ybyra/react'
+import { useDataForm } from '@ybyra/react'
+import type { FillerRegistry } from '@ybyra/core'
+import { createFiller, fill, Position } from '@ybyra/core'
+import { useTheme } from '../theme/context'
+import type { Theme } from '../theme/default'
+import { ActionBar as DefaultActionBar, ActionButton as DefaultActionButton } from './ActionBar'
+import { FieldsGrid as DefaultFieldsGrid } from './defaults/FieldsGrid'
+import { DebugPanel } from './defaults/DebugPanel'
+import { ds } from '../support/ds'
+import type { DataFormComponents, SlotRendererProps } from '../types'
+import { usePageActions } from './PageActionsContext'
+import { getComponent } from './registry'
+import '../renderers'
 
 interface DataFormProps extends UseDataFormOptions {
   debug?: boolean;
@@ -21,29 +22,47 @@ interface DataFormProps extends UseDataFormOptions {
   slots?: Record<string, React.ComponentType<SlotRendererProps>>;
 }
 
-export function DataForm({ debug, components, filler, slots, ...props }: DataFormProps) {
-  const { t } = useTranslation();
-  const theme = useTheme();
-  const form = useDataForm({ ...props, translate: props.translate ?? t });
-  const styles = createStyles(theme);
-  const ResolvedActionBar = components?.ActionBar ?? ActionBar;
-  const ResolvedFieldsGrid = components?.FieldsGrid ?? DefaultFieldsGrid;
-  const ResolvedLoading = components?.Loading;
+export function DataForm ({ debug, components, filler, slots, ...props }: DataFormProps) {
+  const { t } = useTranslation()
+  const theme = useTheme()
+  const form = useDataForm({ ...props, translate: props.translate ?? t })
+  const styles = createStyles(theme)
+  const ResolvedActionBar = components?.ActionBar ?? getComponent('ActionBar') ?? DefaultActionBar
+  const ResolvedActionButton = components?.ActionButton ?? getComponent('ActionButton') ?? DefaultActionButton
+  const ResolvedFieldsGrid = components?.FieldsGrid ?? getComponent('FieldsGrid') ?? DefaultFieldsGrid
+  const ResolvedLoading = components?.Loading ?? getComponent('Loading')
+  const pageActions = usePageActions()
+
+  useLayoutEffect(() => {
+    if (!pageActions) return
+    const headerActions = form.actions.filter((a) => a.config.positions.includes(Position.header))
+    if (headerActions.length === 0) return
+    pageActions.register(
+      <div style={{ display: 'flex', gap: 8 }}>
+        {headerActions.map((a) => <ResolvedActionButton
+          key={a.name}
+          action={a}
+          domain={props.schema.domain}
+        />)}
+      </div>
+    )
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pageActions, props.schema.domain])
 
   const handleFill = useCallback(() => {
-    const fillerFn = filler ? createFiller(filler) : fill;
-    form.setValues(fillerFn(props.schema.fields, props.schema.identity));
-  }, [filler, form, props.schema]);
+    const fillerFn = filler ? createFiller(filler) : fill
+    form.setValues(fillerFn(props.schema.fields, props.schema.identity))
+  }, [filler, form, props.schema])
 
   if (form.loading) {
-    if (ResolvedLoading) return <ResolvedLoading />;
+    if (ResolvedLoading) return <ResolvedLoading />
     return (
       <div style={styles.loadingContainer}>Loading...</div>
-    );
+    )
   }
 
   return (
-    <div {...ds("DataForm")}>
+    <div {...ds('DataForm')}>
       <ResolvedActionBar
         actions={form.actions}
         position="top"
@@ -51,9 +70,9 @@ export function DataForm({ debug, components, filler, slots, ...props }: DataFor
       />
 
       {form.sections.map((section, index) => {
-        if (section.kind === "group") {
+        if (section.kind === 'group') {
           if (components?.GroupWrapper) {
-            const GroupWrapper = components.GroupWrapper;
+            const GroupWrapper = components.GroupWrapper
             return (
               <GroupWrapper
                 key={section.name}
@@ -66,7 +85,7 @@ export function DataForm({ debug, components, filler, slots, ...props }: DataFor
                   slots={slots}
                 />
               </GroupWrapper>
-            );
+            )
           }
           return (
             <div
@@ -83,13 +102,13 @@ export function DataForm({ debug, components, filler, slots, ...props }: DataFor
                 slots={slots}
               />
             </div>
-          );
+          )
         }
         return (
           <div
             key={`ungrouped-${index}`}
             style={styles.group}
-            {...ds("ungrouped")}
+            {...ds('ungrouped')}
           >
             <ResolvedFieldsGrid
               fields={section.fields}
@@ -97,7 +116,7 @@ export function DataForm({ debug, components, filler, slots, ...props }: DataFor
               slots={slots}
             />
           </div>
-        );
+        )
       })}
 
       {components?.Divider
@@ -119,26 +138,27 @@ export function DataForm({ debug, components, filler, slots, ...props }: DataFor
       {debug && (
         <DebugPanel
           actions={[
-            { icon: "zap", color: theme.colors.warning, onPress: handleFill },
-            { icon: "rotate-ccw", color: theme.colors.mutedForeground, onPress: () => form.reset() },
-            { icon: "check", color: theme.colors.success, onPress: () => form.validate() },
-            { icon: "refresh-cw", color: theme.colors.info, onPress: () => window.location.reload() },
+            { icon: 'zap', color: theme.colors.warning, onPress: handleFill },
+            { icon: 'rotate-ccw', color: theme.colors.mutedForeground, onPress: () => form.reset() },
+            { icon: 'check', color: theme.colors.success, onPress: () => form.validate() },
+            { icon: 'refresh-cw', color: theme.colors.info, onPress: () => window.location.reload() },
           ]}
           entries={[
-            { title: "State", content: JSON.stringify(form.state, null, 2) },
-            { title: "Errors", content: JSON.stringify(form.errors, null, 2) },
+            { title: 'State', content: JSON.stringify(form.state, null, 2) },
+            { title: 'Errors', content: JSON.stringify(form.errors, null, 2) },
+            { title: 'Schema', content: JSON.stringify(props.schema, null, 2), collapsed: true },
           ]}
           meta={`dirty: ${String(form.dirty)} | valid: ${String(form.valid)}`}
         />
       )}
     </div>
-  );
+  )
 }
 
 const createStyles = (theme: Theme) => ({
   loadingContainer: {
     padding: `${theme.spacing.xxl}px 0`,
-    textAlign: "center" as const,
+    textAlign: 'center' as const,
     color: theme.colors.mutedForeground,
   },
   group: {
@@ -156,4 +176,4 @@ const createStyles = (theme: Theme) => ({
     backgroundColor: theme.colors.border,
     margin: `${theme.spacing.xl}px 0`,
   },
-});
+})

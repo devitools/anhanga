@@ -4,6 +4,8 @@ import { useTranslation } from "react-i18next";
 import type { DialogContract } from "@ybyra/core";
 import { useTheme } from "../theme/context";
 import type { Theme } from "../theme/default";
+import { getComponent } from "./registry";
+import type { DialogButtonProps } from "../types";
 
 type DialogType = "confirm" | "alert";
 
@@ -11,9 +13,27 @@ interface DialogState {
   visible: boolean;
   type: DialogType;
   message: string;
+  options?: { destructive?: boolean };
 }
 
 const DialogContext = createContext<DialogContract | null>(null);
+
+function DefaultDialogButton({ label, variant, onClick }: DialogButtonProps) {
+  const theme = useTheme();
+  const styles = createStyles(theme);
+  const style = variant === "cancel"
+    ? styles.cancelButton
+    : {
+        ...styles.okButton,
+        backgroundColor: variant === "destructive" ? theme.colors.destructive : theme.colors.primary,
+      };
+
+  return (
+    <button type="button" style={style} onClick={onClick}>
+      {label}
+    </button>
+  );
+}
 
 export function DialogProvider({ children }: { children: React.ReactNode }) {
   const { t } = useTranslation();
@@ -31,25 +51,30 @@ export function DialogProvider({ children }: { children: React.ReactNode }) {
     resolveRef.current = null;
   }, []);
 
-  const show = useCallback((type: DialogType, message: string): Promise<boolean> => {
+  const show = useCallback((type: DialogType, message: string, options?: { destructive?: boolean }): Promise<boolean> => {
     return new Promise((resolve) => {
       resolveRef.current = resolve;
-      setDialog({ visible: true, type, message });
+      setDialog({ visible: true, type, message, options });
     });
   }, []);
 
   const contract: DialogContract = {
-    confirm: (message: string) => show("confirm", message),
+    confirm: (message: string, options?: { destructive?: boolean }) => show("confirm", message, options),
     async alert(message: string) {
       await show("alert", message);
     },
   };
 
-  const title = dialog.type === "confirm"
-    ? t("common.dialog.confirm")
-    : t("common.dialog.alert");
+  const isDestructive = dialog.type === "confirm" && dialog.options?.destructive;
+
+  const title = isDestructive
+    ? t("common.dialog.confirmDestructiveTitle")
+    : dialog.type === "confirm"
+      ? t("common.dialog.confirm")
+      : t("common.dialog.alert");
 
   const styles = createStyles(theme);
+  const DialogBtn = getComponent("DialogButton") ?? DefaultDialogButton;
 
   return (
     <DialogContext.Provider value={contract}>
@@ -61,21 +86,17 @@ export function DialogProvider({ children }: { children: React.ReactNode }) {
             <div style={styles.message}>{t(dialog.message)}</div>
             <div style={styles.actions}>
               {dialog.type === "confirm" && (
-                <button
-                  type="button"
-                  style={styles.cancelButton}
+                <DialogBtn
+                  label={t("common.dialog.cancel")}
+                  variant="cancel"
                   onClick={() => close(false)}
-                >
-                  {t("common.dialog.cancel")}
-                </button>
+                />
               )}
-              <button
-                type="button"
-                style={styles.okButton}
+              <DialogBtn
+                label={isDestructive ? t("common.actions.destroy") : t("common.dialog.ok")}
+                variant={isDestructive ? "destructive" : "default"}
                 onClick={() => close(true)}
-              >
-                {t("common.dialog.ok")}
-              </button>
+              />
             </div>
           </div>
         </div>,

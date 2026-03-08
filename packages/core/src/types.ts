@@ -3,6 +3,7 @@ export const Position = {
   footer: "footer",
   floating: "floating",
   row: "row",
+  header: "header",
 } as const;
 
 export type PositionValue = typeof Position[keyof typeof Position]
@@ -14,7 +15,7 @@ export const Scope = {
   edit: "edit",
 } as const;
 
-export type ScopeValue = typeof Scope[keyof typeof Scope]
+export type ScopeValue = typeof Scope[keyof typeof Scope] | string;
 
 export interface FormConfig {
   width: number;
@@ -96,10 +97,12 @@ export interface NavigatorContract {
   back (): void;
 
   replace (path: string, params?: Record<string, unknown>): void;
+
+  open (route: ScopeRoute, params?: Record<string, unknown>): void;
 }
 
 export interface DialogContract {
-  confirm (message: string): Promise<boolean>;
+  confirm (message: string, options?: { destructive?: boolean }): Promise<boolean>;
 
   alert (message: string): Promise<void>;
 }
@@ -128,6 +131,8 @@ export interface FormContract {
   validate (): boolean;
 
   reset (values?: Record<string, unknown>): void;
+
+  setErrors (errors: Record<string, string[]>): void;
 }
 
 export interface ComponentContract {
@@ -184,23 +189,41 @@ export interface HandlerContext {
   component: ComponentContract
   form?: FormContract
   table?: TableContract
+  value?: unknown
 }
 
-export interface BootstrapHookContext {
+export interface BootstrapHookContext<_T = Record<string, unknown>> {
   context: Record<string, unknown>
-  hydrate(data: Record<string, unknown>): void
   schema: Record<string, FieldProxy>
   component: ComponentContract
 }
 
-export type BootstrapHookFn = (ctx: BootstrapHookContext) => void | Promise<void>
+export type BootstrapHookFn<_T = Record<string, unknown>> = (ctx: BootstrapHookContext) => void | Promise<void>
 
-export interface FetchHookContext {
-  params: PaginateParams
-  component: ComponentContract
-}
+export const FetchType = {
+  record: 'record',
+  collection: 'collection',
+} as const
 
-export type FetchHookFn = (ctx: FetchHookContext) => Promise<PaginatedResult<Record<string, unknown>>>
+export type FetchTypeValue = typeof FetchType[keyof typeof FetchType]
+
+export type FetchHookContext<T = Record<string, unknown>> =
+  | {
+      type: 'record'
+      context: Record<string, unknown>
+      params: PaginateParams
+      hydrate(data: T): void
+      component: ComponentContract
+    }
+  | {
+      type: 'collection'
+      context: Record<string, unknown>
+      params: PaginateParams
+      hydrate(result: PaginatedResult<T>): void
+      component: ComponentContract
+    }
+
+export type FetchHookFn<T = Record<string, unknown>> = (ctx: FetchHookContext<T>) => void | Promise<void>
 
 export interface SchemaHooks {
   bootstrap?: Partial<Record<ScopeValue, BootstrapHookFn>>

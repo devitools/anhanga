@@ -18,74 +18,86 @@ describe("createPersonHooks", () => {
     expect(hooks).toHaveProperty("fetch");
   });
 
-  it("bootstrap has view and edit scope handlers", () => {
+  it("bootstrap has view scope handler", () => {
     expect(hooks.bootstrap![Scope.view]).toBeTypeOf("function");
-    expect(hooks.bootstrap![Scope.edit]).toBeTypeOf("function");
   });
 
-  it("fetch has index scope handler", () => {
+  it("fetch has view, edit, and index scope handlers", () => {
+    expect(hooks.fetch![Scope.view]).toBeTypeOf("function");
+    expect(hooks.fetch![Scope.edit]).toBeTypeOf("function");
     expect(hooks.fetch![Scope.index]).toBeTypeOf("function");
   });
 
-  it("bootstrap[view] calls service.read, hydrates, and disables all fields", async () => {
+  it("fetch[view] calls service.read and hydrates", async () => {
     const data = { id: "1", name: "Alice" };
     vi.mocked(driver.read).mockResolvedValue(data);
 
     const hydrate = vi.fn();
-    const { schema, component } = createMockContext(PersonSchema, vi.fn).scopes(scopes);
+    const { component } = createMockContext(PersonSchema, vi.fn).scopes(scopes);
 
-    await hooks.bootstrap![Scope.view]!({
+    await hooks.fetch![Scope.view]!({
+      type: "record",
       context: { id: "1" },
+      params: { page: 1, limit: 1 },
       hydrate,
-      schema,
       component,
     } as any);
 
     expect(hydrate).toHaveBeenCalledWith(data);
-    expect(schema.name.disabled).toBe(true);
-    expect(schema.email.disabled).toBe(true);
   });
 
-  it("bootstrap[view] does nothing when context.id is missing", async () => {
+  it("fetch[view] does nothing when context.id is missing", async () => {
     const hydrate = vi.fn();
-    const { schema, component } = createMockContext(PersonSchema, vi.fn).scopes(scopes);
+    const { component } = createMockContext(PersonSchema, vi.fn).scopes(scopes);
 
-    await hooks.bootstrap![Scope.view]!({
+    await hooks.fetch![Scope.view]!({
+      type: "record",
       context: {},
+      params: { page: 1, limit: 1 },
       hydrate,
-      schema,
       component,
     } as any);
 
     expect(hydrate).not.toHaveBeenCalled();
   });
 
-  it("bootstrap[edit] calls service.read and hydrates without disabling", async () => {
+  it("bootstrap[view] disables all fields", async () => {
+    const { schema, component } = createMockContext(PersonSchema, vi.fn).scopes(scopes);
+
+    await hooks.bootstrap![Scope.view]!({ context: {}, schema, component });
+
+    expect(schema.name.disabled).toBe(true);
+    expect(schema.email.disabled).toBe(true);
+  });
+
+  it("fetch[edit] calls service.read and hydrates without disabling", async () => {
     const data = { id: "2", name: "Bob" };
     vi.mocked(driver.read).mockResolvedValue(data);
 
     const hydrate = vi.fn();
-    const { schema, component } = createMockContext(PersonSchema, vi.fn).scopes(scopes);
+    const { component } = createMockContext(PersonSchema, vi.fn).scopes(scopes);
 
-    await hooks.bootstrap![Scope.edit]!({
+    await hooks.fetch![Scope.edit]!({
+      type: "record",
       context: { id: "2" },
+      params: { page: 1, limit: 1 },
       hydrate,
-      schema,
       component,
     } as any);
 
     expect(hydrate).toHaveBeenCalledWith(data);
-    expect(schema.name.disabled).toBe(false);
   });
 
-  it("fetch[index] calls service.paginate", async () => {
+  it("fetch[index] calls service.paginate via hydrate", async () => {
     const data = { data: [{ id: "1" }], total: 1, page: 1, limit: 10 };
     vi.mocked(driver.search).mockResolvedValue(data);
 
+    const hydrate = vi.fn();
     const { component } = createMockContext(PersonSchema, vi.fn).scopes(scopes);
     const params = { page: 1, limit: 10 };
-    const result = await hooks.fetch![Scope.index]!({ params, component } as any);
 
-    expect(result).toEqual(data);
+    await hooks.fetch![Scope.index]!({ type: "collection", context: {}, params, hydrate, component } as any);
+
+    expect(hydrate).toHaveBeenCalledWith(data);
   });
 });

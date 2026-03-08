@@ -4,9 +4,10 @@ import { useTheme } from "../../theme/context";
 import type { Theme } from "../../theme/default";
 import { Icon } from "../../support/Icon";
 import type { ColumnSelectorProps } from "../../types";
+import { resolveFieldLabel } from "../../support/i18n";
 
 export function ColumnSelector({ availableColumns, visibleColumns, toggleColumn, domain }: ColumnSelectorProps) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const theme = useTheme();
   const styles = createStyles(theme);
   const [open, setOpen] = useState(false);
@@ -42,7 +43,7 @@ export function ColumnSelector({ availableColumns, visibleColumns, toggleColumn,
                 onClick={() => toggleColumn(col.name)}
               >
                 <Icon name={checked ? "check-square" : "square"} size={14} color={theme.colors.foreground} />
-                <span style={styles.optionText}>{t(`${domain}.fields.${col.name}`, { defaultValue: col.name })}</span>
+                <span style={styles.optionText}>{resolveFieldLabel(i18n, t, domain, col.name)}</span>
               </button>
             );
           })}

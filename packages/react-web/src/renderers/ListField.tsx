@@ -1,78 +1,122 @@
-import { useState } from "react";
-import { useTranslation } from "react-i18next";
-import type { FieldRendererProps } from "@ybyra/react";
-import { useTheme } from "../theme/context";
-import type { Theme } from "../theme/default";
-import { ds } from "../support/ds";
+import { useMemo, useReducer, useRef } from 'react'
+import { createPortal } from 'react-dom'
+import type { FieldRendererProps } from '@ybyra/react'
+import type { SchemaProvide } from '@ybyra/core'
+import { Scope } from '@ybyra/core'
+import { DataTable } from '../components/Table'
+import { DataForm } from '../components/Form'
+import { PageActionsContext, usePageActionsState } from '../components/PageActionsContext'
+import { useListDialog } from './list/useListDialog'
+import { useListComponent } from './list/useListComponent'
+import type { Theme } from '../theme/default'
+import { useTheme } from '../theme/context'
+import { ds } from '../support/ds'
+import { useTranslation } from 'react-i18next'
 
-export function ListField({ domain, name, value, config, proxy, errors, onChange }: FieldRendererProps) {
-  const { t } = useTranslation();
-  const theme = useTheme();
-  const styles = createStyles(theme);
-  const [editIndex, setEditIndex] = useState<number | null>(null);
-  if (proxy.hidden) return null;
+export function ListField (props: FieldRendererProps) {
+  const { name, value, config, errors, proxy, onChange, domain } = props
 
-  const fieldLabel = t(`${domain}.fields.${name}`, { defaultValue: name });
-  const hasError = errors.length > 0;
-  const items = Array.isArray(value) ? (value as Record<string, unknown>[]) : [];
-  const reorderable = config.attrs.reorderable === true;
+  const { t } = useTranslation()
+  const theme = useTheme()
+  const styles = createStyles(theme)
 
-  const remove = (index: number) => {
-    onChange(items.filter((_, i) => i !== index));
-  };
+  const schema = config.attrs?.itemSchema as SchemaProvide | undefined
+  const domainHooks = config.attrs?.hooks as Record<string, unknown> | undefined
+  const domainHandlers = config.attrs?.handlers as Record<string, (ctx: unknown) => unknown> | undefined
+  const domainEvents = config.attrs?.events as any
 
-  const add = () => {
-    onChange([...items, {}]);
-  };
+  const rawValue = Array.isArray(value) ? value : []
+  const onChangeRef = useRef(onChange)
+  onChangeRef.current = onChange
 
-  const moveUp = (index: number) => {
-    if (index === 0) return;
-    const next = [...items];
-    [next[index - 1], next[index]] = [next[index], next[index - 1]];
-    onChange(next);
-  };
+  const reactiveValue = useMemo(() => {
+    const arr = [...rawValue] as Record<string, unknown>[]
+    arr.push = (...items: Record<string, unknown>[]) => {
+      const next = [...rawValue, ...items]
+      onChangeRef.current(next)
+      return next.length
+    }
+    arr.splice = (start: number, deleteCount?: number, ...items: Record<string, unknown>[]) => {
+      const next = [...rawValue]
+      const removed = next.splice(start, deleteCount ?? next.length, ...items)
+      onChangeRef.current(next)
+      return removed
+    }
+    return arr
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [rawValue])
+  const fieldLabel = t(`${domain}.fields.${name}`)
+  const hasError = errors.length > 0
 
-  const moveDown = (index: number) => {
-    if (index >= items.length - 1) return;
-    const next = [...items];
-    [next[index], next[index + 1]] = [next[index + 1], next[index]];
-    onChange(next);
-  };
+  const [dialogState, openDialog, closeDialog] = useListDialog()
+  const [reloadKey, triggerReload] = useReducer((n: number) => n + 1, 0)
+  const { node: headerActions, register } = usePageActionsState()
+
+  const tableComponent = useListComponent(
+    schema!,
+    rawValue,
+    openDialog,
+    closeDialog,
+    triggerReload,
+  )
+
+  const formComponent = useMemo(
+    () => ({ ...tableComponent, scope: dialogState.scope }),
+    [tableComponent, dialogState.scope],
+  )
+
+  const rawValueRef = useRef(rawValue)
+  rawValueRef.current = rawValue
+  const dialogStateRef = useRef(dialogState)
+  dialogStateRef.current = dialogState
+
+  if (!schema || proxy.hidden) return null
 
   return (
     <div style={styles.container} {...ds(`ListField:${name}`)}>
       <label style={{ ...styles.label, ...(hasError ? styles.labelError : {}) }}>{fieldLabel}</label>
-      <div style={styles.list}>
-        {items.map((item, index) => (
-          <div key={index} style={styles.row}>
-            <span style={styles.rowIndex}>#{index + 1}</span>
-            <span style={styles.rowPreview}>
-              {Object.values(item).filter(Boolean).join(", ") || "—"}
-            </span>
-            <div style={styles.rowActions}>
-              {reorderable && (
-                <>
-                  <button type="button" style={styles.btn} onClick={() => moveUp(index)} disabled={proxy.disabled || index === 0}>↑</button>
-                  <button type="button" style={styles.btn} onClick={() => moveDown(index)} disabled={proxy.disabled || index >= items.length - 1}>↓</button>
-                </>
-              )}
-              {!proxy.disabled && (
-                <button type="button" style={{ ...styles.btn, ...styles.btnDestructive }} onClick={() => remove(index)}>×</button>
-              )}
-            </div>
+      {headerActions && <div style={styles.headerActions}>{headerActions}</div>}
+      <PageActionsContext.Provider value={{ register }}>
+        <DataTable
+          key={reloadKey}
+          schema={schema}
+          scope={Scope.index}
+          component={tableComponent}
+          hooks={domainHooks as any}
+          handlers={domainHandlers as any}
+          selectable={false}
+          actionsPosition="end"
+          showColumnSelector={false}
+          value={rawValue}
+        />
+      </PageActionsContext.Provider>
+
+      {dialogState.open && createPortal(
+        <div
+          style={styles.overlay}
+          onClick={closeDialog}
+        >
+          <div
+            style={styles.modal}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <DataForm
+              schema={schema}
+              scope={dialogState.scope}
+              component={formComponent}
+              hooks={domainHooks as any}
+              handlers={domainHandlers as any}
+              events={domainEvents}
+              initialValues={dialogState.selectedItem ?? undefined}
+              context={dialogState.selectedItem ?? {}}
+              value={reactiveValue}
+            />
           </div>
-        ))}
-      </div>
-      {!proxy.disabled && (
-        <button type="button" style={styles.addBtn} onClick={add}>+</button>
+        </div>,
+        document.body,
       )}
-      <div style={styles.errorSlot}>
-        {errors.map((error, i) => (
-          <p key={i} style={styles.error}>{error}</p>
-        ))}
-      </div>
     </div>
-  );
+  )
 }
 
 const createStyles = (theme: Theme) => ({
@@ -80,67 +124,38 @@ const createStyles = (theme: Theme) => ({
     padding: `0 ${theme.spacing.xs}px`,
   },
   label: {
-    display: "block",
+    display: 'block',
     fontSize: theme.fontSize.sm,
     fontWeight: theme.fontWeight.semibold,
     marginBottom: theme.spacing.xs,
     color: theme.colors.foreground,
   },
+  headerActions: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+    marginBottom: theme.spacing.xs,
+  },
+  overlay: {
+    position: 'fixed' as const,
+    inset: 0,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    zIndex: 9999,
+  },
+  modal: {
+    backgroundColor: theme.colors.card,
+    borderRadius: theme.borderRadius.xl,
+    padding: theme.spacing.xxl,
+    minWidth: 480,
+    maxWidth: 640,
+    maxHeight: '90vh',
+    overflowY: 'auto' as const,
+    boxShadow: '0 4px 24px rgba(0, 0, 0, 0.2)',
+  },
   labelError: {
     color: theme.colors.destructive,
-  },
-  list: {
-    border: `1px solid ${theme.colors.input}`,
-    borderRadius: theme.borderRadius.md,
-    overflow: "hidden",
-  },
-  row: {
-    display: "flex",
-    alignItems: "center",
-    gap: theme.spacing.xs,
-    padding: `${theme.spacing.xs}px ${theme.spacing.md}px`,
-    borderBottom: `1px solid ${theme.colors.input}`,
-    backgroundColor: theme.colors.card,
-  },
-  rowIndex: {
-    fontSize: theme.fontSize.xs,
-    color: theme.colors.mutedForeground,
-    minWidth: 24,
-  },
-  rowPreview: {
-    flex: 1,
-    fontSize: theme.fontSize.sm,
-    color: theme.colors.cardForeground,
-    overflow: "hidden",
-    textOverflow: "ellipsis",
-    whiteSpace: "nowrap" as const,
-  },
-  rowActions: {
-    display: "flex",
-    gap: 4,
-  },
-  btn: {
-    border: `1px solid ${theme.colors.input}`,
-    borderRadius: theme.borderRadius.sm,
-    backgroundColor: theme.colors.card,
-    color: theme.colors.cardForeground,
-    cursor: "pointer",
-    padding: "2px 6px",
-    fontSize: theme.fontSize.xs,
-  },
-  btnDestructive: {
-    color: theme.colors.destructive,
-  },
-  addBtn: {
-    marginTop: theme.spacing.xs,
-    border: `1px dashed ${theme.colors.input}`,
-    borderRadius: theme.borderRadius.md,
-    backgroundColor: "transparent",
-    color: theme.colors.mutedForeground,
-    cursor: "pointer",
-    padding: `${theme.spacing.xs}px`,
-    width: "100%",
-    fontSize: theme.fontSize.md,
   },
   errorSlot: {
     minHeight: 20,
@@ -151,4 +166,4 @@ const createStyles = (theme: Theme) => ({
     color: theme.colors.destructive,
     margin: 0,
   },
-});
+})

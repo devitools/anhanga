@@ -1,6 +1,6 @@
 import type { ReactNode, ComponentType } from "react";
 import type { ResolvedAction, ResolvedField, UseDataFormReturn, ResolvedColumn } from "@ybyra/react";
-import type { FieldProxy, PositionValue, ScopeValue } from "@ybyra/core";
+import type { FieldProxy, PositionValue, ScopeValue, ActionConfig } from "@ybyra/core";
 
 export interface SlotRendererProps {
   domain: string;
@@ -63,7 +63,23 @@ export interface ColumnSelectorProps {
   domain: string;
 }
 
-export interface EmptyStateProps {}
+export interface EmptyStateAction {
+  label: string;
+  icon?: string;
+  onPress: () => void;
+}
+
+export interface EmptyStateProps {
+  icon?: string | ComponentType<{ className?: string }>;
+  title?: string;
+  subtitle?: string;
+  action?: EmptyStateAction;
+}
+
+/** Props passadas pelo consumidor no DataTable — `action` aceita nome ou ActionConfig do schema */
+export interface DataTableEmptyStateInput extends Omit<EmptyStateProps, 'action'> {
+  action?: string | ActionConfig;
+}
 
 export interface HeaderCellProps {
   column: ResolvedColumn;
@@ -95,6 +111,52 @@ export interface CardProps {
   domain: string;
 }
 
+export interface SearchBarProps {
+  value: string;
+  onChange: (value: string) => void;
+  domain: string;
+  placeholder?: string;
+}
+
+export interface TextInputProps {
+  type?: string;
+  value: string;
+  onChange: (value: string) => void;
+  onBlur?: () => void;
+  onFocus?: () => void;
+  disabled?: boolean;
+  placeholder?: string;
+  hasError?: boolean;
+}
+
+export interface TextareaInputProps {
+  value: string;
+  onChange: (value: string) => void;
+  onBlur?: () => void;
+  onFocus?: () => void;
+  disabled?: boolean;
+  placeholder?: string;
+  rows?: number;
+  hasError?: boolean;
+}
+
+export interface SelectInputProps {
+  value: string;
+  options: { value: string; label: string }[];
+  onChange: (value: string) => void;
+  onBlur?: () => void;
+  onFocus?: () => void;
+  disabled?: boolean;
+  placeholder?: string;
+  hasError?: boolean;
+}
+
+export interface DialogButtonProps {
+  label: string;
+  variant: 'default' | 'destructive' | 'cancel';
+  onClick: () => void;
+}
+
 export interface DataTableComponents {
   ActionBar?: ComponentType<ActionBarProps>;
   ActionButton?: ComponentType<ActionButtonProps>;
@@ -106,4 +168,5 @@ export interface DataTableComponents {
   HeaderCell?: ComponentType<HeaderCellProps>;
   DataCell?: ComponentType<DataCellProps>;
   Card?: ComponentType<CardProps>;
+  SearchBar?: ComponentType<SearchBarProps>;
 }

@@ -3,6 +3,8 @@ import type { FieldRendererProps } from "@ybyra/react";
 import { useTheme } from "../theme/context";
 import type { Theme } from "../theme/default";
 import { ds } from "../support/ds";
+import { getComponent } from "../components/registry";
+import { resolveFieldLabel, resolveFieldPlaceholder, resolveFieldDescription } from "../support/i18n";
 
 export function TextareaField({ domain, name, value, config, proxy, errors, onChange, onBlur, onFocus }: FieldRendererProps) {
   const { t, i18n } = useTranslation();
@@ -10,25 +12,40 @@ export function TextareaField({ domain, name, value, config, proxy, errors, onCh
   const styles = createStyles(theme);
   if (proxy.hidden) return null;
 
-  const fieldLabel = t(`${domain}.fields.${name}`, { defaultValue: name });
-  const placeholderKey = `${domain}.fields.${name}.placeholder`;
-  const placeholder = i18n.exists(placeholderKey) ? t(placeholderKey) : undefined;
+  const fieldLabel = resolveFieldLabel(i18n, t, domain, name);
+  const placeholder = resolveFieldPlaceholder(i18n, t, domain, name);
+  const description = resolveFieldDescription(i18n, t, domain, name);
   const hasError = errors.length > 0;
   const rows = proxy.height || config.form.height || 3;
+  const CustomInput = getComponent('TextareaInput');
 
   return (
     <div style={styles.container} {...ds(`TextareaField:${name}`)}>
       <label style={{ ...styles.label, ...(hasError ? styles.labelError : {}) }}>{fieldLabel}</label>
-      <textarea
-        style={{ ...styles.input, ...(proxy.disabled ? styles.inputDisabled : {}), ...(hasError ? styles.inputError : {}) }}
-        value={String(value ?? "")}
-        rows={rows}
-        onChange={(e) => onChange(e.target.value)}
-        onBlur={onBlur}
-        onFocus={onFocus}
-        disabled={proxy.disabled}
-        placeholder={placeholder}
-      />
+      {CustomInput ? (
+        <CustomInput
+          value={String(value ?? "")}
+          onChange={onChange}
+          onBlur={onBlur}
+          onFocus={onFocus}
+          disabled={proxy.disabled}
+          placeholder={placeholder}
+          rows={rows}
+          hasError={hasError}
+        />
+      ) : (
+        <textarea
+          style={{ ...styles.input, ...(proxy.disabled ? styles.inputDisabled : {}), ...(hasError ? styles.inputError : {}) }}
+          value={String(value ?? "")}
+          rows={rows}
+          onChange={(e) => onChange(e.target.value)}
+          onBlur={onBlur}
+          onFocus={onFocus}
+          disabled={proxy.disabled}
+          placeholder={placeholder}
+        />
+      )}
+      {description && <p style={styles.description}>{description}</p>}
       <div style={styles.errorSlot}>
         {errors.map((error, i) => (
           <p key={i} style={styles.error}>{error}</p>
@@ -76,6 +93,12 @@ const createStyles = (theme: Theme) => ({
   errorSlot: {
     minHeight: 20,
     marginTop: 2,
+  },
+  description: {
+    fontSize: theme.fontSize.sm,
+    color: theme.colors.mutedForeground,
+    marginTop: theme.spacing.xs,
+    margin: 0,
   },
   error: {
     fontSize: theme.fontSize.xs,

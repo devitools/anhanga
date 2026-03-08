@@ -2,18 +2,22 @@ import { useState, useEffect, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "../../theme/context";
 import type { Theme } from "../../theme/default";
-import { Icon } from "../../support/Icon";
 import type { PaginationProps } from "../../types";
 
 const PAGE_SIZE_OPTIONS = [3, 5, 10, 25, 50];
+
+function getVisiblePages(current: number, total: number): number[] {
+  if (total <= 5) return Array.from({ length: total }, (_, i) => i + 1);
+  const start = Math.max(1, current - 2);
+  const end = Math.min(total, start + 4);
+  return Array.from({ length: end - start + 1 }, (_, i) => start + i);
+}
 
 export function Pagination({ page, limit, total, totalPages, setPage, setLimit }: PaginationProps) {
   const { t } = useTranslation();
   const theme = useTheme();
   const styles = createStyles(theme);
   const [open, setOpen] = useState(false);
-  const start = total === 0 ? 0 : (page - 1) * limit + 1;
-  const end = Math.min(page * limit, total);
 
   const handleClickOutside = useCallback(() => setOpen(false), []);
 
@@ -24,10 +28,13 @@ export function Pagination({ page, limit, total, totalPages, setPage, setLimit }
     }
   }, [open, handleClickOutside]);
 
+  const visiblePages = getVisiblePages(page, totalPages);
+
   return (
     <div style={styles.pagination}>
+      {/* Esquerda: Itens por página */}
       <div style={styles.paginationStart}>
-        <span style={styles.pageInfo}>{t("common.table.recordsPerPage")}</span>
+        <span style={styles.pageInfo}>{t("common.table.recordsPerPage")}:</span>
         <div style={styles.pageSizeSelector}>
           <button
             type="button"
@@ -35,7 +42,6 @@ export function Pagination({ page, limit, total, totalPages, setPage, setLimit }
             onClick={(e) => { e.stopPropagation(); setOpen(!open); }}
           >
             <span style={styles.pageSizeButtonText}>{limit}</span>
-            <Icon name="chevron-down" size={12} color={theme.colors.mutedForeground} />
           </button>
           {open && (
             <div style={styles.pageSizeDropdown} onClick={(e) => e.stopPropagation()}>
@@ -56,23 +62,35 @@ export function Pagination({ page, limit, total, totalPages, setPage, setLimit }
         </div>
       </div>
 
+      {/* Direita: Anterior | páginas numeradas | Próximo */}
       <div style={styles.paginationEnd}>
-        <span style={styles.pageInfo}>{start}-{end} of {total}</span>
         <button
           type="button"
-          style={{ ...styles.pageArrow, ...(page <= 1 ? styles.pageArrowDisabled : {}) }}
+          style={{ ...styles.navButton, ...(page <= 1 ? styles.navButtonDisabled : {}) }}
           disabled={page <= 1}
           onClick={() => setPage(page - 1)}
         >
-          <Icon name="chevron-left" size={16} color={page <= 1 ? theme.colors.mutedForeground : theme.colors.foreground} />
+          {t("common.table.previous")}
         </button>
+
+        {visiblePages.map((p) => (
+          <button
+            key={p}
+            type="button"
+            style={{ ...styles.pageNumber, ...(p === page ? styles.pageNumberActive : {}) }}
+            onClick={() => setPage(p)}
+          >
+            {p}
+          </button>
+        ))}
+
         <button
           type="button"
-          style={{ ...styles.pageArrow, ...(page >= totalPages ? styles.pageArrowDisabled : {}) }}
+          style={{ ...styles.navButton, ...(page >= totalPages ? styles.navButtonDisabled : {}) }}
           disabled={page >= totalPages}
           onClick={() => setPage(page + 1)}
         >
-          <Icon name="chevron-right" size={16} color={page >= totalPages ? theme.colors.mutedForeground : theme.colors.foreground} />
+          {t("common.table.next")}
         </button>
       </div>
     </div>
@@ -83,7 +101,7 @@ const createStyles = (theme: Theme) => ({
   pagination: {
     display: "flex",
     alignItems: "center",
-    justifyContent: "flex-end",
+    justifyContent: "space-between",
     gap: theme.spacing.lg,
     marginTop: theme.spacing.lg,
     marginBottom: theme.spacing.md,
@@ -151,19 +169,38 @@ const createStyles = (theme: Theme) => ({
   pageSizeOptionTextActive: {
     fontWeight: theme.fontWeight.semibold,
   },
-  pageArrow: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    padding: 6,
+  navButton: {
+    padding: `6px 12px`,
     borderRadius: theme.borderRadius.sm,
-    border: "none",
-    background: "none",
+    border: `1px solid ${theme.colors.border}`,
+    backgroundColor: theme.colors.card,
+    fontSize: theme.fontSize.sm,
+    color: theme.colors.foreground,
     cursor: "pointer",
+    fontFamily: "inherit",
   },
-  pageArrowDisabled: {
+  navButtonDisabled: {
     opacity: 0.4,
     cursor: "default",
+  },
+  pageNumber: {
+    width: 32,
+    height: 32,
+    borderRadius: theme.borderRadius.sm,
+    border: `1px solid ${theme.colors.border}`,
+    backgroundColor: theme.colors.card,
+    fontSize: theme.fontSize.sm,
+    color: theme.colors.foreground,
+    cursor: "pointer",
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    fontFamily: "inherit",
+  },
+  pageNumberActive: {
+    backgroundColor: theme.colors.primary,
+    color: theme.colors.primaryForeground,
+    border: `1px solid ${theme.colors.primary}`,
   },
   pageInfo: {
     fontSize: theme.fontSize.sm,

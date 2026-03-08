@@ -27,7 +27,7 @@ export type UseDataTableStore = Readable<UseDataTableReturn> & {
 }
 
 export function useDataTable (options: UseDataTableOptions): UseDataTableStore {
-  const { schema, scope, handlers, hooks, component, pageSize = 10, permissions } = options
+  const { schema, scope, handlers, hooks, context, component, pageSize = 10, permissions } = options
 
   const rows = writable<Record<string, unknown>[]>([])
   const loading = writable(false)
@@ -91,25 +91,29 @@ export function useDataTable (options: UseDataTableOptions): UseDataTableStore {
     if (!fetchHook) return
 
     loading.set(true)
-    fetchHook({
-      params: {
-        page: get(page),
-        limit: get(limit),
-        sort: get(sortField),
-        order: get(sortOrder),
-        filters: get(filters),
-      },
-      component,
+    const hydrate = (result: { data: Record<string, unknown>[]; total: number }) => {
+      if (fetchId !== id) return
+      rows.set(result.data)
+      total.set(result.total)
+    }
+    Promise.resolve(
+      fetchHook({
+        type: 'collection',
+        context: context ?? {},
+        params: {
+          page: get(page),
+          limit: get(limit),
+          sort: get(sortField),
+          order: get(sortOrder),
+          filters: get(filters),
+        },
+        hydrate,
+        component,
+      }),
+    ).finally(() => {
+      if (fetchId !== id) return
+      loading.set(false)
     })
-      .then((result: { data: Record<string, unknown>[]; total: number }) => {
-        if (fetchId !== id) return
-        rows.set(result.data)
-        total.set(result.total)
-      })
-      .finally(() => {
-        if (fetchId !== id) return
-        loading.set(false)
-      })
   }
 
   reload()

@@ -63,7 +63,7 @@ type HandlerFn = (context: HandlerContext) => void | Promise<void>
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type BootstrapHookFn = (ctx: any) => void | Promise<void>
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-type FetchHookFn = (ctx: any) => Promise<any>
+type FetchHookFn = (ctx: any) => void | Promise<void>
 
 export interface UseDataFormOptions {
   schema: SchemaProvide

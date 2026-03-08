@@ -3,35 +3,55 @@ import type { FieldRendererProps } from "@ybyra/react";
 import { useTheme } from "../theme/context";
 import type { Theme } from "../theme/default";
 import { ds } from "../support/ds";
+import { resolveFieldLabel, resolveFieldOption, resolveFieldPlaceholder } from "../support/i18n";
+import { getComponent } from "../components/registry";
 
 export function SelectField({ domain, name, value, config, proxy, errors, onChange, onBlur, onFocus }: FieldRendererProps) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const theme = useTheme();
   const styles = createStyles(theme);
   if (proxy.hidden) return null;
 
-  const fieldLabel = t(`${domain}.fields.${name}`, { defaultValue: name });
+  const fieldLabel = resolveFieldLabel(i18n, t, domain, name);
+  const placeholder = resolveFieldPlaceholder(i18n, t, domain, name);
   const hasError = errors.length > 0;
-  const options = (config.attrs.options ?? []) as (string | number)[];
+  const rawOptions = (config.attrs.options ?? []) as (string | number)[];
+  const options = rawOptions.map((opt) => ({
+    value: String(opt),
+    label: resolveFieldOption(i18n, t, domain, name, String(opt)),
+  }));
+
+  const CustomSelect = getComponent('SelectInput');
 
   return (
     <div style={styles.container} {...ds(`SelectField:${name}`)}>
       <label style={{ ...styles.label, ...(hasError ? styles.labelError : {}) }}>{fieldLabel}</label>
-      <select
-        style={{ ...styles.input, ...(proxy.disabled ? styles.inputDisabled : {}), ...(hasError ? styles.inputError : {}) }}
-        value={String(value ?? "")}
-        onChange={(e) => onChange(e.target.value)}
-        onBlur={onBlur}
-        onFocus={onFocus}
-        disabled={proxy.disabled}
-      >
-        <option value="" />
-        {options.map((opt) => (
-          <option key={String(opt)} value={String(opt)}>
-            {t(`${domain}.fields.${name}.${opt}`, { defaultValue: String(opt) })}
-          </option>
-        ))}
-      </select>
+      {CustomSelect ? (
+        <CustomSelect
+          value={String(value ?? "")}
+          options={options}
+          onChange={onChange}
+          onBlur={onBlur}
+          onFocus={onFocus}
+          disabled={proxy.disabled}
+          placeholder={placeholder}
+          hasError={hasError}
+        />
+      ) : (
+        <select
+          style={{ ...styles.input, ...(proxy.disabled ? styles.inputDisabled : {}), ...(hasError ? styles.inputError : {}) }}
+          value={String(value ?? "")}
+          onChange={(e) => onChange(e.target.value)}
+          onBlur={onBlur}
+          onFocus={onFocus}
+          disabled={proxy.disabled}
+        >
+          <option value="">{placeholder ?? ""}</option>
+          {options.map((opt) => (
+            <option key={opt.value} value={opt.value}>{opt.label}</option>
+          ))}
+        </select>
+      )}
       <div style={styles.errorSlot}>
         {errors.map((error, i) => (
           <p key={i} style={styles.error}>{error}</p>

@@ -20,6 +20,7 @@ export interface FieldRendererProps {
   proxy: FieldProxy
   errors: string[]
   scope: ScopeValue
+  context?: Record<string, unknown>
   onChange(value: unknown): void
   onBlur(): void
   onFocus(): void
@@ -56,6 +57,7 @@ export interface HandlerContext {
   component: ComponentContract
   form?: FormContract
   table?: TableContract
+  value?: unknown
 }
 
 type HandlerFn = (context: HandlerContext) => void | Promise<void>
@@ -63,7 +65,7 @@ type HandlerFn = (context: HandlerContext) => void | Promise<void>
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type BootstrapHookFn = (ctx: any) => void | Promise<void>
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-type FetchHookFn = (ctx: any) => Promise<any>
+type FetchHookFn = (ctx: any) => void | Promise<void>
 
 export interface UseDataFormOptions {
   schema: SchemaProvide
@@ -79,6 +81,7 @@ export interface UseDataFormOptions {
   initialValues?: Record<string, unknown>
   translate?: TranslateContract
   permissions?: string[]
+  value?: unknown
 }
 
 export interface UseDataFormReturn {
@@ -113,7 +116,6 @@ export interface UseDataTableOptions {
   scope: ScopeValue
   handlers?: Record<string, HandlerFn>
   hooks?: {
-    bootstrap?: Partial<Record<ScopeValue, BootstrapHookFn>>
     fetch?: Partial<Record<ScopeValue, FetchHookFn>>
   }
   context?: Record<string, unknown>
@@ -121,6 +123,7 @@ export interface UseDataTableOptions {
   pageSize?: number
   translate?: TranslateContract
   permissions?: string[]
+  value?: Record<string, unknown>[]
 }
 
 export interface UseDataTableReturn {

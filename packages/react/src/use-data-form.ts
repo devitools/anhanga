@@ -14,8 +14,10 @@ import type {
 } from "./types";
 
 export function useDataForm (options: UseDataFormOptions): UseDataFormReturn {
-  const { schema, scope, events, handlers, hooks, context, component, initialValues, translate, permissions } = options;
+  const { schema, scope, events, handlers, hooks, context, component, initialValues, translate, permissions, value } = options;
   const t: TranslateContract = translate ?? ((key) => key);
+  const valueRef = useRef(value);
+  valueRef.current = value;
 
   const [state, setState] = useState<Record<string, unknown>>(() =>
     buildInitialState(schema.fields, initialValues),
@@ -23,25 +25,30 @@ export function useDataForm (options: UseDataFormOptions): UseDataFormReturn {
   const [fieldOverrides, setFieldOverrides] = useState<Record<string, Partial<FieldProxy>>>({});
   const [errors, setErrors] = useState<Record<string, string[]>>({});
   const initialStateRef = useRef(buildInitialState(schema.fields, initialValues));
-  const [loading, setLoading] = useState(() => !!hooks?.bootstrap?.[scope]);
+  const [loading, setLoading] = useState(() => !!(hooks?.fetch?.[scope] || hooks?.bootstrap?.[scope]));
 
   useEffect(() => {
-    const hook = hooks?.bootstrap?.[scope];
-    if (!hook) return;
+    const fetchHook = hooks?.fetch?.[scope];
+    const bootstrapHook = hooks?.bootstrap?.[scope];
+    if (!fetchHook && !bootstrapHook) return;
 
     const run = async () => {
       let hydratedData: Record<string, unknown> | undefined;
-      const schemaResult = createSchemaProxy(schema.fields, {});
-      const hydrate = (data: Record<string, unknown>) => { hydratedData = data; };
-
-      await hook({ context: context ?? {}, hydrate, schema: schemaResult.proxy, component });
-
       let currentOverrides: Record<string, Partial<FieldProxy>> = {};
-      const bootstrapOverrides = schemaResult.getOverrides();
-      for (const [name, ov] of Object.entries(bootstrapOverrides)) {
-        currentOverrides[name] = { ...currentOverrides[name], ...ov };
+
+      // 1. fetch → hidrata os dados
+      if (fetchHook) {
+        const hydrate = (data: Record<string, unknown>) => { hydratedData = data; };
+        await fetchHook({
+          type: 'record',
+          context: context ?? {},
+          params: { page: 1, limit: 1 },
+          hydrate,
+          component,
+        });
       }
 
+      // 2. aplica hydrate e dispara events
       if (hydratedData) {
         let currentState = buildInitialState(schema.fields, hydratedData);
 
@@ -60,6 +67,15 @@ export function useDataForm (options: UseDataFormOptions): UseDataFormReturn {
 
         setState(currentState);
         initialStateRef.current = currentState;
+      }
+
+      // 3. bootstrap → orquestra estado do schema (roda após hydrate)
+      if (bootstrapHook) {
+        const schemaResult = createSchemaProxy(schema.fields, currentOverrides);
+        await bootstrapHook({ context: context ?? {}, schema: schemaResult.proxy, component });
+        for (const [name, ov] of Object.entries(schemaResult.getOverrides())) {
+          currentOverrides[name] = { ...currentOverrides[name], ...ov };
+        }
       }
 
       if (Object.keys(currentOverrides).length > 0) {
@@ -256,8 +272,8 @@ export function useDataForm (options: UseDataFormOptions): UseDataFormReturn {
 
   const valid = useMemo(() => Object.keys(errors).length === 0, [errors]);
 
-  const formRef = useRef({ validate, reset, setValues, errors });
-  formRef.current = { validate, reset, setValues, errors };
+  const formRef = useRef({ validate, reset, setValues, errors, setErrors });
+  formRef.current = { validate, reset, setValues, errors, setErrors };
 
   const actions = useMemo((): ResolvedAction[] => {
     return Object.entries(schema.actions)
@@ -278,8 +294,10 @@ export function useDataForm (options: UseDataFormOptions): UseDataFormReturn {
               dirty,
               valid,
               reset,
-              validate
+              validate,
+              setErrors,
             },
+            value: valueRef.current,
           });
         },
       }));
@@ -297,6 +315,7 @@ export function useDataForm (options: UseDataFormOptions): UseDataFormReturn {
         proxy,
         errors: errors[name] ?? [],
         scope,
+        context: context ?? {},
         onChange (value: unknown) {
           setValue(name, value);
         },
@@ -308,7 +327,7 @@ export function useDataForm (options: UseDataFormOptions): UseDataFormReturn {
         },
       };
     },
-    [schema.fields, schema.domain, state, errors, scope, getProxy, setValue, fireEvent],
+    [schema.fields, schema.domain, state, errors, scope, context, getProxy, setValue, fireEvent],
   );
 
   const permitted = useMemo(

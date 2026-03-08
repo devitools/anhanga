@@ -13,12 +13,29 @@ interface DebugAction {
 interface DebugEntry {
   title: string;
   content: string;
+  collapsed?: boolean;
 }
 
 interface DebugPanelProps {
   actions: DebugAction[];
   entries: DebugEntry[];
   meta?: string;
+}
+
+function CollapsibleEntry({ entry, styles, theme }: { entry: DebugEntry; styles: ReturnType<typeof createStyles>; theme: Theme }) {
+  const [open, setOpen] = useState(!entry.collapsed);
+  return (
+    <div>
+      <div
+        style={{ ...styles.debugTitle, cursor: "pointer", display: "flex", alignItems: "center", gap: 4 }}
+        onClick={() => setOpen((v) => !v)}
+      >
+        <Icon name={open ? "chevron-down" : "chevron-right"} size={10} color={theme.colors.mutedForeground} />
+        {entry.title}
+      </div>
+      {open && <pre style={styles.debugText}>{entry.content}</pre>}
+    </div>
+  );
 }
 
 export function DebugPanel({ actions, entries, meta }: DebugPanelProps) {
@@ -44,10 +61,7 @@ export function DebugPanel({ actions, entries, meta }: DebugPanelProps) {
       {expanded && (
         <>
           {entries.map((entry, i) => (
-            <div key={i}>
-              <div style={styles.debugTitle}>{entry.title}</div>
-              <pre style={styles.debugText}>{entry.content}</pre>
-            </div>
+            <CollapsibleEntry key={i} entry={entry} styles={styles} theme={theme} />
           ))}
           {meta && <div style={styles.debugMeta}>{meta}</div>}
         </>
@@ -69,7 +83,6 @@ const createStyles = (theme: Theme) => ({
     justifyContent: "space-between",
     flexWrap: "wrap" as const,
     gap: theme.spacing.sm,
-    marginBottom: theme.spacing.md,
   },
   debugActions: {
     display: "flex",

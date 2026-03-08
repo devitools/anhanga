@@ -9,7 +9,7 @@ import type {
 } from './types'
 
 export function useDataTable (options: UseDataTableOptions): UseDataTableReturn {
-  const { schema, scope, handlers, hooks, component, pageSize = 10, permissions } = options
+  const { schema, scope, handlers, hooks, context, component, pageSize = 10, permissions } = options
 
   const rows = ref<Record<string, unknown>[]>([])
   const loading = ref(false)
@@ -73,25 +73,29 @@ export function useDataTable (options: UseDataTableOptions): UseDataTableReturn 
     if (!fetchHook) return
 
     loading.value = true
-    fetchHook({
-      params: {
-        page: page.value,
-        limit: limit.value,
-        sort: sortField.value,
-        order: sortOrder.value,
-        filters: filters.value,
-      },
-      component,
+    const hydrate = (result: { data: Record<string, unknown>[]; total: number }) => {
+      if (fetchId !== id) return
+      rows.value = result.data
+      total.value = result.total
+    }
+    Promise.resolve(
+      fetchHook({
+        type: 'collection',
+        context: context ?? {},
+        params: {
+          page: page.value,
+          limit: limit.value,
+          sort: sortField.value,
+          order: sortOrder.value,
+          filters: filters.value,
+        },
+        hydrate,
+        component,
+      }),
+    ).finally(() => {
+      if (fetchId !== id) return
+      loading.value = false
     })
-      .then((result: { data: Record<string, unknown>[]; total: number }) => {
-        if (fetchId !== id) return
-        rows.value = result.data
-        total.value = result.total
-      })
-      .finally(() => {
-        if (fetchId !== id) return
-        loading.value = false
-      })
   }
 
   watch(
