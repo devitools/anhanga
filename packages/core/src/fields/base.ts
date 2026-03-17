@@ -94,6 +94,18 @@ export class FieldDefinition<T = unknown> {
   }
 
   toConfig(): FieldConfig {
-    return structuredClone(this._config)
+    return cloneWithFunctions(this._config) as FieldConfig
   }
+}
+
+function cloneWithFunctions(value: unknown): unknown {
+  if (value === null || typeof value !== 'object') return value
+  if (typeof value === 'function') return value
+  if (Array.isArray(value)) return value.map(cloneWithFunctions)
+  const result: Record<string, unknown> = {}
+  for (const key of Object.keys(value as object)) {
+    const v = (value as Record<string, unknown>)[key]
+    result[key] = typeof v === 'function' ? v : cloneWithFunctions(v)
+  }
+  return result
 }

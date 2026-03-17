@@ -3,14 +3,15 @@ import type { FieldRendererProps } from "@ybyra/react";
 import { useTheme } from "../theme/context";
 import type { Theme } from "../theme/default";
 import { ds } from "../support/ds";
+import { resolveFieldLabel, resolveFieldOption } from "../support/i18n";
 
 export function MultiSelectField({ domain, name, value, config, proxy, errors, onChange, onBlur, onFocus }: FieldRendererProps) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const theme = useTheme();
   const styles = createStyles(theme);
   if (proxy.hidden) return null;
 
-  const fieldLabel = t(`${domain}.fields.${name}`, { defaultValue: name });
+  const fieldLabel = resolveFieldLabel(i18n, t, domain, name);
   const hasError = errors.length > 0;
   const options = (config.attrs.options ?? []) as (string | number)[];
   const selected = Array.isArray(value) ? (value as string[]) : [];
@@ -34,7 +35,7 @@ export function MultiSelectField({ domain, name, value, config, proxy, errors, o
           <div style={styles.chips}>
             {selected.map((v) => (
               <span key={v} style={styles.chip}>
-                {t(`${domain}.fields.${name}.${v}`, { defaultValue: v })}
+                {resolveFieldOption(i18n, t, domain, name, v)}
                 {!proxy.disabled && (
                   <button type="button" style={styles.chipRemove} onClick={() => toggle(v)}>×</button>
                 )}
@@ -51,7 +52,7 @@ export function MultiSelectField({ domain, name, value, config, proxy, errors, o
                 onChange={() => toggle(String(opt))}
                 disabled={proxy.disabled}
               />
-              {t(`${domain}.fields.${name}.${opt}`, { defaultValue: String(opt) })}
+              {resolveFieldOption(i18n, t, domain, name, String(opt))}
             </label>
           ))}
         </div>

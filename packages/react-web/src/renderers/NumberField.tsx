@@ -3,6 +3,7 @@ import type { FieldRendererProps } from "@ybyra/react";
 import { useTheme } from "../theme/context";
 import type { Theme } from "../theme/default";
 import { ds } from "../support/ds";
+import { resolveFieldLabel, resolveFieldPlaceholder } from "../support/i18n";
 
 export function NumberField({ domain, name, value, proxy, errors, onChange, onBlur, onFocus }: FieldRendererProps) {
   const { t, i18n } = useTranslation();
@@ -10,9 +11,8 @@ export function NumberField({ domain, name, value, proxy, errors, onChange, onBl
   const styles = createStyles(theme);
   if (proxy.hidden) return null;
 
-  const fieldLabel = t(`${domain}.fields.${name}`, { defaultValue: name });
-  const placeholderKey = `${domain}.fields.${name}.placeholder`;
-  const placeholder = i18n.exists(placeholderKey) ? t(placeholderKey) : undefined;
+  const fieldLabel = resolveFieldLabel(i18n, t, domain, name);
+  const placeholder = resolveFieldPlaceholder(i18n, t, domain, name);
   const hasError = errors.length > 0;
 
   return (

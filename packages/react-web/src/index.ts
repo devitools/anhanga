@@ -2,13 +2,15 @@ export { DataPage } from './components/DataPage'
 export { DataForm } from './components/Form'
 export { DataTable } from './components/Table'
 export { ActionBar, ActionButton } from './components/ActionBar'
+export { registerComponents, getComponent } from './components/registry'
+export type { ComponentRegistry } from './components/registry'
 export { DialogProvider, useDialog } from './components/Dialog'
 
 export { ThemeProvider, useTheme } from './theme/context'
 export { defaultTheme } from './theme/default'
 export type { Theme } from './theme/default'
 
-export { configureIcons, resolveActionIcon, resolveGroupIcon } from '@ybyra/react'
+export { configureIcons, resolveActionIcon, resolveActionLabel, resolveGroupIcon } from '@ybyra/react'
 
 export { createComponent, useComponent } from './contracts/component'
 export { configureI18n } from './i18n'
@@ -32,5 +34,10 @@ export type {
   DataCellProps,
   RowActionProps,
   CardProps,
+  SearchBarProps,
+  TextInputProps,
+  TextareaInputProps,
+  SelectInputProps,
+  DialogButtonProps,
   DataTableComponents,
 } from './types'

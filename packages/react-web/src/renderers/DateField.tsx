@@ -3,14 +3,15 @@ import type { FieldRendererProps } from "@ybyra/react";
 import { useTheme } from "../theme/context";
 import type { Theme } from "../theme/default";
 import { ds } from "../support/ds";
+import { resolveFieldLabel } from "../support/i18n";
 
 export function DateField({ domain, name, value, proxy, errors, onChange, onBlur, onFocus }: FieldRendererProps) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const theme = useTheme();
   const styles = createStyles(theme);
   if (proxy.hidden) return null;
 
-  const fieldLabel = t(`${domain}.fields.${name}`, { defaultValue: name });
+  const fieldLabel = resolveFieldLabel(i18n, t, domain, name);
   const hasError = errors.length > 0;
 
   return (

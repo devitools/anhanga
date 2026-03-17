@@ -36,6 +36,9 @@ export function createComponent(
       replace(path: string, params?: Record<string, unknown>) {
         nav(resolvePath(path, params));
       },
+      open(route: ScopeRoute, params?: Record<string, unknown>) {
+        nav(resolvePath(route.path, params));
+      },
     },
     dialog,
     toast: {

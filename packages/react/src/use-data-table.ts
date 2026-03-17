@@ -1,19 +1,20 @@
-import { useState, useMemo, useCallback, useEffect, useRef } from "react";
-import type { FieldConfig, ScopeValue, TableContract } from "@ybyra/core";
-import { Position, isInScope, isScopePermitted, isActionPermitted } from "@ybyra/core";
-import type {
-  UseDataTableOptions,
-  UseDataTableReturn,
-  ResolvedColumn,
-  ResolvedAction,
-} from "./types";
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import type { FieldConfig, TableContract } from '@ybyra/core'
+import { isActionPermitted, isInScope, isScopePermitted, Position } from '@ybyra/core'
+import type { ResolvedAction, ResolvedColumn, UseDataTableOptions, UseDataTableReturn } from './types'
 
 export function useDataTable (options: UseDataTableOptions): UseDataTableReturn {
-  const { schema, scope, handlers, hooks, component, pageSize = 10, permissions } = options;
+  const { schema, scope, handlers, hooks, context, component, pageSize = 10, permissions, value = [] } = options;
 
-  const [rows, setRows] = useState<Record<string, unknown>[]>([]);
+  const [rows, setRows] = useState<Record<string, unknown>[]>(value);
   const [loading, setLoading] = useState(false);
   const [total, setTotal] = useState(0);
+
+  useEffect(() => {
+    if (hooks?.fetch?.[scope]) return; // fetch hook gerencia os dados
+    setRows(value);
+    setTotal(value.length);
+  }, [value, hooks?.fetch, scope]);
   const [page, setPage] = useState(1);
   const [limit, setLimitState] = useState(pageSize);
   const [sortField, setSortField] = useState<string | undefined>();
@@ -75,16 +76,23 @@ export function useDataTable (options: UseDataTableOptions): UseDataTableReturn 
     if (!fetchHook) return;
 
     setLoading(true);
-    fetchHook({ params: { page, limit, sort: sortField, order: sortOrder, filters }, component })
-      .then((result: { data: Record<string, unknown>[]; total: number }) => {
-        if (fetchIdRef.current !== id) return;
-        setRows(result.data);
-        setTotal(result.total);
-      })
-      .finally(() => {
-        if (fetchIdRef.current !== id) return;
-        setLoading(false);
-      });
+    const hydrate = (result: { data: Record<string, unknown>[]; total: number }) => {
+      if (fetchIdRef.current !== id) return;
+      setRows(result.data);
+      setTotal(result.total);
+    };
+    Promise.resolve(
+      fetchHook({
+        type: 'collection',
+        context: context ?? {},
+        params: { page, limit, sort: sortField, order: sortOrder, filters },
+        hydrate,
+        component,
+      }),
+    ).finally(() => {
+      if (fetchIdRef.current !== id) return;
+      setLoading(false);
+    });
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [hooks?.fetch, scope, page, limit, sortField, sortOrder, filtersKey, component]);
 

@@ -61,11 +61,41 @@ export const defaultTheme = {
   },
 
   fontWeight: {
-    regular: "400" as const,
-    medium: "500" as const,
-    semibold: "600" as const,
-    bold: "700" as const,
+    regular: "400",
+    medium: "500",
+    semibold: "600",
+    bold: "700",
   },
-} as const;
+} satisfies Theme;
 
-export type Theme = typeof defaultTheme;
+export interface Theme {
+  colors: {
+    background: string;
+    foreground: string;
+    card: string;
+    cardForeground: string;
+    primary: string;
+    primaryForeground: string;
+    secondary: string;
+    secondaryForeground: string;
+    muted: string;
+    mutedForeground: string;
+    accent: string;
+    accentForeground: string;
+    destructive: string;
+    destructiveForeground: string;
+    success: string;
+    successForeground: string;
+    warning: string;
+    warningForeground: string;
+    info: string;
+    infoForeground: string;
+    border: string;
+    input: string;
+    ring: string;
+  };
+  spacing: { xs: number; sm: number; md: number; lg: number; xl: number; xxl: number };
+  borderRadius: { sm: number; md: number; lg: number; xl: number };
+  fontSize: { xs: number; sm: number; md: number; lg: number; xl: number; xxl: number };
+  fontWeight: { regular: string; medium: string; semibold: string; bold: string };
+}

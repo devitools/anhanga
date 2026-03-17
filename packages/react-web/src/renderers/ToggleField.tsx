@@ -3,13 +3,14 @@ import type { FieldRendererProps } from "@ybyra/react";
 import { useTheme } from "../theme/context";
 import type { Theme } from "../theme/default";
 import { ds } from "../support/ds";
+import { resolveFieldLabel } from "../support/i18n";
 
 const TRACK_WIDTH = 44;
 const TRACK_HEIGHT = 22;
 const THUMB_SIZE = 18;
 
 export function ToggleField({ domain, name, value, proxy, onChange }: FieldRendererProps) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const theme = useTheme();
   const styles = createStyles(theme);
   const isOn = Boolean(value);
@@ -17,7 +18,7 @@ export function ToggleField({ domain, name, value, proxy, onChange }: FieldRende
 
   return (
     <div style={styles.container} {...ds(`ToggleField:${name}`)}>
-      <label style={styles.label}>{t(`${domain}.fields.${name}`, { defaultValue: name })}</label>
+      <label style={styles.label}>{resolveFieldLabel(i18n, t, domain, name)}</label>
       <div style={styles.row}>
         <button
           type="button"

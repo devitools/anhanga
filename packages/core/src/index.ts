@@ -32,7 +32,7 @@ export { isScopePermitted, isActionPermitted } from './permission'
 
 export { buildInitialState, isInScope } from './scope'
 
-export { Position, Scope } from './types'
+export { Position, Scope, FetchType } from './types'
 
 export { ptBR } from './locales/pt-BR'
 
@@ -62,6 +62,7 @@ export type {
   HandlerContext,
   BootstrapHookContext,
   BootstrapHookFn,
+  FetchTypeValue,
   FetchHookContext,
   FetchHookFn,
   SchemaHooks,
