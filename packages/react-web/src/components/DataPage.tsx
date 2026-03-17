@@ -22,6 +22,7 @@ interface PageProps {
   title?: string;
   subtitle?: string;
   headerEnd?: ReactNode;
+  className?: string;
 }
 
 export function DataPage (props: PageProps) {
@@ -37,6 +38,7 @@ export function DataPage (props: PageProps) {
     title,
     subtitle,
     headerEnd,
+    className,
     children
   } = props
   const { t } = useTranslation()
@@ -74,8 +76,8 @@ export function DataPage (props: PageProps) {
     const resolvedHeaderEnd = headerEnd ?? registeredActions
     return (
       <PageActionsContext.Provider value={contextValue}>
-        <div style={styles.flatScroll}>
-          <div style={{ ...styles.flatContainer, maxWidth }}>
+        <div style={styles.flatScroll} className={className}>
+          <div>
             <div style={styles.flatHeader}>
               <div>
                 <div style={styles.flatTitle}>{resolvedTitle}</div>
@@ -91,7 +93,7 @@ export function DataPage (props: PageProps) {
   }
 
   return (
-    <div style={styles.scroll}>
+    <div style={styles.scroll} className={className}>
       <div style={{ ...styles.container, maxWidth }}>
         <div style={styles.title}>{t(`${domain}.title`)} / {t(`common.scopes.${scope}`)}</div>
         {children}
@@ -124,10 +126,7 @@ const createStyles = (theme: Theme) => ({
   flatScroll: {
     // No minHeight/backgroundColor/padding — host app controls layout
   },
-  flatContainer: {
-    width: '100%',
-    margin: '0 auto',
-  },
+  flatContainer: {},
   flatHeader: {
     display: 'flex',
     alignItems: 'flex-start',
